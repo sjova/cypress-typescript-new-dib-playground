@@ -6,12 +6,14 @@
 - Please don't write comments in Serbian
 - Display lists (options, flags, etc.) and tables in alphabetical order.
 - Please use present tense imperative in Git commit messages (ex. add tests for AAA, fix the BBB bug in CCC, correct typos in the login)
-- Please put a ticket reference at the end of the Git comment (ex. add tests for AAA #DT-1234)
+- Please put a ticket reference at the end of the Git comment (ex. "add tests for AAA #DT-1234")
 - Use descriptive names whenever possible (files, variables, functions, methods, etc.)
 - Please use only this file extension for test files: `*.spec.ts`
 - Please use dash-case for file naming (ex. foo-something.spec.ts)
 - Please use the descriptive file naming
 - Please use camelCase for variable naming (ex. myVariableName)
+- **Mocha** `describe` title should start with a capital letter
+- **Mocha** `it` title should start with a lowercase letter (_it_ and _descriptive title_ together should have a meaningful meaning)
 - Please separate each meaningful code block with a new line (for better code readability)
 - Please use a separate folder for tests of each feature
 - Please sort all relevant items in the code in alphabetical order (A-Z order).
@@ -28,20 +30,9 @@
 - Mock or control test data as much as possible (JSON data)
 - Tests should always be able to be run independently and still pass
 - Clean up state before tests run (not after)
-- Use route aliases or assertions to guard Cypress from proceeding until an explicit condition is met (don't use `.wait()`)
+- Use API route aliases or assertions to guard Cypress from proceeding until an explicit condition is met (don't use `.wait()`)
 - Don't limit yourself to trying to act like a user
 - Practice PR Code Review in all seniority directions (Senior -> Junior, Junior -> Senior, and all variations between)
-
-## Example Applications
-
-- [https://github.com/cypress-io/cypress-example-recipes](https://github.com/cypress-io/cypress-example-recipes)
-- [https://github.com/cypress-io/cypress-example-kitchensink](https://github.com/cypress-io/cypress-example-kitchensink)
-- [https://github.com/cypress-io/cypress-realworld-app](https://github.com/cypress-io/cypress-realworld-app)
-- [https://github.com/cypress-io/cypress-example-todomvc](https://github.com/cypress-io/cypress-example-todomvc)
-- [https://github.com/cypress-io/cypress-example-todomvc-redux](https://github.com/cypress-io/cypress-example-todomvc-redux)
-- [https://github.com/cypress-io/cypress-example-conduit-app](https://github.com/cypress-io/cypress-example-conduit-app)
-- [https://github.com/cypress-io/cypress-example-phonecat](https://github.com/cypress-io/cypress-example-phonecat)
-- [https://github.com/muratkeremozcan/angular-playground](https://github.com/muratkeremozcan/angular-playground)
 
 ## Branch Naming Conventions
 
@@ -73,13 +64,14 @@ Examples:
 
 Before you create PR or before you push changes in your PR, please make sure that you checked below items:
 
-- Make sure that you fully follow the above-defined Coding Style
+- Make sure that you fully follow the above-defined Coding Style Guide
 - Confirm that you're covering all requirements for the specific feature
 - Please don't include sensitive data (ex. passwords, API tokens, etc.) in your commits
-- Make sure that you're using the best possible selectors in your test
+- Make sure that you're using the best possible selectors in your tests
 - Please skip time-consuming Cypress commands whenever is possible
 - When querying elements, try to stick with `.get()` and meaningful selector
 - Double-check if you can improve your code
+- Please remove unnecessary or unused code from your commit
 - Make sure that your environment is error-free
 - Please confirm your tests in Cypress Test Runner
 - Pull latest changes from the source branch
