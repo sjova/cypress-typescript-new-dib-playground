@@ -1,0 +1,10 @@
+{
+  "$schema": "https://on.cypress.io/cypress.schema.json",
+  "baseUrl": "https://develop--dib-travel.netlify.app/",
+  "pluginsFile": "cypress/plugins/index.ts",
+  "supportFile": "cypress/support/index.ts",
+  "testFiles": "**/*.spec.ts",
+  "video": false,
+  "viewportHeight": 720,
+  "viewportWidth": 1280
+}
