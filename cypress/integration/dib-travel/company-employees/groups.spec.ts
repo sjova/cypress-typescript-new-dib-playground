@@ -38,7 +38,7 @@ describe('Company Employees - Groups Page', () => {
   // TODO add delete group test
 
   // Agent
-  it.only('should allow agent to add new group', () => {
+  it('should allow agent to add new group', () => {
     cy.loginAgent();
     cy.get('dib-layout dib-hamburger-icon').click();
     cy.get('[routerLink="/people-management/groups"]').click();
@@ -49,7 +49,7 @@ describe('Company Employees - Groups Page', () => {
     cy.get('dib-people-management dib-groups .body').should('contain', groupsDetails.name);
   });
 
-  it.only('should allow agent to edit created group', () => {
+  it('should allow agent to edit created group', () => {
     cy.loginAgent();
     cy.get('dib-layout dib-hamburger-icon').click();
     cy.get('[routerLink="/people-management/groups"]').click();
