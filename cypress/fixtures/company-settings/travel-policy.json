@@ -1,0 +1,18 @@
+{
+  "city": "Belgrade",
+  "employeeName": "GROUP",
+  "flightDurationBudgetException": "24",
+  "flightFrom": "Belgrad",
+  "flightTo": "Stockholm",
+  "numberOfDaysInAdvance": "2",
+  "trainFrom": "Stockholm Central",
+  "trainTo": "Malmö C",
+  "travelPolicyBudget": "500",
+  "travelPolicyBudgetExeption": "250",
+  "travelPolicyName": "Travel policy test",
+  "travelPolicyNameUpdate": "Travel policy test (update)",
+  "travelPolicyTypeFlight": "FLIGHT",
+  "travelPolicyTypeHotel": "HOTEL",
+  "travelPolicyTypeTrain": "TRAIN",
+  "typeOfTrip": "One way"
+}
