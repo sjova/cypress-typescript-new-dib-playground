@@ -72,6 +72,10 @@
 
 - `dib-navbar`
 
+## MAIN HAMBURGER ICON
+
+- `dib-navbar dib-hamburger-icon`
+
 ## COOKIES POPUP
 
 - `cookies-popup .cookies-popup__content .cookies-popup__text` - HTML text
