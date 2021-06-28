@@ -2,7 +2,7 @@ import dibTravelAccounts from '../../fixtures/dib-travel-accounts.json';
 
 export const login = (
   email = dibTravelAccounts.defaultAccount.email,
-  password = dibTravelAccounts.defaultAccount.email
+  password = dibTravelAccounts.defaultAccount.password
 ): void => {
   cy.visit('/login');
 
