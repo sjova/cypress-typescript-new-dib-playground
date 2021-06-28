@@ -15,7 +15,7 @@ describe('Company Employees - Employees Page', () => {
     cy.get('[routerLink="/people-management/employees"]').click();
   });
 
-  it.only('should allow regular user to add new employee', () => {
+  it('should allow regular user to add new employee', () => {
     cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
     cy.get('dib-people-management new-dib-employees ui-button button').click();
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]').type(
