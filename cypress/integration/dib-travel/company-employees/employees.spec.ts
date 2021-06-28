@@ -22,8 +22,12 @@ describe('Company Employees - Employees Page', () => {
     cy.get('dib-employee-dialog ui-input  input[name="lastName"]').type(employeeDetails.lastName);
     cy.get('dib-employee-dialog ui-input  input[type="email"]').type(employeeDetails.email);
     cy.get('dib-employee-dialog ui-button button').click();
-    cy.intercept('GET', '/api/secure/v1/corporations/*').as('getEmployees');
-    cy.wait('@getEmployees').its('response.statusCode').should('be.oneOf', [200, 304]);
+    // TODO Replace with waiting specific API call
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(4000);
+    // cy.intercept('/api/secure/v1/corporations/').as('getEmployees');
+    // cy.log('@getEmployees');
+    // cy.wait('@getEmployees').should('be.visible');
 
     cy.get('new-dib-employees dib-page .grid').should('contain', employeeDetails.firstName);
     cy.get('new-dib-employees dib-page .grid').should('contain', employeeDetails.lastName);
@@ -31,7 +35,9 @@ describe('Company Employees - Employees Page', () => {
   });
 
   it('should allow user to edit added employee', () => {
-    //cy.wait(3000); TODO change wait
+    // TODO Replace with waiting specific API call
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(4000);
     cy.get('new-dib-employees dib-page ui-button button').contains('edit').click();
     cy.get('dib-employee-dialog ui-input  input[name="firstName"]').clear();
     cy.get('dib-employee-dialog ui-input  input[name="firstName"]').type(employeeDetails.editFirstName);
@@ -56,7 +62,9 @@ describe('Company Employees - Employees Page', () => {
   });
 
   it('should allow user to delete added employee', () => {
-    //cy.wait(3000); TODO change wait
+    // TODO Replace with waiting specific API call
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(4000);
     cy.get('new-dib-employees dib-page ui-button button').contains('Archive').click();
     cy.get('.cdk-overlay-pane confirmation-dialog .button-container ui-button[type="warning"]')
       .contains('Archive')
