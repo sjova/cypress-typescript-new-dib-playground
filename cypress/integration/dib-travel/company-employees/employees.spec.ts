@@ -24,18 +24,12 @@ describe('Company Employees - Employees Page', () => {
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]').type(employeeDetails.lastName);
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[type="email"]').type(employeeDetails.email);
     cy.get('.cdk-overlay-container dib-employee-dialog ui-button button').click();
-    // TODO Replace with waiting specific API call
     cy.wait('@getCorporationsEmployees').then(() => {
       cy.reload();
       cy.get('dib-people-management new-dib-employees dib-page .grid').should('contain', employeeDetails.firstName);
       cy.get('dib-people-management new-dib-employees dib-page .grid').should('contain', employeeDetails.lastName);
       cy.get('dib-people-management new-dib-employees dib-page .grid').should('contain', employeeDetails.email);
     });
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    //cy.wait(4000);
-    // cy.intercept('/api/secure/v1/corporations/').as('getEmployees');
-    // cy.log('@getEmployees');
-    // cy.wait('@getEmployees').should('be.visible');
   });
 
   it('should allow user to edit added employee', () => {
