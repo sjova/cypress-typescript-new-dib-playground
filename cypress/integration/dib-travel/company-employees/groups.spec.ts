@@ -29,7 +29,9 @@ describe('Company Employees - Groups Page', () => {
     cy.wait(3000);
     cy.get('dib-expandable-item h2')
       .contains('asdf')
-      .parent('dib-expandable-item')
+      // .parent('.item__main')
+      // .parent('.collapsed')
+      .parents('dib-expandable-item')
       .within(() => {
         return cy.get('ui-button button').contains('edit').click();
       });
