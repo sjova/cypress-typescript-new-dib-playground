@@ -10,12 +10,12 @@ describe('Company Employees - Employees Page', () => {
   });
 
   beforeEach(() => {
-    cy.login();
+    cy.loginAgent();
     cy.get('dib-layout dib-hamburger-icon').click();
-    cy.get('[href="/people-management/employees"]').click();
+    cy.get('[routerLink="/people-management/employees"]').click();
   });
 
-  it('should allow regular user to add new employee', () => {
+  it.only('should allow agent to add new employee', () => {
     cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
     cy.get('dib-people-management new-dib-employees ui-button button').click();
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]').type(
@@ -32,46 +32,28 @@ describe('Company Employees - Employees Page', () => {
     });
   });
 
-  it('should allow user to edit added employee', () => {
+  it('should allow agent to edit added employee', () => {
     // TODO Replace with waiting specific API call
-    cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployee');
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(4000);
     cy.get('dib-people-management new-dib-employees dib-page ui-button button').contains('edit').click();
-    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]')
-      .clear()
-      .type(employeeDetails.editFirstName);
-    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]')
-      .clear()
-      .type(employeeDetails.editLastName);
-    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[type="email"]')
-      .clear()
-      .type(employeeDetails.editEmail);
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]').clear();
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]').type(
+      employeeDetails.editFirstName
+    );
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]').clear();
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]').type(
+      employeeDetails.editLastName
+    );
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[type="email"]').clear();
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[type="email"]').type(employeeDetails.editEmail);
     cy.get('.cdk-overlay-container dib-employee-dialog ui-button button').contains('Save').click();
     cy.get('dib-people-management new-dib-employees dib-page .grid').should('contain', employeeDetails.editFirstName);
     cy.get('dib-people-management new-dib-employees dib-page .grid').should('contain', employeeDetails.editLastName);
     cy.get('dib-people-management new-dib-employees dib-page .grid').should('contain', employeeDetails.editEmail);
-
-    // TODO add better waiting
-    // cy.wait('@getCorporationsEmployee').then(() => {
-    // cy.get('dib-people-management new-dib-employees dib-page ui-button button').contains('edit').click();
-    // cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]')
-    //   .clear()
-    //   .type(employeeDetails.editFirstName);
-    // cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]')
-    //   .clear()
-    //   .type(employeeDetails.editLastName);
-    // cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[type="email"]')
-    //   .clear()
-    //   .type(employeeDetails.editEmail);
-    // cy.get('.cdk-overlay-container dib-employee-dialog ui-button button').contains('Save').click();
-    // cy.get('dib-people-management new-dib-employees dib-page .grid').should('contain', employeeDetails.editFirstName);
-    // cy.get('dib-people-management new-dib-employees dib-page .grid').should('contain', employeeDetails.editLastName);
-    // cy.get('dib-people-management new-dib-employees dib-page .grid').should('contain', employeeDetails.editEmail);
-    // });
   });
 
-  it('should not allow regular user to add new employee with existing email', () => {
+  it('should not allow agent to add new employee with existing email', () => {
     cy.get('dib-people-management new-dib-employees ui-button button').contains('Add Employee').click();
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]').type(
       employeeDetails.firstName
@@ -86,7 +68,7 @@ describe('Company Employees - Employees Page', () => {
     cy.get('.cdk-overlay-container .dib-dialog-panel .material-icons').contains('close').click();
   });
 
-  it('should allow user to delete added employee', () => {
+  it.only('should allow agent to delete added employee', () => {
     // TODO Replace with waiting specific API call
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(4000);
