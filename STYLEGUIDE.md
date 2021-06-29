@@ -16,6 +16,7 @@
 - **Mocha** `it` title should start with a lowercase letter (_it_ and _descriptive title_ together should have a meaningful meaning)
 - Please separate each meaningful code block with a new line (for better code readability)
 - Please use a separate folder for tests of each feature
+- Please do not use abbreviations in your code
 - Please sort all relevant items in the code in alphabetical order (A-Z order).
 - For readability, we're using 120 characters as a maximum line length
 - Please use single quotes over double quotes
