@@ -15,8 +15,13 @@ describe('Personal settings - Profile page', () => {
     cy.get('[routerlink="/profile/account"]').click();
   });
 
-  it('should edit personal info!', () => {
-    cy.get('dib-profile dib-account div:nth-child(1) > div > div:nth-child(2) > ui-button').click();
+  it('should edit personal info', () => {
+    cy.get('dib-account .profile-info .profile-info__title')
+      .contains('Personal info')
+      .parent('.profile-info__section')
+      .within(() => {
+        return cy.get('ui-button button').click();
+      });
     cy.get('dib-input input[name="firstName"]').clear().type(profileDetails.name);
     cy.get('dib-input input[name="lastName"]').clear().type(profileDetails.lastName);
     cy.get('.cdk-overlay-container ui-form-dialog dib-select-dob select.day').select(profileDetails.birthDay);
@@ -32,7 +37,12 @@ describe('Personal settings - Profile page', () => {
   });
 
   it('should edit contact info', () => {
-    cy.get(':nth-child(2) > .profile-info__content > :nth-child(2) > .profile-info__button > .ui-button').click();
+    cy.get('dib-account .profile-info .profile-info__title')
+      .contains('Contact info')
+      .parent('.profile-info__section')
+      .within(() => {
+        return cy.get('ui-button button').click();
+      });
     cy.get('dib-input input[name="address1"]').clear().type(profileDetails.homeAddress);
     cy.get('dib-input input[name="city"]').clear().type(profileDetails.city);
     cy.get('dib-input input[name="zipCode"]').clear().type(profileDetails.zipCode);
@@ -49,7 +59,12 @@ describe('Personal settings - Profile page', () => {
   });
 
   it('should edit localize (language & currency)', () => {
-    cy.get('dib-profile dib-account  div:nth-child(4) > div > div:nth-child(2) > ui-button').click();
+    cy.get('dib-account .profile-info .profile-info__title')
+      .contains('Localize')
+      .parent('.profile-info__section')
+      .within(() => {
+        return cy.get('ui-button button').click();
+      });
     cy.get('ui-language-wrapper language-picker').click();
     cy.get('div.picker.ng-star-inserted').contains(profileDetails.language).click();
     cy.get('ui-currency-wrapper currency-picker').click().contains(profileDetails.currency).click();
@@ -60,9 +75,12 @@ describe('Personal settings - Profile page', () => {
   });
 
   it('should change email address', () => {
-    cy.get(
-      'dib-account > div.body.ng-star-inserted > div > div:nth-child(5) > div > div:nth-child(2) > ui-button:nth-child(1) > button'
-    ).click();
+    cy.get('dib-account .profile-info .profile-info__title')
+      .contains('email & password')
+      .parent('.profile-info__section')
+      .within(() => {
+        return cy.get('ui-button button').contains('edit email').click();
+      });
     cy.get('dib-change-email input[name="email"]').clear().type(profileDetails.email);
     cy.get('dib-change-email input[name="password"]').clear().type(profileDetails.password);
     cy.get('dib-change-email ui-button').click();
@@ -71,9 +89,12 @@ describe('Personal settings - Profile page', () => {
   });
 
   it('should change password', () => {
-    cy.get(
-      'dib-account > div.body.ng-star-inserted > div > div:nth-child(5) > div > div:nth-child(2) > ui-button:nth-child(2) > button'
-    ).click();
+    cy.get('dib-account .profile-info .profile-info__title')
+      .contains('email & password')
+      .parent('.profile-info__section')
+      .within(() => {
+        return cy.get('ui-button button').contains('edit password').click();
+      });
     cy.get('change-password input[name="password"]').clear().type(profileDetails.password);
     cy.get('change-password input[name="newPassword"]').clear().type(profileDetails.password);
     cy.get('change-password input[name="confirmNewPassword"]').clear().type(profileDetails.password);
