@@ -28,6 +28,9 @@
 - Add multiple assertions and don't worry about it
 - Use existing Cypress commands that are already written instead of creating more
 - Try to login as users with different permissions instead of a superuser that has all permissions
+- Please try to use at least these selectors: `feature/parent-selector middle/control-selector main/children-selector`
+- Please don't use **Angular** elements as a selector (example prefixes: `ng*`, `ng-*` and `routerLink`)
+- Please don't use **Angular Material** elements as a selector (example prefixes: `mat*`, `mat-*`)
 - Mock or control test data as much as possible (JSON data)
 - Tests should always be able to be run independently and still pass
 - Clean up state before tests run (not after)
