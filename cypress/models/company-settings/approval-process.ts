@@ -1,4 +1,6 @@
 export interface ApprovalProcess {
   approvalProcessFor: string;
-  approver: string;
+  approvalProcessForContent: string;
+  approvedBy: string;
+  approvedByContent: string;
 }
