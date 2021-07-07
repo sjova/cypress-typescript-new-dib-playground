@@ -26,15 +26,23 @@ describe('Company Employees - Groups Page', () => {
   // TODO make better wait
   it.only('should allow regular user to edit created group', () => {
     // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(3000);
-    cy.get('dib-expandable-item h2')
-      .contains('asdf')
-      // .parent('.item__main')
-      // .parent('.collapsed')
-      .parents('dib-expandable-item')
-      .within(() => {
-        return cy.get('ui-button button').contains('edit').click();
-      });
+    //cy.wait(3000);
+
+    cy.get('dib-people-management dib-groups dib-expandable-item h2')
+      .contains(groupsDetails.name)
+      .parents('.item__main')
+      .next()
+      .contains('edit')
+      .click();
+
+    // cy.get('dib-expandable-item h2')
+    //   .contains(groupsDetails.name)
+    //   // .parent('.item__main')
+    //   // .parent('.collapsed')
+    //   .parents('dib-expandable-item')
+    //   .within(() => {
+    //     return cy.get('ui-button button').contains('edit').click();
+    //   });
     //cy.get('dib-groups .body').find('dib-expandable-item').first().find('ui-button button').contains('edit').click();
 
     // cy.get('dib-people-management dib-groups dib-expandable-item ui-button button').contains('edit').click();
