@@ -72,7 +72,7 @@
 
 - `dib-navbar`
 
-## MAIN HAMBURGER ICON
+## MAIN NAVIGATION ICON (HAMBURGER ICON)
 
 - `dib-navbar dib-hamburger-icon`
 
@@ -81,9 +81,15 @@
 - `cookies-popup .cookies-popup__content .cookies-popup__text` - HTML text
 - `cookies-popup .cookies-popup__content .close-icon` - button
 
-## DIALOG (MODAL), SELECT (DROPDOWN)
+## DIALOG (MODAL)
 
-`.cdk-overlay-container`
+`.cdk-overlay-container dib-*-dialog` - in most cases
+or
+`.cdk-overlay-container *-dialog`
+
+## SELECT (DROPDOWN)
+
+`.cdk-overlay-container ui-panel`
 
 ## SNACKBAR
 
@@ -93,3 +99,10 @@
 ## ANGULAR APPLICATION PARENT
 
 - `app-root`
+
+## ANGULAR APPLICATION ROUTER
+
+- `router-outlet`
+  - `routerLink`
+
+Note: Should not be used as selectors.
