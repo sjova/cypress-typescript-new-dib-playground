@@ -12,10 +12,10 @@ describe('Company Employees - Employees Page', () => {
   beforeEach(() => {
     cy.loginAgent();
     cy.get('dib-layout dib-hamburger-icon').click();
-    cy.get('[routerLink="/people-management/employees"]').click();
+    cy.get('[href="/people-management/employees"]').click();
   });
 
-  it.only('should allow agent to add new employee', () => {
+  it('should allow agent to add new employee', () => {
     cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
     cy.get('dib-people-management new-dib-employees ui-button button').click();
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]').type(
@@ -33,20 +33,23 @@ describe('Company Employees - Employees Page', () => {
   });
 
   it('should allow agent to edit added employee', () => {
-    // TODO Replace with waiting specific API call
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(4000);
-    cy.get('dib-people-management new-dib-employees dib-page ui-button button').contains('edit').click();
-    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]').clear();
-    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]').type(
-      employeeDetails.editFirstName
-    );
-    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]').clear();
-    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]').type(
-      employeeDetails.editLastName
-    );
-    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[type="email"]').clear();
-    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[type="email"]').type(employeeDetails.editEmail);
+    cy.get('dib-people-management new-dib-employees dib-page div.grid h4')
+      .contains(employeeDetails.firstName)
+      .parent('.table-cell')
+      .next('.table-cell')
+      .next('.table-cell')
+      .next('.table-cell')
+      .contains('edit')
+      .click();
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]')
+      .clear()
+      .type(employeeDetails.editFirstName);
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]')
+      .clear()
+      .type(employeeDetails.editLastName);
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[type="email"]')
+      .clear()
+      .type(employeeDetails.editEmail);
     cy.get('.cdk-overlay-container dib-employee-dialog ui-button button').contains('Save').click();
     cy.get('dib-people-management new-dib-employees dib-page .grid').should('contain', employeeDetails.editFirstName);
     cy.get('dib-people-management new-dib-employees dib-page .grid').should('contain', employeeDetails.editLastName);
@@ -68,12 +71,18 @@ describe('Company Employees - Employees Page', () => {
     cy.get('.cdk-overlay-container .dib-dialog-panel .material-icons').contains('close').click();
   });
 
-  it.only('should allow agent to delete added employee', () => {
-    // TODO Replace with waiting specific API call
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(4000);
-    cy.get('dib-people-management new-dib-employees dib-page ui-button button').contains('archive').click();
-    cy.get('.cdk-overlay-pane confirmation-dialog .button-container ui-button[type="warning"]')
+  it('should allow agent to delete added employee', () => {
+    cy.get('dib-people-management new-dib-employees dib-page div.grid h4')
+      .contains(employeeDetails.editFirstName)
+      .parent('.table-cell')
+      .next('.table-cell')
+      .next('.table-cell')
+      .next('.table-cell')
+      .contains('archive')
+      .click();
+    cy.get('.cdk-overlay-backdrop')
+      .parent()
+      .find('mat-dialog-container confirmation-dialog ui-button button')
       .contains('archive')
       .click();
     cy.get('dib-people-management new-dib-employees dib-page .grid').should('not.contain', employeeDetails.firstName);
