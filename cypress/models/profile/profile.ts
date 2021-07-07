@@ -18,7 +18,7 @@ export interface Profile {
   documentNumber: string;
   issuingCountry: string;
   expiryDay: string;
-  expiryMonty: string;
+  expiryMonth: string;
   expiryYear: string;
   nationality: string;
   loyaltyProgram: string;
