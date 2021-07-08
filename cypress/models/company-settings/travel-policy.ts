@@ -8,7 +8,7 @@ export interface TravelPolicy {
   trainFrom: string;
   trainTo: string;
   travelPolicyBudget: string;
-  travelPolicyBudgetExeption: string;
+  travelPolicyBudgetException: string;
   travelPolicyName: string;
   travelPolicyNameUpdate: string;
   travelPolicyTypeFlight: string;

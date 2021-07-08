@@ -1,109 +1,175 @@
 import { TravelPolicy } from '../../../models';
 
-describe('Travel Policy Suite', () => {
-  let tpd: TravelPolicy;
+describe('Company Settings - Travel Policy', () => {
+  let travelPolicyForm: TravelPolicy;
 
   before(() => {
-    cy.fixture('company-settings/travel-policy').then((travelPolicyFormData) => {
-      tpd = travelPolicyFormData;
+    cy.fixture('company-settings/travel-policy').then((travelPolicyFormDetails) => {
+      travelPolicyForm = travelPolicyFormDetails;
     });
   });
 
   beforeEach(() => {
     cy.login();
-    cy.get('dib-layout dib-hamburger-icon').click();
-    cy.get('[href="/company-management/travel-policy"]').click();
+    cy.clearCookies();
+    cy.visit('/company-management/travel-policy');
+  });
+
+  it('should display company settings/travel policy in navbar menu', () => {
+    cy.get('dib-navbar dib-hamburger-icon').click();
+    cy.get('.cdk-overlay-container dib-navbar-panel').contains('Travel Policy ');
   });
 
   it('submits empty travel policy form', () => {
-    cy.get('dib-travel-policy ui-button[type=primary]').click();
-    cy.get('dib-travel-policy-dialog ui-button button').click({ force: true });
-    cy.get('dib-dialog-wrapper dib-travel-policy-dialog').should('be.visible');
+    cy.get('dib-company-management dib-travel-policy ui-button[type=primary]').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog').should('be.visible');
   });
 
   it('creates a new flight travel policy', () => {
-    cy.get('dib-travel-policy ui-button[type=primary]').click();
-    cy.get('dib-travel-policy-dialog .dib-select').select(tpd.travelPolicyTypeFlight);
-    cy.get('dib-travel-policy-dialog dib-input input[name=name]').type(tpd.travelPolicyName);
-    cy.get('dib-travel-policy-dialog dib-input input[name=numberOfDaysInAdvance]').type(tpd.numberOfDaysInAdvance);
-    cy.get('dib-travel-policy-dialog dib-checkbox').click({ multiple: true });
-    cy.get('dib-travel-policy-dialog dib-input input[name=budget]').type(tpd.travelPolicyBudget);
-    cy.get('dib-travel-policy-dialog dib-input input[name=budgetException]').type(tpd.travelPolicyBudgetExeption);
-    cy.get('dib-travel-policy-dialog dib-input input[name=flightDurationBudgetException]').type(
-      tpd.flightDurationBudgetException
+    cy.get('dib-company-management dib-travel-policy ui-button[type=primary]').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog .dib-select').select(
+      travelPolicyForm.travelPolicyTypeFlight
     );
-    cy.get('dib-travel-policy-dialog form .add-btn').click({ force: true });
-    cy.get('dib-list-item dib-flight-search-input input[data-placeholder=From]').type(tpd.flightFrom);
-    cy.get('.cdk-overlay-connected-position-bounding-box .mat-option-text').contains(tpd.flightFrom).click();
-    cy.get('dib-list-item dib-flight-search-input input[data-placeholder=To]').type(tpd.flightTo);
-    cy.get('.cdk-overlay-connected-position-bounding-box .mat-option-text').contains(tpd.flightTo).click();
-    cy.get('dib-travel-policy-dialog dib-list-item select').select(tpd.typeOfTrip);
-    cy.get('dib-list-item dib-input input[name=budget]').type(tpd.travelPolicyBudget);
-    cy.get('dib-travel-policy-dialog dib-input input[placeholder=Search]').type(tpd.employeeName);
-    cy.get('dib-travel-policy-dialog mat-checkbox').click();
-    cy.get('dib-travel-policy-dialog ui-button button').click({ force: true });
-    cy.get('dib-travel-policy dib-expandable-item .section__header__title').should('contain', tpd.travelPolicyName);
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=name]').type(travelPolicyForm.travelPolicyName);
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=numberOfDaysInAdvance]').type(
+      travelPolicyForm.numberOfDaysInAdvance
+    );
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog dib-checkbox').click({ multiple: true });
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=budget]').type(
+      travelPolicyForm.travelPolicyBudget
+    );
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=budgetException]').type(
+      travelPolicyForm.travelPolicyBudgetException
+    );
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=flightDurationBudgetException]').type(
+      travelPolicyForm.flightDurationBudgetException
+    );
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog .add-btn').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[data-placeholder=From]').type(
+      travelPolicyForm.flightFrom
+    );
+    cy.get('.cdk-overlay-container .cdk-overlay-pane .flight-search__result__text')
+      .contains(travelPolicyForm.flightFrom)
+      .click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[data-placeholder=To]').type(
+      travelPolicyForm.flightTo
+    );
+    cy.get('.cdk-overlay-container .cdk-overlay-pane .flight-search__result__text')
+      .contains(travelPolicyForm.flightTo)
+      .click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog dib-list-item select').select(travelPolicyForm.typeOfTrip);
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog dib-list-item input[name=budget]').type(
+      travelPolicyForm.travelPolicyBudget
+    );
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=Search]').type(
+      travelPolicyForm.employeeName
+    );
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog .members').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
+    cy.get('dib-company-management dib-expandable-item .section__header__title').should(
+      'contain',
+      travelPolicyForm.travelPolicyName
+    );
   });
 
   it('creates a new hotel travel policy', () => {
-    cy.get('dib-travel-policy ui-button[type=primary]').click();
-    cy.get('dib-travel-policy-dialog .dib-select').select(tpd.travelPolicyTypeHotel);
-    cy.get('dib-travel-policy-dialog dib-input input[name=name]').type(tpd.travelPolicyName);
-    cy.get('dib-travel-policy-dialog dib-input input[name=numberOfDaysInAdvance]').type(tpd.numberOfDaysInAdvance);
-    cy.get('dib-travel-policy-dialog star-rating').click();
-    cy.get('dib-travel-policy-dialog dib-input input[name=budget]').type(tpd.travelPolicyBudget);
-    cy.get('dib-travel-policy-dialog form .add-btn').click({ force: true });
-    cy.get('dib-travel-policy-dialog dib-location-search input[placeholder=City]').type(tpd.city);
-    cy.get('.light-background .pac-container').contains(tpd.city).click();
-    cy.get('dib-list-item dib-input input[name=budget]').type(tpd.travelPolicyBudget);
-    cy.get('dib-travel-policy-dialog dib-input input[placeholder=Search]').type(tpd.employeeName);
-    cy.get('dib-travel-policy-dialog mat-checkbox').click();
-    cy.get('dib-travel-policy-dialog ui-button button').click({ force: true });
-    cy.get('dib-travel-policy dib-expandable-item .section__header__title').should('contain', tpd.travelPolicyName);
+    cy.get('dib-company-management dib-travel-policy ui-button[type=primary]').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog .dib-select').select(
+      travelPolicyForm.travelPolicyTypeHotel
+    );
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=name]').type(travelPolicyForm.travelPolicyName);
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=numberOfDaysInAdvance]').type(
+      travelPolicyForm.numberOfDaysInAdvance
+    );
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog star-rating').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=budget]').type(
+      travelPolicyForm.travelPolicyBudget
+    );
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog .add-btn').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=City]').type(travelPolicyForm.city);
+    cy.get('.light-background .pac-container').contains(travelPolicyForm.city).click();
+    cy.get('.cdk-overlay-container dib-list-item input[name=budget]').type(travelPolicyForm.travelPolicyBudget);
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=Search]').type(
+      travelPolicyForm.employeeName
+    );
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog .members').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
+    cy.get('dib-company-management dib-expandable-item .section__header__title').should(
+      'contain',
+      travelPolicyForm.travelPolicyName
+    );
   });
 
   it('creates a new train travel policy', () => {
-    cy.get('dib-travel-policy ui-button[type=primary]').click();
-    cy.get('dib-travel-policy-dialog .dib-select').select(tpd.travelPolicyTypeTrain);
-    cy.get('dib-travel-policy-dialog dib-input input[name=name]').type(tpd.travelPolicyName);
-    cy.get('dib-travel-policy-dialog dib-input input[name=numberOfDaysInAdvance]').type(tpd.numberOfDaysInAdvance);
-    cy.get('dib-travel-policy-dialog dib-checkbox').click({ multiple: true });
-    cy.get('dib-travel-policy-dialog dib-input input[name=budget]').type(tpd.travelPolicyBudget);
-    cy.get('dib-travel-policy-dialog form .add-btn').click({ force: true });
-    cy.get('dib-travel-policy-dialog dib-list-item input[placeholder=from]').type(tpd.trainFrom);
-    cy.get('.cdk-overlay-connected-position-bounding-box .cdk-overlay-pane').contains(tpd.trainFrom).click();
-    cy.get('dib-travel-policy-dialog dib-list-item input[placeholder=to]').type(tpd.trainTo);
-    cy.get('.cdk-overlay-connected-position-bounding-box .cdk-overlay-pane').contains(tpd.trainTo).click();
-    cy.get('dib-travel-policy-dialog dib-list-item input[placeholder="Budget per train"]').type(tpd.travelPolicyBudget);
-    cy.get('dib-travel-policy-dialog dib-input input[placeholder=Search]').type(tpd.employeeName);
-    cy.get('dib-travel-policy-dialog mat-checkbox').click();
-    cy.get('dib-travel-policy-dialog ui-button button').click({ force: true });
-    cy.get('dib-travel-policy dib-expandable-item .section__header__title').should('contain', tpd.travelPolicyName);
+    cy.get('dib-company-management dib-travel-policy ui-button[type=primary]').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog .dib-select').select(
+      travelPolicyForm.travelPolicyTypeTrain
+    );
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=name]').type(travelPolicyForm.travelPolicyName);
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=numberOfDaysInAdvance]').type(
+      travelPolicyForm.numberOfDaysInAdvance
+    );
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog dib-checkbox').click({ multiple: true });
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=budget]').type(
+      travelPolicyForm.travelPolicyBudget
+    );
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog .add-btn').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog dib-list-item input[placeholder=from]').type(
+      travelPolicyForm.trainFrom
+    );
+    cy.get('.cdk-overlay-container .cdk-overlay-pane').contains(travelPolicyForm.trainFrom).click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog dib-list-item input[placeholder=to]').type(
+      travelPolicyForm.trainTo
+    );
+    cy.get('.cdk-overlay-container .cdk-overlay-pane').contains(travelPolicyForm.trainTo).click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog dib-list-item input[placeholder="Budget per train"]').type(
+      travelPolicyForm.travelPolicyBudget
+    );
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=Search]').type(
+      travelPolicyForm.employeeName
+    );
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog .members').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
+    cy.get('dib-company-management dib-expandable-item .section__header__title').should(
+      'contain',
+      travelPolicyForm.travelPolicyName
+    );
   });
 
   it('should extend form of travel policy tests and display details', () => {
-    cy.get('dib-expandable-item .collapsed .material-icons').eq(0).dblclick({ force: true });
+    cy.get('dib-company-management dib-expandable-item .collapsed .button').first().dblclick();
   });
 
   it('updates travel policy test', () => {
-    cy.get('dib-expandable-item ui-button[type=primary] button').eq(0).click();
-    cy.get('dib-travel-policy-dialog dib-input input[name=name]').clear();
-    cy.get('dib-travel-policy-dialog dib-input input[name=name]').type(tpd.travelPolicyNameUpdate);
-    cy.get('dib-travel-policy-dialog ui-button[type=success]').click();
-    cy.get('dib-travel-policy dib-expandable-item .section__header__title').should(
+    cy.get('dib-company-management dib-expandable-item .section__header__title')
+      .contains(travelPolicyForm.travelPolicyName)
+      .first()
+      .parents('dib-expandable-item')
+      .within(() => {
+        return cy.get('ui-button').contains('edit').click();
+      });
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=Name')
+      .clear()
+      .type(travelPolicyForm.travelPolicyNameUpdate);
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success').click();
+    cy.get('dib-company-management dib-expandable-item .section__header__title').should(
       'contain',
-      tpd.travelPolicyNameUpdate
+      travelPolicyForm.travelPolicyNameUpdate
     );
   });
 
   it('deletes travel policy test', () => {
-    cy.get('dib-expandable-item ui-button[type=warning] button').eq(0).click({ force: true });
-    cy.get('mat-dialog-container confirmation-dialog ui-button[cancel=true]').click();
-    cy.get('dib-expandable-item ui-button[type=warning] button').eq(0).click({ force: true });
-    cy.get('mat-dialog-container confirmation-dialog ui-button[type=warning] button').click({ force: true });
-    cy.get('dib-travel-policy dib-expandable-item .section__header__title').should(
+    cy.get('dib-company-management dib-expandable-item .section__header__title')
+      .contains(travelPolicyForm.travelPolicyNameUpdate)
+      .parents('dib-expandable-item')
+      .within(() => {
+        return cy.get('ui-button').contains('delete').click();
+      });
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
+    cy.get('dib-company-management dib-expandable-item .section__header__title').should(
       'not.contain',
-      tpd.travelPolicyNameUpdate
+      travelPolicyForm.travelPolicyNameUpdate
     );
   });
 });

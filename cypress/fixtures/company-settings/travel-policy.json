@@ -8,7 +8,7 @@
   "trainFrom": "Stockholm Central",
   "trainTo": "Malmö C",
   "travelPolicyBudget": "500",
-  "travelPolicyBudgetExeption": "250",
+  "travelPolicyBudgetException": "250",
   "travelPolicyName": "Travel policy test",
   "travelPolicyNameUpdate": "Travel policy test (update)",
   "travelPolicyTypeFlight": "FLIGHT",
