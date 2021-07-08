@@ -11,7 +11,7 @@ describe('Company Employees - Groups Page', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.get('dib-layout dib-hamburger-icon').click();
+    cy.get('dib-navbar dib-hamburger-icon').click();
     cy.get('[href="/people-management/groups"]').click();
   });
 
