@@ -89,8 +89,8 @@ describe('Company Settings - Approval Process', () => {
     );
   });
 
-  it('closes confirmation-dialog for deleting approval process item (cancellation the delete action)', () => {
-    cy.get('dib-company-management dib-approval-process-item')
+  it('checks cancellation of confirmation dialog', () => {
+    cy.get('dib-company-management dib-approval-process dib-approval-process-item')
       .contains('QA')
       .parents('dib-approval-process-item')
       .within(() => {
@@ -100,7 +100,7 @@ describe('Company Settings - Approval Process', () => {
   });
 
   it('deletes approval process item', () => {
-    cy.get('dib-company-management dib-approval-process-item')
+    cy.get('dib-company-management dib-approval-process dib-approval-process-item')
       .contains('QA')
       .parents('dib-approval-process-item')
       .within(() => {
