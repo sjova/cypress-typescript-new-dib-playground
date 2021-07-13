@@ -17,6 +17,7 @@ export interface Profile {
   documentType: string;
   documentNumber: string;
   issuingCountry: string;
+  newIssuingCounty: string;
   expiryDay: string;
   expiryMonth: string;
   expiryYear: string;

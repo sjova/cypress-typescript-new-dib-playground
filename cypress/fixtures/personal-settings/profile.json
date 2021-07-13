@@ -17,6 +17,7 @@
   "documentType": "Passport",
   "documentNumber": "123456",
   "issuingCountry": "Serbia",
+  "newIssuingCounty": "Zambia",
   "expiryDay": "05",
   "expiryMonth": "07",
   "expiryYear": "2030",
