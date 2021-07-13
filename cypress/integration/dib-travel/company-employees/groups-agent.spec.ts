@@ -11,8 +11,12 @@ describe('Company Employees - Groups Page', () => {
 
   beforeEach(() => {
     cy.loginAgent();
+    cy.visit('/people-management/groups');
+  });
+
+  it('should "Groups" be displayed in side bar', () => {
     cy.get('dib-navbar dib-hamburger-icon').click();
-    cy.get('[href="/people-management/groups"]').click();
+    cy.get('.cdk-overlay-container dib-navbar-panel').contains('Groups');
   });
 
   it('should allow agent to add new group', () => {
