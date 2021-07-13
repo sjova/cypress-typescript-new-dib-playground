@@ -21,6 +21,7 @@ describe('Company settings - Reference fields - Project', () => {
     cy.get('.cdk-overlay-container simple-snack-bar > span').contains(referenceDetails.projectConfirmationMessage);
   });
 
+  //TODO: Check selector for input field
   it('should change project fields label at checkout', () => {
     cy.get('dib-company-management dib-reference-fields dib-project [ng-reflect-placeholder="Project"] input')
       .clear()
@@ -38,7 +39,9 @@ describe('Company settings - Reference fields - Project', () => {
   // });
 
   it('should add a new project', () => {
-    cy.get('.dib-d-flex > ui-button > .ui-button').contains(referenceDetails.addProjectButton).click();
+    cy.get('dib-company-management dib-reference-fields dib-cost-center ui-button')
+      .contains(referenceDetails.addProjectButton)
+      .click();
     cy.get('.cdk-overlay-container dib-project-dialog [name="projectName"]').type(referenceDetails.projectName);
     cy.get('.cdk-overlay-container dib-project-dialog [name="description"]').type(referenceDetails.projectDescription);
     cy.get('.cdk-overlay-container dib-project-dialog ui-button button').contains('save').click();
