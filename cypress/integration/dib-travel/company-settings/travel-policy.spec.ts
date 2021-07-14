@@ -4,14 +4,13 @@ describe('Company Settings - Travel Policy', () => {
   let travelPolicyForm: TravelPolicy;
 
   before(() => {
-    cy.fixture('company-settings/travel-policy').then((travelPolicyFormDetails) => {
+    cy.fixture('company-settings/travel-policy-form').then((travelPolicyFormDetails) => {
       travelPolicyForm = travelPolicyFormDetails;
     });
   });
 
   beforeEach(() => {
     cy.login();
-    cy.clearCookies();
     cy.visit('/company-management/travel-policy');
   });
 
@@ -73,6 +72,17 @@ describe('Company Settings - Travel Policy', () => {
     );
   });
 
+  it('deletes a flight travel policy', () => {
+    cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title')
+      .first()
+      .contains(travelPolicyForm.travelPolicyName)
+      .parents('dib-expandable-item')
+      .within(() => {
+        return cy.get('ui-button').contains('delete').click();
+      });
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
+  });
+
   it('creates a new hotel travel policy', () => {
     cy.get('dib-company-management dib-travel-policy ui-button[type=primary]').click();
     cy.get('.cdk-overlay-container dib-travel-policy-dialog .dib-select').select(
@@ -99,6 +109,17 @@ describe('Company Settings - Travel Policy', () => {
       'contain',
       travelPolicyForm.travelPolicyName
     );
+  });
+
+  it('deletes a hotel travel policy', () => {
+    cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title')
+      .first()
+      .contains(travelPolicyForm.travelPolicyName)
+      .parents('dib-expandable-item')
+      .within(() => {
+        return cy.get('ui-button').contains('delete').click();
+      });
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
   });
 
   it('creates a new train travel policy', () => {
@@ -137,11 +158,11 @@ describe('Company Settings - Travel Policy', () => {
     );
   });
 
-  it('should extend form of travel policy tests and display details', () => {
+  it('should extend form of travel policy and display details', () => {
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .collapsed .button').first().dblclick();
   });
 
-  it('updates travel policy test', () => {
+  it('updates a train travel policy', () => {
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title')
       .contains(travelPolicyForm.travelPolicyName)
       .first()
@@ -159,8 +180,9 @@ describe('Company Settings - Travel Policy', () => {
     );
   });
 
-  it('deletes travel policy test', () => {
+  it('deletes an updated train travel policy', () => {
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title')
+      .first()
       .contains(travelPolicyForm.travelPolicyNameUpdate)
       .parents('dib-expandable-item')
       .within(() => {
