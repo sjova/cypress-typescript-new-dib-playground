@@ -39,7 +39,7 @@ describe('Company settings - Reference fields - Project', () => {
   // });
 
   it('should add a new project', () => {
-    cy.get('dib-company-management dib-reference-fields dib-cost-center ui-button')
+    cy.get('dib-company-management dib-reference-fields dib-project ui-button')
       .contains(referenceDetails.addProjectButton)
       .click();
     cy.get('.cdk-overlay-container dib-project-dialog [name="projectName"]').type(referenceDetails.projectName);

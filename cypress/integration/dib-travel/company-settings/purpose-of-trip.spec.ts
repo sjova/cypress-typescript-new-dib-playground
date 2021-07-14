@@ -44,7 +44,7 @@ describe('Company settings - Reference fields - Purpose of trip', () => {
   });
 
   it('should add a new purpose of trip', () => {
-    cy.get('dib-company-management dib-reference-fields dib-cost-center ui-button')
+    cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip ui-button')
       .contains(referenceDetails.addPurposeOfTripButton)
       .click();
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog [name="purposeOfTripName"]').type(

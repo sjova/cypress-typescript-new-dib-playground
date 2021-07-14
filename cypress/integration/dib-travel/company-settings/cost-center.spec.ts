@@ -69,7 +69,9 @@ describe('Company settings - Reference fields - Cost center', () => {
     cy.get('.cdk-overlay-container dib-cost-center-dialog input[placeholder="Cost Center Description"]').type(
       referenceDetails.costCenterDescription
     );
-    cy.get('.cdk-overlay-container dib-cost-center-dialog dib-assign-members .members .mat-checkbox-layout').click();
+    cy.get('.cdk-overlay-container dib-cost-center-dialog dib-assign-members .members .mat-checkbox-layout')
+      .contains('QA Bot')
+      .click();
     cy.get('.cdk-overlay-container dib-cost-center-dialog ui-button button').contains('save').click();
     cy.get('dib-company-management dib-reference-fields dib-cost-center').should(
       'contain',
