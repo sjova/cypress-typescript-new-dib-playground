@@ -63,6 +63,7 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
   it('deletes credit card', () => {
     cy.get('dib-company-management dib-payment-method dib-credit-card .card__name')
       .contains(paymentMethodForm.firstName)
+      .first()
       .parents('dib-credit-card')
       .within(() => {
         return cy.get('ui-button').contains('Delete').click();

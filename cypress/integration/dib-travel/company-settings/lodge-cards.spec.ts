@@ -94,9 +94,28 @@ describe('Company Settings - Payment Method - Lodge Cards', () => {
     );
   });
 
+  it('updates lodge card', () => {
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item')
+      .contains(paymentMethodForm.firstName)
+      .first()
+      .parents('dib-lodge-cards')
+      .within(() => {
+        return cy.get('ui-button').contains('edit').click();
+      });
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=contactFirstName]')
+      .clear()
+      .type(paymentMethodForm.firstNameUpdate);
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-button[type=success]').click();
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item').should(
+      'contain',
+      paymentMethodForm.firstNameUpdate
+    );
+  });
+
   it('archives lodge card', () => {
     cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item')
       .contains(paymentMethodForm.firstName)
+      .first()
       .parents('dib-lodge-cards')
       .within(() => {
         return cy.get('ui-button').contains(' archive ').click();
@@ -104,7 +123,7 @@ describe('Company Settings - Payment Method - Lodge Cards', () => {
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
     cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item').should(
       'not.contain',
-      paymentMethodForm.firstName
+      paymentMethodForm.firstNameUpdate
     );
   });
 });

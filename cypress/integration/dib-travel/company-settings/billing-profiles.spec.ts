@@ -74,15 +74,12 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       'contain',
       paymentMethodForm.legalNameUpdate
     );
-    cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item h2').should(
-      'contain',
-      paymentMethodForm.legalNameUpdate
-    );
   });
 
   it('closes dialog for request split invoice changes', () => {
     cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item h2')
       .contains(paymentMethodForm.legalNameUpdate)
+      .first()
       .parents('dib-item')
       .within(() => {
         return cy.get('ui-button').contains('Request change').click();
@@ -97,6 +94,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
   it('sends a request for split invoice changes (by cost center)', () => {
     cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item h2')
       .contains(paymentMethodForm.legalNameUpdate)
+      .first()
       .parents('dib-item')
       .within(() => {
         return cy.get('ui-button').contains('Request change').click();
@@ -108,6 +106,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
   it('sends a request for split invoice changes (by reference field)', () => {
     cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item h2')
       .contains(paymentMethodForm.legalNameUpdate)
+      .first()
       .parents('dib-item')
       .within(() => {
         return cy.get('ui-button').contains('Request change').click();
@@ -120,6 +119,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
   it('checks cancellation of confirmation dialog', () => {
     cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item h2')
       .contains(paymentMethodForm.legalNameUpdate)
+      .first()
       .parents('dib-item')
       .within(() => {
         return cy.get('ui-button').contains('archive').click();
@@ -134,6 +134,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
   it('archives billing profile', () => {
     cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item h2')
       .contains(paymentMethodForm.legalNameUpdate)
+      .first()
       .parents('dib-item')
       .within(() => {
         return cy.get('ui-button').contains('archive').click();

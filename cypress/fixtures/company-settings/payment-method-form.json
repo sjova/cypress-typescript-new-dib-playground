@@ -8,6 +8,7 @@
   "email": "fake@gmail.com",
   "expireDate": "04 / 24",
   "firstName": "Nenad",
+  "firstNameUpdate": "Milan",
   "invoiceRecipientEmail": "fake@gmail.com",
   "lastName": "Tripunovic",
   "legalName": "Billing Profile Test",

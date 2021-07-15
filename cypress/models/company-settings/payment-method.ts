@@ -8,6 +8,7 @@ export interface PaymentMethod {
   email: string;
   expireDate: string;
   firstName: string;
+  firstNameUpdate: string;
   invoiceRecipientEmail: string;
   lastName: string;
   legalName: string;
