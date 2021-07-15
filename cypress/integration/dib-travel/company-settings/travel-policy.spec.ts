@@ -80,7 +80,7 @@ describe('Company Settings - Travel Policy', () => {
       .within(() => {
         return cy.get('ui-button').contains('delete').click();
       });
-    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
   });
 
   it('creates a new hotel travel policy', () => {
@@ -119,7 +119,7 @@ describe('Company Settings - Travel Policy', () => {
       .within(() => {
         return cy.get('ui-button').contains('delete').click();
       });
-    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
   });
 
   it('creates a new train travel policy', () => {
@@ -170,10 +170,10 @@ describe('Company Settings - Travel Policy', () => {
       .within(() => {
         return cy.get('ui-button').contains('edit').click();
       });
-    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=Name')
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=Name]')
       .clear()
       .type(travelPolicyForm.travelPolicyNameUpdate);
-    cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
       'contain',
       travelPolicyForm.travelPolicyNameUpdate
@@ -188,7 +188,7 @@ describe('Company Settings - Travel Policy', () => {
       .within(() => {
         return cy.get('ui-button').contains('delete').click();
       });
-    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
       'not.contain',
       travelPolicyForm.travelPolicyNameUpdate
