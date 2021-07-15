@@ -11,7 +11,6 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.clearCookies();
     cy.visit('/company-management/payment-method/credit-cards');
   });
 
@@ -35,9 +34,9 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
     );
   });
 
-  it.only('creates a new credit card', () => {
+  it('creates a new credit card', () => {
     cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();
-    cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=postalCode]').type(paymentMethodForm.zipcode);
+    cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=postalCode]').type(paymentMethodForm.zipCode);
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=city]').type(paymentMethodForm.city);
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog .dib-select').select(paymentMethodForm.country);
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=streetName]').type(
@@ -50,10 +49,10 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=firstName]').type(paymentMethodForm.firstName);
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=lastName]').type(paymentMethodForm.lastName);
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=email]').type(paymentMethodForm.email);
-    //TODO: IFRAME
-    cy.get('form input[name=cardnumber]').type(paymentMethodForm.cardNumber);
-    cy.get('form .dib-dialog-form-section input[name=exp-date]').type(paymentMethodForm.expireDate);
-    cy.get('form input[name=cvc]').type(paymentMethodForm.securityCode);
+    // TODO: iframe
+    // cy.get('form input[name=cardnumber]').type(paymentMethodForm.cardNumber);
+    // cy.get('form .dib-dialog-form-section input[name=exp-date]').type(paymentMethodForm.expireDate);
+    // cy.get('form input[name=cvc]').type(paymentMethodForm.securityCode);
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog ui-button[type=success]').click();
     cy.get('dib-company-management dib-payment-method dib-credit-card .card__name').should(
       'contain',

@@ -11,7 +11,6 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.clearCookies();
     cy.visit('/company-management/payment-method/billing-profiles');
   });
 
@@ -35,7 +34,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=streetName]').type(
       paymentMethodForm.streetName
     );
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=zipcode]').type(paymentMethodForm.zipcode);
+    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=zipcode]').type(paymentMethodForm.zipCode);
     cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=contactFirstName]').type(
       paymentMethodForm.firstName
     );
@@ -70,7 +69,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=legalName]')
       .clear()
       .type(paymentMethodForm.legalNameUpdate);
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog ui-button[type=success').click();
+    cy.get('.cdk-overlay-container dib-billing-profile-dialog ui-button[type=success]').click();
     cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item h2').should(
       'contain',
       paymentMethodForm.legalNameUpdate
@@ -103,7 +102,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
         return cy.get('ui-button').contains('Request change').click();
       });
     cy.get('.cdk-overlay-container dib-invoice-split-dialog ui-button[type=success]').click();
-    cy.get('.cdk-overlay-container snack-bar-container').should('contain', paymentMethodForm.message);
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', paymentMethodForm.message);
   });
 
   it('sends a request for split invoice changes (by reference field)', () => {
@@ -115,7 +114,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       });
     cy.get('.cdk-overlay-container dib-invoice-split-dialog input[type=radio]').check({ force: true });
     cy.get('.cdk-overlay-container dib-invoice-split-dialog ui-button[type=success]').click();
-    cy.get('.cdk-overlay-container snack-bar-container').should('contain', paymentMethodForm.message);
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', paymentMethodForm.message);
   });
 
   it('checks cancellation of confirmation dialog', () => {
@@ -139,7 +138,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       .within(() => {
         return cy.get('ui-button').contains('archive').click();
       });
-    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
     cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item h2').should(
       'not.contain',
       paymentMethodForm.legalNameUpdate
