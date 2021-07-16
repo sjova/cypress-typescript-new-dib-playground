@@ -10,7 +10,7 @@
   "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "cy:spec": "cypress cypress run --spec",
+    "cy:spec": "cypress run --spec",
     "eslint": "eslint cypress --ext ts --fix",
     "prepare": "husky install",
     "prettier": "prettier --write .",
