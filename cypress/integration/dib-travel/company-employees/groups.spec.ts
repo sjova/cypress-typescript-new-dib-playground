@@ -22,7 +22,7 @@ describe('Company Employees - Groups Page', () => {
   it('should allow regular user to add new group', () => {
     cy.get('dib-people-management dib-groups ui-button button').contains('Add Group').click();
     cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="group name*"]').type(groupsDetails.name);
-    cy.get('.cdk-overlay-container dib-group-dialog dib-assign-members .members .mat-checkbox-layout').click();
+    cy.get('.cdk-overlay-container dib-group-dialog dib-assign-members .members label').click();
     cy.get('.cdk-overlay-container dib-group-dialog ui-button button').contains('save').click();
     cy.get('dib-people-management dib-groups .body').should('contain', groupsDetails.name);
   });
