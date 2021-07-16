@@ -127,6 +127,10 @@ We will use `describe()` and `it()` in our tests.
 
 DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accounts.json`. This fixture is stored externally.
 
+## Cypress Config Notes
+
+- `"waitForAnimations": false` - revisit this later
+
 ## Useful Docs
 
 - Getting Started
