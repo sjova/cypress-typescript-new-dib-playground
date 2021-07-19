@@ -33,7 +33,7 @@ describe('Company Employees - Groups Page', () => {
       .parents('.item__main')
       .next()
       .contains('edit')
-      .click({ force: true }); //TODO find better solution instead of force:true if it is possible
+      .click();
     cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="group name*"]')
       .clear()
       .type(groupsDetails.editName);
@@ -47,7 +47,7 @@ describe('Company Employees - Groups Page', () => {
       .parents('.item__main')
       .next()
       .contains('delete')
-      .click({ force: true }); //TODO find better solution instead of force:true if it is possible
+      .click();
     cy.get('.cdk-overlay-container confirmation-dialog ui-button button').contains('Delete').click();
   });
 });
