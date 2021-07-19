@@ -103,6 +103,26 @@ We will use `describe()` and `it()` in our tests.
  */
 ```
 
+## Globs
+
+Glob patterns specify sets of filenames with wildcard characters.
+
+### Segments and separators
+
+A segment is everything between separators. The separator in a glob is always the / character - regardless of the operating system.
+
+### Special character: \* (single-star)
+
+Matches any amount (including none) of characters within a single segment. Useful for globbing files within one directory.
+
+This glob will match files like `index.js`, but not files like `scripts/index.js` or `scripts/nested/index.js`
+
+### Special character: \*\* (double-star)
+
+Matches any amount (including none) of characters across segments. Useful for globbing files in nested directories. Make sure to appropriately restrict your double-star globs, to avoid matching large directories unnecessarily.
+
+Here, the glob is appropriately restricted to the `scripts/` directory. It will match files like `scripts/index.js`, `scripts/nested/index.js`, and `scripts/nested/twice/index.js`.
+
 ## Angular Components
 
 - `app-root` - Angular root (main) component
@@ -156,7 +176,7 @@ DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accoun
 - References
 
   - **[Best Practices](https://docs.cypress.io/guides/references/best-practices)**
-  - [Assertions](https://docs.cypress.io/guides/references/assertions)
+  - **[Assertions](https://docs.cypress.io/guides/references/assertions)**
   - [Bundled Tools](https://docs.cypress.io/guides/references/bundled-tools)
   - [Error Messages](https://docs.cypress.io/guides/references/error-messages)
 
