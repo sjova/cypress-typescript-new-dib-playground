@@ -1,6 +1,7 @@
 import {
   asyncAdd,
   checkToken,
+  clickAttached,
   clickLink,
   dataCy,
   getSessionStorage,
@@ -12,6 +13,7 @@ import {
 
 Cypress.Commands.add('asyncAdd', asyncAdd);
 Cypress.Commands.add('checkToken', checkToken);
+Cypress.Commands.add('clickAttached', { prevSubject: 'element' }, clickAttached);
 Cypress.Commands.add('clickLink', clickLink);
 Cypress.Commands.add('dataCy', dataCy);
 Cypress.Commands.add('getSessionStorage', getSessionStorage);
