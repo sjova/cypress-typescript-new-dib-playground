@@ -1,4 +1,4 @@
-import { PaymentMethod } from '../../../models';
+import { PaymentMethod } from '../../../../models';
 
 describe('Company Settings - Payment Method - Lodge Cards', () => {
   let paymentMethodForm: PaymentMethod;
@@ -13,8 +13,8 @@ describe('Company Settings - Payment Method - Lodge Cards', () => {
     cy.loginAgent();
     cy.visit('/company-management/payment-method/lodge-cards');
   });
-  //TODO: Cypress cannot see any elements on this page and all tests below failed.
-  it('should display company settings/payment method in navbar menu', () => {
+  // TODO: Cypress cannot see any elements on this page and all tests below failed.
+  it('should display payment method in sidebar menu', () => {
     cy.get('dib-navbar dib-hamburger-icon').click();
     cy.get('.cdk-overlay-container dib-navbar-panel').contains(' Payment Method ');
   });

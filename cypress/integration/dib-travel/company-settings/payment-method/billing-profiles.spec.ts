@@ -1,4 +1,4 @@
-import { PaymentMethod } from '../../../models';
+import { PaymentMethod } from '../../../../models';
 
 describe('Company Settings - Payment Method - Billing Profiles', () => {
   let paymentMethodForm: PaymentMethod;
@@ -14,7 +14,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     cy.visit('/company-management/payment-method/billing-profiles');
   });
 
-  it('should display company settings/payment method in navbar menu', () => {
+  it('should display payment method in sidebar menu', () => {
     cy.get('dib-navbar dib-hamburger-icon').click();
     cy.get('.cdk-overlay-container dib-navbar-panel').contains(' Payment Method ');
   });
