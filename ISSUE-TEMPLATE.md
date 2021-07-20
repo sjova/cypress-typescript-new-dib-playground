@@ -4,7 +4,7 @@ We're using the following structure:
 
 - Example feature: **Parent Feature/Sub Feature**
 - Test folder and test file: `cypress/integration/dib-travel/parent-feature/sub-feature.spec.ts`
-- Test _Describe_ label: "Parent Feature/Sub Feature"
+- Test _Describe_ label: "Parent Feature - Sub Feature" (we're using Title Case/Capitalized Case here)
 - Fixture (if needed): `cypress/fixtures/parent-feature/<descriptive-file-name>.json`
   - Only globally shared JSON data can be placed in `cypress/fixtures`
 - Models (if needed): `cypress/models/parent-feature/<descriptive-file-name>.ts `
