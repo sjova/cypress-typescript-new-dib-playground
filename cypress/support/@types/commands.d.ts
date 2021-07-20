@@ -27,6 +27,19 @@ declare global {
       checkToken(token: string): void;
 
       /**
+       * @todo Revisit usage of this later
+       *
+       * Click attached DOM element
+       *
+       * @example
+       *    cy.get('button').clickAttached()
+       *    cy.focused().clickAttached()
+       *    cy.contains('Welcome').clickAttached()
+       */
+
+      clickAttached(): Cypress.Chainable<JQuery<HTMLElement>>;
+
+      /**
        * @todo Used for Cypress demo purposes and must be revisited before usage
        *
        * Click on a link with a specific label

@@ -5,34 +5,41 @@
 - Prefer American English over British English
 - Please don't write comments in Serbian
 - Display lists (options, flags, etc.) and tables in alphabetical order.
-- Please use present tense imperative in Git commit messages (ex. add tests for AAA, fix the BBB bug in CCC, correct typos in the login)
-- Please put a ticket reference at the end of the Git comment (ex. "add tests for AAA #DT-1234")
+- Please use present tense imperative in Git commit messages (ex. `add tests for AAA, fix the BBB bug in CCC, correct typos in the login`)
+- Please put a ticket reference at the end of the Git comment (ex. `"add tests for AAA #DT-1234"`)
 - Use descriptive names whenever possible (files, variables, functions, methods, etc.)
 - Please use only this file extension for test files: `*.spec.ts`
-- Please use dash-case for file naming (ex. foo-something.spec.ts)
+- Please use dash-case for file naming (ex. `foo-something.spec.ts`)
 - Please use the descriptive file naming
-- Please use camelCase for variable naming (ex. myVariableName)
+- Please use camelCase for variable naming (ex. `myVariableName`)
 - **Mocha** `describe` title should start with a capital letter
 - **Mocha** `it` title should start with a lowercase letter (_it_ and _descriptive title_ together should have a meaningful meaning)
+- The KISS principle (keep it simple, stupid)
+- The DRY principle (do not repeat yourself)
 - Please separate each meaningful code block with a new line (for better code readability)
 - Please use a separate folder for tests of each feature
+- Please do not use abbreviations in your code
 - Please sort all relevant items in the code in alphabetical order (A-Z order).
 - For readability, we're using 120 characters as a maximum line length
 - Please use single quotes over double quotes
 - Please reuse repeatable code (model, function, Cypress command, etc.)
 - Please define the TypeScript interface for each data model (export and reuse same if needed)
 - Add meaningful comments to describe your code
-- Add TODO comment for temp. unused or unfinished code
+- Add TODO comment for temp. unused or unfinished code and map with Jira/Issues board (ex. `// TODO: Foo description (DT-1234)`)
 - Simplify extensive (large function/code block) business logic into smaller chunks
 - Add multiple assertions and don't worry about it
 - Use existing Cypress commands that are already written instead of creating more
 - Try to login as users with different permissions instead of a superuser that has all permissions
+- Please try to use at least these selectors: `feature/parent-selector middle/control-selector main/children-selector`
+- Whenever possible, don't use **Angular** elements as a selector (example prefixes: `ng*`, `ng-*` and `routerLink`)
+- Whenever possible, don't use **Angular Material** elements as a selector (example prefixes: `mat*`, `mat-*`)
 - Mock or control test data as much as possible (JSON data)
 - Tests should always be able to be run independently and still pass
 - Clean up state before tests run (not after)
 - Use API route aliases or assertions to guard Cypress from proceeding until an explicit condition is met (don't use `.wait()`)
 - Don't limit yourself to trying to act like a user
 - Practice PR Code Review in all seniority directions (Senior -> Junior, Junior -> Senior, and all variations between)
+- Make sure you would understand your code if you read it a few months from now.
 
 ## Branch Naming Conventions
 
@@ -76,3 +83,6 @@ Before you create PR or before you push changes in your PR, please make sure tha
 - Please confirm your tests in Cypress Test Runner
 - Pull latest changes from the source branch
 - Please add a descriptive title and description when creating PR
+- Confirm tests in Chrome and Electron (headless) browsers
+- Execute tests at least three times
+- If the error(s) occurs randomly, it should be corrected
