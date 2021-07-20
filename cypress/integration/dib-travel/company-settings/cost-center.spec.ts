@@ -85,7 +85,7 @@ describe('Company settings - Reference fields - Cost center', () => {
       .parent()
       .nextUntil('.table-cell .button-cell')
       .contains('edit')
-      .click({ force: true });
+      .clickAttached();
     cy.get('.cdk-overlay-container dib-cost-center-dialog input[placeholder="Cost Center Name*"]')
       .clear()
       .type(referenceDetails.newCostCenterName);
@@ -102,7 +102,7 @@ describe('Company settings - Reference fields - Cost center', () => {
       .parent()
       .nextUntil('.table-cell .button-cell')
       .contains(' archive ')
-      .click({ force: true });
+      .clickAttached();
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
   });
 });

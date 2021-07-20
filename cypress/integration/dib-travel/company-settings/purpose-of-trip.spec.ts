@@ -66,7 +66,7 @@ describe('Company settings - Reference fields - Purpose of trip', () => {
       .parent()
       .nextUntil('.table-cell .button-cell')
       .contains('edit')
-      .click({ force: true });
+      .clickAttached();
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog [name="purposeOfTripName"]')
       .clear()
       .type(referenceDetails.newPurposeOfTrip);
@@ -83,7 +83,7 @@ describe('Company settings - Reference fields - Purpose of trip', () => {
       .parent()
       .nextUntil('.table-cell .button-cell')
       .contains(' archive ')
-      .click({ force: true });
+      .clickAttached();
     cy.get('.cdk-overlay-container simple-snack-bar > span').contains(
       referenceDetails.purposeOfTripConfirmationMessage
     );

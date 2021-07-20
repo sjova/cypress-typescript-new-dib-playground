@@ -54,7 +54,7 @@ describe('Company settings - Reference fields - Project', () => {
       .parent()
       .nextUntil('.table-cell .button-cell')
       .contains('edit')
-      .click({ force: true });
+      .clickAttached();
     cy.get('.cdk-overlay-container dib-project-dialog [name="projectName"]')
       .clear()
       .type(referenceDetails.newProjectName);
@@ -71,7 +71,7 @@ describe('Company settings - Reference fields - Project', () => {
       .parent()
       .nextUntil('.table-cell .button-cell')
       .contains(' archive ')
-      .click({ force: true });
+      .clickAttached();
     cy.get('.cdk-overlay-container simple-snack-bar > span').contains(referenceDetails.projectConfirmationMessage);
   });
 });
