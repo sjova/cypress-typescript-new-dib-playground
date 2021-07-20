@@ -15,7 +15,7 @@ describe('Company Settings - Approval Process', () => {
     cy.visit('/company-management/approval-process');
   });
 
-  it('should display company settings/approval process in navbar menu', () => {
+  it('should display approval process in sidebar menu', () => {
     cy.get('dib-navbar dib-hamburger-icon').click();
     cy.get('.cdk-overlay-container dib-navbar-panel').contains('Approval Process ');
   });
@@ -41,12 +41,24 @@ describe('Company Settings - Approval Process', () => {
     cy.get('.cdk-overlay-container dib-approval-process-dialog .members .user')
       .contains(approvalForm.approvalProcessForContent)
       .click();
-    cy.get('.cdk-overlay-container dib-approval-process-dialog #mat-radio-1').click();
+    cy.get('.cdk-overlay-container dib-approval-process-dialog label')
+      .contains("Don't need approval (exception from travel policy)")
+      .click();
     cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
     cy.get('dib-company-management dib-approval-process dib-approval-process-item .item__left').should(
       'contain',
       approvalForm.approvedBy
     );
+  });
+
+  it('deletes approval process item', () => {
+    cy.get('dib-company-management dib-approval-process dib-approval-process-item')
+      .contains(approvalForm.approvedBy)
+      .parents('dib-approval-process-item')
+      .within(() => {
+        return cy.get('ui-button').contains('delete').clickAttached();
+      });
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
   });
 
   it('creates a new approval process (only out of policy trips)', () => {
@@ -57,16 +69,26 @@ describe('Company Settings - Approval Process', () => {
     cy.get('.cdk-overlay-container dib-approval-process-dialog .members .user')
       .contains(approvalForm.approvalProcessForContent)
       .click();
-    cy.get('.cdk-overlay-container dib-approval-process-dialog #mat-radio-2').click();
+    cy.get('.cdk-overlay-container dib-approval-process-dialog label').contains('Only out of policy trips').click();
     cy.get('.cdk-overlay-container dib-approval-process-dialog dib-input input').eq(2).type(approvalForm.approvedBy);
     cy.get('.cdk-overlay-container dib-approval-process-dialog .members .group')
       .contains(approvalForm.approvedByContent)
-      .click({ force: true });
+      .clickAttached();
     cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
     cy.get('dib-company-management dib-approval-process dib-approval-process-item .item__left').should(
       'contain',
       approvalForm.approvedBy
     );
+  });
+
+  it('deletes approval process item', () => {
+    cy.get('dib-company-management dib-approval-process dib-approval-process-item')
+      .contains(approvalForm.approvedBy)
+      .parents('dib-approval-process-item')
+      .within(() => {
+        return cy.get('ui-button').contains('delete').clickAttached();
+      });
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
   });
 
   it('creates a new approval process (all trips)', () => {
@@ -77,11 +99,11 @@ describe('Company Settings - Approval Process', () => {
     cy.get('.cdk-overlay-container dib-approval-process-dialog .members .user')
       .contains(approvalForm.approvalProcessForContent)
       .click();
-    cy.get('.cdk-overlay-container dib-approval-process-dialog #mat-radio-3').click();
-    cy.get('.cdk-overlay-container dib-approval-process-dialog dib-input input').eq(3).type(approvalForm.approvedBy);
+    cy.get('.cdk-overlay-container dib-approval-process-dialog label').contains('All trips').click();
+    cy.get('.cdk-overlay-container dib-approval-process-dialog dib-input input').last().type(approvalForm.approvedBy);
     cy.get('.cdk-overlay-container dib-approval-process-dialog .members .group')
       .contains(approvalForm.approvedByContent)
-      .click({ force: true });
+      .clickAttached();
     cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
     cy.get('dib-company-management dib-approval-process dib-approval-process-item .item__left').should(
       'contain',
@@ -94,7 +116,7 @@ describe('Company Settings - Approval Process', () => {
       .contains(approvalForm.approvedBy)
       .parents('dib-approval-process-item')
       .within(() => {
-        return cy.get('ui-button').contains('delete').click();
+        return cy.get('ui-button').contains('delete').clickAttached();
       });
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[cancel=true]').click();
   });
@@ -104,7 +126,7 @@ describe('Company Settings - Approval Process', () => {
       .contains(approvalForm.approvedBy)
       .parents('dib-approval-process-item')
       .within(() => {
-        return cy.get('ui-button').contains('delete').click();
+        return cy.get('ui-button').contains('delete').clickAttached();
       });
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
   });
