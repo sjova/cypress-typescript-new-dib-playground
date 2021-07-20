@@ -171,6 +171,7 @@ describe('Personal settings - Profile page', () => {
     cy.get('.cdk-overlay-container dib-travel-document-dialog ui-button').click();
     cy.get('dib-profile dib-account dib-travel-documents').should('contain', 'PASSPORT');
     cy.get('dib-profile dib-account dib-travel-documents').should('contain', profileDetails.issuingCountry);
+    // TODO: Check the force:true click
     cy.get('dib-profile dib-account .travel-documents')
       .contains(profileDetails.issuingCountry)
       .next()
