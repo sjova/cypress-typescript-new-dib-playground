@@ -146,9 +146,9 @@ describe('Personal settings - Profile page', () => {
     cy.get('.cdk-overlay-container dib-travel-document-dialog dib-input input[name="idNumber"]').type(
       profileDetails.documentNumber
     );
-    cy.get('.cdk-overlay-container dib-travel-document-dialog dib-input input[placeholder="Issuing country"]').type(
-      profileDetails.issuingCountry
-    );
+    cy.get('.cdk-overlay-container dib-travel-document-dialog dib-input input[placeholder="Issuing country"]')
+      .click()
+      .type(profileDetails.issuingCountry);
     cy.get('.cdk-overlay-container dib-dialog-wrapper dib-travel-document-dialog dib-searchable-select')
       .contains(profileDetails.issuingCountry)
       .click();
@@ -190,7 +190,7 @@ describe('Personal settings - Profile page', () => {
       .contains(profileDetails.newIssuingCounty)
       .next()
       .contains('delete')
-      .click({ force: true });
+      .clickAttached();
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
   });
 
