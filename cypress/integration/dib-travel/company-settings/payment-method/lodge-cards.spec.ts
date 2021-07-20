@@ -13,7 +13,7 @@ describe('Company Settings - Payment Method - Lodge Cards', () => {
     cy.loginAgent();
     cy.visit('/company-management/payment-method/lodge-cards');
   });
-  // TODO: Cypress cannot see any elements on this page and all tests below failed.
+
   it('should display payment method in sidebar menu', () => {
     cy.get('dib-navbar dib-hamburger-icon').click();
     cy.get('.cdk-overlay-container dib-navbar-panel').contains(' Payment Method ');
@@ -27,7 +27,7 @@ describe('Company Settings - Payment Method - Lodge Cards', () => {
 
   it('closes dialog for creating lodge card', () => {
     cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]').click();
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-button button').contains(' Cancel ').click();
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog button').contains(' Cancel ').click();
     cy.get('dib-company-management dib-payment-method dib-lodge-cards h1').should('contain', ' Lodge Cards ');
   });
 
@@ -43,9 +43,8 @@ describe('Company Settings - Payment Method - Lodge Cards', () => {
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=addressLine]').type(paymentMethodForm.streetName);
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=postalCode]').type(paymentMethodForm.zipCode);
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=city]').type(paymentMethodForm.city);
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown .placeholder')
-      .contains(paymentMethodForm.country)
-      .click();
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-autocomplete').click();
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-autocomplete input').type(paymentMethodForm.country);
     cy.get('.cdk-overlay-container ui-panel .cdk-virtual-scroll-content-wrapper')
       .contains(paymentMethodForm.country)
       .click();
@@ -54,9 +53,8 @@ describe('Company Settings - Payment Method - Lodge Cards', () => {
     );
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=contactLastName]').type(paymentMethodForm.lastName);
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=contactEmail]').type(paymentMethodForm.email);
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown .placeholder')
-      .contains(paymentMethodForm.cardProvider)
-      .click();
+
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown[formcontrolname=provider]').click();
     cy.get('.cdk-overlay-container ui-panel .cdk-virtual-scroll-content-wrapper')
       .contains(paymentMethodForm.cardProvider)
       .click();
@@ -66,21 +64,15 @@ describe('Company Settings - Payment Method - Lodge Cards', () => {
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=creditCardNumber]').type(
       paymentMethodForm.cardNumber
     );
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown .placeholder')
-      .contains(paymentMethodForm.month)
-      .click();
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown[formcontrolname=month]').click();
     cy.get('.cdk-overlay-container ui-panel .cdk-virtual-scroll-content-wrapper')
       .contains(paymentMethodForm.month)
       .click();
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown .placeholder')
-      .contains(paymentMethodForm.year)
-      .click();
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown[formcontrolname=year]').click();
     cy.get('.cdk-overlay-container ui-panel .cdk-virtual-scroll-content-wrapper')
       .contains(paymentMethodForm.year)
       .click();
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown .placeholder')
-      .contains(paymentMethodForm.currency)
-      .click();
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown[formcontrolname=currency').click();
     cy.get('.cdk-overlay-container ui-panel .cdk-virtual-scroll-content-wrapper')
       .contains(paymentMethodForm.currency)
       .click();
@@ -92,6 +84,18 @@ describe('Company Settings - Payment Method - Lodge Cards', () => {
       'contain',
       paymentMethodForm.firstName
     );
+  });
+
+  it('closes dialog for editing lodge card', () => {
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item')
+      .contains(paymentMethodForm.firstName)
+      .first()
+      .parents('dib-lodge-cards')
+      .within(() => {
+        return cy.get('ui-button').contains('edit').click();
+      });
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog button').contains(' Cancel ').click();
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards h1').should('contain', ' Lodge Cards ');
   });
 
   it('updates lodge card', () => {
@@ -106,6 +110,21 @@ describe('Company Settings - Payment Method - Lodge Cards', () => {
       .clear()
       .type(paymentMethodForm.firstNameUpdate);
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-button[type=success]').click();
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item').should(
+      'contain',
+      paymentMethodForm.firstNameUpdate
+    );
+  });
+
+  it('checks cancellation of confirmation dialog', () => {
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item')
+      .contains(paymentMethodForm.firstName)
+      .first()
+      .parents('dib-lodge-cards')
+      .within(() => {
+        return cy.get('ui-button').contains(' archive ').click();
+      });
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button[cancel=true]').click();
     cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item').should(
       'contain',
       paymentMethodForm.firstNameUpdate

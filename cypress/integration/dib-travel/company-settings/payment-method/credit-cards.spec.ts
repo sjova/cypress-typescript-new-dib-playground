@@ -34,11 +34,15 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
     );
   });
 
-  it('creates a new credit card', () => {
+  it.only('creates a new credit card', () => {
     cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=postalCode]').type(paymentMethodForm.zipCode);
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=city]').type(paymentMethodForm.city);
-    cy.get('.cdk-overlay-container dib-add-credit-card-dialog .dib-select').select(paymentMethodForm.country);
+    cy.get('.cdk-overlay-container dib-add-credit-card-dialog ui-dropdown').click();
+    cy.get('.cdk-overlay-container ui-panel cdk-virtual-scroll-viewport')
+      .scrollTo(0, 4000)
+      .contains(paymentMethodForm.country)
+      .click();
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=streetName]').type(
       paymentMethodForm.streetName
     );
