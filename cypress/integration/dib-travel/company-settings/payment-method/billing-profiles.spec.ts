@@ -111,7 +111,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       .within(() => {
         return cy.get('ui-button').contains('Request change').click();
       });
-    cy.get('.cdk-overlay-container dib-invoice-split-dialog input[type=radio]').check({ force: true });
+    cy.get('.cdk-overlay-container dib-invoice-split-dialog input[type=radio]').clickAttached();
     cy.get('.cdk-overlay-container dib-invoice-split-dialog ui-button[type=success]').click();
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', paymentMethodForm.message);
   });
