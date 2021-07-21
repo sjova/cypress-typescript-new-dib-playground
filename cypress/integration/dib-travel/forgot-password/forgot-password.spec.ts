@@ -42,4 +42,11 @@ describe('Forgot Password Page', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Email does not exist');
   });
+
+  it('should display successful message when user entered valid and registered email address', () => {
+    cy.get('new-forgot-password input[type="email"]').type(account.defaultAccount.email);
+    cy.get('new-forgot-password ui-button button').click();
+
+    cy.get('new-forgot-password div .mail-sent-notification').should('contain', 'E-mail has been sent');
+  });
 });
