@@ -1,6 +1,6 @@
 import dibTravelAccounts from '../../../fixtures/dib-travel-accounts.json';
 
-describe('Accounts Fixture', () => {
+describe('Cypress Accounts Fixture', () => {
   beforeEach(() => {
     cy.fixture('dib-travel-accounts.json').as('accounts');
   });

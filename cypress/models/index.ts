@@ -1,4 +1,4 @@
-export * from './company-employees/group-name';
+export * from './company-employees/employee';
+export * from './company-employees/group';
 export * from './dib-travel-accounts';
-export * from './employee/employee';
 export * from './user';
