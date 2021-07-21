@@ -53,6 +53,29 @@ describe('Sign-up Page', () => {
     cy.get('dib-signup ui-input .error').should('contain', 'The email should be in email@example.com format');
   });
 
+  it.only('should display pop up error message when existing email address is inserted', () => {
+    cy.get('dib-signup ui-input input[name="firstName"]').type(registrationUserDetails.firstName);
+    cy.get('dib-signup ui-input input[name="lastName"]').type(registrationUserDetails.lastName);
+    cy.get('dib-signup ui-input input[name="email"]').type(userSignUpUpEmailPassword.defaultAccount.email);
+    cy.get('dib-signup ui-phone-picker ui-autocomplete').click();
+    cy.get('.cdk-overlay-container ui-panel cdk-virtual-scroll-viewport')
+      .scrollTo(0, 8000)
+      .contains(registrationUserDetails.companyCountry)
+      .click();
+    cy.get('dib-signup ui-input input[type="number"]').type(registrationUserDetails.phoneNumber);
+    cy.get('dib-signup ui-input input[name="password"]').eq(0).type(userSignUpUpEmailPassword.signUpAccount.password);
+    cy.get('dib-signup ui-input input[name="password"]').eq(1).type(userSignUpUpEmailPassword.signUpAccount.password);
+    cy.get('dib-signup ui-input input[name="companyName"]').type(registrationUserDetails.companyName);
+    cy.get('dib-signup ui-input input[name="companyRegistrationNumber"]').type(
+      registrationUserDetails.companyRegistrationNumber
+    );
+    cy.get('dib-signup ui-button button').contains('Sign up').click();
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'contain',
+      'E-mail address does already exist or is not valid'
+    );
+  });
+
   it('should display successful message after user signs up with valid data', () => {
     const signUpEmail = getSignUpEmailWithHash(userSignUpUpEmailPassword.signUpAccount.email);
     cy.intercept('GET', '/api/public/v1/details/locations/countries').as('getCountries');
