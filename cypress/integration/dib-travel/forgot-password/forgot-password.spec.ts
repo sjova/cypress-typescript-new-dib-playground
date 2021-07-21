@@ -23,13 +23,23 @@ describe('Forgot Password Page', () => {
 
   it('should display error message when empty email input field is submitted', () => {
     cy.get('new-forgot-password ui-button button').click();
+
     cy.get('new-forgot-password .error').should('contain', 'Email is required.');
   });
 
-  it.only('should display error message when invalid email is submitted', () => {
-    const invalidEmail = getEmailWithHash(account.signUpAccount.email);
-    cy.get('new-forgot-password input[type="email"]').type(invalidEmail.replace('@', ''));
+  it('should display error message when invalid email is submitted', () => {
+    const email = getEmailWithHash(account.signUpAccount.email);
+    cy.get('new-forgot-password input[type="email"]').type(email.replace('@', ''));
     cy.get('new-forgot-password ui-button button').click();
+
     cy.get('new-forgot-password .error').should('contain', 'The email should be in email@example.com format');
+  });
+
+  it('should display error message when email does not exist', () => {
+    const email = getEmailWithHash(account.signUpAccount.email);
+    cy.get('new-forgot-password input[type="email"]').type(email);
+    cy.get('new-forgot-password ui-button button').click();
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Email does not exist');
   });
 });
