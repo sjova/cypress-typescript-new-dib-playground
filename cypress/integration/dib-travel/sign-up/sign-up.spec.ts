@@ -1,5 +1,5 @@
 import { DibTravelAccounts, RegistrationUserDetails } from '../../../models';
-import { getSignUpEmailWithHash } from '../../../helpers';
+import { getEmailWithHash } from '../../../helpers';
 
 describe('Sign-up Page', () => {
   let userSignUpUpEmailPassword: DibTravelAccounts;
@@ -27,6 +27,7 @@ describe('Sign-up Page', () => {
       .should('contain', 'Password is required')
       .should('contain', 'Company name is required')
       .should('contain', 'Company registration number is required');
+
     cy.get('dib-signup ui-phone-picker .error').should('contain', 'Phone number is required.');
     cy.get('dib-signup ui-autocomplete .error').should('contain', 'Country is required');
   });
@@ -50,10 +51,11 @@ describe('Sign-up Page', () => {
       registrationUserDetails.companyRegistrationNumber
     );
     cy.get('dib-signup ui-button button').contains('Sign up').click();
+
     cy.get('dib-signup ui-input .error').should('contain', 'The email should be in email@example.com format');
   });
 
-  it.only('should display pop up error message when existing email address is inserted', () => {
+  it('should display pop up error message when existing email address is inserted', () => {
     cy.get('dib-signup ui-input input[name="firstName"]').type(registrationUserDetails.firstName);
     cy.get('dib-signup ui-input input[name="lastName"]').type(registrationUserDetails.lastName);
     cy.get('dib-signup ui-input input[name="email"]').type(userSignUpUpEmailPassword.defaultAccount.email);
@@ -70,34 +72,56 @@ describe('Sign-up Page', () => {
       registrationUserDetails.companyRegistrationNumber
     );
     cy.get('dib-signup ui-button button').contains('Sign up').click();
+
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
       'E-mail address does already exist or is not valid'
     );
   });
 
-  it('should display successful message after user signs up with valid data', () => {
-    const signUpEmail = getSignUpEmailWithHash(userSignUpUpEmailPassword.signUpAccount.email);
-    cy.intercept('GET', '/api/public/v1/details/locations/countries').as('getCountries');
+  it('should display error message when password is not 6 characters long', () => {
+    const password = userSignUpUpEmailPassword.signUpAccount.password;
+    const shortPassword = password.slice(0, 5);
+    cy.get('dib-signup ui-input input[name="firstName"]').type(registrationUserDetails.firstName);
+    cy.get('dib-signup ui-input input[name="lastName"]').type(registrationUserDetails.lastName);
+    cy.get('dib-signup ui-input input[name="email"]').type(userSignUpUpEmailPassword.defaultAccount.email);
+    cy.get('dib-signup ui-phone-picker ui-autocomplete').click();
+    cy.get('.cdk-overlay-container ui-panel cdk-virtual-scroll-viewport')
+      .scrollTo(0, 8000)
+      .contains(registrationUserDetails.companyCountry)
+      .click();
+    cy.get('dib-signup ui-input input[type="number"]').type(registrationUserDetails.phoneNumber);
+    cy.get('dib-signup ui-input input[name="password"]').eq(0).type(shortPassword);
+    cy.get('dib-signup ui-input input[name="password"]').eq(1).type(shortPassword);
+    cy.get('dib-signup ui-input input[name="companyName"]').type(registrationUserDetails.companyName);
+    cy.get('dib-signup ui-input input[name="companyRegistrationNumber"]').type(
+      registrationUserDetails.companyRegistrationNumber
+    );
+    cy.get('dib-signup ui-button button').contains('Sign up').click();
 
-    cy.wait('@getCountries').then(() => {
-      cy.get('dib-signup ui-input input[name="firstName"]').type(registrationUserDetails.firstName);
-      cy.get('dib-signup ui-input input[name="lastName"]').type(registrationUserDetails.lastName);
-      cy.get('dib-signup ui-input input[name="email"]').type(signUpEmail);
-      cy.get('dib-signup ui-phone-picker ui-autocomplete').click();
-      cy.get('.cdk-overlay-container ui-panel cdk-virtual-scroll-viewport')
-        .scrollTo(0, 8000)
-        .contains(registrationUserDetails.companyCountry)
-        .click();
-      cy.get('dib-signup ui-input input[type="number"]').type(registrationUserDetails.phoneNumber);
-      cy.get('dib-signup ui-input input[name="password"]').eq(0).type(userSignUpUpEmailPassword.signUpAccount.password);
-      cy.get('dib-signup ui-input input[name="password"]').eq(1).type(userSignUpUpEmailPassword.signUpAccount.password);
-      cy.get('dib-signup ui-input input[name="companyName"]').type(registrationUserDetails.companyName);
-      cy.get('dib-signup ui-input input[name="companyRegistrationNumber"]').type(
-        registrationUserDetails.companyRegistrationNumber
-      );
-      cy.get('dib-signup ui-button button').contains('Sign up').click();
-    });
+    cy.get('dib-signup ui-input .error').should('contain', 'Must be at least 6 characters long');
+  });
+
+  it('should display successful message after user signs up with valid data', () => {
+    const signUpEmail = getEmailWithHash(userSignUpUpEmailPassword.signUpAccount.email);
+
+    cy.get('dib-signup ui-input input[name="firstName"]').type(registrationUserDetails.firstName);
+    cy.get('dib-signup ui-input input[name="lastName"]').type(registrationUserDetails.lastName);
+    cy.get('dib-signup ui-input input[name="email"]').type(signUpEmail);
+    cy.get('dib-signup ui-phone-picker ui-autocomplete').click();
+    cy.get('.cdk-overlay-container ui-panel cdk-virtual-scroll-viewport')
+      .scrollTo(0, 8000)
+      .contains(registrationUserDetails.companyCountry)
+      .click();
+    cy.get('dib-signup ui-input input[type="number"]').type(registrationUserDetails.phoneNumber);
+    cy.get('dib-signup ui-input input[name="password"]').eq(0).type(userSignUpUpEmailPassword.signUpAccount.password);
+    cy.get('dib-signup ui-input input[name="password"]').eq(1).type(userSignUpUpEmailPassword.signUpAccount.password);
+    cy.get('dib-signup ui-input input[name="companyName"]').type(registrationUserDetails.companyName);
+    cy.get('dib-signup ui-input input[name="companyRegistrationNumber"]').type(
+      registrationUserDetails.companyRegistrationNumber
+    );
+    cy.get('dib-signup ui-button button').contains('Sign up').click();
+
     cy.get('dib-register-email-sent div').should('contain', 'Check your e-mail and activate your account');
   });
 });
