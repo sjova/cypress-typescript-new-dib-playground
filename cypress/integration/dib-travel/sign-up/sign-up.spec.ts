@@ -18,6 +18,19 @@ describe('Sign-up Page', () => {
     cy.visit('/sign-up');
   });
 
+  it.only('should display error messages when empty sign-up form is submitted', () => {
+    cy.get('dib-signup ui-button button').contains('Sign up').click();
+    cy.get('dib-signup ui-input .error')
+      .should('contain', 'First name is required')
+      .should('contain', 'Last name is required')
+      .should('contain', 'Email is required')
+      .should('contain', 'Password is required')
+      .should('contain', 'Company name is required')
+      .should('contain', 'Company registration number is required');
+    cy.get('dib-signup ui-phone-picker .error').should('contain', 'Phone number is required.');
+    cy.get('dib-signup ui-autocomplete .error').should('contain', 'Country is required');
+  });
+
   it('should display successful message after user signs up with valid data', () => {
     const signUpEmail = getSignUpEmailWithHash(userSignUpUpEmailPassword.signUpAccount.email);
     cy.intercept('GET', '/api/public/v1/details/locations/countries').as('getCountries');
