@@ -28,8 +28,9 @@ describe('Forgot Password Page', () => {
   });
 
   it('should display error message when invalid email is submitted', () => {
-    const email = getEmailWithHash(account.signUpAccount.email);
-    cy.get('new-forgot-password input[type="email"]').type(email.replace('@', ''));
+    const email = account.defaultAccount.email;
+    const invalidEmail = email.replace('@', '');
+    cy.get('new-forgot-password input[type="email"]').type(invalidEmail);
     cy.get('new-forgot-password ui-button button').click();
 
     cy.get('new-forgot-password .error').should('contain', 'The email should be in email@example.com format');
