@@ -92,7 +92,7 @@ describe('Company Settings - Payment Method - Lodge Cards', () => {
       .first()
       .parents('dib-lodge-cards')
       .within(() => {
-        return cy.get('ui-button').contains('edit').click();
+        return cy.get('ui-button').contains('edit').clickAttached();
       });
     cy.get('.cdk-overlay-container dib-lodge-card-dialog button').contains(' Cancel ').click();
     cy.get('dib-company-management dib-payment-method dib-lodge-cards h1').should('contain', ' Lodge Cards ');
@@ -104,7 +104,7 @@ describe('Company Settings - Payment Method - Lodge Cards', () => {
       .first()
       .parents('dib-lodge-cards')
       .within(() => {
-        return cy.get('ui-button').contains('edit').click();
+        return cy.get('ui-button').contains('edit').clickAttached();
       });
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=contactFirstName]')
       .clear()
@@ -122,7 +122,7 @@ describe('Company Settings - Payment Method - Lodge Cards', () => {
       .first()
       .parents('dib-lodge-cards')
       .within(() => {
-        return cy.get('ui-button').contains(' archive ').click();
+        return cy.get('ui-button').contains(' archive ').clickAttached();
       });
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[cancel=true]').click();
     cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item').should(
@@ -137,7 +137,7 @@ describe('Company Settings - Payment Method - Lodge Cards', () => {
       .first()
       .parents('dib-lodge-cards')
       .within(() => {
-        return cy.get('ui-button').contains(' archive ').click();
+        return cy.get('ui-button').contains(' archive ').clickAttached();
       });
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
     cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item').should(

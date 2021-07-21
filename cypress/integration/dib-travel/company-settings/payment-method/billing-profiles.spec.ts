@@ -64,7 +64,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       .first()
       .parents('dib-item')
       .within(() => {
-        return cy.get('ui-button').contains('edit').click();
+        return cy.get('ui-button').contains('edit').clickAttached();
       });
     cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=legalName]')
       .clear()
@@ -82,7 +82,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       .first()
       .parents('dib-item')
       .within(() => {
-        return cy.get('ui-button').contains('Request change').click();
+        return cy.get('ui-button').contains('Request change').clickAttached();
       });
     cy.get('.cdk-overlay-container dib-invoice-split-dialog button').contains(' Cancel ').click();
     cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item h2').should(
@@ -97,7 +97,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       .first()
       .parents('dib-item')
       .within(() => {
-        return cy.get('ui-button').contains('Request change').click();
+        return cy.get('ui-button').contains('Request change').clickAttached();
       });
     cy.get('.cdk-overlay-container dib-invoice-split-dialog ui-button[type=success]').click();
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', paymentMethodForm.message);
@@ -109,7 +109,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       .first()
       .parents('dib-item')
       .within(() => {
-        return cy.get('ui-button').contains('Request change').click();
+        return cy.get('ui-button').contains('Request change').clickAttached();
       });
     cy.get('.cdk-overlay-container dib-invoice-split-dialog input[type=radio]').clickAttached();
     cy.get('.cdk-overlay-container dib-invoice-split-dialog ui-button[type=success]').click();
@@ -122,7 +122,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       .first()
       .parents('dib-item')
       .within(() => {
-        return cy.get('ui-button').contains('archive').click();
+        return cy.get('ui-button').contains('archive').clickAttached();
       });
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[cancel=true]').click();
     cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item h2').should(
@@ -137,7 +137,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       .first()
       .parents('dib-item')
       .within(() => {
-        return cy.get('ui-button').contains('archive').click();
+        return cy.get('ui-button').contains('archive').clickAttached();
       });
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
     cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item h2').should(

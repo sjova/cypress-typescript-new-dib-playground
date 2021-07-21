@@ -34,7 +34,7 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
     );
   });
 
-  it.only('creates a new credit card', () => {
+  it('creates a new credit card', () => {
     cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=postalCode]').type(paymentMethodForm.zipCode);
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=city]').type(paymentMethodForm.city);
@@ -70,7 +70,7 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
       .first()
       .parents('dib-credit-card')
       .within(() => {
-        return cy.get('ui-button').contains('Delete').click();
+        return cy.get('ui-button').contains('Delete').clickAttached();
       });
     cy.get('dib-company-management dib-payment-method dib-credit-card .card__name').should(
       'not.contain',
