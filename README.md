@@ -157,7 +157,7 @@ DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accoun
 
   - [Installing Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress)
   - [Writing Your First Test](https://docs.cypress.io/guides/getting-started/writing-your-first-test)
-  - [Testing Your App](https://docs.cypress.io/guides/getting-started/testing-your-app#Get-started)
+  - [Testing Your App](https://docs.cypress.io/guides/getting-started/testing-your-app)
 
 - Tooling
 
@@ -167,7 +167,8 @@ DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accoun
 - Core Concepts
 
   - [Writing and Organizing Tests](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests)
-  - [The Test Runner](https://docs.cypress.io/guides/core-concepts/test-runner#Overview)
+  - [Conditional Testing](https://docs.cypress.io/guides/core-concepts/conditional-testing)
+  - [The Test Runner](https://docs.cypress.io/guides/core-concepts/test-runner)
 
 - Guides
 
