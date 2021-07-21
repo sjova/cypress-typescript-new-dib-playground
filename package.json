@@ -9,7 +9,9 @@
   },
   "scripts": {
     "cy:open": "cypress open",
-    "cy:run": "cypress run",
+    "cy:run:all": "cypress run",
+    "cy:run:dev": "cypress run --spec 'cypress/integration/dev-playground/*.spec.ts'",
+    "cy:run:dib": "cypress run --spec 'cypress/integration/dib-travel/**/*.spec.ts'",
     "cy:spec": "cypress run --spec",
     "eslint": "eslint cypress --ext ts --fix",
     "prepare": "husky install",
