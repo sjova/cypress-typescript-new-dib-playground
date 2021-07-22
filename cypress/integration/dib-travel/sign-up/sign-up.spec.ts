@@ -6,8 +6,8 @@ describe('Sign-up', () => {
   let registrationUserDetails: RegistrationUserDetails;
 
   before(() => {
-    cy.fixture('dib-travel-accounts').then((accountFixture) => {
-      accounts = accountFixture;
+    cy.fixture('dib-travel-accounts').then((accountsFixture) => {
+      accounts = accountsFixture;
     });
     cy.fixture('sign-up/registration-user-details').then((registrationFixture) => {
       registrationUserDetails = registrationFixture;
@@ -122,6 +122,6 @@ describe('Sign-up', () => {
     );
     cy.get('dib-signup ui-button button').contains('Sign up').click();
 
-    cy.get('dib-register-email-sent div').should('contain', 'Check your e-mail and activate your account');
+    cy.get('dib-register-email-sent').should('contain', 'Check your e-mail and activate your account');
   });
 });
