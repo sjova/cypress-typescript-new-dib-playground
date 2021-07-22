@@ -19,6 +19,24 @@ describe('Sign Up', () => {
     cy.visit('/sign-up');
   });
 
+  it('should check user terms and conditions redirection link', () => {
+    cy.get('dib-signup .terms a[href="https://dibtravel.com/terms-and-conditions/"]').should(
+      'have.text',
+      ' terms and conditions '
+    );
+  });
+
+  it('should check data protection policy redirection link', () => {
+    cy.get('dib-signup .terms a[href="https://dibtravel.com/privacy-policy/"]').should(
+      'have.text',
+      ' data protection policy '
+    );
+  });
+
+  it('should check back login redirection link', () => {
+    cy.get('dib-signup .login-link a[href="/login"]').should('have.text', 'Already have an account?\n');
+  });
+
   it('should display error messages when empty sign-up form is submitted', () => {
     cy.get('dib-signup ui-button button').contains('Sign up').click();
 

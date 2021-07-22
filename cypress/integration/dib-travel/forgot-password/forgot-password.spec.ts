@@ -21,6 +21,10 @@ describe('Forgot Password', () => {
     cy.get('new-forgot-password ui-button button').should('contain', 'Send');
   });
 
+  it('should check back login redirection link', () => {
+    cy.get('new-forgot-password .auth-container-footer a[href="/login"]').should('have.text', 'Back');
+  });
+
   it('should display error message when empty email input field is submitted', () => {
     cy.get('new-forgot-password ui-button button').click();
 

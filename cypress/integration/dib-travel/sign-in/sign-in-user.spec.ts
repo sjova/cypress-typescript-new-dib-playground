@@ -25,6 +25,20 @@ describe('Sign In (User)', () => {
     cy.get('new-login .auth-container-footer a[href="/sign-up"]').should('have.text', "Don't have an account?");
   });
 
+  it('should check user terms and conditions redirection link', () => {
+    cy.get('new-login .terms a[href="https://dibtravel.com/terms-and-conditions/"]').should(
+      'have.text',
+      ' terms and conditions '
+    );
+  });
+
+  it('should check data protection policy redirection link', () => {
+    cy.get('new-login .terms a[href="https://dibtravel.com/privacy-policy/"]').should(
+      'have.text',
+      ' data protection policy '
+    );
+  });
+
   it('should display error message when empty form is submitted', () => {
     cy.get('new-login ui-button button').click();
 
