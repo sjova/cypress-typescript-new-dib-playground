@@ -42,9 +42,9 @@ describe('Forgot Password', () => {
   });
 
   it('should display error message when email does not exist', () => {
-    const email = getEmailWithHash(accounts.signUpAccount.email);
+    const emailWithHash = getEmailWithHash(accounts.signUpAccount.email);
 
-    cy.get('new-forgot-password .auth-container-content input[type="email"]').type(email);
+    cy.get('new-forgot-password .auth-container-content input[type="email"]').type(emailWithHash);
     cy.get('new-forgot-password ui-button button').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Email does not exist');
