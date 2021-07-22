@@ -68,6 +68,6 @@ describe('Sign in Page', () => {
     cy.get('[data-cy="navbar-my-travels-link"]').should('contain', 'My Travels');
     cy.get('dib-navbar dib-hamburger-icon').click();
 
-    cy.get('dib-navbar-panel').should('contain', 'Log Out');
+    cy.get('.cdk-overlay-container dib-navbar-panel').should('contain', 'Log Out');
   });
 });
