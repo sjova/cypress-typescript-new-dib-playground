@@ -1,7 +1,7 @@
 import { DibTravelAccounts, RegistrationUserDetails } from '../../../models';
 import { getEmailWithHash } from '../../../helpers';
 
-describe('Sign-up Page', () => {
+describe('Sign-up', () => {
   let userSignUpEmailPassword: DibTravelAccounts;
   let registrationUserDetails: RegistrationUserDetails;
 
