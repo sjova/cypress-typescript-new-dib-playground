@@ -34,7 +34,7 @@ describe('Sign Up', () => {
   });
 
   it('should check back login redirection link', () => {
-    cy.get('dib-signup a[href="/login"]').should('have.text', 'Already have an account?\n');
+    cy.get('dib-signup .login-link a[href="/login"]').should('have.text', 'Already have an account?\n');
   });
 
   it('should display error messages when empty sign-up form is submitted', () => {

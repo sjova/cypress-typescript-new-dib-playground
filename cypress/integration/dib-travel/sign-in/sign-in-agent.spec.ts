@@ -22,7 +22,7 @@ describe('Sign In (Agent)', () => {
   });
 
   it('should check back login redirection link', () => {
-    cy.get('new-agent-login a[href="/login"]').should('have.text', 'Back');
+    cy.get('new-agent-login .auth-container-footer a[href="/login"]').should('have.text', 'Back');
   });
 
   it('should display error message when empty form is submitted', () => {
