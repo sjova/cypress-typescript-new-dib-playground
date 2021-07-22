@@ -2,15 +2,15 @@ import { DibTravelAccounts, RegistrationUserDetails } from '../../../models';
 import { getEmailWithHash } from '../../../helpers';
 
 describe('Sign-up Page', () => {
-  let userSignUpUpEmailPassword: DibTravelAccounts;
+  let userSignUpEmailPassword: DibTravelAccounts;
   let registrationUserDetails: RegistrationUserDetails;
 
   before(() => {
-    cy.fixture('dib-travel-accounts').then((userSignUpEmailPasswordData) => {
-      userSignUpUpEmailPassword = userSignUpEmailPasswordData;
+    cy.fixture('dib-travel-accounts').then((userSignUpEmailPasswordFixture) => {
+      userSignUpEmailPassword = userSignUpEmailPasswordFixture;
     });
-    cy.fixture('sign-up/registration-user-details').then((registrationData) => {
-      registrationUserDetails = registrationData;
+    cy.fixture('sign-up/registration-user-details').then((registrationFixture) => {
+      registrationUserDetails = registrationFixture;
     });
   });
 
@@ -33,7 +33,7 @@ describe('Sign-up Page', () => {
   });
 
   it('should display error message when invalid email address is inserted', () => {
-    const email = userSignUpUpEmailPassword.defaultAccount.email;
+    const email = userSignUpEmailPassword.defaultAccount.email;
     const invalidEmail = email.replace('@', '');
     cy.get('dib-signup ui-input input[name="firstName"]').type(registrationUserDetails.firstName);
     cy.get('dib-signup ui-input input[name="lastName"]').type(registrationUserDetails.lastName);
@@ -44,8 +44,8 @@ describe('Sign-up Page', () => {
       .contains(registrationUserDetails.companyCountry)
       .click();
     cy.get('dib-signup ui-input input[type="number"]').type(registrationUserDetails.phoneNumber);
-    cy.get('dib-signup ui-input input[name="password"]').eq(0).type(userSignUpUpEmailPassword.signUpAccount.password);
-    cy.get('dib-signup ui-input input[name="password"]').eq(1).type(userSignUpUpEmailPassword.signUpAccount.password);
+    cy.get('dib-signup ui-input input[name="password"]').eq(0).type(userSignUpEmailPassword.signUpAccount.password);
+    cy.get('dib-signup ui-input input[name="password"]').eq(1).type(userSignUpEmailPassword.signUpAccount.password);
     cy.get('dib-signup ui-input input[name="companyName"]').type(registrationUserDetails.companyName);
     cy.get('dib-signup ui-input input[name="companyRegistrationNumber"]').type(
       registrationUserDetails.companyRegistrationNumber
@@ -58,15 +58,15 @@ describe('Sign-up Page', () => {
   it('should display pop up error message when existing email address is inserted', () => {
     cy.get('dib-signup ui-input input[name="firstName"]').type(registrationUserDetails.firstName);
     cy.get('dib-signup ui-input input[name="lastName"]').type(registrationUserDetails.lastName);
-    cy.get('dib-signup ui-input input[name="email"]').type(userSignUpUpEmailPassword.defaultAccount.email);
+    cy.get('dib-signup ui-input input[name="email"]').type(userSignUpEmailPassword.defaultAccount.email);
     cy.get('dib-signup ui-phone-picker ui-autocomplete').click();
     cy.get('.cdk-overlay-container ui-panel cdk-virtual-scroll-viewport')
       .scrollTo(0, 8000)
       .contains(registrationUserDetails.companyCountry)
       .click();
     cy.get('dib-signup ui-input input[type="number"]').type(registrationUserDetails.phoneNumber);
-    cy.get('dib-signup ui-input input[name="password"]').eq(0).type(userSignUpUpEmailPassword.signUpAccount.password);
-    cy.get('dib-signup ui-input input[name="password"]').eq(1).type(userSignUpUpEmailPassword.signUpAccount.password);
+    cy.get('dib-signup ui-input input[name="password"]').eq(0).type(userSignUpEmailPassword.signUpAccount.password);
+    cy.get('dib-signup ui-input input[name="password"]').eq(1).type(userSignUpEmailPassword.signUpAccount.password);
     cy.get('dib-signup ui-input input[name="companyName"]').type(registrationUserDetails.companyName);
     cy.get('dib-signup ui-input input[name="companyRegistrationNumber"]').type(
       registrationUserDetails.companyRegistrationNumber
@@ -80,11 +80,11 @@ describe('Sign-up Page', () => {
   });
 
   it('should display error message when password is not 6 characters long', () => {
-    const password = userSignUpUpEmailPassword.signUpAccount.password;
+    const password = userSignUpEmailPassword.signUpAccount.password;
     const shortPassword = password.slice(0, 5);
     cy.get('dib-signup ui-input input[name="firstName"]').type(registrationUserDetails.firstName);
     cy.get('dib-signup ui-input input[name="lastName"]').type(registrationUserDetails.lastName);
-    cy.get('dib-signup ui-input input[name="email"]').type(userSignUpUpEmailPassword.defaultAccount.email);
+    cy.get('dib-signup ui-input input[name="email"]').type(userSignUpEmailPassword.defaultAccount.email);
     cy.get('dib-signup ui-phone-picker ui-autocomplete').click();
     cy.get('.cdk-overlay-container ui-panel cdk-virtual-scroll-viewport')
       .scrollTo(0, 8000)
@@ -103,7 +103,7 @@ describe('Sign-up Page', () => {
   });
 
   it('should display successful message after user signs up with valid data', () => {
-    const signUpEmail = getEmailWithHash(userSignUpUpEmailPassword.signUpAccount.email);
+    const signUpEmail = getEmailWithHash(userSignUpEmailPassword.signUpAccount.email);
 
     cy.get('dib-signup ui-input input[name="firstName"]').type(registrationUserDetails.firstName);
     cy.get('dib-signup ui-input input[name="lastName"]').type(registrationUserDetails.lastName);
@@ -114,8 +114,8 @@ describe('Sign-up Page', () => {
       .contains(registrationUserDetails.companyCountry)
       .click();
     cy.get('dib-signup ui-input input[type="number"]').type(registrationUserDetails.phoneNumber);
-    cy.get('dib-signup ui-input input[name="password"]').eq(0).type(userSignUpUpEmailPassword.signUpAccount.password);
-    cy.get('dib-signup ui-input input[name="password"]').eq(1).type(userSignUpUpEmailPassword.signUpAccount.password);
+    cy.get('dib-signup ui-input input[name="password"]').eq(0).type(userSignUpEmailPassword.signUpAccount.password);
+    cy.get('dib-signup ui-input input[name="password"]').eq(1).type(userSignUpEmailPassword.signUpAccount.password);
     cy.get('dib-signup ui-input input[name="companyName"]').type(registrationUserDetails.companyName);
     cy.get('dib-signup ui-input input[name="companyRegistrationNumber"]').type(
       registrationUserDetails.companyRegistrationNumber
