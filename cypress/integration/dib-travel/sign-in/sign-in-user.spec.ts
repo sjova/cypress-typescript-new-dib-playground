@@ -27,15 +27,15 @@ describe('Sign In (User)', () => {
 
   it('should check user terms and conditions redirection link', () => {
     cy.get('new-login .terms a[href="https://dibtravel.com/terms-and-conditions/"]').should(
-      'contain',
-      'terms and conditions'
+      'have.text',
+      ' terms and conditions '
     );
   });
 
   it('should check data protection policy redirection link', () => {
     cy.get('new-login .terms a[href="https://dibtravel.com/privacy-policy/"]').should(
-      'contain',
-      'data protection policy'
+      'have.text',
+      ' data protection policy '
     );
   });
 

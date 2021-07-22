@@ -16,13 +16,13 @@ describe('Sign In (Agent)', () => {
 
   it('should check agent terms and conditions redirection link', () => {
     cy.get('new-agent-login .terms a[href="https://developer.expediapartnersolutions.com/terms/agent/en/"]').should(
-      'contain',
-      'terms and conditions'
+      'have.text',
+      'terms and conditions '
     );
   });
 
   it('should check back login redirection link', () => {
-    cy.get('new-agent-login a[href="/login"]').should('contain', 'Back');
+    cy.get('new-agent-login a[href="/login"]').should('have.text', 'Back');
   });
 
   it('should display error message when empty form is submitted', () => {
