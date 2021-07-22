@@ -1,4 +1,6 @@
-export interface RegistrationUserDetails {
+import { User } from '../user';
+
+export interface SignUpUser extends User {
   firstName: string;
   lastName: string;
   phoneNumber: string;
