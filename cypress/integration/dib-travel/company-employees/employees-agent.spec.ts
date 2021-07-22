@@ -24,7 +24,7 @@ describe('Company Employees - Employees (Agent)', () => {
   it('should allow agent to add new employee', () => {
     cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
 
-    cy.get('dib-people-management new-dib-employees .table-pref ui-button button').click();
+    cy.get('dib-people-management dib-employees .table-pref ui-button button').click();
 
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]').type(employee.firstName);
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]').type(employee.lastName);
@@ -34,14 +34,14 @@ describe('Company Employees - Employees (Agent)', () => {
     cy.wait('@getCorporationsEmployees').then(() => {
       cy.reload();
 
-      cy.get('dib-people-management new-dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
-      cy.get('dib-people-management new-dib-employees dib-page .grid .name-cell').should('contain', employee.lastName);
-      cy.get('dib-people-management new-dib-employees dib-page .grid .table-cell').should('contain', employee.email);
+      cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
+      cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.lastName);
+      cy.get('dib-people-management dib-employees dib-page .grid .table-cell').should('contain', employee.email);
     });
   });
 
   it('should allow agent to edit added employee', () => {
-    cy.get('dib-people-management new-dib-employees dib-page .grid .name-cell h4')
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell h4')
       .contains(employee.firstName)
       .parent('.name-cell')
       .next('.table-cell')
@@ -49,7 +49,7 @@ describe('Company Employees - Employees (Agent)', () => {
       .next('.button-cell')
       .get('ui-button button')
       .contains('edit')
-      .click();
+      .clickAttached();
 
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]')
       .clear()
@@ -59,18 +59,18 @@ describe('Company Employees - Employees (Agent)', () => {
       .type(employee.modifiedLastName);
     cy.get('.cdk-overlay-container dib-employee-dialog ui-button button').contains('Save').click();
 
-    cy.get('dib-people-management new-dib-employees dib-page .grid .name-cell h4').should(
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell h4').should(
       'contain',
       employee.modifiedFirstName
     );
-    cy.get('dib-people-management new-dib-employees dib-page .grid .name-cell h4').should(
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell h4').should(
       'contain',
       employee.modifiedLastName
     );
   });
 
   it('should not allow agent to add new employee with existing email', () => {
-    cy.get('dib-people-management new-dib-employees .table-pref ui-button button').click();
+    cy.get('dib-people-management dib-employees .table-pref ui-button button').click();
 
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]').type(employee.firstName);
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]').type(employee.lastName);
@@ -82,7 +82,7 @@ describe('Company Employees - Employees (Agent)', () => {
   });
 
   it('should allow agent to delete added employee', () => {
-    cy.get('dib-people-management new-dib-employees dib-page .grid .name-cell h4')
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell h4')
       .contains(employee.modifiedFirstName)
       .parent('.name-cell')
       .next('.table-cell')
@@ -94,14 +94,8 @@ describe('Company Employees - Employees (Agent)', () => {
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button button').contains('archive').click();
 
-    cy.get('dib-people-management new-dib-employees dib-page .grid .name-cell').should(
-      'not.contain',
-      employee.firstName
-    );
-    cy.get('dib-people-management new-dib-employees dib-page .grid .name-cell').should(
-      'not.contain',
-      employee.lastName
-    );
-    cy.get('dib-people-management new-dib-employees dib-page .grid .table-cell').should('not.contain', employee.email);
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('not.contain', employee.firstName);
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('not.contain', employee.lastName);
+    cy.get('dib-people-management dib-employees dib-page .grid .table-cell').should('not.contain', employee.email);
   });
 });
