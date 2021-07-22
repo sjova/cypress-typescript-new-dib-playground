@@ -25,7 +25,7 @@ describe('Sign In (User)', () => {
     cy.get('new-login .auth-container-footer a[href="/sign-up"]').should('have.text', "Don't have an account?");
   });
 
-  it('should check terms and conditions redirection link', () => {
+  it('should check user terms and conditions redirection link', () => {
     cy.get('new-login .terms a[href="https://dibtravel.com/terms-and-conditions/"]').should(
       'contain',
       'terms and conditions'
