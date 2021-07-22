@@ -35,6 +35,7 @@ describe('Sign-up', () => {
   it('should display error message when invalid email address is inserted', () => {
     const email = accounts.defaultAccount.email;
     const invalidEmail = email.replace('@', '');
+
     cy.get('dib-signup ui-input input[name="firstName"]').type(registrationUserDetails.firstName);
     cy.get('dib-signup ui-input input[name="lastName"]').type(registrationUserDetails.lastName);
     cy.get('dib-signup ui-input input[name="email"]').type(invalidEmail);
@@ -82,6 +83,7 @@ describe('Sign-up', () => {
   it('should display error message when password is not 6 characters long', () => {
     const password = accounts.signUpAccount.password;
     const shortPassword = password.slice(0, 5);
+
     cy.get('dib-signup ui-input input[name="firstName"]').type(registrationUserDetails.firstName);
     cy.get('dib-signup ui-input input[name="lastName"]').type(registrationUserDetails.lastName);
     cy.get('dib-signup ui-input input[name="email"]').type(accounts.defaultAccount.email);
