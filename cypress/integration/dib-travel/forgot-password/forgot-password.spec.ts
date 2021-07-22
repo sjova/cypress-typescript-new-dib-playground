@@ -12,7 +12,7 @@ describe('Forgot Password', () => {
 
   beforeEach(() => {
     cy.visit('/login');
-    cy.get('new-login a[href="/forgot-password"]').click();
+    cy.get('new-login .forgot-password-wrapper a[href="/forgot-password"]').click();
   });
 
   it('should display forgot password page and all elements', () => {
