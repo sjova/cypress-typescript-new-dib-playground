@@ -1,6 +1,6 @@
 import { DibTravelAccounts } from '../../../models';
 
-describe('Sign in Page', () => {
+describe('Sign in Page (User)', () => {
   let loginDetails: DibTravelAccounts;
   before(() => {
     cy.fixture('dib-travel-accounts').then((loginFixture) => {
