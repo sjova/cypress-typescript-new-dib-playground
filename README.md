@@ -145,11 +145,11 @@ Here, the glob is appropriately restricted to the `scripts/` directory. It will 
 
 ## DIB Travel Accounts
 
-DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accounts.json`. This fixture is stored externally.
+DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accounts.json`. The interface (type) for this fixture is located here: `cypress/models/dib-travel-accounts.ts` (this fixture is stored externally). And these two files should not be modified.
 
 ## Cypress Config Notes
 
-- `"waitForAnimations": false` - revisit this later
+- `"defaultCommandTimeout": 8000` - revisit this later
 
 ## Useful Docs
 
