@@ -1,4 +1,5 @@
 export interface PaymentMethod {
+  address: string;
   cardNumber: string;
   cardProvider: string;
   city: string;
@@ -8,18 +9,16 @@ export interface PaymentMethod {
   email: string;
   expireDate: string;
   firstName: string;
-  firstNameUpdate: string;
   invoiceRecipientEmail: string;
   lastName: string;
   legalName: string;
-  legalNameUpdate: string;
   lodgeCardName: string;
-  message: string;
+  modifiedFirstName: string;
+  modifiedLegalName: string;
   month: string;
   phoneNumber: string;
   searchPeopleOrGroup: string;
   securityCode: string;
-  streetName: string;
   taxId: string;
   vatNumber: string;
   year: string;
