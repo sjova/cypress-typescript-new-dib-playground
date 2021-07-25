@@ -11,12 +11,15 @@
 - Please use only this file extension for test files: `*.spec.ts`
 - Please use dash-case for file naming (ex. `foo-something.spec.ts`)
 - Please use the descriptive file naming
+- If you need a prefix in naming, please use "cy"
+- Ideally, when you read `objectname.propertyName`, it should sound meaningful
 - Please use camelCase for variable naming (ex. `myVariableName`)
 - **Mocha** `describe` title should start with a capital letter
 - **Mocha** `it` title should start with a lowercase letter (_it_ and _descriptive title_ together should have a meaningful meaning)
 - The KISS principle (keep it simple, stupid)
 - The DRY principle (do not repeat yourself)
 - Please separate each meaningful code block with a new line (for better code readability)
+  - ex. imports, `describe`, variables, `before/beforeEach`, `it` block, selectors/actions, page selectors, dialog selectors, `should` block, other meaningful unit/block, etc.
 - Please use a separate folder for tests of each feature
 - Please do not use abbreviations in your code
 - Please sort all relevant items in the code in alphabetical order (A-Z order).
@@ -31,6 +34,11 @@
 - Use existing Cypress commands that are already written instead of creating more
 - Try to login as users with different permissions instead of a superuser that has all permissions
 - Please try to use at least these selectors: `feature/parent-selector middle/control-selector main/children-selector`
+- Please be consistent with your changes (code, naming, etc.), especially within the same group/unit/test.
+- Please use "short" imports, since we're using `index.ts`
+- Please use "fixture" suffix (ex. `fooFixture`)
+- Each `it` block should have at least one `.shoud` block (where you confirm something)
+- When you're using `.contains()` command, please reduce searchable HTML scope as much as possible (use additional selectors or other commands)
 - Whenever possible, don't use **Angular** elements as a selector (example prefixes: `ng*`, `ng-*` and `routerLink`)
 - Whenever possible, don't use **Angular Material** elements as a selector (example prefixes: `mat*`, `mat-*`)
 - Mock or control test data as much as possible (JSON data)
@@ -73,6 +81,7 @@ Before you create PR or before you push changes in your PR, please make sure tha
 
 - Make sure that you fully follow the above-defined Coding Style Guide
 - Confirm that you're covering all requirements for the specific feature
+- Double-check the whole user flow for the specific feature, and re-think if you missed covering some functionality with tests.
 - Please don't include sensitive data (ex. passwords, API tokens, etc.) in your commits
 - Make sure that you're using the best possible selectors in your tests
 - Please skip time-consuming Cypress commands whenever is possible
