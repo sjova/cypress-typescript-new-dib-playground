@@ -123,7 +123,6 @@ describe('Personal Settings - Profile', () => {
   });
 
   it('should add travel document', () => {
-    // TODO: Revisit below
     cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
     cy.intercept('GET', 'api/public/v1/details/locations/countries/for-travel-documents').as(
       'getCountriesForTravelDocuments'
@@ -159,22 +158,13 @@ describe('Personal Settings - Profile', () => {
       profile.documentNumber
     );
 
-    // cy.get('.cdk-overlay-container dib-travel-document-dialog dib-input input[placeholder="Issuing country"]')
-    //   .click()
-    //   .type(profile.issuingCountry);
-    // cy.get('.cdk-overlay-container dib-dialog-wrapper dib-travel-document-dialog dib-searchable-select')
-    //   .contains(profile.issuingCountry)
-    //   .click();
-    // TODO: Revisit below
     cy.get(
-      '.cdk-overlay-container dib-dialog-wrapper dib-travel-document-dialog ui-form ui-autocomplete-wrapper dib-searchable-select dib-input input[placeholder="Issuing country"]'
+      '.cdk-overlay-container dib-travel-document-dialog dib-searchable-select input[placeholder="Issuing country"]'
     )
       .click()
       .clear()
       .type(profile.issuingCountry);
-    cy.get(
-      '.cdk-overlay-container dib-travel-document-dialog ui-form ui-autocomplete-wrapper dib-searchable-select .select-list .select-list-item'
-    )
+    cy.get('.cdk-overlay-container dib-travel-document-dialog dib-searchable-select .select-list')
       .contains(profile.issuingCountry)
       .click();
 
@@ -190,7 +180,7 @@ describe('Personal Settings - Profile', () => {
     cy.get('.cdk-overlay-container dib-travel-document-dialog dib-input input[placeholder="Nationality"]').type(
       profile.nationality
     );
-    cy.get('.cdk-overlay-container dib-travel-document-dialog dib-searchable-select div')
+    cy.get('.cdk-overlay-container dib-travel-document-dialog dib-searchable-select .select-list')
       .contains(profile.nationality)
       .click();
     cy.get('.cdk-overlay-container dib-travel-document-dialog ui-checkbox-wrapper').click();
@@ -201,7 +191,6 @@ describe('Personal Settings - Profile', () => {
   });
 
   it('should edit travel document', () => {
-    // TODO: Revisit below
     cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
     cy.intercept('GET', 'api/public/v1/details/locations/countries/for-travel-documents').as(
       'getCountriesForTravelDocuments'
@@ -214,26 +203,13 @@ describe('Personal Settings - Profile', () => {
       .contains('Edit')
       .click();
 
-    // cy.get(
-    //   '.cdk-overlay-container dib-travel-document-dialog ui-autocomplete-wrapper dib-searchable-select dib-input input[placeholder="Issuing country"]'
-    // )
-    //   .scrollIntoView()
-    //   .clear()
-    //   .type(profile.newIssuingCounty);
-    // cy.get('.cdk-overlay-container dib-dialog-wrapper dib-travel-document-dialog dib-searchable-select')
-    //   .should('exist')
-    //   .contains(profile.newIssuingCounty)
-    //   .click();
-    // TODO: Revisit below
     cy.get(
-      '.cdk-overlay-container dib-dialog-wrapper dib-travel-document-dialog ui-form ui-autocomplete-wrapper dib-searchable-select dib-input input[placeholder="Issuing country"]'
+      '.cdk-overlay-container dib-travel-document-dialog dib-searchable-select input[placeholder="Issuing country"]'
     )
       .click()
       .clear()
       .type(profile.newIssuingCounty);
-    cy.get(
-      '.cdk-overlay-container dib-travel-document-dialog ui-form ui-autocomplete-wrapper dib-searchable-select .select-list .select-list-item'
-    )
+    cy.get('.cdk-overlay-container dib-travel-document-dialog dib-searchable-select .select-list')
       .contains(profile.newIssuingCounty)
       .click();
 
@@ -254,10 +230,26 @@ describe('Personal Settings - Profile', () => {
       .click();
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
+
+    cy.get('dib-profile dib-account dib-travel-documents').should('not.contain', profile.newIssuingCounty);
   });
 
-  it('should add loyalty program and delete it', () => {
-    cy.get('dib-profile dib-account div.profile-info__section.loyalty-program button').click();
+  // TODO: Internal travel agent is not added
+  // it.only('should add Internal travel agent', () => {
+  //   cy.intercept('/api/secure/v1/customers/*/internal-travel-agents').as('getInternalTravelAgents');
+
+  //   cy.get('dib-profile dib-account .internal-agents button').contains('Add').click();
+
+  //   cy.get('.cdk-overlay-container dib-internal-agents-dialog dib-assign-members .members .mat-checkbox-layout')
+  //     .contains('QA Test Bot')
+  //     .click();
+
+  //   cy.get('.cdk-overlay-container dib-internal-agents-dialog ui-button button').contains('Add').click();
+  //   cy.wait('@getInternalTravelAgents');
+  // });
+
+  it('should add loyalty program', () => {
+    cy.get('dib-profile dib-account .profile-info__section.loyalty-program button').click();
 
     cy.get('.cdk-overlay-container dib-add-loyalty button').click();
     cy.get('.cdk-overlay-container dib-add-loyalty dib-loyalty-auto-complete')
@@ -273,16 +265,27 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('dib-profile dib-account .loyalty-program__grid').should('contain', profile.loyaltyProgram);
     cy.get('dib-profile dib-account .loyalty-program__grid').should('contain', profile.loyaltyNumber);
+  });
+
+  it('should delete loyalty program', () => {
+    cy.intercept('/api/secure/v1/customers/*/memberships').as('getMemberships');
+    cy.wait('@getMemberships');
+
     cy.get('dib-profile dib-account .loyalty-name')
       .contains(profile.loyaltyProgram)
       .parent()
       .parent()
       .within(() => {
-        return cy.get('.grid-button').click();
+        return cy.get('button').clickAttached();
       });
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Loyalty program successfully deleted');
+
+    cy.get('dib-profile dib-account .profile-info__section.loyalty-program').should(
+      'not.contain',
+      profile.loyaltyNumber
+    );
   });
 });
