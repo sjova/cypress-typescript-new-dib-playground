@@ -4,13 +4,15 @@
   "description": "Cypress TypeScript Project",
   "private": true,
   "engines": {
-    "node": ">=4.17.0",
+    "node": ">=14.17.3",
     "yarn": ">=1.22.10"
   },
   "scripts": {
+    "cy:open:iframe": "cypress open --config-file cypress-iframe.json",
     "cy:open": "cypress open",
     "cy:run:all": "cypress run",
     "cy:run:dev": "cypress run --spec 'cypress/integration/dev-playground/*.spec.ts'",
+    "cy:run:dib:iframe": "cypress run --config-file cypress-iframe.json --spec 'cypress/integration/dib-travel-iframe/**/*.spec.ts'",
     "cy:run:dib": "cypress run --spec 'cypress/integration/dib-travel/**/*.spec.ts'",
     "cy:spec": "cypress run --spec",
     "eslint": "eslint cypress --ext ts --fix",

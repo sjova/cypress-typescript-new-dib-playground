@@ -149,7 +149,9 @@ DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accoun
 
 ## Cypress Config Notes
 
-- `"defaultCommandTimeout": 8000` - revisit this later
+- `"defaultCommandTimeout": 8000` - revisit this later when we speed up the front-end Angular application
+- `"requestTimeout": 10000` - revisit this later when we speed up the front-end Angular application
+- `"chromeWebSecurity": false` - revisit this later, reference: [Iframe Support (Work in progress)](https://github.com/cypress-io/cypress/issues/136)
 
 ## Useful Docs
 
@@ -181,5 +183,6 @@ DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accoun
   - [Bundled Tools](https://docs.cypress.io/guides/references/bundled-tools)
   - [Error Messages](https://docs.cypress.io/guides/references/error-messages)
 
+- **[Kitchen Sink](https://example.cypress.io/)**
 - **[Recipes](https://docs.cypress.io/examples/examples/recipes)**
 - **[FAQ Using Cypress](https://docs.cypress.io/faq/questions/using-cypress-faq)**
