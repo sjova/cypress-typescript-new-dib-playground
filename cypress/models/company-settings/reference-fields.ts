@@ -1,4 +1,4 @@
-export interface ReferenceFields {
+export interface Reference {
   addCostCenterButton: string;
   costCenterName: string;
   costCenterDescription: string;

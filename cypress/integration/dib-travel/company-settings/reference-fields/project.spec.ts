@@ -1,11 +1,11 @@
-import { ReferenceFields } from '../../../models/company-settings/reference-fields';
+import { Reference } from '../../../../models/company-settings/reference-fields';
 
 describe('Company settings - Reference fields - Project', () => {
-  let referenceDetails: ReferenceFields;
+  let reference: Reference;
 
   before(() => {
-    cy.fixture('company-settings/reference-fields').then((reference) => {
-      referenceDetails = reference;
+    cy.fixture('company-settings/reference-fields').then((referenceFixture) => {
+      reference = referenceFixture;
     });
   });
 
@@ -18,60 +18,70 @@ describe('Company settings - Reference fields - Project', () => {
     cy.get('dib-company-management dib-reference-fields dib-project .checkbox-label')
       .contains('Display and set field to mandatory when checking out booking')
       .click();
-    cy.get('.cdk-overlay-container simple-snack-bar > span').contains(referenceDetails.projectConfirmationMessage);
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', reference.projectConfirmationMessage);
   });
 
-  //TODO: Check selector for input field
   it('should change project fields label at checkout', () => {
     cy.get('dib-company-management dib-reference-fields dib-project [ng-reflect-placeholder="Project"] input')
       .clear()
-      .type(referenceDetails.projectLabel);
+      .type(reference.projectLabel);
+
     cy.get('dib-company-management dib-reference-fields dib-project button')
-      .contains(referenceDetails.changeLabelButton)
+      .contains(reference.changeLabelButton)
       .click();
+
     cy.get('.cdk-overlay-container confirmation-dialog button').contains(' Change ').click();
-    cy.get('.cdk-overlay-container simple-snack-bar > span').contains(referenceDetails.projectConfirmationMessage);
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', reference.projectConfirmationMessage);
   });
 
-  //TODO: Uncomment when bug is fixed
+  // TODO: Uncomment when bug is fixed - DT8476
   // it('should reset to default fields label', () => {
   //   cy.get('dib-company-management dib-reference-fields  dib-project button').contains('Reset to default').click();
   // });
 
   it('should add a new project', () => {
     cy.get('dib-company-management dib-reference-fields dib-project ui-button')
-      .contains(referenceDetails.addProjectButton)
+      .contains(reference.addProjectButton)
       .click();
-    cy.get('.cdk-overlay-container dib-project-dialog [name="projectName"]').type(referenceDetails.projectName);
-    cy.get('.cdk-overlay-container dib-project-dialog [name="description"]').type(referenceDetails.projectDescription);
+
+    cy.get('.cdk-overlay-container dib-project-dialog [name="projectName"]').type(reference.projectName);
+    cy.get('.cdk-overlay-container dib-project-dialog [name="description"]').type(reference.projectDescription);
+
     cy.get('.cdk-overlay-container dib-project-dialog ui-button button').contains('save').click();
-    cy.get('dib-company-management dib-reference-fields dib-project').should('contain', referenceDetails.projectName);
+
+    cy.get('dib-company-management dib-reference-fields dib-project').should('contain', reference.projectName);
   });
 
   it('should edit the project', () => {
     cy.get('dib-company-management dib-reference-fields dib-project')
-      .contains(referenceDetails.projectName)
+      .contains(reference.projectName)
       .parent()
       .nextUntil('.table-cell .button-cell')
       .contains('edit')
       .clickAttached();
-    cy.get('.cdk-overlay-container dib-project-dialog [name="projectName"]')
-      .clear()
-      .type(referenceDetails.newProjectName);
+
+    cy.get('.cdk-overlay-container dib-project-dialog [name="projectName"]').clear().type(reference.newProjectName);
+
     cy.get('.cdk-overlay-container dib-project-dialog ui-button button').contains('save').click();
-    cy.get('dib-company-management dib-reference-fields dib-project .grid').should(
-      'contain',
-      referenceDetails.newProjectName
-    );
+
+    cy.get('dib-company-management dib-reference-fields dib-project .grid').should('contain', reference.newProjectName);
   });
 
   it('should delete the project', () => {
     cy.get('dib-company-management dib-reference-fields dib-project')
-      .contains(referenceDetails.newProjectName)
+      .contains(reference.newProjectName)
       .parent()
       .nextUntil('.table-cell .button-cell')
       .contains(' archive ')
       .clickAttached();
-    cy.get('.cdk-overlay-container simple-snack-bar > span').contains(referenceDetails.projectConfirmationMessage);
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').contains(reference.projectConfirmationMessage);
+
+    cy.get('dib-company-management dib-reference-fields dib-project .grid').should(
+      'not.contain',
+      reference.newProjectName
+    );
   });
 });

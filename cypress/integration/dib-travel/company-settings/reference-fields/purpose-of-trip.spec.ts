@@ -1,11 +1,11 @@
-import { ReferenceFields } from '../../../models/company-settings/reference-fields';
+import { Reference } from '../../../../models/company-settings/reference-fields';
 
 describe('Company settings - Reference fields - Purpose of trip', () => {
-  let referenceDetails: ReferenceFields;
+  let reference: Reference;
 
   before(() => {
-    cy.fixture('company-settings/reference-fields').then((reference) => {
-      referenceDetails = reference;
+    cy.fixture('company-settings/reference-fields').then((referenceFixture) => {
+      reference = referenceFixture;
     });
   });
 
@@ -19,17 +19,20 @@ describe('Company settings - Reference fields - Purpose of trip', () => {
       'dib-company-management dib-reference-fields dib-purpose-of-trip [ng-reflect-placeholder="Purpose of trip"] input'
     )
       .clear()
-      .type(referenceDetails.purposeOfTripLabel);
+      .type(reference.purposeOfTripLabel);
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip button')
-      .contains(referenceDetails.changeLabelButton)
+      .contains(reference.changeLabelButton)
       .click();
+
     cy.get('.cdk-overlay-container confirmation-dialog button').contains(' Change ').click();
-    cy.get('.cdk-overlay-container simple-snack-bar > span').contains(
-      referenceDetails.purposeOfTripConfirmationMessage
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'contain',
+      reference.purposeOfTripConfirmationMessage
     );
   });
 
-  //TODO: Uncomment when bug is fixed
+  // TODO: Uncomment when bug is fixed - DT8476
   // it('should reset to default fields label', () => {
   //   cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip').contains('Reset to default').click();
   // });
@@ -38,54 +41,69 @@ describe('Company settings - Reference fields - Purpose of trip', () => {
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip .checkbox-label')
       .contains('Display and set field to mandatory when checking out booking')
       .click();
-    cy.get('.cdk-overlay-container simple-snack-bar > span').contains(
-      referenceDetails.purposeOfTripConfirmationMessage
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'contain',
+      reference.purposeOfTripConfirmationMessage
     );
   });
 
   it('should add a new purpose of trip', () => {
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip ui-button')
-      .contains(referenceDetails.addPurposeOfTripButton)
+      .contains(reference.addPurposeOfTripButton)
       .click();
+
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog [name="purposeOfTripName"]').type(
-      referenceDetails.purposeOfTrip
+      reference.purposeOfTrip
     );
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog [name="description"]').type(
-      referenceDetails.purposeOfTripDescription
+      reference.purposeOfTripDescription
     );
+
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog ui-button button').contains('save').click();
+
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip').should(
       'contain',
-      referenceDetails.purposeOfTrip
+      reference.purposeOfTrip
     );
   });
 
   it('should edit purpose of trip', () => {
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip')
-      .contains(referenceDetails.purposeOfTrip)
+      .contains(reference.purposeOfTrip)
       .parent()
       .nextUntil('.table-cell .button-cell')
       .contains('edit')
       .clickAttached();
+
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog [name="purposeOfTripName"]')
       .clear()
-      .type(referenceDetails.newPurposeOfTrip);
+      .type(reference.newPurposeOfTrip);
+
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog ui-button button').contains('save').click();
+
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip .grid').should(
       'contain',
-      referenceDetails.newPurposeOfTrip
+      reference.newPurposeOfTrip
     );
   });
 
   it('should delete purpose of trip', () => {
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip')
-      .contains(referenceDetails.newPurposeOfTrip)
+      .contains(reference.newPurposeOfTrip)
       .parent()
       .nextUntil('.table-cell .button-cell')
       .contains(' archive ')
       .clickAttached();
-    cy.get('.cdk-overlay-container simple-snack-bar > span').contains(
-      referenceDetails.purposeOfTripConfirmationMessage
+
+    cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip .grid').should(
+      'not.contain',
+      reference.newPurposeOfTrip
+    );
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'contain',
+      reference.purposeOfTripConfirmationMessage
     );
   });
 });
