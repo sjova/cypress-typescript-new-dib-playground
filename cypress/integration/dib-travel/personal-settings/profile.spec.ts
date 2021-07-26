@@ -240,7 +240,7 @@ describe('Personal Settings - Profile', () => {
 
   //   cy.get('dib-profile dib-account .internal-agents button').contains('Add').click();
 
-  //   cy.get('.cdk-overlay-container dib-internal-agents-dialog dib-assign-members .members .mat-checkbox-layout')
+  //   cy.get('.cdk-overlay-container dib-internal-agents-dialog dib-assign-members .members')
   //     .contains('QA Test Bot')
   //     .click();
 
@@ -278,7 +278,6 @@ describe('Personal Settings - Profile', () => {
       .within(() => {
         return cy.get('button').clickAttached();
       });
-
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Loyalty program successfully deleted');
