@@ -24,7 +24,6 @@ describe('Company settings - Reference fields - Your reference', () => {
     cy.get('dib-company-management dib-reference-fields dib-your-reference button')
       .contains(reference.changeLabelButton)
       .click();
-
     cy.get('.cdk-overlay-container confirmation-dialog button').contains(' Change ').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(

@@ -30,7 +30,6 @@ describe('Company settings - Reference fields - Project', () => {
     cy.get('dib-company-management dib-reference-fields dib-project button')
       .contains(reference.changeLabelButton)
       .click();
-
     cy.get('.cdk-overlay-container confirmation-dialog button').contains(' Change ').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', reference.projectConfirmationMessage);
@@ -48,7 +47,6 @@ describe('Company settings - Reference fields - Project', () => {
 
     cy.get('.cdk-overlay-container dib-project-dialog [name="projectName"]').type(reference.projectName);
     cy.get('.cdk-overlay-container dib-project-dialog [name="description"]').type(reference.projectDescription);
-
     cy.get('.cdk-overlay-container dib-project-dialog ui-button button').contains('save').click();
 
     cy.get('dib-company-management dib-reference-fields dib-project').should('contain', reference.projectName);
@@ -63,7 +61,6 @@ describe('Company settings - Reference fields - Project', () => {
       .clickAttached();
 
     cy.get('.cdk-overlay-container dib-project-dialog [name="projectName"]').clear().type(reference.newProjectName);
-
     cy.get('.cdk-overlay-container dib-project-dialog ui-button button').contains('save').click();
 
     cy.get('dib-company-management dib-reference-fields dib-project .grid').should('contain', reference.newProjectName);

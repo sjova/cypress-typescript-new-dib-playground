@@ -59,7 +59,6 @@ describe('Company settings - Reference fields - Purpose of trip', () => {
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog [name="description"]').type(
       reference.purposeOfTripDescription
     );
-
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog ui-button button').contains('save').click();
 
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip').should(
@@ -79,7 +78,6 @@ describe('Company settings - Reference fields - Purpose of trip', () => {
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog [name="purposeOfTripName"]')
       .clear()
       .type(reference.newPurposeOfTrip);
-
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog ui-button button').contains('save').click();
 
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip .grid').should(
