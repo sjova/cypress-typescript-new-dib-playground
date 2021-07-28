@@ -39,7 +39,7 @@ describe('Company Employees - Groups (User)', () => {
       .contains(group.name)
       .parent('.item__main')
       .next('[dib-column-right]')
-      .get('ui-button button')
+      .find('ui-button button')
       .contains('edit')
       .clickAttached();
 
@@ -54,7 +54,7 @@ describe('Company Employees - Groups (User)', () => {
       .contains(group.modifiedName)
       .parent('.item__main')
       .next('[dib-column-right]')
-      .get('ui-button button')
+      .find('ui-button button')
       .contains('delete')
       .clickAttached();
 

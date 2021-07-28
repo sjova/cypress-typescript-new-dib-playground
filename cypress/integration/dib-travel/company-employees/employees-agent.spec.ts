@@ -47,7 +47,7 @@ describe('Company Employees - Employees (Agent)', () => {
       .next('.table-cell')
       .next('.table-cell')
       .next('.button-cell')
-      .get('ui-button button')
+      .find('ui-button button')
       .contains('edit')
       .clickAttached();
 
@@ -88,7 +88,7 @@ describe('Company Employees - Employees (Agent)', () => {
       .next('.table-cell')
       .next('.table-cell')
       .next('.button-cell')
-      .get('ui-button button')
+      .find('ui-button button')
       .contains('archive')
       .clickAttached();
 
