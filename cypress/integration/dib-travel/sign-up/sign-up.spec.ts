@@ -38,7 +38,7 @@ describe('Sign Up', () => {
   });
 
   it('should display error messages when empty sign-up form is submitted', () => {
-    cy.get('dib-signup ui-button button').contains('Sign up').click();
+    cy.get('dib-signup ui-button').contains('Sign up').click();
 
     cy.get('dib-signup ui-input .error')
       .should('contain', 'First name is required')
@@ -68,7 +68,7 @@ describe('Sign Up', () => {
     cy.get('dib-signup ui-input input[name="password"]').eq(1).type(signUpUser.password);
     cy.get('dib-signup ui-input input[name="companyName"]').type(signUpUser.companyName);
     cy.get('dib-signup ui-input input[name="companyRegistrationNumber"]').type(signUpUser.companyRegistrationNumber);
-    cy.get('dib-signup ui-button button').contains('Sign up').click();
+    cy.get('dib-signup ui-button').contains('Sign up').click();
 
     cy.get('dib-signup ui-input .error').should('contain', 'The email should be in email@example.com format');
   });
@@ -87,7 +87,7 @@ describe('Sign Up', () => {
     cy.get('dib-signup ui-input input[name="password"]').eq(1).type(signUpUser.password);
     cy.get('dib-signup ui-input input[name="companyName"]').type(signUpUser.companyName);
     cy.get('dib-signup ui-input input[name="companyRegistrationNumber"]').type(signUpUser.companyRegistrationNumber);
-    cy.get('dib-signup ui-button button').contains('Sign up').click();
+    cy.get('dib-signup ui-button').contains('Sign up').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
@@ -111,7 +111,7 @@ describe('Sign Up', () => {
     cy.get('dib-signup ui-input input[name="password"]').eq(1).type(shortPassword);
     cy.get('dib-signup ui-input input[name="companyName"]').type(signUpUser.companyName);
     cy.get('dib-signup ui-input input[name="companyRegistrationNumber"]').type(signUpUser.companyRegistrationNumber);
-    cy.get('dib-signup ui-button button').contains('Sign up').click();
+    cy.get('dib-signup ui-button').contains('Sign up').click();
 
     cy.get('dib-signup ui-input .error').should('contain', 'Must be at least 6 characters long');
   });
@@ -132,7 +132,7 @@ describe('Sign Up', () => {
     cy.get('dib-signup ui-input input[name="password"]').eq(1).type(signUpUser.password);
     cy.get('dib-signup ui-input input[name="companyName"]').type(signUpUser.companyName);
     cy.get('dib-signup ui-input input[name="companyRegistrationNumber"]').type(signUpUser.companyRegistrationNumber);
-    cy.get('dib-signup ui-button button').contains('Sign up').click();
+    cy.get('dib-signup ui-button').contains('Sign up').click();
 
     cy.get('dib-register-email-sent').should('contain', 'Check your e-mail and activate your account');
   });
