@@ -1,6 +1,6 @@
 {
-  "approvalProcessFor": "Bot",
-  "approvalProcessForContent": "bot",
-  "approvedBy": "QA",
-  "approvedByContent": "qa"
+  "approvalProcessFor": "QA",
+  "approvalProcessForContent": " qa bot ",
+  "approvedBy": "CY",
+  "approvedByContent": "cy group"
 }
