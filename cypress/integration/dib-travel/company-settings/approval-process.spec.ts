@@ -1,11 +1,18 @@
 import { ApprovalProcess } from '../../../models';
+import { Group } from '../../../models';
+
+const groupLink = '/people-management/groups';
 
 describe('Company Settings - Approval Process', () => {
   let approvalForm: ApprovalProcess;
+  let group: Group;
 
   before(() => {
     cy.fixture('company-settings/approval-form').then((approvalProcessFormFixture) => {
       approvalForm = approvalProcessFormFixture;
+    });
+    cy.fixture('company-employees/group').then((groupFixture) => {
+      group = groupFixture;
     });
   });
 
@@ -33,7 +40,22 @@ describe('Company Settings - Approval Process', () => {
     cy.get('.cdk-overlay-container .modal-content').scrollTo('bottom');
 
     cy.get('.cdk-overlay-container dib-approval-process-helptext-dialog').should('be.visible');
+
     cy.get('.cdk-overlay-container dib-dialog-wrapper').contains('close').click();
+  });
+
+  it('should create a group for approval process', () => {
+    cy.visit(groupLink);
+    cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
+
+    cy.wait('@getCorporationsEmployees').then(() => {
+      cy.get('dib-people-management dib-groups ui-button button').contains('Add Group').click();
+
+      cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="group name*"]').type(group.name);
+      cy.get('.cdk-overlay-container dib-group-dialog ui-button button').contains('save').click();
+
+      cy.get('dib-people-management dib-groups dib-expandable-item').should('contain', group.name);
+    });
   });
 
   it('should create a new approval process (exception from travel policy)', () => {
@@ -62,6 +84,7 @@ describe('Company Settings - Approval Process', () => {
       .within(() => {
         return cy.get('ui-button').contains('delete').clickAttached();
       });
+
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
 
     cy.get('dib-company-management dib-approval-process dib-page dib-approval-process-item').should('not.exist');
@@ -95,6 +118,7 @@ describe('Company Settings - Approval Process', () => {
       .within(() => {
         return cy.get('ui-button').contains('delete').clickAttached();
       });
+
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
 
     cy.get('dib-company-management dib-approval-process dib-page dib-approval-process-item').should('not.exist');
@@ -128,6 +152,7 @@ describe('Company Settings - Approval Process', () => {
       .within(() => {
         return cy.get('ui-button').contains('delete').clickAttached();
       });
+
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[cancel=true]').click();
 
     cy.get('dib-company-management dib-approval-process dib-approval-process-item .item__left').should(
@@ -143,8 +168,27 @@ describe('Company Settings - Approval Process', () => {
       .within(() => {
         return cy.get('ui-button').contains('delete').clickAttached();
       });
+
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
 
     cy.get('dib-company-management dib-approval-process dib-page dib-approval-process-item').should('not.exist');
+  });
+
+  it('should delete group for approval process', () => {
+    cy.visit(groupLink);
+    cy.get('dib-people-management dib-groups dib-expandable-item h2')
+      .contains(group.name)
+      .parent('.item__main')
+      .next('[dib-column-right]')
+      .find('ui-button button')
+      .contains('delete')
+      .clickAttached();
+
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button button').contains('Delete').click();
+
+    cy.get('dib-people-management dib-groups [dib-empty-list-label]').should(
+      'contain',
+      'You have not yet created any groups.'
+    );
   });
 });
