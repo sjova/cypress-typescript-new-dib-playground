@@ -1,5 +1,5 @@
-export interface Profile {
-  name: string;
+export interface ProfileDetails {
+  firstName: string;
   lastName: string;
   email: string;
   birthDay: string;
@@ -17,7 +17,7 @@ export interface Profile {
   documentType: string;
   documentNumber: string;
   issuingCountry: string;
-  newIssuingCounty: string;
+  newIssuingCountry: string;
   expiryDay: string;
   expiryMonth: string;
   expiryYear: string;

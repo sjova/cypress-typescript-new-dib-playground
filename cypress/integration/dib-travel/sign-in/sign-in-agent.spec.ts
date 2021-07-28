@@ -26,7 +26,7 @@ describe('Sign In (Agent)', () => {
   });
 
   it('should display error message when empty form is submitted', () => {
-    cy.get('new-agent-login ui-button button').contains('Login').click();
+    cy.get('new-agent-login ui-button').contains('Login').click();
 
     cy.get('new-agent-login ui-control-wrapper .error')
       .should('contain', 'Email is required')
@@ -37,7 +37,7 @@ describe('Sign In (Agent)', () => {
     cy.get('new-agent-login ui-input input[name=userEmail]').type(accounts.defaultAccount.email);
     cy.get('new-agent-login ui-input input[name=email]').type(accounts.agentAccount.email);
     cy.get('new-agent-login ui-input input[name=password]').type(accounts.invalidAccount.password);
-    cy.get('new-agent-login ui-button button').click();
+    cy.get('new-agent-login ui-button').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Invalid Credentials');
   });
@@ -49,7 +49,7 @@ describe('Sign In (Agent)', () => {
     cy.get('new-agent-login ui-input input[name=userEmail]').type(invalidEmail);
     cy.get('new-agent-login ui-input input[name=email]').type(accounts.agentAccount.email);
     cy.get('new-agent-login ui-input input[name=password]').type(accounts.agentAccount.password);
-    cy.get('new-agent-login ui-button button').click();
+    cy.get('new-agent-login ui-button').click();
 
     cy.get('new-agent-login ui-input[type="email"] .error').should(
       'contain',
@@ -64,7 +64,7 @@ describe('Sign In (Agent)', () => {
     cy.get('new-agent-login ui-input input[name=userEmail]').type(accounts.defaultAccount.email);
     cy.get('new-agent-login ui-input input[name=email]').type(invalidEmail);
     cy.get('new-agent-login ui-input input[name=password]').type(accounts.agentAccount.password);
-    cy.get('new-agent-login ui-button button').click();
+    cy.get('new-agent-login ui-button').click();
 
     cy.get('new-agent-login ui-input[type="email"] .error').should(
       'contain',
@@ -76,7 +76,7 @@ describe('Sign In (Agent)', () => {
     cy.get('new-agent-login ui-input input[name=userEmail]').type(accounts.agentAccount.email);
     cy.get('new-agent-login ui-input input[name=email]').type(accounts.invalidAccount.email);
     cy.get('new-agent-login ui-input input[name=password]').type(accounts.agentAccount.password);
-    cy.get('new-agent-login ui-button button').click();
+    cy.get('new-agent-login ui-button').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Invalid Credentials');
   });
@@ -85,7 +85,7 @@ describe('Sign In (Agent)', () => {
     cy.get('new-agent-login ui-input input[name=userEmail]').clear().type(accounts.defaultAccount.email);
     cy.get('new-agent-login ui-input input[name=email]').clear().type(accounts.agentAccount.email);
     cy.get('new-agent-login ui-input input[name=password]').clear().type(accounts.agentAccount.password);
-    cy.get('new-agent-login ui-button button').click();
+    cy.get('new-agent-login ui-button').click();
 
     cy.get('[data-cy="navbar-my-travels-link"]').should('contain', 'My Travels');
 

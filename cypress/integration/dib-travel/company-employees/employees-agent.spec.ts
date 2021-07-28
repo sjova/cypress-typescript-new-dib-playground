@@ -24,12 +24,12 @@ describe('Company Employees - Employees (Agent)', () => {
   it('should allow agent to add new employee', () => {
     cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
 
-    cy.get('dib-people-management dib-employees .table-pref ui-button button').click();
+    cy.get('dib-people-management dib-employees .table-pref ui-button').click();
 
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]').type(employee.firstName);
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]').type(employee.lastName);
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[type="email"]').type(employee.email);
-    cy.get('.cdk-overlay-container dib-employee-dialog ui-button button').click();
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-button').click();
 
     cy.wait('@getCorporationsEmployees').then(() => {
       cy.reload();
@@ -57,7 +57,7 @@ describe('Company Employees - Employees (Agent)', () => {
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]')
       .clear()
       .type(employee.modifiedLastName);
-    cy.get('.cdk-overlay-container dib-employee-dialog ui-button button').contains('Save').click();
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-button').contains('Save').click();
 
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell h4').should(
       'contain',
@@ -70,14 +70,17 @@ describe('Company Employees - Employees (Agent)', () => {
   });
 
   it('should not allow agent to add new employee with existing email', () => {
-    cy.get('dib-people-management dib-employees .table-pref ui-button button').click();
+    cy.get('dib-people-management dib-employees .table-pref ui-button').click();
 
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]').type(employee.firstName);
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]').type(employee.lastName);
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[type="email"]').type(employee.email);
-    cy.get('.cdk-overlay-container dib-employee-dialog ui-button button').click();
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-button').click();
 
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'A user with this email already exits.');
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'contain',
+      'A user with this email already exists.'
+    );
     cy.get('.cdk-overlay-container simple-snack-bar button').contains('ok').click();
   });
 
@@ -92,7 +95,7 @@ describe('Company Employees - Employees (Agent)', () => {
       .contains('archive')
       .clickAttached();
 
-    cy.get('.cdk-overlay-container confirmation-dialog ui-button button').contains('archive').click();
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button').contains('archive').click();
 
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('not.contain', employee.firstName);
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('not.contain', employee.lastName);
