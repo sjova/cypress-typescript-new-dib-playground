@@ -24,4 +24,5 @@ export interface Profile {
   nationality: string;
   loyaltyProgram: string;
   loyaltyNumber: string;
+  employee: string;
 }

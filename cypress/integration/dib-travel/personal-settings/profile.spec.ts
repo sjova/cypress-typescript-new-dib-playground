@@ -234,19 +234,41 @@ describe('Personal Settings - Profile', () => {
     cy.get('dib-profile dib-account dib-travel-documents').should('not.contain', profile.newIssuingCounty);
   });
 
-  // TODO: Internal travel agent is not added
-  // it.only('should add Internal travel agent', () => {
-  //   cy.intercept('/api/secure/v1/customers/*/internal-travel-agents').as('getInternalTravelAgents');
+  it('should add Internal travel agent', () => {
+    cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
+    cy.intercept('POST', '/api/secure/v1/customers/*/internal-travel-agents').as('postInternalTravelAgents');
+    cy.wait('@getCorporationsEmployees');
+    // TODO: Fix delay on FE side
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(1000);
+    cy.get('dib-profile dib-account dib-internal-agents .internal-agents ui-button button').contains('Add').click();
+    cy.get('.cdk-overlay-container dib-internal-agents-dialog dib-assign-members .member label .user')
+      // TODO: Use data from fixture
+      .contains(profile.employee)
+      .click();
+    cy.get('.cdk-overlay-container dib-internal-agents-dialog ui-button button').contains('Add').click();
+    cy.wait('@postInternalTravelAgents');
+    // TODO: Use data from fixture
+    cy.get('dib-profile dib-account dib-internal-agents .internal-agents__grid td.--first').should(
+      'contain',
+      profile.employee
+    );
+  });
 
-  //   cy.get('dib-profile dib-account .internal-agents button').contains('Add').click();
+  it('should delete Internal travel agent', () => {
+    cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
+    cy.intercept('POST', '/api/secure/v1/customers/*/internal-travel-agents').as('postInternalTravelAgents');
+    cy.wait('@getCorporationsEmployees');
+    cy.get('dib-profile dib-account .internal-agents')
+      .contains(profile.employee)
+      .nextUntil('dib-profile dib-account dib-internal-agents ui-button button')
+      .contains('Delete ')
+      .clickAttached();
 
-  //   cy.get('.cdk-overlay-container dib-internal-agents-dialog dib-assign-members .members')
-  //     .contains('QA Test Bot')
-  //     .click();
+    cy.wait('@postInternalTravelAgents');
 
-  //   cy.get('.cdk-overlay-container dib-internal-agents-dialog ui-button button').contains('Add').click();
-  //   cy.wait('@getInternalTravelAgents');
-  // });
+    cy.get('dib-profile dib-account dib-internal-agents').should('not.contain', profile.employee);
+  });
 
   it('should add loyalty program', () => {
     cy.get('dib-profile dib-account .profile-info__section.loyalty-program button').click();
