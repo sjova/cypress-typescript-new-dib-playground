@@ -40,7 +40,7 @@ describe('Sign In (User)', () => {
   });
 
   it('should display error message when empty form is submitted', () => {
-    cy.get('new-login ui-button button').click();
+    cy.get('new-login ui-button').click();
 
     cy.get('new-login ui-control-wrapper .error')
       .should('contain', 'Email is required')
@@ -50,7 +50,7 @@ describe('Sign In (User)', () => {
   it('should display error message when wrong password is submitted', () => {
     cy.get('new-login ui-input input[name=email]').type(accounts.defaultAccount.email);
     cy.get('new-login ui-input input[name=password]').type(accounts.invalidAccount.password);
-    cy.get('new-login ui-button button').click();
+    cy.get('new-login ui-button').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Invalid Credentials');
   });
@@ -61,7 +61,7 @@ describe('Sign In (User)', () => {
 
     cy.get('new-login ui-input input[name=email]').type(invalidEmail);
     cy.get('new-login ui-input input[name=password]').type(accounts.defaultAccount.password);
-    cy.get('new-login ui-button button').click();
+    cy.get('new-login ui-button').click();
 
     cy.get('new-login ui-input[type="email"] .error').should(
       'contain',
@@ -72,7 +72,7 @@ describe('Sign In (User)', () => {
   it('should display pop up error message when user enters credential that does not exist', () => {
     cy.get('new-login ui-input input[name=email]').type(accounts.invalidAccount.email);
     cy.get('new-login ui-input input[name=password]').type(accounts.invalidAccount.password);
-    cy.get('new-login ui-button button').click();
+    cy.get('new-login ui-button').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Invalid Credentials');
   });
@@ -80,7 +80,7 @@ describe('Sign In (User)', () => {
   it('should allow user to sign in with valid credentials', () => {
     cy.get('new-login ui-input input[name=email]').clear().type(accounts.defaultAccount.email);
     cy.get('new-login ui-input input[name=password]').clear().type(accounts.defaultAccount.password);
-    cy.get('new-login ui-button button').click();
+    cy.get('new-login ui-button').click();
 
     cy.get('[data-cy="navbar-my-travels-link"]').should('contain', 'My Travels');
 

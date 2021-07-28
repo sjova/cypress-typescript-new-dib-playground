@@ -13,7 +13,7 @@ describe('Personal Settings - Credit Cards', () => {
     const cvc = '123';
     const zip = '11000';
 
-    cy.get('dib-profile dib-payment ui-button[type="primary"] button').click();
+    cy.get('dib-profile dib-payment ui-button[type="primary"]').click();
 
     cy.get('.cdk-overlay-container dib-add-card-dialog dib-stripe-card-input iframe')
       .switchToIframe()
