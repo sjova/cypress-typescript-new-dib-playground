@@ -1,0 +1,22 @@
+{
+  "addCostCenterButton": "Add cost center",
+  "costCenterName": "Cost Center Name",
+  "costCenterDescription": "Cost Center Description",
+  "newCostCenterName": "New Cost Center Name",
+  "projectName": "Project Name",
+  "projectDescription": "Project Description",
+  "newProjectName": "New Project Name",
+  "purposeOfTrip": "Purpose of trip is",
+  "purposeOfTripDescription": "Purpose of trip Description",
+  "newPurposeOfTrip": "New Purpose of trip is",
+  "projectLabel": "New Project Label",
+  "purposeOfTripLabel": "New Purpose of trip Label",
+  "yourReferenceLabel": "New Reference field Label",
+  "costCenterConfirmationMessage": "Settings updated",
+  "projectConfirmationMessage": "Project successfully saved.",
+  "purposeOfTripConfirmationMessage": "Purpose of trip successfully saved.",
+  "yourReferenceConfirmationMessage": "Your reference successfully saved.",
+  "addProjectButton": "Add project",
+  "addPurposeOfTripButton": "Add purpose of trip",
+  "changeLabelButton": "Change label"
+}

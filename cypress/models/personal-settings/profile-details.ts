@@ -1,3 +1,6 @@
+// TODO: Group data the same as on UI/UX
+// ex. personal info, contact info, reference fields, etc.
+// and don't forget to update fixture
 export interface ProfileDetails {
   firstName: string;
   lastName: string;
