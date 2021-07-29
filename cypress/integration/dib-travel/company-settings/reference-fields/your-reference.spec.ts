@@ -1,11 +1,11 @@
-import { Reference } from '../../../../models/company-settings/reference-fields';
+import { ReferenceFields } from '../../../../models';
 
-describe('Company settings - Reference fields - Your reference', () => {
-  let reference: Reference;
+describe('Company Settings - Reference Fields - Your Reference', () => {
+  let referenceFields: ReferenceFields;
 
   before(() => {
     cy.fixture('company-settings/reference-fields').then((referenceFixture) => {
-      reference = referenceFixture;
+      referenceFields = referenceFixture;
     });
   });
 
@@ -15,27 +15,28 @@ describe('Company settings - Reference fields - Your reference', () => {
   });
 
   it('should change your reference fields label at checkout', () => {
-    cy.get(
-      'dib-company-management dib-reference-fields dib-your-reference [ng-reflect-placeholder="Your reference"] input'
-    )
+    cy.get('dib-company-management dib-reference-fields dib-your-reference label')
+      .contains('Your reference')
+      .next('input')
       .clear()
-      .type(reference.yourReferenceLabel);
-
-    cy.get('dib-company-management dib-reference-fields dib-your-reference button')
-      .contains(reference.changeLabelButton)
+      .type(referenceFields.yourReferenceLabel);
+    cy.get('dib-company-management dib-reference-fields dib-your-reference ui-button')
+      .contains(referenceFields.changeLabelButton)
       .click();
-    cy.get('.cdk-overlay-container confirmation-dialog button').contains(' Change ').click();
+
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button').contains(' Change ').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
-      reference.yourReferenceConfirmationMessage
+      referenceFields.yourReferenceConfirmationMessage
     );
   });
 
-  // TODO: Uncomment when bug is fixed - DT8476
-  // it('should reset to default fields label', () => {
-  //   cy.get('dib-company-management dib-reference-fields dib-your-reference').contains('Reset to default').click();
-  // });
+  // TODO: Uncomment when the bug is fixed (DT-8476)
+  /* it('should reset to default fields label', () => {
+    cy.get('dib-company-management dib-reference-fields dib-your-reference').contains('Reset to default').click();
+    // TODO: missing `.should()`
+  }); */
 
   it('should check "Display and set field to mandatory when checking out booking" check-box', () => {
     cy.get('dib-company-management dib-reference-fields dib-your-reference .checkbox-label')
@@ -44,7 +45,7 @@ describe('Company settings - Reference fields - Your reference', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
-      reference.yourReferenceConfirmationMessage
+      referenceFields.yourReferenceConfirmationMessage
     );
   });
 });

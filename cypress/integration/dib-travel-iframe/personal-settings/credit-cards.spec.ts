@@ -7,6 +7,7 @@ describe('Personal Settings - Credit Cards', () => {
   });
 
   // TODO: This is only demo example
+  // Please don't modify or delete this block for now
   it('should access iframe on the page', () => {
     const cardNumber = '4444333322221111';
     const mmYy = '0129';

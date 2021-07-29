@@ -52,7 +52,7 @@ describe('Sign Up', () => {
     cy.get('dib-signup ui-autocomplete .error').should('contain', 'Country is required');
   });
 
-  it('should display error message when invalid email address is inserted', () => {
+  it.only('should display error message when invalid email address is inserted', () => {
     const invalidEmail = signUpUser.email.replace('@', '');
 
     cy.get('dib-signup ui-input input[name="firstName"]').type(signUpUser.firstName);
@@ -68,7 +68,7 @@ describe('Sign Up', () => {
     cy.get('dib-signup ui-input input[name="password"]').eq(1).type(signUpUser.password);
     cy.get('dib-signup ui-input input[name="companyName"]').type(signUpUser.companyName);
     cy.get('dib-signup ui-input input[name="companyRegistrationNumber"]').type(signUpUser.companyRegistrationNumber);
-    cy.get('dib-signup ui-button').contains('Sign up').click();
+    cy.get('dib-signup ui-button button').contains('Sign up').click();
 
     cy.get('dib-signup ui-input .error').should('contain', 'The email should be in email@example.com format');
   });

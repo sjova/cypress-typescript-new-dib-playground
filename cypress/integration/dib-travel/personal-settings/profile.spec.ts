@@ -263,7 +263,7 @@ describe('Personal Settings - Profile', () => {
   });
 
   it('should delete travel document', () => {
-    cy.intercept('/api/secure/v1/corporations/*/employees').as('getEmployees');
+    cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getEmployees');
 
     cy.wait('@getEmployees');
 
@@ -278,6 +278,10 @@ describe('Personal Settings - Profile', () => {
     cy.get('dib-profile dib-account dib-travel-documents').should('not.contain', profileDetails.newIssuingCountry);
   });
 
+  // TODO: Add missing user via shared fn
+  // Please use following structure for shared group
+  // dib-travel/<feature-name>/shared/<shared-group-of-commands>.ts - please be descriptive
+  // dib-travel/<feature-name>/index.ts - please export shared test command
   it('should add Internal travel agent', () => {
     cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getEmployees');
     cy.intercept('POST', '/api/secure/v1/customers/*/internal-travel-agents').as('postInternalTravelAgents');
@@ -300,6 +304,10 @@ describe('Personal Settings - Profile', () => {
     cy.get('dib-profile dib-account dib-internal-agents .--first').should('contain', profileDetails.employee);
   });
 
+  // TODO: Add missing user via shared fn
+  // Please use following structure for shared group
+  // dib-travel/<feature-name>/shared/<shared-group-of-commands>.ts - please be descriptive
+  // dib-travel/<feature-name>/index.ts - please export shared test command
   it('should delete Internal travel agent', () => {
     cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getEmployees');
     cy.intercept('POST', '/api/secure/v1/customers/*/internal-travel-agents').as('postInternalTravelAgents');
