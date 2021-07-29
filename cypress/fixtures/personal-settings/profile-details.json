@@ -1,28 +1,42 @@
 {
-  "firstName": "QA",
-  "lastName": "Bot",
-  "email": "qa.tools@dibtravel.com",
-  "birthDay": "05",
-  "birthMonth": "07",
-  "birthYear": "1980",
-  "homeAddress": "Knez Mihajlova 14",
-  "city": "Belgrade",
-  "zipCode": "11000",
-  "country": "Serbia",
-  "mobileNumber": "+381631234567",
-  "language": "Serbian",
-  "currency": "RSD",
-  "password": "testing1234",
-  "title": "Mr",
-  "documentType": "Passport",
-  "documentNumber": "123456",
-  "issuingCountry": "Serbia",
-  "newIssuingCountry": "Zambia",
-  "expiryDay": "05",
-  "expiryMonth": "07",
-  "expiryYear": "2030",
-  "nationality": "Serbian",
-  "loyaltyProgram": "Etihad",
-  "loyaltyNumber": "123456",
-  "employee": "CY Dragan CY Draganovic"
+  "personalInfo": {
+    "firstName": "QA",
+    "lastName": "Bot",
+    "email": "qa.tools@dibtravel.com",
+    "birthDay": "05",
+    "birthMonth": "07",
+    "birthYear": "1980"
+  },
+  "contactInfo": {
+    "homeAddress": "Knez Mihajlova 14",
+    "city": "Belgrade",
+    "zipCode": "11000",
+    "country": "Serbia",
+    "mobileNumber": "+381631234567"
+  },
+  "localize": {
+    "language": "Serbian",
+    "currency": "RSD"
+  },
+  "emailAndPassword": {
+    "password": "testing1234"
+  },
+  "travelDocuments": {
+    "title": "Mr",
+    "documentType": "Passport",
+    "documentNumber": "123456",
+    "issuingCountry": "Serbia",
+    "newIssuingCountry": "Zambia",
+    "expiryDay": "05",
+    "expiryMonth": "07",
+    "expiryYear": "2030",
+    "nationality": "Serbian"
+  },
+  "internalTravelAgent": {
+    "employee": "CY Petar CY Petrovic"
+  },
+  "loyaltyProgram": {
+    "loyaltyProgramProvider": "Etihad",
+    "loyaltyNumber": "123456"
+  }
 }
