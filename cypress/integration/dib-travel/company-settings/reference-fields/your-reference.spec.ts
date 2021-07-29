@@ -19,16 +19,16 @@ describe('Company Settings - Reference Fields - Your Reference', () => {
       .contains('Your reference')
       .next('input')
       .clear()
-      .type(referenceFields.yourReferenceLabel);
+      .type(referenceFields.yourReference.yourReferenceLabel);
     cy.get('dib-company-management dib-reference-fields dib-your-reference ui-button')
-      .contains(referenceFields.changeLabelButton)
+      .contains(referenceFields.changeLabel.changeLabelButton)
       .click();
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button').contains(' Change ').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
-      referenceFields.yourReferenceConfirmationMessage
+      referenceFields.yourReference.yourReferenceConfirmationMessage
     );
   });
 
@@ -45,7 +45,7 @@ describe('Company Settings - Reference Fields - Your Reference', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
-      referenceFields.yourReferenceConfirmationMessage
+      referenceFields.yourReference.yourReferenceConfirmationMessage
     );
   });
 });

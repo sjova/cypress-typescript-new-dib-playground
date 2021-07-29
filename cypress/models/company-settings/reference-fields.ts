@@ -2,24 +2,36 @@
 // ex. cost center, project, purpose trip, etc.
 // and don't forget to update fixture
 export interface ReferenceFields {
-  addCostCenterButton: string;
-  costCenterName: string;
-  costCenterDescription: string;
-  newCostCenterName: string;
-  projectName: string;
-  projectDescription: string;
-  newProjectName: string;
-  purposeOfTrip: string;
-  purposeOfTripDescription: string;
-  newPurposeOfTrip: string;
-  projectLabel: string;
-  purposeOfTripLabel: string;
-  yourReferenceLabel: string;
-  costCenterConfirmationMessage: string;
-  projectConfirmationMessage: string;
-  purposeOfTripConfirmationMessage: string;
-  yourReferenceConfirmationMessage: string;
-  addProjectButton: string;
-  addPurposeOfTripButton: string;
-  changeLabelButton: string;
+  costCenter: {
+    addCostCenterButton: string;
+    costCenterName: string;
+    costCenterDescription: string;
+    newCostCenterName: string;
+    costCenterConfirmationMessage: string;
+  };
+  project: {
+    projectName: string;
+    projectDescription: string;
+    newProjectName: string;
+    projectLabel: string;
+    projectConfirmationMessage: string;
+    addProjectButton: string;
+  };
+  purposeOfTrip: {
+    purposeOfTripText: string;
+    purposeOfTripDescription: string;
+    newPurposeOfTrip: string;
+    purposeOfTripLabel: string;
+    purposeOfTripConfirmationMessage: string;
+    addPurposeOfTripButton: string;
+  };
+
+  yourReference: {
+    yourReferenceLabel: string;
+    yourReferenceConfirmationMessage: string;
+  };
+
+  changeLabel: {
+    changeLabelButton: string;
+  };
 }
