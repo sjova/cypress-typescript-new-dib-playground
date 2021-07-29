@@ -42,4 +42,9 @@ export interface ProfileDetails {
     loyaltyProgramProvider: string;
     loyaltyNumber: string;
   };
+  newEmployee: {
+    firstNameNewEmployee: string;
+    lastNameNewEmployee: string;
+    emailNewEmployee: string;
+  };
 }

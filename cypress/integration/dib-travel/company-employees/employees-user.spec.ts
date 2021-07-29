@@ -23,7 +23,7 @@ describe('Company Employees - Employees (User)', () => {
   });
 
   it('should allow user to add new employee', () => {
-    addNewEmployee();
+    addNewEmployee(employee.firstName, employee.lastName, employee.email);
   });
 
   it('should allow user to edit added employee', () => {
@@ -71,6 +71,6 @@ describe('Company Employees - Employees (User)', () => {
   });
 
   it('should allow user to delete added employee', () => {
-    deleteAddedEmployee();
+    deleteAddedEmployee(employee.modifiedFirstName, employee.firstName, employee.lastName, employee.email);
   });
 });

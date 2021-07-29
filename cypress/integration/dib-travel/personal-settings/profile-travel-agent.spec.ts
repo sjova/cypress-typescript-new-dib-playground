@@ -1,6 +1,5 @@
 import { ProfileDetails } from '../../../models';
-import { deleteEmployee } from '../../../support/commands/add-delete-employee';
-import { addNewEmployee } from '../company-employees';
+import { addNewEmployee, deleteAddedEmployee } from '../company-employees';
 
 describe('Personal Settings - Profile - Travel agent', () => {
   let profileDetails: ProfileDetails;
@@ -22,7 +21,11 @@ describe('Personal Settings - Profile - Travel agent', () => {
 
   it('should add Internal travel agent', () => {
     cy.visit('/people-management/employees');
-    addNewEmployee();
+    addNewEmployee(
+      profileDetails.newEmployee.firstNameNewEmployee,
+      profileDetails.newEmployee.lastNameNewEmployee,
+      profileDetails.newEmployee.emailNewEmployee
+    );
     cy.visit('/profile/account');
 
     cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getEmployees');
@@ -37,7 +40,7 @@ describe('Personal Settings - Profile - Travel agent', () => {
     cy.get('dib-profile dib-account dib-internal-agents ui-button').contains('Add').click();
 
     cy.get('.cdk-overlay-container dib-internal-agents-dialog dib-assign-members .member .user')
-      .contains(profileDetails.internalTravelAgent.employee)
+      .contains(profileDetails.newEmployee.firstNameNewEmployee)
       .click();
     cy.get('.cdk-overlay-container dib-internal-agents-dialog ui-button').contains('Add').click();
 
@@ -45,7 +48,7 @@ describe('Personal Settings - Profile - Travel agent', () => {
 
     cy.get('dib-profile dib-account dib-internal-agents .--first').should(
       'contain',
-      profileDetails.internalTravelAgent.employee
+      profileDetails.newEmployee.firstNameNewEmployee
     );
   });
 
@@ -65,7 +68,7 @@ describe('Personal Settings - Profile - Travel agent', () => {
     cy.wait(1000);
 
     cy.get('dib-profile dib-account dib-internal-agents .--first')
-      .contains(profileDetails.internalTravelAgent.employee)
+      .contains(profileDetails.newEmployee.firstNameNewEmployee)
       .next('.--middle')
       .next('.--last')
       .find('ui-button')
@@ -75,9 +78,14 @@ describe('Personal Settings - Profile - Travel agent', () => {
 
     cy.get('dib-profile dib-account dib-internal-agents').should(
       'not.contain',
-      profileDetails.internalTravelAgent.employee
+      profileDetails.newEmployee.firstNameNewEmployee
     );
     cy.visit('/people-management/employees');
-    deleteEmployee();
+    deleteAddedEmployee(
+      profileDetails.newEmployee.firstNameNewEmployee,
+      profileDetails.newEmployee.firstNameNewEmployee,
+      profileDetails.newEmployee.lastNameNewEmployee,
+      profileDetails.newEmployee.emailNewEmployee
+    );
   });
 });

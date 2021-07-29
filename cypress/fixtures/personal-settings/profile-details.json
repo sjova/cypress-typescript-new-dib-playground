@@ -38,5 +38,10 @@
   "loyaltyProgram": {
     "loyaltyProgramProvider": "Etihad",
     "loyaltyNumber": "123456"
+  },
+  "newEmployee": {
+    "firstNameNewEmployee": "NewEmployee",
+    "lastNameNewEmployee": "BotLastName",
+    "emailNewEmployee": "newemployee@dibtravel.com"
   }
 }

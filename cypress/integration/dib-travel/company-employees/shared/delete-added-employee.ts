@@ -1,10 +1,8 @@
-import Employee from '../../../../fixtures/company-employees/employee.json';
-
 export const deleteAddedEmployee = (
-  modifiedFirstName = Employee.modifiedFirstName,
-  firstName = Employee.firstName,
-  lastName = Employee.lastName,
-  email = Employee.email
+  modifiedFirstName: string,
+  firstName: string,
+  lastName: string,
+  email: string
 ): void => {
   cy.visit('/people-management/employees');
 

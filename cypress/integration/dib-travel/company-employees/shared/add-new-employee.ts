@@ -1,10 +1,4 @@
-import Employee from '../../../../fixtures/company-employees/employee.json';
-
-export const addNewEmployee = (
-  firstName = Employee.firstName,
-  lastName = Employee.lastName,
-  email = Employee.email
-): void => {
+export const addNewEmployee = (firstName: string, lastName: string, email: string): void => {
   cy.visit('/people-management/employees');
 
   cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
