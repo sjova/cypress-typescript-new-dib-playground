@@ -1,25 +1,30 @@
-// TODO: Group data the same as on UI/UX
-// ex. cost center, project, purpose trip, etc.
-// and don't forget to update fixture
 export interface ReferenceFields {
-  addCostCenterButton: string;
-  costCenterName: string;
-  costCenterDescription: string;
-  newCostCenterName: string;
-  projectName: string;
-  projectDescription: string;
-  newProjectName: string;
-  purposeOfTrip: string;
-  purposeOfTripDescription: string;
-  newPurposeOfTrip: string;
-  projectLabel: string;
-  purposeOfTripLabel: string;
-  yourReferenceLabel: string;
-  costCenterConfirmationMessage: string;
-  projectConfirmationMessage: string;
-  purposeOfTripConfirmationMessage: string;
-  yourReferenceConfirmationMessage: string;
-  addProjectButton: string;
-  addPurposeOfTripButton: string;
-  changeLabelButton: string;
+  costCenter: {
+    ctaButton: string;
+    name: string;
+    modifiedName: string;
+    description: string;
+    confirmationMessage: string;
+  };
+  project: {
+    ctaButton: string;
+    name: string;
+    modifiedName: string;
+    description: string;
+    label: string;
+    confirmationMessage: string;
+  };
+  purposeOfTrip: {
+    ctaButton: string;
+    name: string;
+    modifiedName: string;
+    description: string;
+    label: string;
+    confirmationMessage: string;
+  };
+  yourReference: {
+    label: string;
+    confirmationMessage: string;
+  };
+  changeLabelCtaButton: string;
 }

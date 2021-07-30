@@ -1,31 +1,44 @@
-// TODO: Group data the same as on UI/UX
-// ex. personal info, contact info, reference fields, etc.
-// and don't forget to update fixture
 export interface ProfileDetails {
-  firstName: string;
-  lastName: string;
-  email: string;
-  birthDay: string;
-  birthMonth: string;
-  birthYear: string;
-  homeAddress: string;
-  city: string;
-  zipCode: string;
-  country: string;
-  mobileNumber: string;
-  language: string;
-  currency: string;
-  password: string;
-  title: string;
-  documentType: string;
-  documentNumber: string;
-  issuingCountry: string;
-  newIssuingCountry: string;
-  expiryDay: string;
-  expiryMonth: string;
-  expiryYear: string;
-  nationality: string;
-  loyaltyProgram: string;
-  loyaltyNumber: string;
-  employee: string;
+  personalInfo: {
+    firstName: string;
+    lastName: string;
+    birthDay: string;
+    birthMonth: string;
+    birthYear: string;
+  };
+  contactInfo: {
+    address: string;
+    city: string;
+    zipCode: string;
+    country: string;
+    phoneNumber: string;
+  };
+  localize: {
+    language: string;
+    currency: string;
+  };
+  emailAndPassword: {
+    email: string;
+    password: string;
+  };
+  travelDocuments: {
+    documentType: string;
+    gender: string;
+    documentNumber: string;
+    issuingCountry: string;
+    changeIssuingCountry: string;
+    expiryDay: string;
+    expiryMonth: string;
+    expiryYear: string;
+    nationality: string;
+  };
+  internalTravelAgent: {
+    firstName: string;
+    lastName: string;
+    email: string;
+  };
+  loyaltyProgram: {
+    provider: string;
+    number: string;
+  };
 }
