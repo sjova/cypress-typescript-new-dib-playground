@@ -153,6 +153,11 @@ DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accoun
 - `"requestTimeout": 10000` - revisit this later when we speed up the front-end Angular application
 - `"chromeWebSecurity": false` - revisit this later, reference: [Iframe Support (Work in progress)](https://github.com/cypress-io/cypress/issues/136)
 
+## ToDo Decision
+
+- `dib-foo ui-button button` vs. `dib-foo ui-button`
+- `dib-foo ui-input input` vs. `dib-foo ui-input`
+
 ## Useful Docs
 
 - Getting Started
