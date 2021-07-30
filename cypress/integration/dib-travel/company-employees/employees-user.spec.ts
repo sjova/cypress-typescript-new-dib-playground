@@ -1,6 +1,7 @@
 import { getEmailWithHash } from '../../../helpers';
 import { Employee } from '../../../models';
-import { addNewEmployee, deleteAddedEmployee } from './shared';
+
+import { addEmployee, archiveEmployee } from './shared';
 
 describe('Company Employees - Employees (User)', () => {
   let employee: Employee;
@@ -23,7 +24,17 @@ describe('Company Employees - Employees (User)', () => {
   });
 
   it('should allow user to add new employee', () => {
-    addNewEmployee(employee.firstName, employee.lastName, employee.email);
+    cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
+
+    addEmployee(employee.firstName, employee.lastName, employee.email);
+
+    cy.wait('@getCorporationsEmployees').then(() => {
+      cy.reload();
+
+      cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
+      cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.lastName);
+      cy.get('dib-people-management dib-employees dib-page .grid .table-cell').should('contain', employee.email);
+    });
   });
 
   it('should allow user to edit added employee', () => {
@@ -56,12 +67,7 @@ describe('Company Employees - Employees (User)', () => {
   });
 
   it('should not allow user to add new employee with existing email', () => {
-    cy.get('dib-people-management dib-employees .table-pref ui-button').click();
-
-    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]').type(employee.firstName);
-    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]').type(employee.lastName);
-    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[type="email"]').type(employee.email);
-    cy.get('.cdk-overlay-container dib-employee-dialog ui-button').click();
+    addEmployee(employee.firstName, employee.lastName, employee.email);
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
@@ -70,7 +76,11 @@ describe('Company Employees - Employees (User)', () => {
     cy.get('.cdk-overlay-container simple-snack-bar button').contains('ok').click();
   });
 
-  it('should allow user to delete added employee', () => {
-    deleteAddedEmployee(employee.modifiedFirstName, employee.firstName, employee.lastName, employee.email);
+  it('should allow user to archive previously added employee', () => {
+    archiveEmployee(employee.email);
+
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('not.contain', employee.firstName);
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('not.contain', employee.lastName);
+    cy.get('dib-people-management dib-employees dib-page .grid .table-cell').should('not.contain', employee.email);
   });
 });

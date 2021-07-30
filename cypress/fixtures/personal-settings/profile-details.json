@@ -2,46 +2,43 @@
   "personalInfo": {
     "firstName": "QA",
     "lastName": "Bot",
-    "email": "qa.tools@dibtravel.com",
     "birthDay": "05",
     "birthMonth": "07",
     "birthYear": "1980"
   },
   "contactInfo": {
-    "homeAddress": "Knez Mihajlova 14",
+    "address": "Knez Mihajlova 14",
     "city": "Belgrade",
     "zipCode": "11000",
     "country": "Serbia",
-    "mobileNumber": "+381631234567"
+    "phoneNumber": "+381631234567"
   },
   "localize": {
     "language": "Serbian",
     "currency": "RSD"
   },
   "emailAndPassword": {
+    "email": "qa.tools@dibtravel.com",
     "password": "testing1234"
   },
   "travelDocuments": {
-    "title": "Mr",
     "documentType": "Passport",
+    "gender": "Mr",
     "documentNumber": "123456",
     "issuingCountry": "Serbia",
-    "newIssuingCountry": "Zambia",
+    "changeIssuingCountry": "Zambia",
     "expiryDay": "05",
     "expiryMonth": "07",
     "expiryYear": "2030",
     "nationality": "Serbian"
   },
   "internalTravelAgent": {
-    "employee": "CY Petar CY Petrovic"
+    "firstName": "CY Petar",
+    "lastName": "CY Petrovic",
+    "email": "qa.tools+cy.ci.personal-settings.profile.hash@dibtravel.com"
   },
   "loyaltyProgram": {
-    "loyaltyProgramProvider": "Etihad",
-    "loyaltyNumber": "123456"
-  },
-  "newEmployee": {
-    "firstNameNewEmployee": "NewEmployee",
-    "lastNameNewEmployee": "BotLastName",
-    "emailNewEmployee": "newemployee@dibtravel.com"
+    "provider": "Etihad",
+    "number": "123456"
   }
 }

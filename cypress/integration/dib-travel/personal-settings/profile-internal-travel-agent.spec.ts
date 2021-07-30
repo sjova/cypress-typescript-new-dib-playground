@@ -1,12 +1,19 @@
 import { ProfileDetails } from '../../../models';
-import { addNewEmployee, deleteAddedEmployee } from '../company-employees';
+import { getEmailWithHash } from '../../../helpers';
+import { addEmployee, archiveEmployee } from '../company-employees';
 
-describe('Personal Settings - Profile - Travel agent', () => {
+describe('Personal Settings - Profile - Internal Travel Agent', () => {
   let profileDetails: ProfileDetails;
 
   before(() => {
     cy.fixture('personal-settings/profile-details').then((profileDetailsFixture) => {
-      profileDetails = profileDetailsFixture;
+      profileDetails = {
+        ...profileDetailsFixture,
+        internalTravelAgent: {
+          ...profileDetailsFixture.internalTravelAgent,
+          email: getEmailWithHash(profileDetailsFixture.internalTravelAgent.email),
+        },
+      };
     });
   });
 
@@ -14,18 +21,14 @@ describe('Personal Settings - Profile - Travel agent', () => {
     cy.login();
   });
 
-  // TODO: Add missing user via shared fn
-  // Please use following structure for shared group
-  // dib-travel/<feature-name>/shared/<shared-group-of-commands>.ts - please be descriptive
-  // dib-travel/<feature-name>/index.ts - please export shared test command
-
   it('should add Internal travel agent', () => {
     cy.visit('/people-management/employees');
-    addNewEmployee(
-      profileDetails.newEmployee.firstNameNewEmployee,
-      profileDetails.newEmployee.lastNameNewEmployee,
-      profileDetails.newEmployee.emailNewEmployee
+    addEmployee(
+      profileDetails.internalTravelAgent.firstName,
+      profileDetails.internalTravelAgent.lastName,
+      profileDetails.internalTravelAgent.email
     );
+
     cy.visit('/profile/account');
 
     cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getEmployees');
@@ -33,14 +36,14 @@ describe('Personal Settings - Profile - Travel agent', () => {
 
     cy.wait('@getEmployees');
 
-    // Fix custom delay in implementation
+    // Fix custom delay in FE implementation
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(1000);
 
     cy.get('dib-profile dib-account dib-internal-agents ui-button').contains('Add').click();
 
     cy.get('.cdk-overlay-container dib-internal-agents-dialog dib-assign-members .member .user')
-      .contains(profileDetails.newEmployee.firstNameNewEmployee)
+      .contains(`${profileDetails.internalTravelAgent.firstName} ${profileDetails.internalTravelAgent.lastName}`)
       .click();
     cy.get('.cdk-overlay-container dib-internal-agents-dialog ui-button').contains('Add').click();
 
@@ -48,27 +51,24 @@ describe('Personal Settings - Profile - Travel agent', () => {
 
     cy.get('dib-profile dib-account dib-internal-agents .--first').should(
       'contain',
-      profileDetails.newEmployee.firstNameNewEmployee
+      `${profileDetails.internalTravelAgent.firstName} ${profileDetails.internalTravelAgent.lastName}`
     );
   });
 
-  // TODO: Add missing user via shared fn
-  // Please use following structure for shared group
-  // dib-travel/<feature-name>/shared/<shared-group-of-commands>.ts - please be descriptive
-  // dib-travel/<feature-name>/index.ts - please export shared test command
   it('should delete Internal travel agent', () => {
     cy.visit('/profile/account');
+
     cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getEmployees');
     cy.intercept('POST', '/api/secure/v1/customers/*/internal-travel-agents').as('postInternalTravelAgents');
 
     cy.wait('@getEmployees');
 
-    // Fix custom delay in implementation
+    // Fix custom delay in FE implementation
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(1000);
 
     cy.get('dib-profile dib-account dib-internal-agents .--first')
-      .contains(profileDetails.newEmployee.firstNameNewEmployee)
+      .contains(`${profileDetails.internalTravelAgent.firstName} ${profileDetails.internalTravelAgent.lastName}`)
       .next('.--middle')
       .next('.--last')
       .find('ui-button')
@@ -78,14 +78,10 @@ describe('Personal Settings - Profile - Travel agent', () => {
 
     cy.get('dib-profile dib-account dib-internal-agents').should(
       'not.contain',
-      profileDetails.newEmployee.firstNameNewEmployee
+      `${profileDetails.internalTravelAgent.firstName} ${profileDetails.internalTravelAgent.lastName}`
     );
+
     cy.visit('/people-management/employees');
-    deleteAddedEmployee(
-      profileDetails.newEmployee.firstNameNewEmployee,
-      profileDetails.newEmployee.firstNameNewEmployee,
-      profileDetails.newEmployee.lastNameNewEmployee,
-      profileDetails.newEmployee.emailNewEmployee
-    );
+    archiveEmployee(profileDetails.internalTravelAgent.email);
   });
 });

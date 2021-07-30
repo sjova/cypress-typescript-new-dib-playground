@@ -1,32 +1,30 @@
 {
   "costCenter": {
-    "addCostCenterButton": "Add cost center",
-    "costCenterName": "Cost Center Name",
-    "costCenterDescription": "Cost Center Description",
-    "newCostCenterName": "New Cost Center Name",
-    "costCenterConfirmationMessage": "Settings updated"
+    "ctaButton": "Add cost center",
+    "name": "Cost Center Name",
+    "modifiedName": "Modified Cost Center Name",
+    "description": "Cost Center Description",
+    "confirmationMessage": "Settings updated"
   },
   "project": {
-    "projectName": "Project Name",
-    "projectDescription": "Project Description",
-    "newProjectName": "New Project Name",
-    "projectLabel": "New Project Label",
-    "projectConfirmationMessage": "Project successfully saved.",
-    "addProjectButton": "Add project"
+    "ctaButton": "Add project",
+    "name": "Project Name",
+    "modifiedName": "Modified Project Name",
+    "description": "Project Description",
+    "label": "Changed Project Label",
+    "confirmationMessage": "Project successfully saved."
   },
   "purposeOfTrip": {
-    "purposeOfTripText": "Purpose of trip is",
-    "purposeOfTripDescription": "Purpose of trip Description",
-    "newPurposeOfTrip": "New Purpose of trip is",
-    "purposeOfTripLabel": "New Purpose of trip Label",
-    "purposeOfTripConfirmationMessage": "Purpose of trip successfully saved.",
-    "addPurposeOfTripButton": "Add purpose of trip"
+    "ctaButton": "Add purpose of trip",
+    "name": "Purpose of trip is",
+    "modifiedName": "Modified Purpose of trip is",
+    "description": "Purpose of trip Description",
+    "label": "Changed Purpose of trip Label",
+    "confirmationMessage": "Purpose of trip successfully saved."
   },
   "yourReference": {
-    "yourReferenceLabel": "New Reference field Label",
-    "yourReferenceConfirmationMessage": "Your reference successfully saved."
+    "label": "Changed Reference field Label",
+    "confirmationMessage": "Your reference successfully saved."
   },
-  "changeLabel": {
-    "changeLabelButton": "Change label"
-  }
+  "changeLabelCtaButton": "Change label"
 }

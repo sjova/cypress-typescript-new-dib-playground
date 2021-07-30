@@ -1,2 +1,2 @@
-export * from './add-new-employee';
-export * from './delete-added-employee';
+export * from './add-employee';
+export * from './archive-employee';

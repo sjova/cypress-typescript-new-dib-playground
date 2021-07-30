@@ -71,7 +71,7 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container ui-form-dialog dib-input input[name="address1"]')
       .clear()
-      .type(profileDetails.contactInfo.homeAddress);
+      .type(profileDetails.contactInfo.address);
     cy.get('.cdk-overlay-container ui-form-dialog dib-input input[name="city"]')
       .clear()
       .type(profileDetails.contactInfo.city);
@@ -86,7 +86,7 @@ describe('Personal Settings - Profile', () => {
       .click();
     cy.get('.cdk-overlay-container ui-form-dialog dib-input input[name="cellphone"]')
       .clear()
-      .type(profileDetails.contactInfo.mobileNumber);
+      .type(profileDetails.contactInfo.phoneNumber);
     cy.get('.cdk-overlay-container ui-form-dialog ui-button').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Profile Successfully Updated');
@@ -95,11 +95,11 @@ describe('Personal Settings - Profile', () => {
       .contains('Contact info')
       .parent('.profile-info__section')
       .within(() => {
-        cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.homeAddress);
+        cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.address);
         cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.city);
         cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.zipCode);
         cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.country);
-        cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.mobileNumber);
+        cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.phoneNumber);
       });
   });
 
@@ -141,7 +141,7 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container dib-change-email input[name="email"]')
       .clear()
-      .type(profileDetails.personalInfo.email);
+      .type(profileDetails.emailAndPassword.email);
     cy.get('.cdk-overlay-container dib-change-email input[name="password"]')
       .clear()
       .type(profileDetails.emailAndPassword.password);
@@ -153,7 +153,7 @@ describe('Personal Settings - Profile', () => {
       .contains('email & password')
       .parent('.profile-info__section')
       .find('.profile-info__row')
-      .should('contain', profileDetails.personalInfo.email);
+      .should('contain', profileDetails.emailAndPassword.email);
   });
 
   it('should change password', () => {
@@ -195,7 +195,7 @@ describe('Personal Settings - Profile', () => {
     cy.get('.cdk-overlay-container dib-travel-document-dialog dib-select-wrapper')
       .contains('Gender')
       .parent('select')
-      .select(profileDetails.travelDocuments.title);
+      .select(profileDetails.travelDocuments.gender);
     cy.get('.cdk-overlay-container dib-travel-document-dialog dib-input input[name="firstName"]').type(
       profileDetails.personalInfo.firstName
     );
@@ -272,9 +272,9 @@ describe('Personal Settings - Profile', () => {
     )
       .click()
       .clear()
-      .type(profileDetails.travelDocuments.newIssuingCountry);
+      .type(profileDetails.travelDocuments.changeIssuingCountry);
     cy.get('.cdk-overlay-container dib-travel-document-dialog dib-searchable-select .select-list')
-      .contains(profileDetails.travelDocuments.newIssuingCountry)
+      .contains(profileDetails.travelDocuments.changeIssuingCountry)
       .click();
 
     cy.get('.cdk-overlay-container dib-travel-document-dialog dib-checkbox').click();
@@ -283,7 +283,7 @@ describe('Personal Settings - Profile', () => {
     cy.get('dib-profile dib-account dib-travel-documents').should('contain', 'PASSPORT');
     cy.get('dib-profile dib-account dib-travel-documents').should(
       'contain',
-      profileDetails.travelDocuments.newIssuingCountry
+      profileDetails.travelDocuments.changeIssuingCountry
     );
   });
 
@@ -293,7 +293,7 @@ describe('Personal Settings - Profile', () => {
     cy.wait('@getEmployees');
 
     cy.get('dib-profile dib-account .travel-documents')
-      .contains(profileDetails.travelDocuments.newIssuingCountry)
+      .contains(profileDetails.travelDocuments.changeIssuingCountry)
       .next('td')
       .contains('delete')
       .click();
@@ -302,7 +302,7 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('dib-profile dib-account dib-travel-documents').should(
       'not.contain',
-      profileDetails.travelDocuments.newIssuingCountry
+      profileDetails.travelDocuments.changeIssuingCountry
     );
   });
 
@@ -311,22 +311,16 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container dib-add-loyalty ui-button').click();
     cy.get('.cdk-overlay-container dib-add-loyalty dib-loyalty-auto-complete')
-      .type(profileDetails.loyaltyProgram.loyaltyProgramProvider)
+      .type(profileDetails.loyaltyProgram.provider)
       .type('{downarrow}')
       .type('{enter}');
-    cy.get('.cdk-overlay-container dib-add-loyalty input[name="program"]').type(
-      profileDetails.loyaltyProgram.loyaltyNumber
-    );
+    cy.get('.cdk-overlay-container dib-add-loyalty input[name="program"]').type(profileDetails.loyaltyProgram.number);
     cy.get('.cdk-overlay-container dib-add-loyalty ui-button').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Loyalty program saved');
 
-    cy.get('dib-profile dib-account .loyalty-name')
-      .eq(0)
-      .should('contain', profileDetails.loyaltyProgram.loyaltyProgramProvider);
-    cy.get('dib-profile dib-account .loyalty-name')
-      .eq(1)
-      .should('contain', profileDetails.loyaltyProgram.loyaltyNumber);
+    cy.get('dib-profile dib-account .loyalty-name').eq(0).should('contain', profileDetails.loyaltyProgram.provider);
+    cy.get('dib-profile dib-account .loyalty-name').eq(1).should('contain', profileDetails.loyaltyProgram.number);
   });
 
   it('should delete loyalty program', () => {
@@ -335,7 +329,7 @@ describe('Personal Settings - Profile', () => {
     cy.wait('@getMemberships');
 
     cy.get('dib-profile dib-account .loyalty-name')
-      .contains(profileDetails.loyaltyProgram.loyaltyProgramProvider)
+      .contains(profileDetails.loyaltyProgram.provider)
       .parent('.grid-data')
       .next('.grid-button')
       .find('button')
@@ -345,11 +339,9 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Loyalty program successfully deleted');
 
-    // TODO: Revisit this later
-    cy.get('dib-profile dib-account .profile-info .loyalty-program').should(
-      'not.contain',
-      profileDetails.loyaltyProgram.loyaltyProgramProvider
-    );
-    // cy.get('dib-profile dib-account .profile-info').should('not.contain', profileDetails.loyaltyNumber);
+    // TODO: Revisit both tests later
+    // Elements don't have a parent, and we need conditional testing
+    cy.get('dib-profile dib-account .profile-info').should('not.contain', profileDetails.loyaltyProgram.provider);
+    // cy.get('dib-profile dib-account .profile-info').should('not.contain', profileDetails.loyaltyProgram.number);
   });
 });

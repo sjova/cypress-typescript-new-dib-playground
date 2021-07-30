@@ -19,16 +19,16 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
       .contains('Purpose of trip')
       .next('input')
       .clear()
-      .type(referenceFields.purposeOfTrip.purposeOfTripLabel);
+      .type(referenceFields.purposeOfTrip.label);
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip ui-button')
-      .contains(referenceFields.changeLabel.changeLabelButton)
+      .contains(referenceFields.changeLabelCtaButton)
       .click();
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button').contains(' Change ').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
-      referenceFields.purposeOfTrip.purposeOfTripConfirmationMessage
+      referenceFields.purposeOfTrip.confirmationMessage
     );
   });
 
@@ -45,32 +45,32 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
-      referenceFields.purposeOfTrip.purposeOfTripConfirmationMessage
+      referenceFields.purposeOfTrip.confirmationMessage
     );
   });
 
   it('should add a new purpose of trip', () => {
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip ui-button')
-      .contains(referenceFields.purposeOfTrip.addPurposeOfTripButton)
+      .contains(referenceFields.purposeOfTrip.ctaButton)
       .click();
 
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog input[name="purposeOfTripName"]').type(
-      referenceFields.purposeOfTrip.purposeOfTripText
+      referenceFields.purposeOfTrip.name
     );
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog input[name="description"]').type(
-      referenceFields.purposeOfTrip.purposeOfTripDescription
+      referenceFields.purposeOfTrip.description
     );
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog ui-button').contains('save').click();
 
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip').should(
       'contain',
-      referenceFields.purposeOfTrip.purposeOfTripText
+      referenceFields.purposeOfTrip.name
     );
   });
 
   it('should edit purpose of trip', () => {
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip .table-cell h4')
-      .contains(referenceFields.purposeOfTrip.purposeOfTripText)
+      .contains(referenceFields.purposeOfTrip.name)
       .parent('.table-cell')
       .next('.table-cell')
       .next('.button-cell')
@@ -79,18 +79,18 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
 
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog input[name="purposeOfTripName"]')
       .clear()
-      .type(referenceFields.purposeOfTrip.newPurposeOfTrip);
+      .type(referenceFields.purposeOfTrip.modifiedName);
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog ui-button').contains('save').click();
 
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip .grid').should(
       'contain',
-      referenceFields.purposeOfTrip.newPurposeOfTrip
+      referenceFields.purposeOfTrip.modifiedName
     );
   });
 
   it('should delete purpose of trip', () => {
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip .table-cell h4')
-      .contains(referenceFields.purposeOfTrip.newPurposeOfTrip)
+      .contains(referenceFields.purposeOfTrip.modifiedName)
       .parent('.table-cell')
       .next('.table-cell')
       .next('.button-cell')
@@ -99,12 +99,12 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
 
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip .grid').should(
       'not.contain',
-      referenceFields.purposeOfTrip.newPurposeOfTrip
+      referenceFields.purposeOfTrip.modifiedName
     );
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
-      referenceFields.purposeOfTrip.purposeOfTripConfirmationMessage
+      referenceFields.purposeOfTrip.confirmationMessage
     );
   });
 });

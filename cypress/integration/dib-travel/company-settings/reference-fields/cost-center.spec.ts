@@ -15,13 +15,14 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
   });
 
   it('should both check-boxes be checked', () => {
-    cy.get('dib-company-management dib-reference-fields dib-cost-center ui-checkbox :checkbox')
+    cy.get('dib-company-management dib-reference-fields dib-cost-center ui-checkbox input[type="checkbox"]')
+      // Computed size is zero, and we need to use `{ force: true }`
       .uncheck({ force: true })
       .check({ force: true });
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
-      referenceFields.costCenter.costCenterConfirmationMessage
+      referenceFields.costCenter.confirmationMessage
     );
   });
 
@@ -32,7 +33,7 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
-      referenceFields.costCenter.costCenterConfirmationMessage
+      referenceFields.costCenter.confirmationMessage
     );
 
     cy.get('dib-company-management dib-reference-fields dib-cost-center .warning-message')
@@ -58,33 +59,31 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
-      referenceFields.costCenter.costCenterConfirmationMessage
+      referenceFields.costCenter.confirmationMessage
     );
   });
 
-  // it('should check "Make cost centers mandatory in each travel booking" check-box', () => {
-  //   cy.get('dib-company-management dib-reference-fields dib-cost-center .checkbox-label')
-  //     .contains('Make cost centers mandatory in each travel booking')
-  //     .click();
+  it('should check "Make cost centers mandatory in each travel booking" check-box', () => {
+    cy.get('dib-company-management dib-reference-fields dib-cost-center .checkbox-label')
+      .contains('Make cost centers mandatory in each travel booking')
+      .click();
 
-  //   cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-  //     'contain',
-  //     referenceFields.costCenter.costCenterConfirmationMessage
-  //   );
-  // });
-
-  // TODO: Revisit this, since in some cases watning message will not be visible
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'contain',
+      referenceFields.costCenter.confirmationMessage
+    );
+  });
 
   it('should add new cost center', () => {
     cy.get('dib-company-management dib-reference-fields dib-cost-center ui-button')
-      .contains(referenceFields.costCenter.addCostCenterButton)
+      .contains(referenceFields.costCenter.ctaButton)
       .click();
 
     cy.get('.cdk-overlay-container dib-cost-center-dialog input[placeholder="Cost Center Name*"]').type(
-      referenceFields.costCenter.costCenterName
+      referenceFields.costCenter.name
     );
     cy.get('.cdk-overlay-container dib-cost-center-dialog input[placeholder="Cost Center Description"]').type(
-      referenceFields.costCenter.costCenterDescription
+      referenceFields.costCenter.description
     );
 
     cy.get('.cdk-overlay-container dib-cost-center-dialog dib-assign-members .members').contains('QA Bot').click();
@@ -92,13 +91,13 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
 
     cy.get('dib-company-management dib-reference-fields dib-cost-center').should(
       'contain',
-      referenceFields.costCenter.costCenterName
+      referenceFields.costCenter.name
     );
   });
 
   it('should edit cost center', () => {
     cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell h4')
-      .contains(referenceFields.costCenter.costCenterName)
+      .contains(referenceFields.costCenter.name)
       .parent('.table-cell')
       .next('.table-cell')
       .next('.table-cell')
@@ -108,18 +107,18 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
 
     cy.get('.cdk-overlay-container dib-cost-center-dialog input[placeholder="Cost Center Name*"]')
       .clear()
-      .type(referenceFields.costCenter.newCostCenterName);
+      .type(referenceFields.costCenter.modifiedName);
     cy.get('.cdk-overlay-container dib-cost-center-dialog ui-button').contains('save').click();
 
     cy.get('dib-company-management dib-reference-fields dib-cost-center .grid').should(
       'contain',
-      referenceFields.costCenter.newCostCenterName
+      referenceFields.costCenter.modifiedName
     );
   });
 
   it('should delete cost center', () => {
     cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell h4')
-      .contains(referenceFields.costCenter.newCostCenterName)
+      .contains(referenceFields.costCenter.modifiedName)
       .parent('.table-cell')
       .next('.table-cell')
       .next('.table-cell')
@@ -131,7 +130,7 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
 
     cy.get('dib-company-management dib-reference-fields dib-cost-center .grid').should(
       'not.contain',
-      referenceFields.costCenter.newCostCenterName
+      referenceFields.costCenter.modifiedName
     );
   });
 });
