@@ -1,6 +1,6 @@
 {
   "city": "Belgrade",
-  "employeeName": "GROUP",
+  "employeeName": "QA",
   "flightDurationBudgetException": "24",
   "flightFrom": "Belgrad",
   "flightTo": "Stockholm",
@@ -9,8 +9,8 @@
   "trainTo": "Malmö C",
   "travelPolicyBudget": "500",
   "travelPolicyBudgetException": "250",
-  "travelPolicyName": "Travel policy test",
-  "travelPolicyNameUpdate": "Travel policy test (update)",
+  "travelPolicyName": "CY Travel policy test",
+  "travelPolicyModifiedName": "CY Travel policy test (update)",
   "travelPolicyTypeFlight": "FLIGHT",
   "travelPolicyTypeHotel": "HOTEL",
   "travelPolicyTypeTrain": "TRAIN",

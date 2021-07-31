@@ -4,8 +4,8 @@ describe('Company Settings - Travel Policy', () => {
   let travelPolicyForm: TravelPolicy;
 
   before(() => {
-    cy.fixture('company-settings/travel-policy-form').then((travelPolicyFormDetails) => {
-      travelPolicyForm = travelPolicyFormDetails;
+    cy.fixture('company-settings/travel-policy-form').then((travelPolicyFormFixture) => {
+      travelPolicyForm = travelPolicyFormFixture;
     });
   });
 
@@ -16,16 +16,18 @@ describe('Company Settings - Travel Policy', () => {
 
   it('should display travel policy in sidebar menu', () => {
     cy.get('dib-navbar dib-hamburger-icon').click();
-    cy.get('.cdk-overlay-container dib-navbar-panel').contains('Travel Policy ');
+
+    cy.get('.cdk-overlay-container dib-navbar-panel').contains('Travel Policy ').should('exist');
   });
 
-  it('submits empty travel policy form', () => {
+  it('should submit empty travel policy form', () => {
     cy.get('dib-company-management dib-travel-policy ui-button[type=primary]').click();
     cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
+
     cy.get('.cdk-overlay-container dib-travel-policy-dialog').should('be.visible');
   });
 
-  it('creates a new flight travel policy', () => {
+  it('should create flight travel policy', () => {
     cy.get('dib-company-management dib-travel-policy ui-button[type=primary]').click();
     cy.get('.cdk-overlay-container dib-travel-policy-dialog .dib-select').select(
       travelPolicyForm.travelPolicyTypeFlight
@@ -64,26 +66,31 @@ describe('Company Settings - Travel Policy', () => {
     cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=Search]').type(
       travelPolicyForm.employeeName
     );
-    cy.get('.cdk-overlay-container dib-travel-policy-dialog .members').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog label .user')
+      .contains(travelPolicyForm.employeeName)
+      .click();
     cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
+
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
       'contain',
       travelPolicyForm.travelPolicyName
     );
   });
 
-  it('deletes flight travel policy', () => {
+  it('should delete flight travel policy', () => {
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title')
-      .first()
       .contains(travelPolicyForm.travelPolicyName)
       .parents('dib-expandable-item')
       .within(() => {
         return cy.get('ui-button').contains('delete').clickAttached();
       });
+
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
+
+    cy.get('dib-company-management dib-travel-policy .sections dib-expandable-item').should('not.exist');
   });
 
-  it('creates a new hotel travel policy', () => {
+  it('should create hotel travel policy', () => {
     cy.get('dib-company-management dib-travel-policy ui-button[type=primary]').click();
     cy.get('.cdk-overlay-container dib-travel-policy-dialog .dib-select').select(
       travelPolicyForm.travelPolicyTypeHotel
@@ -103,26 +110,31 @@ describe('Company Settings - Travel Policy', () => {
     cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=Search]').type(
       travelPolicyForm.employeeName
     );
-    cy.get('.cdk-overlay-container dib-travel-policy-dialog .members').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog label .user')
+      .contains(travelPolicyForm.employeeName)
+      .click();
     cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
+
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
       'contain',
       travelPolicyForm.travelPolicyName
     );
   });
 
-  it('deletes hotel travel policy', () => {
+  it('should delete hotel travel policy', () => {
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title')
-      .first()
       .contains(travelPolicyForm.travelPolicyName)
       .parents('dib-expandable-item')
       .within(() => {
         return cy.get('ui-button').contains('delete').clickAttached();
       });
+
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
+
+    cy.get('dib-company-management dib-travel-policy .sections dib-expandable-item').should('not.exist');
   });
 
-  it('creates a new train travel policy', () => {
+  it('should create train travel policy', () => {
     cy.get('dib-company-management dib-travel-policy ui-button[type=primary]').click();
     cy.get('.cdk-overlay-container dib-travel-policy-dialog .dib-select').select(
       travelPolicyForm.travelPolicyTypeTrain
@@ -150,8 +162,11 @@ describe('Company Settings - Travel Policy', () => {
     cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=Search]').type(
       travelPolicyForm.employeeName
     );
-    cy.get('.cdk-overlay-container dib-travel-policy-dialog .members').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog label .user')
+      .contains(travelPolicyForm.employeeName)
+      .click();
     cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
+
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
       'contain',
       travelPolicyForm.travelPolicyName
@@ -159,54 +174,63 @@ describe('Company Settings - Travel Policy', () => {
   });
 
   it('should extend form of travel policy and display details', () => {
-    cy.get('dib-company-management dib-travel-policy dib-expandable-item .collapsed .button').first().dblclick();
+    cy.intercept('GET', '/api/secure/v1/travel-policy').as('getTravelPolicy');
+
+    cy.wait('@getTravelPolicy').then(() => {
+      cy.get('dib-company-management dib-travel-policy dib-expandable-item .button').click();
+
+      cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__item').should(
+        'contain',
+        travelPolicyForm.employeeName
+      );
+    });
   });
 
-  it('updates train travel policy', () => {
+  it('should update train travel policy', () => {
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title')
       .contains(travelPolicyForm.travelPolicyName)
-      .first()
       .parents('dib-expandable-item')
       .within(() => {
         return cy.get('ui-button').contains('edit').clickAttached();
       });
+
     cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=Name]')
       .clear()
-      .type(travelPolicyForm.travelPolicyNameUpdate);
+      .type(travelPolicyForm.travelPolicyModifiedName);
     cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
+
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
       'contain',
-      travelPolicyForm.travelPolicyNameUpdate
+      travelPolicyForm.travelPolicyModifiedName
     );
   });
 
-  it('checks cancellation of confirmation dialog', () => {
+  it('should check cancellation of confirmation dialog', () => {
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title')
-      .first()
-      .contains(travelPolicyForm.travelPolicyNameUpdate)
+      .contains(travelPolicyForm.travelPolicyModifiedName)
       .parents('dib-expandable-item')
       .within(() => {
         return cy.get('ui-button').contains('delete').clickAttached();
       });
+
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[cancel=true]').click();
+
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
       'contain',
-      travelPolicyForm.travelPolicyNameUpdate
+      travelPolicyForm.travelPolicyModifiedName
     );
   });
 
-  it('deletes train travel policy', () => {
+  it('should delete train travel policy', () => {
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title')
-      .first()
-      .contains(travelPolicyForm.travelPolicyNameUpdate)
+      .contains(travelPolicyForm.travelPolicyModifiedName)
       .parents('dib-expandable-item')
       .within(() => {
         return cy.get('ui-button').contains('delete').clickAttached();
       });
+
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
-    cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
-      'not.contain',
-      travelPolicyForm.travelPolicyNameUpdate
-    );
+
+    cy.get('dib-company-management dib-travel-policy .sections dib-expandable-item').should('not.exist');
   });
 });

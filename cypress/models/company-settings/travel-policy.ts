@@ -10,7 +10,7 @@ export interface TravelPolicy {
   travelPolicyBudget: string;
   travelPolicyBudgetException: string;
   travelPolicyName: string;
-  travelPolicyNameUpdate: string;
+  travelPolicyModifiedName: string;
   travelPolicyTypeFlight: string;
   travelPolicyTypeHotel: string;
   travelPolicyTypeTrain: string;
