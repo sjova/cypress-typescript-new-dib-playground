@@ -1,7 +1,19 @@
 import { TravelPolicy } from '../../../models';
 
+// TODO: Blocked by issue DT-8412
 describe('Company Settings - Travel Policy', () => {
   let travelPolicyForm: TravelPolicy;
+
+  const deleteTravelPolicyItem = () => {
+    cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title')
+      .contains(travelPolicyForm.travelPolicyName)
+      .parents('dib-expandable-item')
+      .within(() => {
+        return cy.get('ui-button').contains('delete').clickAttached();
+      });
+
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
+  };
 
   before(() => {
     cy.fixture('company-settings/travel-policy-form').then((travelPolicyFormFixture) => {
@@ -78,14 +90,7 @@ describe('Company Settings - Travel Policy', () => {
   });
 
   it('should delete flight travel policy', () => {
-    cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title')
-      .contains(travelPolicyForm.travelPolicyName)
-      .parents('dib-expandable-item')
-      .within(() => {
-        return cy.get('ui-button').contains('delete').clickAttached();
-      });
-
-    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
+    deleteTravelPolicyItem();
 
     cy.get('dib-company-management dib-travel-policy .sections dib-expandable-item').should('not.exist');
   });
@@ -122,14 +127,7 @@ describe('Company Settings - Travel Policy', () => {
   });
 
   it('should delete hotel travel policy', () => {
-    cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title')
-      .contains(travelPolicyForm.travelPolicyName)
-      .parents('dib-expandable-item')
-      .within(() => {
-        return cy.get('ui-button').contains('delete').clickAttached();
-      });
-
-    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
+    deleteTravelPolicyItem();
 
     cy.get('dib-company-management dib-travel-policy .sections dib-expandable-item').should('not.exist');
   });
@@ -222,14 +220,7 @@ describe('Company Settings - Travel Policy', () => {
   });
 
   it('should delete train travel policy', () => {
-    cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title')
-      .contains(travelPolicyForm.travelPolicyModifiedName)
-      .parents('dib-expandable-item')
-      .within(() => {
-        return cy.get('ui-button').contains('delete').clickAttached();
-      });
-
-    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
+    deleteTravelPolicyItem();
 
     cy.get('dib-company-management dib-travel-policy .sections dib-expandable-item').should('not.exist');
   });
