@@ -1,30 +1,17 @@
 export interface ReferenceFields {
-  costCenter: {
-    ctaButton: string;
-    name: string;
-    modifiedName: string;
-    description: string;
-    confirmationMessage: string;
-  };
-  project: {
-    ctaButton: string;
-    name: string;
-    modifiedName: string;
-    description: string;
-    label: string;
-    confirmationMessage: string;
-  };
-  purposeOfTrip: {
-    ctaButton: string;
-    name: string;
-    modifiedName: string;
-    description: string;
-    label: string;
-    confirmationMessage: string;
-  };
-  yourReference: {
-    label: string;
-    confirmationMessage: string;
-  };
+  costCenter: Omit<ReferenceField, 'label'>;
+  project: ReferenceField;
+  purposeOfTrip: ReferenceField;
+  yourReference: Pick<ReferenceField, 'label' | 'confirmationMessage'>;
   changeLabelCtaButton: string;
+  resetToDefaultCtaButton: string;
+}
+
+interface ReferenceField {
+  addActionCtaButton: string;
+  name: string;
+  modifiedName: string;
+  description: string;
+  label: string;
+  confirmationMessage: string;
 }

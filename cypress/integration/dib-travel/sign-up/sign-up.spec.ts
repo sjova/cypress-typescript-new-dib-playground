@@ -52,7 +52,7 @@ describe('Sign Up', () => {
     cy.get('dib-signup ui-autocomplete .error').should('contain', 'Country is required');
   });
 
-  it.only('should display error message when invalid email address is inserted', () => {
+  it('should display error message when invalid email address is inserted', () => {
     const invalidEmail = signUpUser.email.replace('@', '');
 
     cy.get('dib-signup ui-input input[name="firstName"]').type(signUpUser.firstName);

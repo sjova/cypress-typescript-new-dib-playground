@@ -3,6 +3,30 @@ import { ProfileDetails } from '../../../models';
 describe('Personal Settings - Profile', () => {
   let profileDetails: ProfileDetails;
 
+  const clickCtaInsideSection = (sectionLabel: string, ctaButtonLabel?: string) => {
+    if (ctaButtonLabel) {
+      cy.get('dib-profile dib-account .profile-info .profile-info__title')
+        .contains(sectionLabel)
+        .parent('.profile-info__section')
+        .find('ui-button')
+        .contains(ctaButtonLabel)
+        .click();
+    } else {
+      cy.get('dib-profile dib-account .profile-info .profile-info__title')
+        .contains(sectionLabel)
+        .parent('.profile-info__section')
+        .find('ui-button')
+        .click();
+    }
+  };
+
+  const getSection = (sectionLabel: string): Cypress.Chainable<JQuery<HTMLElement>> => {
+    return cy
+      .get('dib-profile dib-account .profile-info .profile-info__title')
+      .contains(sectionLabel)
+      .parent('.profile-info__section');
+  };
+
   before(() => {
     cy.fixture('personal-settings/profile-details').then((profileDetailsFixture) => {
       profileDetails = profileDetailsFixture;
@@ -21,11 +45,7 @@ describe('Personal Settings - Profile', () => {
   });
 
   it('should edit personal info', () => {
-    cy.get('dib-profile dib-account .profile-info .profile-info__title')
-      .contains('Personal info')
-      .parent('.profile-info__section')
-      .find('ui-button')
-      .click();
+    clickCtaInsideSection('Personal info');
 
     cy.get('.cdk-overlay-container ui-form-dialog dib-input input[name="firstName"]')
       .clear()
@@ -46,16 +66,13 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Profile Successfully Updated');
 
-    cy.get('dib-profile dib-account .profile-info .profile-info__title')
-      .contains('Personal info')
-      .parent('.profile-info__section')
-      .within(() => {
-        cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.firstName);
-        cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.lastName);
-        cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.birthDay);
-        cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.birthMonth);
-        cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.birthYear);
-      });
+    getSection('Personal info').within(() => {
+      cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.firstName);
+      cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.lastName);
+      cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.birthDay);
+      cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.birthMonth);
+      cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.birthYear);
+    });
   });
 
   it('should edit contact info', () => {
@@ -63,11 +80,7 @@ describe('Personal Settings - Profile', () => {
 
     cy.wait('@getCountries');
 
-    cy.get('dib-profile dib-account .profile-info .profile-info__title')
-      .contains('Contact info')
-      .parent('.profile-info__section')
-      .find('ui-button')
-      .click();
+    clickCtaInsideSection('Contact info');
 
     cy.get('.cdk-overlay-container ui-form-dialog dib-input input[name="address1"]')
       .clear()
@@ -91,24 +104,17 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Profile Successfully Updated');
 
-    cy.get('dib-profile dib-account .profile-info .profile-info__title')
-      .contains('Contact info')
-      .parent('.profile-info__section')
-      .within(() => {
-        cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.address);
-        cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.city);
-        cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.zipCode);
-        cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.country);
-        cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.phoneNumber);
-      });
+    getSection('Contact info').within(() => {
+      cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.address);
+      cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.city);
+      cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.zipCode);
+      cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.country);
+      cy.get('.profile-info__row').should('contain', profileDetails.contactInfo.phoneNumber);
+    });
   });
 
   it('should edit localize (language & currency)', () => {
-    cy.get('dib-profile dib-account .profile-info .profile-info__title')
-      .contains('Localize')
-      .parent('.profile-info__section')
-      .find('ui-button')
-      .click();
+    clickCtaInsideSection('Localize');
 
     cy.get('.cdk-overlay-container ui-form-dialog language-picker').click();
     cy.get('.cdk-overlay-container ui-form-dialog language-picker .picker .opinional-language')
@@ -122,22 +128,14 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Profile Successfully Updated');
 
-    cy.get('dib-profile dib-account .profile-info .profile-info__title')
-      .contains('Localize')
-      .parent('.profile-info__section')
-      .within(() => {
-        cy.get('.profile-info__row').should('contain', profileDetails.localize.language);
-        cy.get('.profile-info__row').should('contain', profileDetails.localize.currency);
-      });
+    getSection('Localize').within(() => {
+      cy.get('.profile-info__row').should('contain', profileDetails.localize.language);
+      cy.get('.profile-info__row').should('contain', profileDetails.localize.currency);
+    });
   });
 
   it('should change email address', () => {
-    cy.get('dib-profile dib-account .profile-info .profile-info__title')
-      .contains('email & password')
-      .parent('.profile-info__section')
-      .find('ui-button')
-      .contains('edit email')
-      .click();
+    clickCtaInsideSection('email & password', 'edit email');
 
     cy.get('.cdk-overlay-container dib-change-email input[name="email"]')
       .clear()
@@ -149,20 +147,11 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Email Successfully Updated');
 
-    cy.get('dib-profile dib-account .profile-info .profile-info__title')
-      .contains('email & password')
-      .parent('.profile-info__section')
-      .find('.profile-info__row')
-      .should('contain', profileDetails.emailAndPassword.email);
+    getSection('email & password').find('.profile-info__row').should('contain', profileDetails.emailAndPassword.email);
   });
 
   it('should change password', () => {
-    cy.get('dib-profile dib-account .profile-info .profile-info__title')
-      .contains('email & password')
-      .parent('.profile-info__section')
-      .find('ui-button')
-      .contains('edit password')
-      .click();
+    clickCtaInsideSection('email & password', 'edit password');
 
     cy.get('.cdk-overlay-container change-password input[name="password"]')
       .clear()
@@ -203,7 +192,7 @@ describe('Personal Settings - Profile', () => {
       profileDetails.personalInfo.lastName
     );
 
-    cy.get('.cdk-overlay-container dib-travel-document-dialog  dib-input-label .dib-label')
+    cy.get('.cdk-overlay-container dib-travel-document-dialog dib-input-label .dib-label')
       .contains('Date of birth*')
       .parent('dib-input-label')
       .next('ui-date-wrapper')
@@ -227,7 +216,7 @@ describe('Personal Settings - Profile', () => {
       .contains(profileDetails.travelDocuments.issuingCountry)
       .click();
 
-    cy.get('.cdk-overlay-container dib-travel-document-dialog  dib-input-label .dib-label')
+    cy.get('.cdk-overlay-container dib-travel-document-dialog dib-input-label .dib-label')
       .contains('Expiry date*')
       .parent('dib-input-label')
       .next('ui-date-wrapper')
@@ -339,7 +328,7 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Loyalty program successfully deleted');
 
-    // TODO: Revisit both tests later
+    // TODO: Revisit both tests later (blocked with `cy.waitUntilAngularReady()`)
     // Elements don't have a parent, and we need conditional testing
     cy.get('dib-profile dib-account .profile-info').should('not.contain', profileDetails.loyaltyProgram.provider);
     // cy.get('dib-profile dib-account .profile-info').should('not.contain', profileDetails.loyaltyProgram.number);

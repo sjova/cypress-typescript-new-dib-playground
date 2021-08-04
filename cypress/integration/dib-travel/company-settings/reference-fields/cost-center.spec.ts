@@ -45,7 +45,7 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
 
   // TODO: Uncomment when bug is fixed (DT-8477)
   /*it('should verify that error message is displayed', () => {
-      cy.get('dib-company-management dib-reference-fields  dib-cost-center .warning-message')
+      cy.get('dib-company-management dib-reference-fields dib-cost-center .warning-message')
       .should('not.be.visible')
       .contains(
         'If you uncheck this box, and have not assigned any cost center to an employee, they will not be able to complete their trip booking if cost centers are set as mandatory '
@@ -75,8 +75,8 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
   });
 
   it('should add new cost center', () => {
-    cy.get('dib-company-management dib-reference-fields dib-cost-center ui-button')
-      .contains(referenceFields.costCenter.ctaButton)
+    cy.get('dib-company-management dib-reference-fields dib-cost-center ui-button[size="large"]')
+      .contains(referenceFields.costCenter.addActionCtaButton)
       .click();
 
     cy.get('.cdk-overlay-container dib-cost-center-dialog input[placeholder="Cost Center Name*"]').type(

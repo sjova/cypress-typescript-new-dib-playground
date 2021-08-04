@@ -2,8 +2,8 @@
 
 import { User } from './user';
 export interface DibTravelAccounts {
-  agentAccount: User;
-  defaultAccount: User;
-  invalidAccount: User;
-  signUpAccount: User;
+  agentAccount: Pick<User, 'email' | 'password'>;
+  defaultAccount: Pick<User, 'email' | 'password'>;
+  invalidAccount: Pick<User, 'email' | 'password'>;
+  signUpAccount: Pick<User, 'email' | 'password'>;
 }

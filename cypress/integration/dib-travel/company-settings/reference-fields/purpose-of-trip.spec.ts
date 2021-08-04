@@ -34,7 +34,9 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
 
   // TODO: Uncomment when the bug is fixed (DT-8476)
   /* it('should reset to default fields label', () => {
-    cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip').contains('Reset to default').click();
+    cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip ui-button[outline="true"]')
+      .contains(referenceFields.resetToDefaultCtaButton)
+      .click();
     // TODO: missing `.should()`
   }); */
 
@@ -50,8 +52,8 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
   });
 
   it('should add a new purpose of trip', () => {
-    cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip ui-button')
-      .contains(referenceFields.purposeOfTrip.ctaButton)
+    cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip ui-button[size="large"]')
+      .contains(referenceFields.purposeOfTrip.addActionCtaButton)
       .click();
 
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog input[name="purposeOfTripName"]').type(

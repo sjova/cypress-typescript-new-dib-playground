@@ -32,7 +32,7 @@ describe('Company Settings - Reference Fields - Project', () => {
       .clear()
       .type(referenceFields.project.label);
 
-    cy.get('dib-company-management dib-reference-fields dib-project ui-button')
+    cy.get('dib-company-management dib-reference-fields dib-project ui-button[outline="true"]')
       .contains(referenceFields.changeLabelCtaButton)
       .click();
 
@@ -46,13 +46,15 @@ describe('Company Settings - Reference Fields - Project', () => {
 
   // TODO: Uncomment when the bug is fixed (DT-8476)
   /* it('should reset to default fields label', () => {
-    cy.get('dib-company-management dib-reference-fields  dib-project ui-button').contains('Reset to default').click();
+    cy.get('dib-company-management dib-reference-fields dib-project ui-button[outline="true"]')
+      .contains(referenceFields.resetToDefaultCtaButton)
+      .click();
     // TODO: missing `.should()`
   }); */
 
   it('should add a new project', () => {
-    cy.get('dib-company-management dib-reference-fields dib-project ui-button')
-      .contains(referenceFields.project.ctaButton)
+    cy.get('dib-company-management dib-reference-fields dib-project ui-button[size="large"]')
+      .contains(referenceFields.project.addActionCtaButton)
       .click();
 
     cy.get('.cdk-overlay-container dib-project-dialog input[name="projectName"]').type(referenceFields.project.name);

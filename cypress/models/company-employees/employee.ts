@@ -1,7 +1,6 @@
-export interface Employee {
-  firstName: string;
-  lastName: string;
-  email: string;
+import { User } from '../user';
+
+export interface Employee extends Omit<User, 'password'> {
   modifiedFirstName: string;
   modifiedLastName: string;
 }

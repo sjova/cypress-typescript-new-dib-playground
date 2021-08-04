@@ -34,7 +34,9 @@ describe('Company Settings - Reference Fields - Your Reference', () => {
 
   // TODO: Uncomment when the bug is fixed (DT-8476)
   /* it('should reset to default fields label', () => {
-    cy.get('dib-company-management dib-reference-fields dib-your-reference').contains('Reset to default').click();
+    cy.get('dib-company-management dib-reference-fields dib-your-reference ui-button[outline="true"]')
+      .contains(referenceFields.resetToDefaultCtaButton)
+      .click();
     // TODO: missing `.should()`
   }); */
 

@@ -1,30 +1,31 @@
 {
   "costCenter": {
-    "ctaButton": "Add cost center",
+    "addActionCtaButton": "Add cost center",
     "name": "Cost Center Name",
     "modifiedName": "Modified Cost Center Name",
     "description": "Cost Center Description",
     "confirmationMessage": "Settings updated"
   },
   "project": {
-    "ctaButton": "Add project",
+    "addActionCtaButton": "Add project",
     "name": "Project Name",
     "modifiedName": "Modified Project Name",
     "description": "Project Description",
-    "label": "Changed Project Label",
+    "label": "Modified Project Label",
     "confirmationMessage": "Project successfully saved."
   },
   "purposeOfTrip": {
-    "ctaButton": "Add purpose of trip",
-    "name": "Purpose of trip is",
-    "modifiedName": "Modified Purpose of trip is",
-    "description": "Purpose of trip Description",
-    "label": "Changed Purpose of trip Label",
+    "addActionCtaButton": "Add purpose of trip",
+    "name": "Purpose Of Trip Name",
+    "modifiedName": "Modified Purpose Of Trip Name",
+    "description": "Purpose Of Trip Description",
+    "label": "Modified Purpose Of Trip Label",
     "confirmationMessage": "Purpose of trip successfully saved."
   },
   "yourReference": {
-    "label": "Changed Reference field Label",
+    "label": "Modified Your Reference Label",
     "confirmationMessage": "Your reference successfully saved."
   },
-  "changeLabelCtaButton": "Change label"
+  "changeLabelCtaButton": "Change label",
+  "resetToDefaultCtaButton": "Reset to default"
 }

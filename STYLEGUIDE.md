@@ -41,6 +41,8 @@
 - Please always define the method in the intercept command (ex. `cy.intercept('GET', '/api/employees'`)
 - Please use "short" imports, since we're using `index.ts`
 - Please use "fixture" suffix (ex. `fooFixture`)
+- Please use `ctaButton` suffix when needed (CTA = Call-To-Action)
+- Please use TypeScript Utility Types when needed (ex. `Partial<Type>`, `Pick<Type, Keys>`, `Omit<Type, Keys>`)
 - Each `it` block should have at least one `.should` block (where you confirm something)
 - Please note the difference between `.parent()` and `.parents() commands
 - Whenever you use the traversal commands (`.find()`, `.parent()`, `.next()`, etc.), please use some selector inside of command. If you can't find a good selector, use HTML elements at least to confirm the current layout
@@ -91,6 +93,7 @@ Before you create PR or before you push changes in your PR, please make sure tha
 - Confirm that you're covering all requirements for the specific feature
 - Double-check the whole user flow for the specific feature, and re-think if you missed covering some functionality with tests.
 - Please don't include sensitive data (ex. passwords, API tokens, etc.) in your commits
+- Don't forget to remove `.only` and `.skip` from your tests.
 - Make sure that you're using the best possible selectors in your tests
 - Please skip time-consuming Cypress commands whenever is possible
 - When querying elements, try to stick with `.get()` and meaningful selector
@@ -100,6 +103,6 @@ Before you create PR or before you push changes in your PR, please make sure tha
 - Please confirm your tests in Cypress Test Runner
 - Pull latest changes from the source branch
 - Please add a descriptive title and description when creating PR
-- Confirm tests in Chrome and Electron (headless) browsers
+- Confirm your tests in Test Runner (Chrome and Electron) and run your tests headlessly (Electron) at least once
 - Execute tests at least three times
 - If the error(s) occurs randomly, it should be corrected

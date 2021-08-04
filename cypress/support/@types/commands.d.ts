@@ -156,7 +156,7 @@ declare global {
        * @example
        *    cy.typeLogin({ email: 'petar.petrovic@dibtravel.com', password: 'Secret1' })
        */
-      typeLogin(user: User): void;
+      typeLogin(user: Pick<User, 'email' | 'password'>): void;
     }
   }
 }
