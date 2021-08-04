@@ -7,19 +7,21 @@ describe('Company Settings - Payment Method', () => {
   });
 
   // TODO: This is only demo example
+  // Please don't modify or delete this block for now
   it('should access iframes on the page', () => {
     const cardNumber = '4444333322221111';
     const mmYy = '0129';
     const cvc = '123';
 
-    cy.get('dib-company-management dib-payment-method ui-button[type="primary"] button').click();
+    cy.get('dib-company-management dib-payment-method ui-button[type="primary"]').click();
 
     cy.get('.cdk-overlay-container dib-dialog-wrapper dib-add-credit-card-dialog .dib-dialog-form-section')
       .contains('CREDIT CARD DETAILS')
       .next('.StripeElement')
-      .within(() => {
-        cy.get('iframe').switchToIframe().find('.CardNumberField input[name="cardnumber"]').type(cardNumber);
-      });
+      .find('iframe')
+      .switchToIframe()
+      .find('.CardNumberField input[name="cardnumber"]')
+      .type(cardNumber);
 
     cy.get('.cdk-overlay-container dib-dialog-wrapper dib-add-credit-card-dialog .card-expiry iframe')
       .switchToIframe()

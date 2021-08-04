@@ -24,11 +24,11 @@ describe('Company Employees - Groups (User)', () => {
     cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
 
     cy.wait('@getCorporationsEmployees').then(() => {
-      cy.get('dib-people-management dib-groups ui-button button').contains('Add Group').click();
+      cy.get('dib-people-management dib-groups ui-button').contains('Add Group').click();
 
       cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="group name*"]').type(group.name);
       cy.get('.cdk-overlay-container dib-group-dialog dib-assign-members .member').click();
-      cy.get('.cdk-overlay-container dib-group-dialog ui-button button').contains('save').click();
+      cy.get('.cdk-overlay-container dib-group-dialog ui-button').contains('save').click();
 
       cy.get('dib-people-management dib-groups dib-expandable-item').should('contain', group.name);
     });
@@ -44,7 +44,7 @@ describe('Company Employees - Groups (User)', () => {
       .clickAttached();
 
     cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="group name*"]').clear().type(group.modifiedName);
-    cy.get('.cdk-overlay-container dib-group-dialog ui-button button').contains('save').click();
+    cy.get('.cdk-overlay-container dib-group-dialog ui-button').contains('save').click();
 
     cy.get('dib-people-management dib-groups dib-expandable-item').should('contain', group.modifiedName);
   });
@@ -58,7 +58,7 @@ describe('Company Employees - Groups (User)', () => {
       .contains('delete')
       .clickAttached();
 
-    cy.get('.cdk-overlay-container confirmation-dialog ui-button button').contains('Delete').click();
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button').contains('Delete').click();
   });
 
   it('should confirm that the group no longer exists', () => {

@@ -1,6 +1,6 @@
 # Pull Request Review Checklist
 
-- Confirm tests in Chrome and Electron (headless) browsers (at least these two, other browsers are optional)
+- Confirm your tests in Test Runner (Chrome and Electron) and run your tests headlessly (Electron) at least once
 - Confirm that environment is error-free
 - Double-check feature requirements and description
 - Execute tests at least three times
