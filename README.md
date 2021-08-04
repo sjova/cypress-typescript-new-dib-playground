@@ -103,6 +103,15 @@ We will use `describe()` and `it()` in our tests.
  */
 ```
 
+## Electron Headless Testing Examples
+
+- `yarn cy:spec cypress/integration/dib-travel/<parent-feature>/<sub-feature>.spec.ts` - run single feature test headlessly
+- `yarn cy:spec cypress/integration/dib-travel/<parent-feature>/<sub-feature>/<nested-feature>.spec.ts` - run single nested test headlessly
+- `yarn cy:spec cypress/integration/dib-travel/<parent-feature>/*.spec.ts` - run all feature tests headlessly
+- `yarn cy:spec cypress/integration/dib-travel/<parent-feature>/**/*.spec.ts` - run all feature and nested tests headlessly
+- `yarn cy:run:dib` - run all DIB tests headlessly
+- `yarn cy:run:dib:iframe`- run all DIB Iframe tests headlessly
+
 ## Globs
 
 Glob patterns specify sets of filenames with wildcard characters.
@@ -145,11 +154,67 @@ Here, the glob is appropriately restricted to the `scripts/` directory. It will 
 
 ## DIB Travel Accounts
 
-DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accounts.json`. This fixture is stored externally.
+DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accounts.json`. The interface (type) for this fixture is located here: `cypress/models/dib-travel-accounts.ts` (this fixture is stored externally). And these two files should not be modified.
 
 ## Cypress Config Notes
 
-- `"waitForAnimations": false` - revisit this later
+- `"defaultCommandTimeout": 8000` - revisit this later when we speed up the front-end Angular application
+- `"requestTimeout": 10000` - revisit this later when we speed up the front-end Angular application
+- `"chromeWebSecurity": false` - revisit this later, reference: [Iframe Support (Work in progress)](https://github.com/cypress-io/cypress/issues/136)
+
+## ToDo Decision
+
+- `dib-foo ui-button button` vs. `dib-foo ui-button`
+- `dib-foo ui-input input` vs. `dib-foo ui-input`
+
+# Local Playground
+
+You can use the local playground to clarify or fully understand any Cypress command with a custom HTML structure.
+
+First, install globally [lite-server](https://www.npmjs.com/package/lite-server).
+
+Next, create an external `index.html` file. Example:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local Playground</title>
+  </head>
+  <body>
+    <div data-test-id="test-example" class="example">
+      <button id="query-btn" class="query-btn btn btn-primary">Button</button>
+    </div>
+  </body>
+</html>
+```
+
+And from the same folder, run the `lite server` command. Your local `index.html` file will be available at this address: [http://localhost:3000/](http://localhost:3000/).
+
+After this step, you can write your test for specific HTML structure from your local playground. Example:
+
+```ts
+describe('Local Playground - Querying', () => {
+  it('should demonstrate get in local playground', () => {
+    cy.visit('http://localhost:3000/');
+
+    cy.get('#query-btn').should('contain', 'Button');
+    cy.get('.query-btn').should('contain', 'Button');
+
+    cy.get('[data-test-id="test-example"]').should('have.class', 'example');
+    cy.get('[data-test-id="test-example"]').invoke('attr', 'data-test-id').should('equal', 'test-example');
+
+    cy.get('[data-test-id="test-example"]').invoke('css', 'position').should('equal', 'static');
+
+    cy.get('[data-test-id="test-example"]')
+      .should('have.attr', 'data-test-id', 'test-example')
+      .and('have.css', 'position', 'static');
+  });
+});
+```
 
 ## Useful Docs
 
@@ -157,7 +222,7 @@ DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accoun
 
   - [Installing Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress)
   - [Writing Your First Test](https://docs.cypress.io/guides/getting-started/writing-your-first-test)
-  - [Testing Your App](https://docs.cypress.io/guides/getting-started/testing-your-app#Get-started)
+  - [Testing Your App](https://docs.cypress.io/guides/getting-started/testing-your-app)
 
 - Tooling
 
@@ -167,7 +232,8 @@ DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accoun
 - Core Concepts
 
   - [Writing and Organizing Tests](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests)
-  - [The Test Runner](https://docs.cypress.io/guides/core-concepts/test-runner#Overview)
+  - [Conditional Testing](https://docs.cypress.io/guides/core-concepts/conditional-testing)
+  - [The Test Runner](https://docs.cypress.io/guides/core-concepts/test-runner)
 
 - Guides
 
@@ -180,5 +246,9 @@ DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accoun
   - [Bundled Tools](https://docs.cypress.io/guides/references/bundled-tools)
   - [Error Messages](https://docs.cypress.io/guides/references/error-messages)
 
+- **[Kitchen Sink](https://example.cypress.io/)**
 - **[Recipes](https://docs.cypress.io/examples/examples/recipes)**
 - **[FAQ Using Cypress](https://docs.cypress.io/faq/questions/using-cypress-faq)**
+- [API](https://docs.cypress.io/api/table-of-contents)
+- [Mocha](https://mochajs.org/)
+- [Chai](https://www.chaijs.com/)

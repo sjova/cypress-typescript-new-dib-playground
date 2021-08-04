@@ -68,13 +68,17 @@
 
 - [OTHER](https://develop--dib-travel.netlify.app/<todo>) - `TBD`
 
-## PRODUCTS PICKER (HOME MAIN NAVIGATION)
+## PRODUCTS PICKER (HOME CENTRAL NAVIGATION)
 
 - `dib-navbar`
 
-## MAIN NAVIGATION ICON (HAMBURGER ICON)
+## MAIN SIDEBAR NAVIGATION ICON (HAMBURGER ICON)
 
 - `dib-navbar dib-hamburger-icon`
+
+## MAIN SIDEBAR NAVIGATION
+
+- `.cdk-overlay-container dib-navbar-panel`
 
 ## COOKIES POPUP
 

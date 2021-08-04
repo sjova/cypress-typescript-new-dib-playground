@@ -11,31 +11,49 @@
 - Please use only this file extension for test files: `*.spec.ts`
 - Please use dash-case for file naming (ex. `foo-something.spec.ts`)
 - Please use the descriptive file naming
+- If you need a prefix in naming, please use "cy"
+- Ideally, when you read `objectname.propertyName`, it should sound meaningful
 - Please use camelCase for variable naming (ex. `myVariableName`)
 - **Mocha** `describe` title should start with a capital letter
 - **Mocha** `it` title should start with a lowercase letter (_it_ and _descriptive title_ together should have a meaningful meaning)
 - The KISS principle (keep it simple, stupid)
 - The DRY principle (do not repeat yourself)
 - Please separate each meaningful code block with a new line (for better code readability)
+  - ex. imports, `describe`, variables, `before/beforeEach`, `it` block, selectors/actions, page selectors, dialog selectors, `should` block, other meaningful unit/block, etc.
 - Please use a separate folder for tests of each feature
 - Please do not use abbreviations in your code
 - Please sort all relevant items in the code in alphabetical order (A-Z order).
 - For readability, we're using 120 characters as a maximum line length
 - Please use single quotes over double quotes
-- Please reuse repeatable code (model, function, Cypress command, etc.)
+- Please reuse repeatable code (data model, function, test case, Cypress command etc.)
 - Please define the TypeScript interface for each data model (export and reuse same if needed)
+- Instead of a long list of items in the single data model, please group meaningful groups whenever possible
+- Please use appropriate JS/TS comments (`//` - Single Line Comments, `/* ... */` - Multi-line Comments)
 - Add meaningful comments to describe your code
 - Add TODO comment for temp. unused or unfinished code and map with Jira/Issues board (ex. `// TODO: Foo description (DT-1234)`)
 - Simplify extensive (large function/code block) business logic into smaller chunks
 - Add multiple assertions and don't worry about it
 - Use existing Cypress commands that are already written instead of creating more
+- Please don't use too many selectors for one single element
 - Try to login as users with different permissions instead of a superuser that has all permissions
 - Please try to use at least these selectors: `feature/parent-selector middle/control-selector main/children-selector`
+- Please be consistent with your changes (code, naming, etc.), especially within the same group/unit/test.
+- Please always define the method in the intercept command (ex. `cy.intercept('GET', '/api/employees'`)
+- Please use "short" imports, since we're using `index.ts`
+- Please use "fixture" suffix (ex. `fooFixture`)
+- Please use `ctaButton` suffix when needed (CTA = Call-To-Action)
+- Please use TypeScript Utility Types when needed (ex. `Partial<Type>`, `Pick<Type, Keys>`, `Omit<Type, Keys>`)
+- Each `it` block should have at least one `.should` block (where you confirm something)
+- Please note the difference between `.parent()` and `.parents() commands
+- Whenever you use the traversal commands (`.find()`, `.parent()`, `.next()`, etc.), please use some selector inside of command. If you can't find a good selector, use HTML elements at least to confirm the current layout
+- In a dilemma between `.find()` and `.within()` commands, please use `.find()` for a single inner selector and `.within()` for more than one inner selectors
+- When you're using `.contains()` command, please reduce searchable HTML scope as much as possible (use additional selectors or other commands)
 - Whenever possible, don't use **Angular** elements as a selector (example prefixes: `ng*`, `ng-*` and `routerLink`)
 - Whenever possible, don't use **Angular Material** elements as a selector (example prefixes: `mat*`, `mat-*`)
 - Mock or control test data as much as possible (JSON data)
 - Tests should always be able to be run independently and still pass
 - Clean up state before tests run (not after)
+- If the test failed during test development, please manually clean up test data from the environment
 - Use API route aliases or assertions to guard Cypress from proceeding until an explicit condition is met (don't use `.wait()`)
 - Don't limit yourself to trying to act like a user
 - Practice PR Code Review in all seniority directions (Senior -> Junior, Junior -> Senior, and all variations between)
@@ -73,7 +91,9 @@ Before you create PR or before you push changes in your PR, please make sure tha
 
 - Make sure that you fully follow the above-defined Coding Style Guide
 - Confirm that you're covering all requirements for the specific feature
+- Double-check the whole user flow for the specific feature, and re-think if you missed covering some functionality with tests.
 - Please don't include sensitive data (ex. passwords, API tokens, etc.) in your commits
+- Don't forget to remove `.only` and `.skip` from your tests.
 - Make sure that you're using the best possible selectors in your tests
 - Please skip time-consuming Cypress commands whenever is possible
 - When querying elements, try to stick with `.get()` and meaningful selector
@@ -83,6 +103,6 @@ Before you create PR or before you push changes in your PR, please make sure tha
 - Please confirm your tests in Cypress Test Runner
 - Pull latest changes from the source branch
 - Please add a descriptive title and description when creating PR
-- Confirm tests in Chrome and Electron (headless) browsers
+- Confirm your tests in Test Runner (Chrome and Electron) and run your tests headlessly (Electron) at least once
 - Execute tests at least three times
 - If the error(s) occurs randomly, it should be corrected

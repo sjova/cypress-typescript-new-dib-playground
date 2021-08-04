@@ -1,7 +1,7 @@
 // Reference: https://docs.cypress.io/guides/getting-started/writing-your-first-test#Write-a-real-test
 
 describe('The Kitchen Sink', () => {
-  it('Gets, types and asserts', () => {
+  it('should demonstrate gets, types, and asserts', () => {
     // Visits the Kitchen Sink
     cy.visit('https://example.cypress.io/');
 

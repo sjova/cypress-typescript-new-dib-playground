@@ -1,1 +1,1 @@
-export * from './get-sign-up-email-with-hash';
+export * from './get-email-with-hash';

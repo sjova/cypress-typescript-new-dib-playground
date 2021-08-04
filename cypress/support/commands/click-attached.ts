@@ -5,9 +5,12 @@
  * Here we use JQuery `.trigger('click')` right after ensuring the element is attached.
  * Note that we no longer use the original cypress `.click()` API.
  */
-export const clickAttached = (subject: HTMLElement): Cypress.Chainable<JQuery<HTMLElement>> =>
-  cy.wrap(subject).should(($el) => {
+export const clickAttached = (subject: HTMLElement): Cypress.Chainable<JQuery<HTMLElement>> => {
+  cy.log('clickAttached');
+
+  return cy.wrap(subject, { log: false }).should(($el) => {
     expect(Cypress.dom.isAttached($el)).to.be.true;
 
     return $el.trigger('click');
   });
+};
