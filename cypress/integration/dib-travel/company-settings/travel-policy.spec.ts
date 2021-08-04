@@ -16,8 +16,8 @@ describe('Company Settings - Travel Policy', () => {
   };
 
   before(() => {
-    cy.fixture('company-settings/travel-policy-form').then((travelPolicyFormFixture) => {
-      travelPolicyForm = travelPolicyFormFixture;
+    cy.fixture('company-settings/travel-policy-form').then((travelPolicyFixture) => {
+      travelPolicyForm = travelPolicyFixture;
     });
   });
 
