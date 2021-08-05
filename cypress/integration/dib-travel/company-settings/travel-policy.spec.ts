@@ -1,6 +1,5 @@
 import { TravelPolicy } from '../../../models';
 
-// TODO: Blocked by issue DT-8412
 describe('Company Settings - Travel Policy', () => {
   let travelPolicyForm: TravelPolicy;
 
