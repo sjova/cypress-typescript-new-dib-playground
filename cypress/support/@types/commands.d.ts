@@ -157,6 +157,18 @@ declare global {
        *    cy.typeLogin({ email: 'petar.petrovic@dibtravel.com', password: 'Secret1' })
        */
       typeLogin(user: Pick<User, 'email' | 'password'>): void;
+
+      /**
+       * Wait for Angular until it becomes ready
+       *
+       * @example
+       *    cy.waitForAngular()
+       *
+       *    cy.get('dib-parent').waitForAngular().find('dib-children')
+       *
+       *    cy.get('dib-parent').waitForAngular().within(() => { cy.get('dib-children') });
+       */
+      waitForAngular(): Cypress.Chainable<unknown>;
     }
   }
 }
