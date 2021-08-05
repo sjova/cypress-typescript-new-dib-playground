@@ -9,6 +9,7 @@
 
 export const switchToIframe = (iframeSelector: string): Cypress.Chainable<JQuery<HTMLElement>> => {
   // get the `iframe > document > body`, and retry until the body element is not empty
+
   cy.log('switchToIframe');
 
   return (

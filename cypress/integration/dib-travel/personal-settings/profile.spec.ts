@@ -328,9 +328,7 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Loyalty program successfully deleted');
 
-    // TODO: Revisit both tests later (blocked with `cy.waitUntilAngularReady()`)
-    // Elements don't have a parent, and we need conditional testing
+    cy.get('dib-profile dib-account .profile-info .loyalty-program__grid').should('not.exist');
     cy.get('dib-profile dib-account .profile-info').should('not.contain', profileDetails.loyaltyProgram.provider);
-    // cy.get('dib-profile dib-account .profile-info').should('not.contain', profileDetails.loyaltyProgram.number);
   });
 });
