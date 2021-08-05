@@ -1,7 +1,6 @@
 import { ApprovalProcess } from '../../../models';
 import { Group } from '../../../models';
 
-// TODO: Blocked by issue DT-8412
 describe('Company Settings - Approval Process', () => {
   let approvalForm: ApprovalProcess;
   let group: Group;
