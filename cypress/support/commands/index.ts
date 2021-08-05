@@ -10,3 +10,4 @@ export * from './login';
 export * from './set-session-storage';
 export * from './switch-to-iframe';
 export * from './type-login';
+export * from './wait-for-angular';
