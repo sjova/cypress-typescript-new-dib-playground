@@ -5,7 +5,9 @@ describe('Company Settings - Approval Process', () => {
   let approvalForm: ApprovalProcess;
   let group: Group;
 
+  const travelPolicyLink = '/company-management/travel-policy';
   const groupLink = '/people-management/groups';
+
   const deleteApprovalProcessItem = () => {
     cy.get('dib-company-management dib-approval-process dib-approval-process-item')
       .contains(approvalForm.approvalProcessFor)
@@ -68,6 +70,19 @@ describe('Company Settings - Approval Process', () => {
     });
   });
 
+  // TODO: This will be solved the same as Groups
+  it('should create travel policy for approval process', () => {
+    cy.visit(travelPolicyLink);
+    cy.get('dib-company-management dib-travel-policy ui-button[type=primary]').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog .dib-select').select(approvalForm.travelPolicyType);
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=name]').type(approvalForm.travelPolicyName);
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
+
+    cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
+      'contain',
+      approvalForm.travelPolicyName
+    );
+  });
   it('should create approval process (exception from travel policy)', () => {
     cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
     cy.get('.cdk-overlay-container dib-approval-process-dialog dib-input')
@@ -179,5 +194,20 @@ describe('Company Settings - Approval Process', () => {
       'contain',
       'You have not yet created any groups.'
     );
+  });
+
+  // TODO: This will be solved the same as Groups
+  it('should delete travel policy for approval process', () => {
+    cy.visit(travelPolicyLink);
+    cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title')
+      .contains(approvalForm.travelPolicyName)
+      .parents('dib-expandable-item')
+      .within(() => {
+        return cy.get('ui-button').contains('delete').clickAttached();
+      });
+
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
+
+    cy.get('dib-company-management dib-travel-policy .sections dib-expandable-item').should('not.exist');
   });
 });
