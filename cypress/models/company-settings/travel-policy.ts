@@ -1,18 +1,37 @@
+import { User } from '../user';
+
 export interface TravelPolicy {
-  city: string;
-  employeeName: string;
-  flightDurationBudgetException: string;
-  flightFrom: string;
-  flightTo: string;
+  flight: Flight;
+  hotel: Hotel;
+  train: Train;
+  sharedDetails: SharedDetails;
+  employee: Pick<User, 'firstName' | 'lastName' | 'email'>;
+}
+
+export interface SharedDetails {
+  name: string;
+  modifiedName: string;
   numberOfDaysInAdvance: string;
-  trainFrom: string;
-  trainTo: string;
-  travelPolicyBudget: string;
-  travelPolicyBudgetException: string;
-  travelPolicyName: string;
-  travelPolicyModifiedName: string;
-  travelPolicyTypeFlight: string;
-  travelPolicyTypeHotel: string;
-  travelPolicyTypeTrain: string;
-  typeOfTrip: string;
+  budget: string;
+}
+
+interface Base {
+  type: string;
+}
+
+interface Flight extends Base {
+  budgetException: string;
+  durationBudgetException: string;
+  from: string;
+  to: string;
+  ticketType: string;
+}
+
+interface Hotel extends Base {
+  city: string;
+}
+
+interface Train extends Base {
+  from: string;
+  to: string;
 }

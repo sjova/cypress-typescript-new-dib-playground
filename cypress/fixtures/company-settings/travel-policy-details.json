@@ -1,0 +1,30 @@
+{
+  "flight": {
+    "type": "FLIGHT",
+    "budgetException": "250",
+    "from": "Belgrad",
+    "to": "Stockholm",
+    "ticketType": "One way",
+    "durationBudgetException": "24"
+  },
+  "hotel": {
+    "type": "HOTEL",
+    "city": "Belgrade"
+  },
+  "train": {
+    "type": "TRAIN",
+    "from": "Stockholm Central",
+    "to": "Malmö C"
+  },
+  "sharedDetails": {
+    "name": "CY Travel Policy Test",
+    "modifiedName": "CY Modified Travel Tolicy Test",
+    "numberOfDaysInAdvance": "2",
+    "budget": "500"
+  },
+  "employee": {
+    "firstName": "QA",
+    "lastName": "Bot",
+    "email": "qa.tools@dibtravel.com"
+  }
+}

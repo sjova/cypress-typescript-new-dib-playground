@@ -17,7 +17,7 @@ describe('Company Employees - Employees (User)', () => {
     cy.visit('/people-management/employees');
   });
 
-  it('should "Employees" be displayed in side bar', () => {
+  it('should display "Employees" in the sidebar navigation', () => {
     cy.get('dib-navbar dib-hamburger-icon').click();
 
     cy.get('.cdk-overlay-container dib-navbar-panel').contains('Employees').should('exist');
