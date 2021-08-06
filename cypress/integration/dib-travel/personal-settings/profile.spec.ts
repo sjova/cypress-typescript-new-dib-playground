@@ -38,7 +38,7 @@ describe('Personal Settings - Profile', () => {
     cy.visit('/profile/account');
   });
 
-  it('should "Profile" be displayed in side bar', () => {
+  it('should display "Profile" in the sidebar navigation', () => {
     cy.get('dib-navbar dib-hamburger-icon').click();
 
     cy.get('.cdk-overlay-container dib-navbar-panel').should('contain', 'Profile');
