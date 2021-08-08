@@ -3,6 +3,4 @@ export interface ApprovalProcess {
   approvalProcessForContent: string;
   approvedBy: string;
   approvedByContent: string;
-  travelPolicyType: string;
-  travelPolicyName: string;
 }

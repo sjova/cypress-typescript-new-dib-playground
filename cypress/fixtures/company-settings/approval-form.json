@@ -1,8 +1,6 @@
 {
-  "approvalProcessFor": "QA",
+  "approvalProcessFor": "Bot",
   "approvalProcessForContent": " qa bot ",
   "approvedBy": "CY",
-  "approvedByContent": "cy group",
-  "travelPolicyName": "CY Travel policy test",
-  "travelPolicyType": "FLIGHT"
+  "approvedByContent": "cy group"
 }
