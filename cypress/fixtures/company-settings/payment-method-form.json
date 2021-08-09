@@ -1,26 +1,38 @@
 {
-  "address": "Lepenicka 7",
-  "cardNumber": "42424242424242",
-  "cardProvider": "Diners",
-  "city": "Belgrade",
-  "companyRegistrationNumber": "CY 23",
-  "country": "Serbia",
-  "currency": "EUR",
-  "email": "qa.tools+cy.ci.company-sttings.payment-method.hash@dibtravel.com",
-  "expireDate": "04 / 24",
-  "firstName": "CY Nenad",
-  "invoiceRecipientEmail": "qa.tools+cy.ci.company-sttings.payment-method.hash@dibtravel.com",
-  "lastName": "CY Tripunovic",
-  "legalName": "CY Billing Profile Test",
-  "lodgeCardName": "CY Lodge Cards Test",
-  "modifiedFirstName": "CY Milan",
-  "modifiedLegalName": "CY Billing Profile Test (modified)",
-  "month": "01",
-  "phoneNumber": "12345678",
-  "searchPeopleOrGroup": "CY GROUP",
-  "securityCode": "CY 23",
-  "taxId": "CY 234x",
-  "vatNumber": "CY 555",
-  "year": "2022",
-  "zipCode": "11000"
+  "companyInformation": {
+    "companyLegalName": "CY DIB Travel Test",
+    "taxId": "CY 234x",
+    "city": "Belgrade",
+    "country": "Serbia",
+    "address": "Lepenicka 7",
+    "zipCode": "11000",
+    "companyRegistrationNumber": "CY 23",
+    "vatNumber": "CY 555"
+  },
+  "primaryContactInformation": {
+    "firstName": "CY Nenad",
+    "modifiedFirstName": "CY Milan",
+    "lastName": "CY Tripunovic",
+    "modifiedLastName": "CY Milankovic",
+    "email": "qa.tools+cy.ci.company-sttings.payment-method.hash@dibtravel.com",
+    "modifiedEmail": "qa.tools+cy.ci.company-sttings.payment-method.modified.hash@dibtravel.com"
+  },
+  "lodgeCardDetails": {
+    "cardName": "CY Lodge Card Test",
+    "cardNumber": "42424242424242",
+    "cardProvider": "Diners",
+    "expireDate": "0424",
+    "month": "01",
+    "securityCode": "234",
+    "year": "2022"
+  },
+  "currencies": {
+    "currency": "EUR"
+  },
+  "invoices": {
+    "invoiceRecipientEmail": "qa.tools+cy.ci.company-sttings.payment-method.hash@dibtravel.com"
+  },
+  "search": {
+    "searchPeopleOrGroup": "CY GROUP"
+  }
 }

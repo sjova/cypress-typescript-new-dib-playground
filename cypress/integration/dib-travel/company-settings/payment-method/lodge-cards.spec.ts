@@ -3,9 +3,27 @@ import { PaymentMethod } from '../../../../models';
 describe('Company Settings - Payment Method - Lodge Cards', () => {
   let paymentMethodForm: PaymentMethod;
 
+  const openEditLodgeCardForm = () => {
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item')
+      .contains(paymentMethodForm.primaryContactInformation.email)
+      .parents('dib-lodge-cards')
+      .find('ui-button')
+      .contains('edit')
+      .clickAttached();
+  };
+
+  const openArchiveLodgeCardForm = () => {
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item')
+      .contains(paymentMethodForm.primaryContactInformation.email)
+      .parents('dib-lodge-cards')
+      .find('ui-button')
+      .contains(' archive ')
+      .clickAttached();
+  };
+
   before(() => {
-    cy.fixture('company-settings/payment-method-form').then((paymentMethodFormFixture) => {
-      paymentMethodForm = paymentMethodFormFixture;
+    cy.fixture('company-settings/payment-method-form').then((paymentMethodFixture) => {
+      paymentMethodForm = paymentMethodFixture;
     });
   });
 
@@ -14,143 +32,139 @@ describe('Company Settings - Payment Method - Lodge Cards', () => {
     cy.visit('/company-management/payment-method/lodge-cards');
   });
 
-  it('should display payment method in sidebar menu', () => {
-    cy.get('dib-navbar dib-hamburger-icon').click();
-
-    cy.get('.cdk-overlay-container dib-navbar-panel').contains(' Payment Method ').should('exist');
-  });
-
-  it('should submit empty form for creating lodge card', () => {
-    cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]').click();
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-button[type=success]').click();
-
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog').should('be.visible');
-  });
-
-  it('should close dialog for creating lodge card', () => {
-    cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]').click();
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog button').contains(' Cancel ').click();
-
-    cy.get('dib-company-management dib-payment-method dib-lodge-cards h1').should('contain', ' Lodge Cards ');
-  });
-
-  it('should create a new lodge card', () => {
+  it('should create lodge card', () => {
     cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]').click();
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=companyLegalName]').type(
-      paymentMethodForm.legalName
+      paymentMethodForm.companyInformation.companyLegalName
     );
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=companyRegistrationNumber]').type(
-      paymentMethodForm.companyRegistrationNumber
+      paymentMethodForm.companyInformation.companyRegistrationNumber
     );
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=vatNumber]').type(paymentMethodForm.vatNumber);
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=addressLine]').type(paymentMethodForm.address);
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=postalCode]').type(paymentMethodForm.zipCode);
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=city]').type(paymentMethodForm.city);
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=vatNumber]').type(
+      paymentMethodForm.companyInformation.vatNumber
+    );
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=addressLine]').type(
+      paymentMethodForm.companyInformation.address
+    );
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=postalCode]').type(
+      paymentMethodForm.companyInformation.zipCode
+    );
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=city]').type(
+      paymentMethodForm.companyInformation.city
+    );
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-autocomplete').click();
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-autocomplete input').type(paymentMethodForm.country);
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-autocomplete input').type(
+      paymentMethodForm.companyInformation.country
+    );
     cy.get('.cdk-overlay-container ui-panel .cdk-virtual-scroll-content-wrapper')
-      .contains(paymentMethodForm.country)
+      .contains(paymentMethodForm.companyInformation.country)
       .click();
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=contactFirstName]').type(
-      paymentMethodForm.firstName
+      paymentMethodForm.primaryContactInformation.firstName
     );
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=contactLastName]').type(paymentMethodForm.lastName);
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=contactEmail]').type(paymentMethodForm.email);
-
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=contactLastName]').type(
+      paymentMethodForm.primaryContactInformation.lastName
+    );
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=contactEmail]').type(
+      paymentMethodForm.primaryContactInformation.email
+    );
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown[formcontrolname=provider]').click();
     cy.get('.cdk-overlay-container ui-panel .cdk-virtual-scroll-content-wrapper')
-      .contains(paymentMethodForm.cardProvider)
+      .contains(paymentMethodForm.lodgeCardDetails.cardProvider)
       .click();
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=lodgeCardName]').type(
-      paymentMethodForm.lodgeCardName
+      paymentMethodForm.lodgeCardDetails.cardName
     );
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=creditCardNumber]').type(
-      paymentMethodForm.cardNumber
+      paymentMethodForm.lodgeCardDetails.cardNumber
     );
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown[formcontrolname=month]').click();
     cy.get('.cdk-overlay-container ui-panel .cdk-virtual-scroll-content-wrapper')
-      .contains(paymentMethodForm.month)
+      .contains(paymentMethodForm.lodgeCardDetails.month)
       .click();
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown[formcontrolname=year]').click();
     cy.get('.cdk-overlay-container ui-panel .cdk-virtual-scroll-content-wrapper')
-      .contains(paymentMethodForm.year)
+      .contains(paymentMethodForm.lodgeCardDetails.year)
       .click();
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown[formcontrolname=currency').click();
     cy.get('.cdk-overlay-container ui-panel .cdk-virtual-scroll-content-wrapper')
-      .contains(paymentMethodForm.currency)
+      .contains(paymentMethodForm.currencies.currency)
       .click();
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=invoiceRecipientEmail]').type(
-      paymentMethodForm.email
+      paymentMethodForm.invoices.invoiceRecipientEmail
     );
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-button[type=success]').click();
 
     cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item').should(
       'contain',
-      paymentMethodForm.firstName
+      paymentMethodForm.primaryContactInformation.email
     );
   });
 
-  it('should close dialog for editing lodge card', () => {
-    cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item')
-      .contains(paymentMethodForm.firstName)
-      .first()
-      .parents('dib-lodge-cards')
-      .within(() => {
-        return cy.get('ui-button').contains('edit').clickAttached();
-      });
+  it('should close form for creating lodge card', () => {
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]').click();
     cy.get('.cdk-overlay-container dib-lodge-card-dialog button').contains(' Cancel ').click();
 
     cy.get('dib-company-management dib-payment-method dib-lodge-cards h1').should('contain', ' Lodge Cards ');
   });
 
   it('should update lodge card', () => {
-    cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item')
-      .contains(paymentMethodForm.firstName)
-      .first()
-      .parents('dib-lodge-cards')
-      .within(() => {
-        return cy.get('ui-button').contains('edit').clickAttached();
-      });
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item');
+    openEditLodgeCardForm();
+
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=contactFirstName]')
       .clear()
-      .type(paymentMethodForm.modifiedFirstName);
+      .type(paymentMethodForm.primaryContactInformation.modifiedFirstName);
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=contactLastName]')
+      .clear()
+      .type(paymentMethodForm.primaryContactInformation.modifiedFirstName);
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=contactEmail]')
+      .clear()
+      .type(paymentMethodForm.primaryContactInformation.modifiedEmail);
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-button[type=success]').click();
 
     cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item').should(
       'contain',
-      paymentMethodForm.modifiedFirstName
+      paymentMethodForm.primaryContactInformation.modifiedEmail
     );
   });
 
+  it('should close dialog for editing lodge card', () => {
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item');
+    openEditLodgeCardForm();
+
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog button').contains(' Cancel ').click();
+
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards h1').should('contain', ' Lodge Cards ');
+  });
+
+  it('should try to submit empty form for creating lodge card', () => {
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]').click();
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-button[type=success]').click();
+
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog').should('be.visible');
+  });
+
   it('should check cancellation of confirmation dialog', () => {
-    cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item')
-      .contains(paymentMethodForm.firstName)
-      .first()
-      .parents('dib-lodge-cards')
-      .within(() => {
-        return cy.get('ui-button').contains(' archive ').clickAttached();
-      });
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item');
+    openArchiveLodgeCardForm();
+
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[cancel=true]').click();
 
     cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item').should(
       'contain',
-      paymentMethodForm.modifiedFirstName
+      paymentMethodForm.primaryContactInformation.modifiedEmail
     );
   });
 
   it('should archive lodge card', () => {
-    cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item')
-      .contains(paymentMethodForm.firstName)
-      .first()
-      .parents('dib-lodge-cards')
-      .within(() => {
-        return cy.get('ui-button').contains(' archive ').clickAttached();
-      });
+    openArchiveLodgeCardForm();
+
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
 
-    cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item').should(
-      'not.contain',
-      paymentMethodForm.modifiedFirstName
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards .items').should(
+      'contain',
+      ' You have not added any lodge cards yet. '
     );
   });
 });
