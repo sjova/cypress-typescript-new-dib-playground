@@ -60,6 +60,19 @@ declare global {
       dataCy(value: string): Chainable<JQuery<HTMLElement>>;
 
       /**
+       * Get iframe document body
+       *
+       * @param {string} selector - Iframe selector
+       *
+       * @example
+       *    cy.getIframeBody('dib-foo iframe')
+       *
+       *    cy.getIframeBody('iframe[data-cy="dib-foo-iframe"]').find('#run-button').should('have.text', 'Try it').click()
+       *    cy.getIframeBody('iframe[data-cy="dib-foo-iframe"]').find('#result').should('include.text', '"some response"')
+       */
+      getIframeBody(selector: string): Cypress.Chainable<JQuery<HTMLElement>>;
+
+      /**
        * @todo Used for Cypress demo purposes and must be revisited before usage
        *
        * Get Session Storage - Returns the current value associated with the given key,
@@ -70,6 +83,21 @@ declare global {
        *    cy.getSessionStorage('abc123')
        */
       getSessionStorage(key: string): void;
+
+      /**
+       * Iframe fix
+       *
+       * This command should be executed before each test
+       *
+       * @example
+       *    cy.iframeFix()
+       *
+       *    beforeEach(() => {
+       *      cy.iframeFix();
+       *      // other commands should be placed after `cy.iframeFix()`
+       *    });
+       */
+      iframeFix(): void;
 
       /**
        * Login user on DIB Travel platform.
@@ -109,6 +137,17 @@ declare global {
       setSessionStorage(key: string): void;
 
       /**
+       * Switch to iframe
+       *
+       * @example
+       *    cy.get('dib-foo iframe').switchToIframe()
+       *
+       *    cy.get('iframe[data-cy="dib-foo-iframe"]').switchToIframe().find('#run-button').should('have.text', 'Try it').click()
+       *    cy.get('iframe[data-cy="dib-foo-iframe"]').switchToIframe().find('#result').should('include.text', '"some response"')
+       */
+      switchToIframe(): Cypress.Chainable<JQuery<HTMLElement>>;
+
+      /**
        * @todo Used for Cypress demo purposes and must be revisited before usage
        *
        * Login user with specified email and password
@@ -117,7 +156,19 @@ declare global {
        * @example
        *    cy.typeLogin({ email: 'petar.petrovic@dibtravel.com', password: 'Secret1' })
        */
-      typeLogin(user: User): void;
+      typeLogin(user: Pick<User, 'email' | 'password'>): void;
+
+      /**
+       * Wait for Angular until it becomes ready
+       *
+       * @example
+       *    cy.waitForAngular()
+       *
+       *    cy.get('dib-parent').waitForAngular().find('dib-children')
+       *
+       *    cy.get('dib-parent').waitForAngular().within(() => { cy.get('dib-children') });
+       */
+      waitForAngular(): Cypress.Chainable<unknown>;
     }
   }
 }

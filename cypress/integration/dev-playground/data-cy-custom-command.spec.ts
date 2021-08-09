@@ -1,5 +1,5 @@
 describe('DataCy Custom Command', () => {
-  it('best practices - selecting elements', () => {
+  it('should demonstrate selecting elements best practices', () => {
     cy.visit('https://example.cypress.io/commands/querying');
 
     // https://on.cypress.io/best-practices#Selecting-Elements

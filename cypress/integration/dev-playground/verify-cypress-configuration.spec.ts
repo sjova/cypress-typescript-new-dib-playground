@@ -1,5 +1,5 @@
 describe('Cypress.config()', () => {
-  it('Get and set configuration options', () => {
+  it('should get and set configuration options', () => {
     const myConfig = Cypress.config();
 
     expect(myConfig).to.have.property('animationDistanceThreshold', 5);

@@ -1,0 +1,44 @@
+{
+  "personalInfo": {
+    "firstName": "QA",
+    "lastName": "Bot",
+    "birthDay": "05",
+    "birthMonth": "07",
+    "birthYear": "1980"
+  },
+  "contactInfo": {
+    "address": "Knez Mihajlova 14",
+    "city": "Belgrade",
+    "zipCode": "11000",
+    "country": "Serbia",
+    "phoneNumber": "+381631234567"
+  },
+  "localize": {
+    "language": "Serbian",
+    "currency": "RSD"
+  },
+  "emailAndPassword": {
+    "email": "qa.tools@dibtravel.com",
+    "password": "testing1234"
+  },
+  "travelDocuments": {
+    "documentType": "Passport",
+    "gender": "Mr",
+    "documentNumber": "123456",
+    "issuingCountry": "Serbia",
+    "changeIssuingCountry": "Zambia",
+    "expiryDay": "05",
+    "expiryMonth": "07",
+    "expiryYear": "2030",
+    "nationality": "Serbian"
+  },
+  "internalTravelAgent": {
+    "firstName": "CY Petar",
+    "lastName": "CY Petrovic",
+    "email": "qa.tools+cy.ci.personal-settings.profile.[hash]@dibtravel.com"
+  },
+  "loyaltyProgram": {
+    "provider": "Etihad",
+    "number": "123456"
+  }
+}

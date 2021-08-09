@@ -87,13 +87,13 @@
 
 ## DIALOG (MODAL)
 
-`.cdk-overlay-container dib-*-dialog` - in most cases
-or
-`.cdk-overlay-container *-dialog`
+- `.cdk-overlay-container dib-*-dialog` - in most cases
+- `.cdk-overlay-container *-dialog`
 
 ## SELECT (DROPDOWN)
 
-`.cdk-overlay-container ui-panel`
+- `.cdk-overlay-container ui-panel`
+- `.cdk-overlay-container .cdk-overlay-pane`
 
 ## SNACKBAR
 
