@@ -33,7 +33,9 @@ declare global {
        *
        * @example
        *    cy.get('button').clickAttached()
+       *
        *    cy.focused().clickAttached()
+       *
        *    cy.contains('Welcome').clickAttached()
        */
 
@@ -123,6 +125,13 @@ declare global {
        *    cy.loginAgent('petar.petrovic@dibtravel.com', 'milan.milanovic@dibtravel.com', 'Secret1')
        */
       loginAgent(userEmail?: string, agentEmail?: string, agentPassword?: string): void;
+
+      /**
+       * Reset state
+       *
+       * Clear data in local storage and all browser cookies. To prevent a state from being shared across tests, Cypress automatically clears data in local storage and all cookies before each test
+       */
+      resetState(): void;
 
       /**
        * @todo Used for Cypress demo purposes and must be revisited before usage
