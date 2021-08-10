@@ -9,6 +9,7 @@ import {
   iframeFix,
   login,
   loginAgent,
+  resetState,
   setSessionStorage,
   switchToIframe,
   typeLogin,
@@ -25,6 +26,7 @@ Cypress.Commands.add('getSessionStorage', getSessionStorage);
 Cypress.Commands.add('iframeFix', iframeFix);
 Cypress.Commands.add('login', login);
 Cypress.Commands.add('loginAgent', loginAgent);
+Cypress.Commands.add('resetState', resetState);
 Cypress.Commands.add('setSessionStorage', setSessionStorage);
 Cypress.Commands.add('switchToIframe', { prevSubject: 'element' }, switchToIframe);
 Cypress.Commands.add('typeLogin', typeLogin);

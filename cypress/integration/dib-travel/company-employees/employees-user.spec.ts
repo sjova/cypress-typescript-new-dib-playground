@@ -1,6 +1,5 @@
 import { getEmailWithHash } from '../../../helpers';
 import { Employee } from '../../../models';
-
 import { addEmployee, archiveEmployee } from './shared';
 
 describe('Company Employees - Employees (User)', () => {
@@ -77,10 +76,6 @@ describe('Company Employees - Employees (User)', () => {
   });
 
   it('should allow user to archive previously added employee', () => {
-    archiveEmployee(employee.email);
-
-    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('not.contain', employee.firstName);
-    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('not.contain', employee.lastName);
-    cy.get('dib-people-management dib-employees dib-page .grid .table-cell').should('not.contain', employee.email);
+    archiveEmployee(employee);
   });
 });

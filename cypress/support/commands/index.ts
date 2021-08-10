@@ -7,6 +7,7 @@ export * from './get-iframe-body';
 export * from './get-session-storage';
 export * from './iframe-fix';
 export * from './login';
+export * from './reset-state';
 export * from './set-session-storage';
 export * from './switch-to-iframe';
 export * from './type-login';
