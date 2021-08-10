@@ -1,10 +1,3 @@
-/**
- * Add employee
- *
- * @param {string} firstName - Employee first name
- * @param {string} lastName - Employee last name
- * @param {string} email - Employee email
- */
 export const addEmployee = (firstName: string, lastName: string, email: string): void => {
   cy.get('dib-people-management dib-employees .table-pref ui-button').click();
 

@@ -1,7 +1,7 @@
-import { clickSingleTravelPolicyCtaButton } from './click-single-travel-policy-cta-button';
+import { clickTravelPolicyCtaButton } from './click-travel-policy-cta-button';
 
 export const deleteTravelPolicy = (travelPolicyName: string): void => {
-  clickSingleTravelPolicyCtaButton(travelPolicyName, 'delete');
+  clickTravelPolicyCtaButton(travelPolicyName, 'delete');
 
   cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
 };

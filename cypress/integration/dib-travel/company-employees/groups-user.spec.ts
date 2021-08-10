@@ -1,4 +1,5 @@
 import { Group } from '../../../models';
+import { addGroup, deleteGroup } from './shared';
 
 describe('Company Employees - Groups (User)', () => {
   let group: Group;
@@ -21,17 +22,7 @@ describe('Company Employees - Groups (User)', () => {
   });
 
   it('should allow user to add new group', () => {
-    cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
-
-    cy.wait('@getCorporationsEmployees').then(() => {
-      cy.get('dib-people-management dib-groups ui-button').contains('Add Group').click();
-
-      cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="group name*"]').type(group.name);
-      cy.get('.cdk-overlay-container dib-group-dialog dib-assign-members .member').click();
-      cy.get('.cdk-overlay-container dib-group-dialog ui-button').contains('save').click();
-
-      cy.get('dib-people-management dib-groups dib-expandable-item').should('contain', group.name);
-    });
+    addGroup(group.name);
   });
 
   it('should allow user to edit created group', () => {
@@ -50,15 +41,7 @@ describe('Company Employees - Groups (User)', () => {
   });
 
   it('should allow user to delete created group', () => {
-    cy.get('dib-people-management dib-groups dib-expandable-item h2')
-      .contains(group.modifiedName)
-      .parent('.item__main')
-      .next('[dib-column-right]')
-      .find('ui-button button')
-      .contains('delete')
-      .clickAttached();
-
-    cy.get('.cdk-overlay-container confirmation-dialog ui-button').contains('Delete').click();
+    deleteGroup(group.modifiedName);
   });
 
   it('should confirm that the group no longer exists', () => {

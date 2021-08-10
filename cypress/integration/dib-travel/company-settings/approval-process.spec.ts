@@ -1,32 +1,20 @@
-import { ApprovalProcess, TravelPolicy, Group } from '../../../models';
-import { enterSharedDetails, deleteTravelPolicyAndConfirm } from './travel-policy/shared';
+import { ApprovalProcess, Group, TravelPolicy } from '../../../models';
+import { addGroup, deleteGroup } from '../company-employees';
+import {
+  confirmApprovalProcess,
+  deleteApprovalProcess,
+  selectApprovalSettings,
+  selectTraveler,
+} from './approval-process';
+import { addHotelTravelPolicy, deleteTravelPolicy } from './travel-policy';
 
 describe('Company Settings - Approval Process', () => {
-  let approvalForm: ApprovalProcess;
   let group: Group;
   let travelPolicyDetails: TravelPolicy;
 
-  const travelPolicyLink = '/company-management/travel-policy';
-  const groupLink = '/people-management/groups';
-
-  const deleteApprovalProcessAndConfirm = () => {
-    cy.get('dib-company-management dib-approval-process dib-approval-process-item')
-      .contains(approvalForm.approvalProcessFor)
-      .parents('dib-approval-process-item')
-      .find('ui-button')
-      .contains('delete')
-      .clickAttached();
-
-    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
-
-    cy.get('dib-company-management dib-approval-process dib-page dib-approval-process-item').should('not.exist');
-  };
+  let approvalProcess: ApprovalProcess;
 
   before(() => {
-    cy.fixture('company-settings/approval-form').then((approvalProcessFixture) => {
-      approvalForm = approvalProcessFixture;
-    });
-
     cy.fixture('company-employees/group').then((groupFixture) => {
       group = groupFixture;
     });
@@ -34,6 +22,34 @@ describe('Company Settings - Approval Process', () => {
     cy.fixture('company-settings/travel-policy-details').then((travelPolicyFixture) => {
       travelPolicyDetails = travelPolicyFixture;
     });
+
+    cy.fixture('company-settings/approval-process').then((approvalProcessFixture) => {
+      approvalProcess = approvalProcessFixture;
+    });
+  });
+
+  before(() => {
+    cy.login();
+
+    cy.visit('/company-management/travel-policy');
+    addHotelTravelPolicy(travelPolicyDetails); // TODO: Do we need to include other types (Flight, Train)?
+
+    cy.visit('/people-management/groups');
+    addGroup(group.name, false);
+
+    cy.resetState();
+  });
+
+  after(() => {
+    cy.resetState();
+
+    cy.login();
+
+    cy.visit('/company-management/travel-policy');
+    deleteTravelPolicy(travelPolicyDetails.sharedDetails.name);
+
+    cy.visit('/people-management/groups');
+    deleteGroup(group.name);
   });
 
   beforeEach(() => {
@@ -49,176 +65,98 @@ describe('Company Settings - Approval Process', () => {
 
   it('should display info about approval process', () => {
     cy.get('dib-company-management dib-approval-process .header__details__helptext').click();
-    cy.get('.cdk-overlay-container .modal-content').scrollTo('bottom');
 
+    cy.get('.cdk-overlay-container dib-approval-process-helptext-dialog .modal-content').scrollTo('bottom');
+
+    // TODO: Confirm dialog content (heading and paragraph) instead `.should('be.visible')`
     cy.get('.cdk-overlay-container dib-approval-process-helptext-dialog').should('be.visible');
 
-    cy.get('.cdk-overlay-container dib-dialog-wrapper').contains('close').click();
+    cy.get('.cdk-overlay-container dib-dialog-wrapper i').click();
   });
 
-  it('should create group for approval process', () => {
-    cy.visit(groupLink);
-
-    cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
-
-    cy.wait('@getCorporationsEmployees').then(() => {
-      cy.get('dib-people-management dib-groups ui-button').contains('Add Group').click();
-
-      cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="group name*"]').type(group.name);
-      cy.get('.cdk-overlay-container dib-group-dialog ui-button').contains('save').click();
-
-      cy.get('dib-people-management dib-groups dib-expandable-item').should('contain', group.name);
-    });
-  });
-
-  it('should create travel policy for approval process', () => {
-    cy.visit(travelPolicyLink);
-
-    cy.get('dib-company-management dib-travel-policy ui-button[type=primary]').click();
-
-    enterSharedDetails(travelPolicyDetails.hotel.type, travelPolicyDetails.sharedDetails);
-
-    cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
-
-    cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
-      'contain',
-      travelPolicyDetails.sharedDetails.name
-    );
-  });
-
-  it('should create approval process (exception from travel policy)', () => {
+  it('should add approval process (exception from travel policy)', () => {
     cy.intercept('GET', '/api/secure/v1/travel-policy/approval-process').as('getApprovalProcessForm');
 
     cy.wait('@getApprovalProcessForm').then(() => {
       cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
-      cy.get('.cdk-overlay-container dib-approval-process-dialog dib-input')
-        .first()
-        .type(approvalForm.approvalProcessFor);
-      cy.get('.cdk-overlay-container dib-approval-process-dialog .members label')
-        .contains(approvalForm.approvalProcessForContent)
-        .click();
+
+      selectTraveler(approvalProcess.traveler);
     });
 
-    cy.get('.cdk-overlay-container dib-approval-process-dialog label')
+    cy.get('.cdk-overlay-container dib-approval-process-dialog .radio-button-group label')
       .contains("Don't need approval (exception from travel policy)")
       .click();
     cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
 
-    cy.get('dib-company-management dib-approval-process dib-approval-process-item .item__left').should(
-      'contain',
-      approvalForm.approvalProcessFor
-    );
+    confirmApprovalProcess(approvalProcess);
   });
+
+  // TODO: Additional test (`it`) for: "Selected traveler already has approval process!"
 
   it('should delete approval process (exception from travel policy)', () => {
-    deleteApprovalProcessAndConfirm();
+    deleteApprovalProcess(approvalProcess.traveler.firstName);
   });
 
-  it('should create approval process (only out of policy trips)', () => {
+  it('should add approval process (only out of policy trips)', () => {
     cy.intercept('GET', '/api/secure/v1/travel-policy/approval-process').as('getApprovalProcessForm');
 
     cy.wait('@getApprovalProcessForm').then(() => {
       cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
-      cy.get('.cdk-overlay-container dib-approval-process-dialog dib-input')
-        .first()
-        .type(approvalForm.approvalProcessFor);
-      cy.get('.cdk-overlay-container dib-approval-process-dialog .members label')
-        .contains(approvalForm.approvalProcessForContent)
-        .click();
+
+      selectTraveler(approvalProcess.traveler);
     });
 
-    cy.get('.cdk-overlay-container dib-approval-process-dialog label').contains('Only out of policy trips').click();
-    cy.get('.cdk-overlay-container dib-approval-process-dialog dib-input').eq(2).type(approvalForm.approvedBy);
-    cy.get('.cdk-overlay-container dib-approval-process-dialog .members label')
-      .contains(approvalForm.approvedByContent)
-      .clickAttached();
+    selectApprovalSettings('Only out of policy trips', approvalProcess.travelersGroupName);
+
     cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
 
-    cy.get('dib-company-management dib-approval-process dib-approval-process-item .item__left').should(
-      'contain',
-      approvalForm.approvalProcessFor
-    );
+    confirmApprovalProcess(approvalProcess);
   });
 
   it('should delete approval process (only out of policy trips)', () => {
-    deleteApprovalProcessAndConfirm();
+    deleteApprovalProcess(approvalProcess.traveler.firstName);
   });
 
-  it('should create approval process (all trips)', () => {
+  it('should add approval process (all trips)', () => {
     cy.intercept('GET', '/api/secure/v1/travel-policy/approval-process').as('getApprovalProcessForm');
 
     cy.wait('@getApprovalProcessForm').then(() => {
       cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
-      cy.get('.cdk-overlay-container dib-approval-process-dialog dib-input')
-        .first()
-        .type(approvalForm.approvalProcessFor);
-      cy.get('.cdk-overlay-container dib-approval-process-dialog .members label')
-        .contains(approvalForm.approvalProcessForContent)
-        .click();
+
+      selectTraveler(approvalProcess.traveler);
     });
 
-    cy.get('.cdk-overlay-container dib-approval-process-dialog label').contains('All trips').click();
-    cy.get('.cdk-overlay-container dib-approval-process-dialog dib-input').last().type(approvalForm.approvedBy);
-    cy.get('.cdk-overlay-container dib-approval-process-dialog .members label')
-      .contains(approvalForm.approvedByContent)
-      .clickAttached();
+    selectApprovalSettings('All trips', approvalProcess.travelersGroupName);
+
     cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
 
-    cy.get('dib-company-management dib-approval-process dib-approval-process-item .item__left').should(
-      'contain',
-      approvalForm.approvalProcessFor
-    );
+    confirmApprovalProcess(approvalProcess);
   });
 
-  it('should check cancellation of confirmation dialog', () => {
-    cy.get('dib-company-management dib-approval-process dib-approval-process-item')
-      .contains(approvalForm.approvalProcessFor)
+  // TODO: Similar test should be added for all Approval Settings (think about reusable function)
+  it('should confirm the cancellation in the confirmation dialog (all trips)', () => {
+    cy.get('dib-company-management dib-approval-process dib-approval-process-item .item__left .item__content p')
+      .contains(`${approvalProcess.traveler.firstName} ${approvalProcess.traveler.lastName}`)
       .parents('dib-approval-process-item')
-      .find('ui-button')
+      .find('[dib-column-right] ui-button')
       .contains('delete')
       .clickAttached();
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[cancel=true]').click();
 
-    cy.get('dib-company-management dib-approval-process dib-approval-process-item .item__left').should(
-      'contain',
-      approvalForm.approvalProcessFor
-    );
+    confirmApprovalProcess(approvalProcess);
   });
 
   it('should delete approval process (all trips)', () => {
-    deleteApprovalProcessAndConfirm();
+    deleteApprovalProcess(approvalProcess.traveler.firstName);
   });
 
-  it('should try to submit empty approval process form', () => {
+  it('should not be able to submit an empty approval process form', () => {
     cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
+
     cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
 
+    // TODO: Confirm snackbar message: "Traveler or group of travelers must be selected" (instead below c)
     cy.get('.cdk-overlay-container dib-approval-process-dialog').should('be.visible');
-  });
-
-  it('should delete group for approval process', () => {
-    cy.visit(groupLink);
-
-    cy.get('dib-people-management dib-groups dib-expandable-item h2')
-      .contains(group.name)
-      .parent('.item__main')
-      .next('[dib-column-right]')
-      .find('ui-button button')
-      .contains('delete')
-      .clickAttached();
-
-    cy.get('.cdk-overlay-container confirmation-dialog ui-button').contains('Delete').click();
-
-    cy.get('dib-people-management dib-groups [dib-empty-list-label]').should(
-      'contain',
-      'You have not yet created any groups.'
-    );
-  });
-
-  it('should delete travel policy for approval process', () => {
-    cy.visit(travelPolicyLink);
-
-    deleteTravelPolicyAndConfirm(travelPolicyDetails.sharedDetails.name);
   });
 });

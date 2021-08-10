@@ -1,9 +1,9 @@
 import { TravelPolicy } from '../../../../models';
 import {
-  searchAndSelectEmployee,
-  enterSharedDetails,
+  clickTravelPolicyCtaButton,
   deleteTravelPolicyAndConfirm,
-  clickSingleTravelPolicyCtaButton,
+  enterSharedDetails,
+  searchAndSelectEmployee,
 } from './shared';
 
 describe('Company Settings - Travel Policy - Train', () => {
@@ -65,7 +65,7 @@ describe('Company Settings - Travel Policy - Train', () => {
   });
 
   it('should update train travel policy', () => {
-    clickSingleTravelPolicyCtaButton(travelPolicyDetails.sharedDetails.name, 'edit');
+    clickTravelPolicyCtaButton(travelPolicyDetails.sharedDetails.name, 'edit');
 
     cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=Name]')
       .clear()
@@ -80,7 +80,7 @@ describe('Company Settings - Travel Policy - Train', () => {
 
   // TODO: This should be added for other types and inner test should be shared fn
   it('should check cancellation of confirmation dialog', () => {
-    clickSingleTravelPolicyCtaButton(travelPolicyDetails.sharedDetails.modifiedName, 'delete');
+    clickTravelPolicyCtaButton(travelPolicyDetails.sharedDetails.modifiedName, 'delete');
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[cancel=true]').click();
 

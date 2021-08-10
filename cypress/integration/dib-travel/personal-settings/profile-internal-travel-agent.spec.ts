@@ -1,5 +1,5 @@
-import { ProfileDetails } from '../../../models';
 import { getEmailWithHash } from '../../../helpers';
+import { ProfileDetails } from '../../../models';
 import { addEmployee, archiveEmployee } from '../company-employees';
 
 describe('Personal Settings - Profile - Internal Travel Agent', () => {
@@ -82,6 +82,6 @@ describe('Personal Settings - Profile - Internal Travel Agent', () => {
     );
 
     cy.visit('/people-management/employees');
-    archiveEmployee(profileDetails.internalTravelAgent.email);
+    archiveEmployee(profileDetails.internalTravelAgent, false);
   });
 });

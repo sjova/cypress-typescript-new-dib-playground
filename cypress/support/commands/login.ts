@@ -11,6 +11,8 @@ export const login = (
 
   cy.get('new-login ui-button button').contains('Sign in').click();
 
+  cy.waitForAngular();
+
   cy.get('cookies-popup .cookies-popup__content .close-icon').click();
 };
 
@@ -26,6 +28,8 @@ export const loginAgent = (
   cy.get('new-agent-login ui-input[name=password] input[name="password"]').type(agentPassword);
 
   cy.get('new-agent-login ui-button button').contains('Login').click();
+
+  cy.waitForAngular();
 
   cy.get('cookies-popup .cookies-popup__content .close-icon').click();
 };

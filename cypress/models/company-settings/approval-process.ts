@@ -1,6 +1,6 @@
+import { User } from '../user';
+
 export interface ApprovalProcess {
-  approvalProcessFor: string;
-  approvalProcessForContent: string;
-  approvedBy: string;
-  approvedByContent: string;
+  traveler: Pick<User, 'firstName' | 'lastName'>;
+  travelersGroupName: string;
 }
