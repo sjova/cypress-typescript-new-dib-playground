@@ -14,6 +14,7 @@
 - If you need a prefix in naming, please use "cy"
 - Ideally, when you read `objectname.propertyName`, it should sound meaningful
 - Please use camelCase for variable naming (ex. `myVariableName`)
+- If the test is availably only for the agent, please add the following suffix in the test description: ` (Agent)`
 - **Mocha** `describe` title should start with a capital letter
 - **Mocha** `it` title should start with a lowercase letter (_it_ and _descriptive title_ together should have a meaningful meaning)
 - The KISS principle (keep it simple, stupid)
@@ -25,10 +26,14 @@
 - Please sort all relevant items in the code in alphabetical order (A-Z order).
 - For readability, we're using 120 characters as a maximum line length
 - Please use single quotes over double quotes
-- Please reuse repeatable code (data model, function, test case, Cypress command etc.)
+- Please reuse repeatable code (data model, function, test case, partial test case, Cypress command, etc.)
 - Please define the TypeScript interface for each data model (export and reuse same if needed)
 - Instead of a long list of items in the single data model, please group meaningful groups whenever possible
+- Data should reflect UI/UX in terms of naming and order of properties
 - Please use appropriate JS/TS comments (`//` - Single Line Comments, `/* ... */` - Multi-line Comments)
+- Please put all globally used functions to the root `helpers` folder
+- Please put all functions from a single feature test to the `helpers` folder inside the origin feature
+- Please put all functions from multiple feature tests to the `shared` folder inside the origin feature
 - Add meaningful comments to describe your code
 - Add TODO comment for temp. unused or unfinished code and map with Jira/Issues board (ex. `// TODO: Foo description (DT-1234)`)
 - Simplify extensive (large function/code block) business logic into smaller chunks
@@ -57,7 +62,9 @@
 - Use API route aliases or assertions to guard Cypress from proceeding until an explicit condition is met (don't use `.wait()`)
 - Don't limit yourself to trying to act like a user
 - Practice PR Code Review in all seniority directions (Senior -> Junior, Junior -> Senior, and all variations between)
-- Make sure you would understand your code if you read it a few months from now.
+- Make sure you would understand your code if you read it a few months from now
+- Please don't copy/paste blocks from existing tests. Instead, consider reusable functions or commands.
+- Please don't write dummy tests (always consider the benefit of the written test)
 
 ## Branch Naming Conventions
 

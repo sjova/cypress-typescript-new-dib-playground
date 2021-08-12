@@ -1,31 +1,8 @@
 import { ProfileDetails } from '../../../models';
+import { clickCtaInsideSection, getSection } from './helpers';
 
 describe('Personal Settings - Profile', () => {
   let profileDetails: ProfileDetails;
-
-  const clickCtaInsideSection = (sectionLabel: string, ctaButtonLabel?: string) => {
-    if (ctaButtonLabel) {
-      cy.get('dib-profile dib-account .profile-info .profile-info__title')
-        .contains(sectionLabel)
-        .parent('.profile-info__section')
-        .find('ui-button')
-        .contains(ctaButtonLabel)
-        .click();
-    } else {
-      cy.get('dib-profile dib-account .profile-info .profile-info__title')
-        .contains(sectionLabel)
-        .parent('.profile-info__section')
-        .find('ui-button')
-        .click();
-    }
-  };
-
-  const getSection = (sectionLabel: string): Cypress.Chainable<JQuery<HTMLElement>> => {
-    return cy
-      .get('dib-profile dib-account .profile-info .profile-info__title')
-      .contains(sectionLabel)
-      .parent('.profile-info__section');
-  };
 
   before(() => {
     cy.fixture('personal-settings/profile-details').then((profileDetailsFixture) => {

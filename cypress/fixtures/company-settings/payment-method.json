@@ -1,0 +1,38 @@
+{
+  "companyInformation": {
+    "companyLegalName": "CY Dib Services AB",
+    "companyRegistrationNumber": "1234561234",
+    "vatNumber": "121212121212121",
+    "taxId": "7878787878",
+    "address": "Lepenicka 7",
+    "zipCode": "11000",
+    "city": "Belgrade",
+    "country": "Serbia"
+  },
+  "primaryContact": {
+    "firstName": "CY Petar",
+    "lastName": "CY Petrovic",
+    "email": "qa.tools+cy.ci.payment-method.[hash]@dibtravel.com",
+    "modifiedFirstName": "CY Dragan",
+    "modifiedLastName": "CY Draganovic",
+    "modifiedEmail": "qa.tools+cy.ci.payment-method.modified.[hash]@dibtravel.com"
+  },
+  "lodgeCardDetails": {
+    "cardProvider": "Diners",
+    "cardName": "CY Lodge Card Test",
+    "cardNumber": "36148900647913",
+    "expiryMonth": "01",
+    "expiryYear": "2029",
+    "currency": "EUR",
+    "securityCode": "321"
+  },
+  "invoiceRecipient": {
+    "email": "qa.tools+cy.ci.invoice-recipient.[hash]@dibtravel.com",
+    "vatNumber": "343434343434343"
+  },
+  "person": {
+    "firstName": "QA",
+    "lastName": "Bot"
+  },
+  "groupName": "CY Group"
+}
