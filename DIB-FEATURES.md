@@ -88,6 +88,7 @@
 ## DIALOG (MODAL)
 
 - `.cdk-overlay-container dib-*-dialog` - in most cases
+- `.cdk-overlay-container dib-*`
 - `.cdk-overlay-container *-dialog`
 
 ## SELECT (DROPDOWN)

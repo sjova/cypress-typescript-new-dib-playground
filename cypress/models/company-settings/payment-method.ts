@@ -1,43 +1,38 @@
+import { User } from '../user';
+
 export interface PaymentMethod {
   companyInformation: CompanyInformation;
-  primaryContactInformation: PrimaryContactInformation;
+  primaryContact: PrimaryContact;
   lodgeCardDetails: LodgeCardDetails;
-  search: Search;
-  invoices: Invoices;
-  currencies: Currencies;
+  invoiceRecipient: InvoiceRecipient;
+  person: Pick<User, 'firstName' | 'lastName'>;
+  groupName: string;
 }
 interface CompanyInformation {
   companyLegalName: string;
-  taxId: string;
-  city: string;
-  country: string;
-  address: string;
-  zipCode: string;
   companyRegistrationNumber: string;
   vatNumber: string;
+  taxId: string;
+  address: string;
+  zipCode: string;
+  city: string;
+  country: string;
 }
-interface PrimaryContactInformation {
-  firstName: string;
+interface PrimaryContact extends Omit<User, 'password'> {
   modifiedFirstName: string;
-  lastName: string;
   modifiedLastName: string;
-  email: string;
   modifiedEmail: string;
 }
 interface LodgeCardDetails {
   cardProvider: string;
   cardName: string;
   cardNumber: string;
-  expireDate: string;
-  month: string;
-  year: string;
-}
-interface Currencies {
+  expiryMonth: string;
+  expiryYear: string;
   currency: string;
+  securityCode: string; // TODO: Revisit since currently is not used?
 }
-interface Invoices {
-  invoiceRecipientEmail: string;
-}
-interface Search {
-  searchPeopleOrGroup: string;
+interface InvoiceRecipient {
+  email: string;
+  vatNumber: string;
 }
