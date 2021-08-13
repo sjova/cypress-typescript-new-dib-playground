@@ -1,6 +1,6 @@
 import { getEmailWithHash } from '../../../../helpers';
 import { PaymentMethod } from '../../../../models';
-import { archiveLodgeCard, editLodgeCard } from './helpers';
+import { clickLodgeCardCtaButton } from './helpers';
 
 describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
   let paymentMethod: PaymentMethod;
@@ -27,14 +27,22 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
     cy.visit('/company-management/payment-method/lodge-cards');
   });
 
-  // TODO: Revisit test or description
-  it('should confirm the cancellation of adding a lodge card', () => {
+  it('should cancel the adding lodge card', () => {
     cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]').click();
 
     cy.get('.cdk-overlay-container dib-lodge-card-dialog button').contains(' Cancel ').click();
 
-    // TODO: Below test is wrong, you should confirm: "You have not added any lodge cards yet."
-    cy.get('dib-company-management dib-payment-method dib-lodge-cards h1').should('contain', ' Lodge Cards ');
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog').should('not.exist');
+  });
+
+  it('should not be able to submit an empty lodge card form', () => {
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]').click();
+
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-button[type=success]').click();
+
+    // TODO: We should confirm all required fields (one by one)
+    // TODO: Remove bellow dummy test
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog').should('be.visible');
   });
 
   it('should add a lodge card', () => {
@@ -74,34 +82,32 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
       .contains('Card provider')
       .parents('ui-dropdown')
       .click();
-    cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.lodgeCardDetails.cardProvider).click();
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=lodgeCardName]').type(
-      paymentMethod.lodgeCardDetails.cardName
-    );
+    cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.lodgeCard.provider).click();
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=lodgeCardName]').type(paymentMethod.lodgeCard.name);
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=creditCardNumber]').type(
-      paymentMethod.lodgeCardDetails.cardNumber
+      paymentMethod.lodgeCard.number
     );
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown .placeholder')
       .contains('MM')
       .parents('ui-dropdown')
       .click();
-    cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.lodgeCardDetails.expiryMonth).click();
+    cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.lodgeCard.expiryMonth).click();
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown .placeholder')
       .contains('YYYY')
       .parents('ui-dropdown')
       .click();
-    cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.lodgeCardDetails.expiryYear).click();
+    cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.lodgeCard.expiryYear).click();
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown .placeholder')
       .contains('Currency')
       .parents('ui-dropdown')
       .click();
-    cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.lodgeCardDetails.currency).click();
+    cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.lodgeCard.currency).click();
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=invoiceRecipientEmail]').type(
       paymentMethod.invoiceRecipient.email
     );
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-button[type=success]').click();
 
-    // TODO: Confirm snackbar message (double-check?)
+    // TODO: Confirm snackbar message: "Successfully added lodge card"
     cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item').should(
       'contain',
       paymentMethod.primaryContact.email
@@ -111,7 +117,7 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
   it('should update a lodge card', () => {
     cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item');
 
-    editLodgeCard(paymentMethod.primaryContact.email);
+    clickLodgeCardCtaButton(paymentMethod.primaryContact.email, 'edit');
 
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=contactFirstName]')
       .clear()
@@ -124,43 +130,29 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
       .type(paymentMethod.primaryContact.modifiedEmail);
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-button[type=success]').click();
 
-    // TODO: Confirm snackbar message (double-check?)
+    // TODO: Confirm snackbar message: "Successfully updated lodge card"
     cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item').should(
       'contain',
       paymentMethod.primaryContact.modifiedEmail
     );
   });
 
-  // TODO: Revisit test or description
-  it('should not be able to submit an empty lodge card form', () => {
-    cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]').click();
-
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-button[type=success]').click();
-
-    // TODO: Below test is wrong. Instead, please confirm required fields msg or something similar
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog').should('be.visible');
-  });
-
-  // TODO: Revisit test or description
-  it('should check cancellation of confirmation dialog', () => {
+  it('should cancel the removing lodge card', () => {
     cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item');
 
-    archiveLodgeCard(paymentMethod.primaryContact.modifiedEmail);
+    clickLodgeCardCtaButton(paymentMethod.primaryContact.modifiedEmail, ' archive ');
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[cancel=true]').click();
 
-    cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item').should(
-      'contain',
-      paymentMethod.primaryContact.modifiedEmail
-    );
+    cy.get('.cdk-overlay-container confirmation-dialog').should('not.exist');
   });
 
   it('should archive a lodge card', () => {
-    archiveLodgeCard(paymentMethod.primaryContact.modifiedEmail);
+    clickLodgeCardCtaButton(paymentMethod.primaryContact.modifiedEmail, ' archive ');
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
 
-    // TODO: Confirm snackbar message (double-check?)
+    // TODO: Confirm snackbar message: "Successfully archived lodge card"
     cy.get('dib-company-management dib-payment-method dib-lodge-cards .items').should(
       'contain',
       ' You have not added any lodge cards yet. '

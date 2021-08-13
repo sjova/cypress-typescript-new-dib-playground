@@ -1,6 +1,6 @@
 import { getEmailWithHash } from '../../../../helpers';
 import { PaymentMethod } from '../../../../models';
-import { archiveBillingProfile, requestSplitInvoiceChange } from './helpers';
+import { clickBillingProfileCtaAction } from './helpers';
 
 describe('Company Settings - Payment Method - Billing Profiles', () => {
   let paymentMethod: PaymentMethod;
@@ -25,6 +25,20 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
   beforeEach(() => {
     cy.login();
     cy.visit('/company-management/payment-method/billing-profiles');
+  });
+
+  // TODO: It should cancel the adding billing profile
+  // note: upper right close button
+
+  it('should not be able to submit an empty billing profile form', () => {
+    cy.get('dib-company-management dib-payment-method dib-billing-profiles ui-button[type=primary]').click();
+
+    cy.get('.cdk-overlay-container dib-billing-profile-dialog ui-button[type=success]').click();
+
+    // TODO: We should confirm all required fields (one by one)
+    // TODO: Confirm snackbar message: "Please fill out all required fields"
+    // TODO: Remove bellow dummy test
+    cy.get('.cdk-overlay-container dib-billing-profile-dialog').should('be.visible');
   });
 
   it('should add a billing profile', () => {
@@ -65,14 +79,14 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     );
     cy.get('.cdk-overlay-container dib-billing-profile-dialog .dib-select')
       .last()
-      .select(paymentMethod.lodgeCardDetails.currency);
+      .select(paymentMethod.lodgeCard.currency);
     // TODO: This should be revisited (we should use `person` and `groupName`)
     // Also, group should be created (`before`) and removed (`after`) properly
     cy.get('.cdk-overlay-container dib-billing-profile-dialog input[placeholder=Search]').type(paymentMethod.groupName);
     cy.get('.cdk-overlay-container dib-billing-profile-dialog .members').click();
     cy.get('.cdk-overlay-container dib-billing-profile-dialog ui-button[type=success]').click();
 
-    // TODO: Confirm snackbar message (double-check?)
+    // TODO: Confirm snackbar message: "Successfully added billing profile"
     cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item .content').should(
       'contain',
       paymentMethod.primaryContact.email
@@ -80,12 +94,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
   });
 
   it('should update a billing profile', () => {
-    cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item .content')
-      .contains(paymentMethod.primaryContact.email)
-      .parents('dib-item')
-      .find('ui-button')
-      .contains('edit')
-      .clickAttached();
+    clickBillingProfileCtaAction(paymentMethod.primaryContact.email, 'edit');
 
     cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=contactFirstName]')
       .clear()
@@ -98,35 +107,31 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       .type(paymentMethod.primaryContact.modifiedEmail);
     cy.get('.cdk-overlay-container dib-billing-profile-dialog ui-button[type=success]').click();
 
-    // TODO: Confirm snackbar message (double-check?)
+    // TODO: Confirm snackbar message: "Successfully updated billing profile"
     cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item .content').should(
       'contain',
       paymentMethod.primaryContact.modifiedEmail
     );
   });
 
-  // TODO: Revisit test or description
-  it('should close dialog for request split invoice changes', () => {
-    requestSplitInvoiceChange(paymentMethod.primaryContact.modifiedEmail);
+  it('should cancel the request split invoice change', () => {
+    clickBillingProfileCtaAction(paymentMethod.primaryContact.modifiedEmail, 'Request change');
 
     cy.get('.cdk-overlay-container dib-invoice-split-dialog button').contains(' Cancel ').click();
 
-    cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item .content').should(
-      'contain',
-      paymentMethod.primaryContact.modifiedEmail
-    );
+    cy.get('.cdk-overlay-container dib-invoice-split-dialog').should('not.exist');
   });
 
-  it('should send request for split invoice changes (by cost center)', () => {
-    requestSplitInvoiceChange(paymentMethod.primaryContact.modifiedEmail);
+  it('should send the request split invoice change (by cost center)', () => {
+    clickBillingProfileCtaAction(paymentMethod.primaryContact.modifiedEmail, 'Request change');
 
     cy.get('.cdk-overlay-container dib-invoice-split-dialog ui-button[type=success]').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Successfully updated billing profile.');
   });
 
-  it('should send request for split invoice changes (by reference field)', () => {
-    requestSplitInvoiceChange(paymentMethod.primaryContact.modifiedEmail);
+  it('should send the request split invoice change (by reference field)', () => {
+    clickBillingProfileCtaAction(paymentMethod.primaryContact.modifiedEmail, 'Request change');
 
     cy.get('.cdk-overlay-container dib-invoice-split-dialog input[type=radio]').clickAttached();
     cy.get('.cdk-overlay-container dib-invoice-split-dialog ui-button[type=success]').click();
@@ -134,32 +139,20 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Successfully updated billing profile.');
   });
 
-  // TODO: Revisit test or description
-  it('should try to submit empty form for creating billing profile', () => {
-    cy.get('dib-company-management dib-payment-method dib-billing-profiles ui-button[type=primary]').click();
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog ui-button[type=success]').click();
-
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog').should('be.visible');
-  });
-
-  // TODO: Revisit test or description
-  it('should check cancellation of confirmation dialog', () => {
-    archiveBillingProfile(paymentMethod.primaryContact.modifiedEmail);
+  it('should cancel the archiving billing profile', () => {
+    clickBillingProfileCtaAction(paymentMethod.primaryContact.modifiedEmail, 'archive');
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[cancel=true]').click();
 
-    cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item .content').should(
-      'contain',
-      paymentMethod.primaryContact.modifiedEmail
-    );
+    cy.get('.cdk-overlay-container confirmation-dialog').should('not.exist');
   });
 
   it('should archive a billing profile', () => {
-    archiveBillingProfile(paymentMethod.primaryContact.modifiedEmail);
+    clickBillingProfileCtaAction(paymentMethod.primaryContact.modifiedEmail, 'archive');
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
 
-    // TODO: Confirm snackbar message (double-check?)
+    // TODO: Confirm snackbar message: "Successfully archived billing profile"
     cy.get('dib-company-management dib-payment-method dib-billing-profiles .billing-profiles').should(
       'contain',
       ' You have not added any billing profiles yet. '

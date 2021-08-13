@@ -134,7 +134,7 @@ describe('Company Settings - Approval Process', () => {
   });
 
   // TODO: Similar test should be added for all Approval Settings (think about reusable function)
-  it('should confirm the cancellation in the confirmation dialog (all trips)', () => {
+  it('should cancel the deleting approval setting for the group/person (all trips)', () => {
     cy.get('dib-company-management dib-approval-process dib-approval-process-item .item__left .item__content p')
       .contains(`${approvalProcess.traveler.firstName} ${approvalProcess.traveler.lastName}`)
       .parents('dib-approval-process-item')
@@ -156,7 +156,7 @@ describe('Company Settings - Approval Process', () => {
 
     cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
 
-    // TODO: Confirm snackbar message: "Traveler or group of travelers must be selected" (instead below c)
+    // TODO: Confirm snackbar message: "Traveler or group of travelers must be selected" (instead below)
     cy.get('.cdk-overlay-container dib-approval-process-dialog').should('be.visible');
   });
 });
