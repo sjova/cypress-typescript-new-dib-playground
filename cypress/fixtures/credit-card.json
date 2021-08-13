@@ -1,0 +1,27 @@
+{
+  "visa": {
+    "brand": "Visa",
+    "number": "4242424242424242"
+  },
+  "visa3DSecure": {
+    "brand": "Visa 3D Secure",
+    "number": "4000002760003184"
+  },
+  "mastercard": {
+    "brand": "Mastercard",
+    "number": "5555555555554444"
+  },
+  "dinersClub": {
+    "brand": "Diners Club",
+    "number": "3056930009020004"
+  },
+  "americanExpress": {
+    "brand": "American Express",
+    "number": "378282246310005",
+    "cvv": "4321"
+  },
+  "expiryMonth": "06",
+  "expiryYear": "2031",
+  "cvc": "321",
+  "zipCode": "11000"
+}

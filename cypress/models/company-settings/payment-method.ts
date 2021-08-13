@@ -3,7 +3,7 @@ import { User } from '../user';
 export interface PaymentMethod {
   companyInformation: CompanyInformation;
   primaryContact: PrimaryContact;
-  creditCard: CreditCard;
+  lodgeCard: LodgeCard;
   invoiceRecipient: InvoiceRecipient;
   person: Pick<User, 'firstName' | 'lastName'>;
   groupName: string;
@@ -23,16 +23,15 @@ interface PrimaryContact extends Omit<User, 'password'> {
   modifiedLastName: string;
   modifiedEmail: string;
 }
-interface CreditCard {
-  cardProvider: string;
-  cardName: string;
-  lodgeCardNumber: string;
-  creditCardNumber: string;
+interface LodgeCard {
+  provider: string;
+  name: string;
+  number: string;
   expiryMonth: string;
   expiryYear: string;
   currency: string;
-  securityCode: string;
 }
+
 interface InvoiceRecipient {
   email: string;
   vatNumber: string;
