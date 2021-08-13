@@ -17,10 +17,11 @@
     "modifiedLastName": "CY Draganovic",
     "modifiedEmail": "qa.tools+cy.ci.payment-method.modified.[hash]@dibtravel.com"
   },
-  "lodgeCardDetails": {
+  "creditCard": {
     "cardProvider": "Diners",
     "cardName": "CY Lodge Card Test",
-    "cardNumber": "36148900647913",
+    "lodgeCardNumber": "36148900647913",
+    "creditCardNumber": "4242424242424242",
     "expiryMonth": "01",
     "expiryYear": "2029",
     "currency": "EUR",

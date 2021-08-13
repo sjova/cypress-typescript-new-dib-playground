@@ -65,7 +65,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     );
     cy.get('.cdk-overlay-container dib-billing-profile-dialog .dib-select')
       .last()
-      .select(paymentMethod.lodgeCardDetails.currency);
+      .select(paymentMethod.creditCard.currency);
     // TODO: This should be revisited (we should use `person` and `groupName`)
     // Also, group should be created (`before`) and removed (`after`) properly
     cy.get('.cdk-overlay-container dib-billing-profile-dialog input[placeholder=Search]').type(paymentMethod.groupName);

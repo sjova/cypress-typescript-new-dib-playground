@@ -74,28 +74,28 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
       .contains('Card provider')
       .parents('ui-dropdown')
       .click();
-    cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.lodgeCardDetails.cardProvider).click();
+    cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.creditCard.cardProvider).click();
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=lodgeCardName]').type(
-      paymentMethod.lodgeCardDetails.cardName
+      paymentMethod.creditCard.cardName
     );
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=creditCardNumber]').type(
-      paymentMethod.lodgeCardDetails.cardNumber
+      paymentMethod.creditCard.lodgeCardNumber
     );
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown .placeholder')
       .contains('MM')
       .parents('ui-dropdown')
       .click();
-    cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.lodgeCardDetails.expiryMonth).click();
+    cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.creditCard.expiryMonth).click();
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown .placeholder')
       .contains('YYYY')
       .parents('ui-dropdown')
       .click();
-    cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.lodgeCardDetails.expiryYear).click();
+    cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.creditCard.expiryYear).click();
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-dropdown .placeholder')
       .contains('Currency')
       .parents('ui-dropdown')
       .click();
-    cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.lodgeCardDetails.currency).click();
+    cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.creditCard.currency).click();
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=invoiceRecipientEmail]').type(
       paymentMethod.invoiceRecipient.email
     );
