@@ -89,6 +89,8 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
     cy.get('.cdk-overlay-container dib-cost-center-dialog dib-assign-members .members').contains('QA Bot').click();
     cy.get('.cdk-overlay-container dib-cost-center-dialog ui-button').contains('save').click();
 
+    cy.waitForAngular();
+
     cy.get('dib-company-management dib-reference-fields dib-cost-center').should(
       'contain',
       referenceFields.costCenter.name

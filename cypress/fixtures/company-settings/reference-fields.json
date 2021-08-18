@@ -12,7 +12,8 @@
     "modifiedName": "Modified Project Name",
     "description": "Project Description",
     "label": "Modified Project Label",
-    "confirmationMessage": "Project successfully saved."
+    "confirmationMessage": "Project successfully saved.",
+    "confirmationMessage2": "Project successfully archived."
   },
   "purposeOfTrip": {
     "addActionCtaButton": "Add purpose of trip",
@@ -20,11 +21,13 @@
     "modifiedName": "Modified Purpose Of Trip Name",
     "description": "Purpose Of Trip Description",
     "label": "Modified Purpose Of Trip Label",
-    "confirmationMessage": "Purpose of trip successfully saved."
+    "confirmationMessage": "Purpose of trip successfully saved.",
+    "confirmationMessage2": "Purpose of trip successfully archived."
   },
   "yourReference": {
     "label": "Modified Your Reference Label",
-    "confirmationMessage": "Your reference successfully saved."
+    "confirmationMessage": "Your reference successfully saved.",
+    "confirmationMessage2": "Your reference configuration successfully saved."
   },
   "changeLabelCtaButton": "Change label",
   "resetToDefaultCtaButton": "Reset to default"

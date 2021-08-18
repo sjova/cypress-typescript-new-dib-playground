@@ -103,6 +103,21 @@ We will use `describe()` and `it()` in our tests.
  */
 ```
 
+## Iframe Support
+
+We're testing features with iframes in separated directory: `cypress/integration/dib-travel-iframe/*` (inner structure is same as in: `cypress/integration/dib-travel/*`)
+
+In current configuration, iframe testing working only with this two npm scripts:
+
+- `cy:open:iframe`
+- `cy:run:dib:iframe`
+
+Since Cypress has limited support for testing iframes at this moment, we created a custom command: `.switchToIframe()` with which you can switch to the contents of the iframe. Naming following open proposal for official Cypress command, which should be supported in the near future.
+
+And one last thing, you need to include `cy.iframeFix()` inside `beforeEach()`.
+
+Here you can find a few demo examples: `cypress/integration/dib-travel-iframe/iframe-demo/*`.
+
 ## Electron Headless Testing Examples
 
 - `yarn cy:spec cypress/integration/dib-travel/<parent-feature>/<sub-feature>.spec.ts` - run single feature test headlessly
@@ -158,12 +173,12 @@ DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accoun
 
 ## Cypress Config Notes
 
-- `"defaultCommandTimeout": 8000` - revisit this later when we speed up the Angular front-end application (current Angular loading time is around 4-6 seconds, and we added 2 seconds on top of that)
-- `"requestTimeout": 10000` - revisit this later when we speed up the front-end Angular application
-- `"chromeWebSecurity": false` - revisit this later, reference: [Iframe Support (Work in progress)](https://github.com/cypress-io/cypress/issues/136)
+- `"defaultCommandTimeout": 14000` - revisit this later when we speed up the Angular front-end application (current Angular loading time is around 4-6-12 seconds, and we added 2 seconds on top of that)
+- `"requestTimeout": 12000` - revisit this later when we speed up the front-end Angular application
 
 ## ToDo Decision
 
+- revisit recommending VSCode extensions (`.vscode/extensions.json`)
 - `dib-foo ui-button button` vs. `dib-foo ui-button`
 - `dib-foo ui-input input` vs. `dib-foo ui-input`
 

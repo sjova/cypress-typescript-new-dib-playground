@@ -95,7 +95,7 @@ describe('Company Settings - Reference Fields - Project', () => {
       .contains(' archive ')
       .clickAttached();
 
-    cy.get('.cdk-overlay-container simple-snack-bar > span').contains(referenceFields.project.confirmationMessage);
+    cy.get('.cdk-overlay-container simple-snack-bar > span').contains(referenceFields.project.confirmationMessage2);
 
     cy.get('dib-company-management dib-reference-fields dib-project .grid').should(
       'not.contain',

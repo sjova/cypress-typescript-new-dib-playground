@@ -106,7 +106,7 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
-      referenceFields.purposeOfTrip.confirmationMessage
+      referenceFields.purposeOfTrip.confirmationMessage2
     );
   });
 });

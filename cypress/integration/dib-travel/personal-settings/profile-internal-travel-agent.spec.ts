@@ -37,8 +37,7 @@ describe('Personal Settings - Profile - Internal Travel Agent', () => {
     cy.wait('@getEmployees');
 
     // Fix custom delay in FE implementation
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(1000);
+    cy.waitForAngular();
 
     cy.get('dib-profile dib-account dib-internal-agents ui-button').contains('Add').click();
 
@@ -64,8 +63,7 @@ describe('Personal Settings - Profile - Internal Travel Agent', () => {
     cy.wait('@getEmployees');
 
     // Fix custom delay in FE implementation
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(1000);
+    cy.waitForAngular();
 
     cy.get('dib-profile dib-account dib-internal-agents .--first')
       .contains(`${profileDetails.internalTravelAgent.firstName} ${profileDetails.internalTravelAgent.lastName}`)

@@ -47,7 +47,7 @@ describe('Company Settings - Reference Fields - Your Reference', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
-      referenceFields.yourReference.confirmationMessage
+      referenceFields.yourReference.confirmationMessage2
     );
   });
 });

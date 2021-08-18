@@ -258,6 +258,9 @@ describe('Personal Settings - Profile', () => {
 
     cy.wait('@getEmployees');
 
+    // TODO: Revisit above intercept
+    cy.waitForAngular();
+
     cy.get('dib-profile dib-account .travel-documents')
       .contains(profileDetails.travelDocuments.changeIssuingCountry)
       .next('td')
@@ -273,6 +276,8 @@ describe('Personal Settings - Profile', () => {
   });
 
   it('should add loyalty program', () => {
+    cy.waitForAngular();
+
     cy.get('dib-profile dib-account .loyalty-program ui-button').click();
 
     cy.get('.cdk-overlay-container dib-add-loyalty ui-button').click();
@@ -293,6 +298,9 @@ describe('Personal Settings - Profile', () => {
     cy.intercept('GET', '/api/secure/v1/customers/*/memberships').as('getMemberships');
 
     cy.wait('@getMemberships');
+
+    // TODO: Revisit above intercept
+    cy.waitForAngular();
 
     cy.get('dib-profile dib-account .loyalty-name')
       .contains(profileDetails.loyaltyProgram.provider)

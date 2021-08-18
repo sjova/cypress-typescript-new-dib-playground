@@ -6,6 +6,12 @@
 // https://github.com/cypress-io/cypress/issues/685
 // https://gitlab.com/kgroat/cypress-iframe
 // https://docs.cypress.io/guides/guides/web-security#Set-chromeWebSecurity-to-false
+// https://www.npmjs.com/package/cypress-iframe
+// https://www.nicknish.co/blog/cypress-targeting-elements-inside-iframes
+// https://bahr.dev/2019/09/02/testing-stripe-elements/
+// https://www.mikefettes.com/blog/cypress-and-stripe-payments-testing
+// https://medium.com/@michabahr/testing-stripe-elements-with-cypress-5a2fc17ab27b
+// https://medium.com/@you54f/configuring-cypress-to-work-with-iframes-cross-origin-sites-afff5efcf61f
 
 export const switchToIframe = (iframeSelector: string): Cypress.Chainable<JQuery<HTMLElement>> => {
   // get the `iframe > document > body`, and retry until the body element is not empty
