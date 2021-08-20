@@ -54,7 +54,10 @@ describe('Company Settings - Approval Process', () => {
 
   beforeEach(() => {
     cy.login();
+
     cy.visit('/company-management/approval-process');
+
+    cy.waitForAngular();
   });
 
   it('should display "Approval Process" in the sidebar navigation', () => {
@@ -75,13 +78,9 @@ describe('Company Settings - Approval Process', () => {
   });
 
   it('should add approval process (exception from travel policy)', () => {
-    cy.intercept('GET', '/api/secure/v1/travel-policy/approval-process').as('getApprovalProcessForm');
+    cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
 
-    cy.wait('@getApprovalProcessForm').then(() => {
-      cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
-
-      selectTraveler(approvalProcess.traveler);
-    });
+    selectTraveler(approvalProcess.traveler);
 
     cy.get('.cdk-overlay-container dib-approval-process-dialog .radio-button-group label')
       .contains("Don't need approval (exception from travel policy)")
@@ -98,13 +97,9 @@ describe('Company Settings - Approval Process', () => {
   });
 
   it('should add approval process (only out of policy trips)', () => {
-    cy.intercept('GET', '/api/secure/v1/travel-policy/approval-process').as('getApprovalProcessForm');
+    cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
 
-    cy.wait('@getApprovalProcessForm').then(() => {
-      cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
-
-      selectTraveler(approvalProcess.traveler);
-    });
+    selectTraveler(approvalProcess.traveler);
 
     selectApprovalSettings('Only out of policy trips', approvalProcess.travelersGroupName);
 
@@ -118,13 +113,9 @@ describe('Company Settings - Approval Process', () => {
   });
 
   it('should add approval process (all trips)', () => {
-    cy.intercept('GET', '/api/secure/v1/travel-policy/approval-process').as('getApprovalProcessForm');
+    cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
 
-    cy.wait('@getApprovalProcessForm').then(() => {
-      cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
-
-      selectTraveler(approvalProcess.traveler);
-    });
+    selectTraveler(approvalProcess.traveler);
 
     selectApprovalSettings('All trips', approvalProcess.travelersGroupName);
 

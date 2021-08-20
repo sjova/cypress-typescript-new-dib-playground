@@ -1,0 +1,3 @@
+# Random Errors Log
+
+TODO

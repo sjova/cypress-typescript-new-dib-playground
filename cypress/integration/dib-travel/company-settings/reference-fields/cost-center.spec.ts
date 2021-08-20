@@ -75,6 +75,8 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
   });
 
   it('should add new cost center', () => {
+    cy.waitForAngular();
+
     cy.get('dib-company-management dib-reference-fields dib-cost-center ui-button[size="large"]')
       .contains(referenceFields.costCenter.addActionCtaButton)
       .click();
@@ -119,6 +121,8 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
   });
 
   it('should delete cost center', () => {
+    cy.waitForAngular();
+
     cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell h4')
       .contains(referenceFields.costCenter.modifiedName)
       .parent('.table-cell')
@@ -129,6 +133,8 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       .clickAttached();
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
+
+    cy.waitForAngular();
 
     cy.get('dib-company-management dib-reference-fields dib-cost-center .grid').should(
       'not.contain',

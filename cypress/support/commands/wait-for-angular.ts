@@ -11,13 +11,13 @@ export const waitForAngular = (subject?: JQuery<HTMLElement>): Cypress.Chainable
   cy.log('waitForAngular...');
 
   return cy
-    .window({ log: false })
+    .window({ log: true })
     .invoke('getAllAngularRootElements')
     .then((rootElements) => {
       const rootElement = rootElements[0];
 
       return cy
-        .window({ log: false })
+        .window({ log: true })
         .invoke('getAngularTestability', rootElement)
         .then(
           (testability) =>

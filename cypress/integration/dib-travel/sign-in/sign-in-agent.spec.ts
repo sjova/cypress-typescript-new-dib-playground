@@ -34,6 +34,8 @@ describe('Sign In (Agent)', () => {
   });
 
   it('should display error message when wrong password is submitted', () => {
+    cy.waitForAngular();
+
     cy.get('new-agent-login ui-input input[name=userEmail]').type(accounts.defaultAccount.email);
     cy.get('new-agent-login ui-input input[name=email]').type(accounts.agentAccount.email);
     cy.get('new-agent-login ui-input input[name=password]').type(accounts.invalidAccount.password);

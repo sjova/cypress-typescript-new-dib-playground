@@ -1,5 +1,5 @@
-import { DibTravelAccounts, SignUpUser } from '../../../models';
 import { getEmailWithHash } from '../../../helpers';
+import { DibTravelAccounts, SignUpUser } from '../../../models';
 
 describe('Sign Up', () => {
   let accounts: DibTravelAccounts;
@@ -53,6 +53,8 @@ describe('Sign Up', () => {
   });
 
   it('should display error message when invalid email address is inserted', () => {
+    cy.waitForAngular();
+
     const invalidEmail = signUpUser.email.replace('@', '');
 
     cy.get('dib-signup ui-input input[name="firstName"]').type(signUpUser.firstName);

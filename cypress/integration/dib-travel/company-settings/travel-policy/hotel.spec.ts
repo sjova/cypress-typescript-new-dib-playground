@@ -28,6 +28,8 @@ describe('Company Settings - Travel Policy - Hotel', () => {
   // it('should update hotel travel policy', () => {});
 
   it('should delete hotel travel policy', () => {
+    cy.waitForAngular();
+
     deleteTravelPolicyAndConfirm(travelPolicyDetails.sharedDetails.name);
   });
 });

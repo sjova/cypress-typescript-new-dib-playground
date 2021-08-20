@@ -11,6 +11,8 @@ describe('Sign In (User)', () => {
 
   beforeEach(() => {
     cy.visit('/login');
+
+    cy.waitForAngular();
   });
 
   it('should check agent redirection link', () => {

@@ -1,5 +1,5 @@
 import { TravelPolicy } from '../../../../models';
-import { enterSharedDetails, searchAndSelectEmployee, deleteTravelPolicyAndConfirm } from './shared';
+import { deleteTravelPolicyAndConfirm, enterSharedDetails, searchAndSelectEmployee } from './shared';
 
 describe('Company Settings - Travel Policy - Flight', () => {
   let travelPolicyDetails: TravelPolicy;
@@ -60,6 +60,8 @@ describe('Company Settings - Travel Policy - Flight', () => {
   // it('should update flight travel policy', () => {});
 
   it('should delete flight travel policy', () => {
+    cy.waitForAngular();
+
     deleteTravelPolicyAndConfirm(travelPolicyDetails.sharedDetails.name);
   });
 });

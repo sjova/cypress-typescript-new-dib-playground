@@ -20,10 +20,10 @@ export const switchToIframe = (iframeSelector: string): Cypress.Chainable<JQuery
 
   return (
     cy
-      .get(iframeSelector, { log: false })
-      .its('0.contentDocument.body', { log: false })
+      .get(iframeSelector, { log: true })
+      .its('0.contentDocument.body', { log: true })
       .should('not.be.empty')
       // wraps "body" DOM element to allow chaining more Cypress commands, like `.find(...)`
-      .then((body) => cy.wrap(body, { log: false }))
+      .then((body) => cy.wrap(body, { log: true }))
   );
 };

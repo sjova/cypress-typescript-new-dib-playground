@@ -1,28 +1,28 @@
-# cypress-typescript
+# cypress-typescript-new-dib-playground
 
-Cypress TypeScript Project
+Cypress TypeScript DIB Playground
 
 ## System Requirements
 
 Operating System: **macOS Catalina 10.15.7 (19H1217)**
 
-IDE: **Visual Studio Code 1.56.2**
+IDE: **Visual Studio Code 1.59.0**
 
 ```
 git --version
-git version 2.32.0
+git version 2.33.0
 
 nvm --version
 0.38.0
 
 node --version
-v14.17.0
+v14.17.5
 
 npm --version
-6.14.13
+6.14.14
 
 yarn --version
-1.22.10
+1.22.11
 ```
 
 ## Getting Started

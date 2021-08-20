@@ -288,6 +288,8 @@ describe('Personal Settings - Profile', () => {
     cy.get('.cdk-overlay-container dib-add-loyalty input[name="program"]').type(profileDetails.loyaltyProgram.number);
     cy.get('.cdk-overlay-container dib-add-loyalty ui-button').click();
 
+    cy.waitForAngular();
+
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Loyalty program saved');
 
     cy.get('dib-profile dib-account .loyalty-name').eq(0).should('contain', profileDetails.loyaltyProgram.provider);
@@ -295,9 +297,9 @@ describe('Personal Settings - Profile', () => {
   });
 
   it('should delete loyalty program', () => {
-    cy.intercept('GET', '/api/secure/v1/customers/*/memberships').as('getMemberships');
+    // cy.intercept('GET', '/api/secure/v1/customers/*/memberships').as('getMemberships');
 
-    cy.wait('@getMemberships');
+    // cy.wait('@getMemberships');
 
     // TODO: Revisit above intercept
     cy.waitForAngular();
@@ -310,6 +312,8 @@ describe('Personal Settings - Profile', () => {
       .clickAttached();
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type="warning"] button').click();
+
+    cy.waitForAngular();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Loyalty program successfully deleted');
 
