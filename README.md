@@ -6,7 +6,7 @@ Cypress TypeScript DIB Playground
 
 Operating System: **macOS Catalina 10.15.7 (19H1217)**
 
-IDE: **Visual Studio Code 1.59.0**
+IDE: **Visual Studio Code 1.60.0**
 
 ```
 git --version
@@ -29,15 +29,36 @@ yarn --version
 
 Initially, you need to run `yarn install`. After that, you can execute Cypress with one of these two npm scripts: `yarn cy:open` or `yarn cy:run`.
 
-### Visual Studio Code Extensions
+## Visual Studio Code Recommended Extensions
 
-- [Cypress Fixture-IntelliSense](https://marketplace.visualstudio.com/items?itemName=JosefBiehler.cypress-fixture-intellisense): Supports your [cy.fixture\(\)](https://docs.cypress.io/api/commands/fixture) and [cy.route\(..., "fixture:"\)](https://docs.cypress.io/api/commands/route) commands by providing intellisense for existing fixtures.
-- [Cypress Helper](https://marketplace.visualstudio.com/items?itemName=Shelex.vscode-cy-helper): Various helpers and commands for integration with Cypress.
-- [Cypress Snippets](https://marketplace.visualstudio.com/items?itemName=andrew-codes.cypress-snippets): Useful Cypress code snippets.
-- [Open Cypress](https://marketplace.visualstudio.com/items?itemName=tnrich.vscode-extension-open-cypress): This allows you to open Cypress specs and single `it()` blocks directly from VS Code.
-- [Test Utils](https://marketplace.visualstudio.com/items?itemName=chrisbreiding.test-utils): Easily add or remove `.only` and `.skip` modifiers with keyboard shortcuts or the command palette.
+This project has a recommended list of extensions, and you will be prompted to install them when you open the project for the first time.
 
-The above extensions are included in the project recommended extensions configuration file.
+You can find more details about this here: [Workspace recommended extensions](https://code.visualstudio.com/docs/editor/extension-marketplace#_workspace-recommended-extensions).
+
+## Visual Studio Code Recommended Settings
+
+These are the recommended project settings:
+
+```json
+{
+  "editor.codeActionsOnSave": ["source.fixAll", "source.organizeImports"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.renderWhitespace": "all",
+  "files.exclude": {
+    ".husky": true,
+    ".vscode": true,
+    "**/node_modules": true
+  },
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.startupEditor": "none"
+}
+```
+
+You can find more details about this here: [User and Workspace Settings](https://code.visualstudio.com/docs/getstarted/settings).
 
 ## Prettier & ESLint
 

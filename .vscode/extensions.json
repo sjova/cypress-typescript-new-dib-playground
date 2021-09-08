@@ -1,16 +1,13 @@
 {
   "recommendations": [
-    "andrew-codes.cypress-snippets",
-    "chrisbreiding.test-utils",
     "CoenraadS.bracket-pair-colorizer-2",
     "dbaeumer.vscode-eslint",
     "eamodio.gitlens",
     "EditorConfig.EditorConfig",
     "esbenp.prettier-vscode",
+    "humao.rest-client",
     "JosefBiehler.cypress-fixture-intellisense",
-    "Shelex.vscode-cy-helper",
     "spoonscen.es6-mocha-snippets",
     "streetsidesoftware.code-spell-checker",
-    "tnrich.vscode-extension-open-cypress"
   ]
 }
