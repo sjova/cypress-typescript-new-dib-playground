@@ -21,8 +21,16 @@ describe('Company Employees - Groups (Agent)', () => {
     cy.get('.cdk-overlay-container dib-navbar-panel').contains('Groups').should('exist');
   });
 
+  it('should display Groups page', () => {
+    cy.get('dib-people-management dib-groups .header').should('contain', 'Groups');
+    cy.get('dib-people-management dib-groups .header').should(
+      'contain',
+      'You can create groups of employees in order to simplify on- and off-boarding in in the company. When assigning functions and authorization (e.g. Cost Centers, Billing profiles etc) you can do that to a group instead of every employee.'
+    );
+  });
+
   it('should allow agent to add new group', () => {
-    addGroup(group.name);
+    addGroup(group.name, group.description);
   });
 
   it('should allow agent to edit created group', () => {
@@ -38,6 +46,7 @@ describe('Company Employees - Groups (Agent)', () => {
     cy.get('.cdk-overlay-container dib-group-dialog ui-button').contains('save').click();
 
     cy.get('dib-people-management dib-groups dib-expandable-item').should('contain', group.modifiedName);
+    cy.get('dib-people-management dib-groups dib-expandable-item').should('contain', group.modifiedDescription);
   });
 
   it('should allow agent to delete created group', () => {
