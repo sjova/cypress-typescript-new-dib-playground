@@ -1,8 +1,9 @@
-import { Group } from '../../../models';
+import { Employee, Group } from '../../../models';
 import { addGroup, deleteGroup } from './shared';
 
 describe('Company Employees - Groups (User)', () => {
   let group: Group;
+  let employee: Employee;
 
   before(() => {
     cy.fixture('company-employees/group').then((groupFixture) => {
@@ -31,6 +32,12 @@ describe('Company Employees - Groups (User)', () => {
 
   it('should allow user to add new group', () => {
     addGroup(group.name, group.description);
+  });
+
+  it('should display added employee in created group', () => {
+    cy.get('dib-people-management dib-groups dib-expandable-item .button').contains('keyboard_arrow_down').click();
+    cy.get('dib-people-management dib-groups dib-expandable-item dib-list-item').should('contain', employee.firstName);
+    cy.get('dib-people-management dib-groups dib-expandable-item dib-list-item').should('contain', employee.email);
   });
 
   it('should allow user to edit created group', () => {
