@@ -13,7 +13,7 @@ export const login = (
 
   cy.waitForAngular();
 
-  cy.get('cookies-popup .cookies-popup__content .close-icon').click();
+  cy.get('.cookies-popup .material-icons').click();
 };
 
 export const loginAgent = (
@@ -31,5 +31,5 @@ export const loginAgent = (
 
   cy.waitForAngular();
 
-  cy.get('cookies-popup .cookies-popup__content .close-icon').click();
+  cy.get('.cookies-popup .material-icons').click();
 };
