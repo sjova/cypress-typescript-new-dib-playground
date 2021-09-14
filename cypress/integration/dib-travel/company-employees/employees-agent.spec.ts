@@ -21,22 +21,70 @@ describe('Company Employees - Employees (Agent)', () => {
 
     cy.get('.cdk-overlay-container dib-navbar-panel').contains('Employees').should('exist');
   });
+  it('should display Employees page', () => {
+    cy.get('dib-people-management dib-employees dib-page .header').should('contain', 'Employees');
+    cy.get('dib-people-management dib-employees dib-page button').should('contain', 'Add Employee');
+  });
 
   it('should allow agent to add new employee', () => {
-    cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
+    cy.waitForAngular();
 
     addEmployee(employee.firstName, employee.lastName, employee.email);
 
-    cy.wait('@getCorporationsEmployees').then(() => {
-      cy.reload();
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.lastName);
+    cy.get('dib-people-management dib-employees dib-page .grid .table-cell').should('contain', employee.email);
+  });
 
-      cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
-      cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.lastName);
-      cy.get('dib-people-management dib-employees dib-page .grid .table-cell').should('contain', employee.email);
+  it('should allow agent to search a certain employee', () => {
+    cy.get('dib-people-management dib-employees dib-page ui-input input[name="undefined"]').type(employee.firstName, {
+      force: true,
     });
+
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should(
+      'not.contain',
+      employee.modifiedFirstName
+    );
+
+    cy.waitForAngular();
+  });
+
+  it('should display only invited users', () => {
+    cy.waitForAngular();
+
+    cy.get('dib-people-management dib-employees dib-page ui-dropdown .selected').click();
+
+    cy.waitForAngular();
+    cy.get('.cdk-overlay-container .cdk-overlay-pane ui-panel .item').contains('Invited').click();
+
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('not.contain', 'QA Bot');
+  });
+
+  it('should display only activated users', () => {
+    cy.waitForAngular();
+
+    cy.get('dib-people-management dib-employees dib-page ui-dropdown .selected').click();
+
+    cy.waitForAngular();
+    cy.get('.cdk-overlay-container .cdk-overlay-pane ui-panel .item').contains('Activated').click();
+
+    cy.get('dib-people-management dib-employees dib-page .grid').should('contain', 'Activated');
+    cy.get('dib-people-management dib-employees dib-page .grid').should('not.contain', 'Invited');
+    cy.get('dib-people-management dib-employees dib-page .grid').should('not.contain', 'Not invited');
+  });
+
+  it('should display only admins', () => {
+    cy.get(
+      'body > app-root > dib-layout > div.dib-layout-content > dib-people-management > div > div > dib-employees > dib-page > div.body > div > div.table-pref.ng-star-inserted > div.filters > ui-radio > div > div:nth-child(2) > .radio-label'
+    ).click();
+
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', 'Admin');
   });
 
   it('should allow agent to edit added employee', () => {
+    cy.waitForAngular();
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell h4')
       .contains(employee.firstName)
       .parent('.name-cell')
@@ -66,6 +114,8 @@ describe('Company Employees - Employees (Agent)', () => {
   });
 
   it('should not allow agent to add new employee with existing email', () => {
+    cy.waitForAngular();
+
     addEmployee(employee.firstName, employee.lastName, employee.email);
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
