@@ -15,6 +15,15 @@ describe('Sign In (User)', () => {
     cy.waitForAngular();
   });
 
+  it('should check if a not logged user can visit a page', () => {
+    cy.visit('https://develop--dib-travel.netlify.app/people-management/employees');
+    cy.waitForAngular();
+
+    cy.get('new-login ui-input input[name=email]').should('be.visible');
+    cy.get('new-login ui-input input[name=password]').should('be.visible');
+    cy.get('new-login ui-button').should('contain', 'Sign in');
+  });
+
   it('should check agent redirection link', () => {
     cy.get('new-login .auth-container-footer a[href="/login/agent"]').should('have.text', 'Agent login');
   });
