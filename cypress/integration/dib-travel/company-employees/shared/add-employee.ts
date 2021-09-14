@@ -1,9 +1,21 @@
-export const addEmployee = (firstName: string, lastName: string, email: string): void => {
+export const addEmployee = (firstName: string, lastName: string, email: string, sendInvitation: boolean): void => {
   cy.get('dib-people-management dib-employees .table-pref ui-button').click();
 
-  cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]').type(firstName);
-  cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]').type(lastName);
-  cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[type="email"]').type(email);
+  if (sendInvitation == true) {
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]').type(firstName);
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]').type(lastName);
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[type="email"]').type(email);
 
-  cy.get('.cdk-overlay-container dib-employee-dialog ui-button').click();
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-button').click();
+  } else {
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]').type(firstName);
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="lastName"]').type(lastName);
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[type="email"]').type(email);
+
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-checkbox')
+      .contains('Send invitation immediately to employee')
+      .click();
+
+    cy.get('.cdk-overlay-container dib-employee-dialog ui-button').click();
+  }
 };

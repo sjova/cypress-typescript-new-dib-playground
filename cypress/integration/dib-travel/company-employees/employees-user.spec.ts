@@ -27,14 +27,52 @@ describe('Company Employees - Employees (User)', () => {
     cy.get('dib-people-management dib-employees dib-page button').should('contain', 'Add Employee');
   });
 
-  it('should allow user to add new employee', () => {
+  it('should allow user to add new employee with sending invitation to employee', () => {
     cy.waitForAngular();
 
-    addEmployee(employee.firstName, employee.lastName, employee.email);
+    addEmployee(employee.firstName, employee.lastName, employee.email, true);
 
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.lastName);
     cy.get('dib-people-management dib-employees dib-page .grid .table-cell').should('contain', employee.email);
+  });
+
+  it('should display only invited users', () => {
+    cy.waitForAngular();
+
+    cy.get('dib-people-management dib-employees dib-page ui-dropdown .selected').click();
+
+    cy.waitForAngular();
+    cy.get('.cdk-overlay-container .cdk-overlay-pane ui-panel .item').contains('Invited').click();
+
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
+    cy.get('dib-people-management dib-employees .grid .table-cell').should('contain', 'Invited');
+    cy.get('dib-people-management dib-employees').should('not.contain', 'Not invited');
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('not.contain', 'QA Bot');
+  });
+
+  it('should allow user to add new employee with not sending invitation to employee', () => {
+    cy.waitForAngular();
+
+    addEmployee(employee.firstName, employee.lastName, 'dusan@gmail.com', false);
+
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.lastName);
+    cy.get('dib-people-management dib-employees dib-page .grid .table-cell').should('contain', 'dusan@gmail.com');
+    cy.get('dib-people-management dib-employees').should('contain', 'Not invited');
+  });
+
+  it('should display only not invited users', () => {
+    cy.waitForAngular();
+
+    cy.get('dib-people-management dib-employees dib-page ui-dropdown .selected').click();
+
+    cy.waitForAngular();
+    cy.get('.cdk-overlay-container .cdk-overlay-pane ui-panel .item').contains('Not invited').click();
+
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
+    cy.get('dib-people-management dib-employees').should('contain', 'Not invited');
+    cy.get('dib-people-management dib-employees .grid .table-cell').should('not.contain', 'Invited');
   });
 
   it('should allow user to search a certain employee', () => {
@@ -51,18 +89,6 @@ describe('Company Employees - Employees (User)', () => {
     cy.waitForAngular();
   });
 
-  it('should display only invited users', () => {
-    cy.waitForAngular();
-
-    cy.get('dib-people-management dib-employees dib-page ui-dropdown .selected').click();
-
-    cy.waitForAngular();
-    cy.get('.cdk-overlay-container .cdk-overlay-pane ui-panel .item').contains('Invited').click();
-
-    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
-    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('not.contain', 'QA Bot');
-  });
-
   it('should display only activated users', () => {
     cy.waitForAngular();
 
@@ -77,9 +103,9 @@ describe('Company Employees - Employees (User)', () => {
   });
 
   it('should display only admins', () => {
-    cy.get(
-      'body > app-root > dib-layout > div.dib-layout-content > dib-people-management > div > div > dib-employees > dib-page > div.body > div > div.table-pref.ng-star-inserted > div.filters > ui-radio > div > div:nth-child(2) > .radio-label'
-    ).click();
+    cy.waitForAngular();
+
+    cy.get('dib-people-management dib-employees ui-radio').contains('Show admins only').click();
 
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', 'Admin');
   });
@@ -117,7 +143,7 @@ describe('Company Employees - Employees (User)', () => {
   it('should not allow user to add new employee with existing email', () => {
     cy.waitForAngular();
 
-    addEmployee(employee.firstName, employee.lastName, employee.email);
+    addEmployee(employee.firstName, employee.lastName, employee.email, true);
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
@@ -127,6 +153,8 @@ describe('Company Employees - Employees (User)', () => {
   });
 
   it('should allow user to archive previously added employee', () => {
-    archiveEmployee(employee);
+    for (let index = 0; index < 2; index++) {
+      archiveEmployee(employee);
+    }
   });
 });
