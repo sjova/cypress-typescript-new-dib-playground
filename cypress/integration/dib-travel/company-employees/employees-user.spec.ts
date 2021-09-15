@@ -30,7 +30,7 @@ describe('Company Employees - Employees (User)', () => {
   it('should allow user to add new employee with sending invitation to employee', () => {
     cy.waitForAngular();
 
-    addEmployee(employee.firstName, employee.lastName, employee.email, true);
+    addEmployee(employee.firstName, employee.lastName, employee.email);
 
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.lastName);
@@ -38,6 +38,7 @@ describe('Company Employees - Employees (User)', () => {
   });
 
   it('should allow user to search a certain employee', () => {
+    //TODO revisit selector one more time
     cy.get('dib-people-management dib-employees dib-page ui-input input[name="undefined"]').type(employee.firstName, {
       force: true,
     });
@@ -147,7 +148,7 @@ describe('Company Employees - Employees (User)', () => {
   it('should not allow user to add new employee with existing email', () => {
     cy.waitForAngular();
 
-    addEmployee(employee.firstName, employee.lastName, employee.email, true);
+    addEmployee(employee.firstName, employee.lastName, employee.email);
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
