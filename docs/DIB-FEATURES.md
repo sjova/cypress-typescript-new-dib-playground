@@ -82,8 +82,8 @@
 
 ## COOKIES POPUP
 
-- `cookies-popup .cookies-popup__content .cookies-popup__text` - HTML text
-- `cookies-popup .cookies-popup__content .close-icon` - button
+- `cookies-popup .cookies-popup .cookies-popup-text` - HTML text
+- `cookies-popup .cookies-popup .close-icon` - button
 
 ## DIALOG (MODAL)
 
