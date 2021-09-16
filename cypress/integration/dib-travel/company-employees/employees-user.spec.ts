@@ -28,6 +28,7 @@ describe('Company Employees - Employees (User)', () => {
   });
 
   it('should allow user to add new employee with sending invitation to employee', () => {
+    //TODO check if waitForAngular can be inside beforeEach
     cy.waitForAngular();
 
     addEmployee(employee.firstName, employee.lastName, employee.email);
@@ -38,7 +39,7 @@ describe('Company Employees - Employees (User)', () => {
   });
 
   it('should allow user to search a certain employee', () => {
-    //TODO revisit selector one more time
+    //TODO revisit selector one more time. "undefined" is always set in input-name selector
     cy.get('dib-people-management dib-employees dib-page ui-input input[name="undefined"]').type(employee.firstName, {
       force: true,
     });
