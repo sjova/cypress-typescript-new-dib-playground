@@ -16,7 +16,7 @@ describe('Company Employees - Groups (User)', () => {
     cy.visit('/people-management/groups');
   });
 
-  xit('should display "Groups" in the sidebar navigation', () => {
+  it('should display "Groups" in the sidebar navigation', () => {
     cy.get('dib-navbar dib-hamburger-icon').click();
 
     cy.get('.cdk-overlay-container dib-navbar-panel').contains('Groups').should('exist');
