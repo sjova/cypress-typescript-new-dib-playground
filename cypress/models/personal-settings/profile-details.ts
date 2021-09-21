@@ -4,13 +4,14 @@ export interface ProfileDetails {
   personalInfo: PersonalInfo;
   contactInfo: ContactInfo;
   localize: Localize;
-  emailAndPassword: Pick<User, 'email' | 'password'>;
+  emailAndPassword: Pick<User, 'email' | 'password' | 'invalidEmail' | 'invalidPassword' | 'shortPassword'>;
   travelDocuments: TravelDocuments;
   internalTravelAgent: Omit<User, 'password'>;
   loyaltyProgram: LoyaltyProgram;
 }
 
 interface PersonalInfo extends Pick<User, 'firstName' | 'lastName'> {
+  gender: string;
   birthDay: string;
   birthMonth: string;
   birthYear: string;
@@ -42,6 +43,7 @@ interface TravelDocuments {
 }
 
 interface LoyaltyProgram {
-  provider: string;
+  flightProvider: string;
+  trainProvider: string;
   number: string;
 }

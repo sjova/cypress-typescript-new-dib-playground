@@ -31,22 +31,18 @@ describe('Personal Settings - Profile - Internal Travel Agent', () => {
 
     cy.visit('/profile/account');
 
-    cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getEmployees');
-    cy.intercept('POST', '/api/secure/v1/customers/*/internal-travel-agents').as('postInternalTravelAgents');
-
-    cy.wait('@getEmployees');
-
-    // Fix custom delay in FE implementation
     cy.waitForAngular();
 
     cy.get('dib-profile dib-account dib-internal-agents ui-button').contains('Add').click();
+
+    cy.get('.cdk-overlay-container dib-internal-agents-dialog dib-assign-members dib-input input').type(
+      profileDetails.internalTravelAgent.email
+    );
 
     cy.get('.cdk-overlay-container dib-internal-agents-dialog dib-assign-members .member .user')
       .contains(`${profileDetails.internalTravelAgent.firstName} ${profileDetails.internalTravelAgent.lastName}`)
       .click();
     cy.get('.cdk-overlay-container dib-internal-agents-dialog ui-button').contains('Add').click();
-
-    cy.wait('@postInternalTravelAgents');
 
     cy.get('dib-profile dib-account dib-internal-agents .--first').should(
       'contain',
@@ -57,12 +53,6 @@ describe('Personal Settings - Profile - Internal Travel Agent', () => {
   it('should delete Internal travel agent', () => {
     cy.visit('/profile/account');
 
-    cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getEmployees');
-    cy.intercept('POST', '/api/secure/v1/customers/*/internal-travel-agents').as('postInternalTravelAgents');
-
-    cy.wait('@getEmployees');
-
-    // Fix custom delay in FE implementation
     cy.waitForAngular();
 
     cy.get('dib-profile dib-account dib-internal-agents .--first')
@@ -71,8 +61,6 @@ describe('Personal Settings - Profile - Internal Travel Agent', () => {
       .next('.--last')
       .find('ui-button')
       .click();
-
-    cy.wait('@postInternalTravelAgents');
 
     cy.get('dib-profile dib-account dib-internal-agents').should(
       'not.contain',

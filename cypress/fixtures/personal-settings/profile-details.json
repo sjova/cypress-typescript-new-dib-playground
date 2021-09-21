@@ -1,5 +1,6 @@
 {
   "personalInfo": {
+    "gender": "MRS",
     "firstName": "QA",
     "lastName": "Bot",
     "birthDay": "05",
@@ -19,7 +20,10 @@
   },
   "emailAndPassword": {
     "email": "qa.tools@dibtravel.com",
-    "password": "testing1234"
+    "password": "testing1234",
+    "invalidEmail": "qa.toolsdibtravel.com",
+    "invalidPassword": "123456",
+    "shortPassword": "123"
   },
   "travelDocuments": {
     "documentType": "Passport",
@@ -38,7 +42,8 @@
     "email": "qa.tools+cy.ci.profile.[hash]@dibtravel.com"
   },
   "loyaltyProgram": {
-    "provider": "Etihad",
+    "flightProvider": "Etihad",
+    "trainProvider": "MTRX",
     "number": "123456"
   }
 }
