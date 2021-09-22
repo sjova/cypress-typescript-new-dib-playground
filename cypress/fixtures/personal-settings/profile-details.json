@@ -20,10 +20,7 @@
   },
   "emailAndPassword": {
     "email": "qa.tools@dibtravel.com",
-    "password": "testing1234",
-    "invalidEmail": "qa.toolsdibtravel.com",
-    "invalidPassword": "123456",
-    "shortPassword": "123"
+    "password": "testing1234"
   },
   "travelDocuments": {
     "documentType": "Passport",

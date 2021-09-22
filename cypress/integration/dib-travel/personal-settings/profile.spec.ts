@@ -119,7 +119,7 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container dib-change-email input[name="email"]')
       .clear()
-      .type(profileDetails.emailAndPassword.invalidEmail);
+      .type(profileDetails.emailAndPassword.email.replace('@', ''));
     cy.get('.cdk-overlay-container dib-change-email input[name="password"]')
       .clear()
       .type(profileDetails.emailAndPassword.password);
@@ -136,7 +136,7 @@ describe('Personal Settings - Profile', () => {
       .type(profileDetails.emailAndPassword.email);
     cy.get('.cdk-overlay-container dib-change-email input[name="password"]')
       .clear()
-      .type(profileDetails.emailAndPassword.invalidPassword);
+      .type(profileDetails.emailAndPassword.password.replace(/[0-9]/g, ''));
     cy.get('.cdk-overlay-container dib-change-email ui-button').click();
 
     cy.get('.cdk-overlay-container dib-change-email dib-input .dib-input-error').should(
@@ -169,7 +169,7 @@ describe('Personal Settings - Profile', () => {
       .type(profileDetails.emailAndPassword.password);
     cy.get('.cdk-overlay-container change-password input[name="newPassword"]')
       .clear()
-      .type(profileDetails.emailAndPassword.invalidPassword);
+      .type(profileDetails.emailAndPassword.password.replace(/[0-9]/g, ''));
     cy.get('.cdk-overlay-container change-password input[name="confirmNewPassword"]')
       .clear()
       .type(profileDetails.emailAndPassword.password);
@@ -186,7 +186,7 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container change-password input[name="password"]')
       .clear()
-      .type(profileDetails.emailAndPassword.invalidPassword);
+      .type(profileDetails.emailAndPassword.password.replace(/[0-9]/g, ''));
     cy.get('.cdk-overlay-container change-password input[name="newPassword"]')
       .clear()
       .type(profileDetails.emailAndPassword.password);
@@ -209,10 +209,10 @@ describe('Personal Settings - Profile', () => {
       .type(profileDetails.emailAndPassword.password);
     cy.get('.cdk-overlay-container change-password input[name="newPassword"]')
       .clear()
-      .type(profileDetails.emailAndPassword.shortPassword);
+      .type(profileDetails.emailAndPassword.password.replace(/\D/g, ''));
     cy.get('.cdk-overlay-container change-password input[name="confirmNewPassword"]')
       .clear()
-      .type(profileDetails.emailAndPassword.shortPassword);
+      .type(profileDetails.emailAndPassword.password.replace(/\D/g, ''));
     cy.get('.cdk-overlay-container change-password ui-button').click();
 
     cy.get('.cdk-overlay-container change-password dib-input .dib-input-error').should(

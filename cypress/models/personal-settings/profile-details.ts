@@ -4,7 +4,7 @@ export interface ProfileDetails {
   personalInfo: PersonalInfo;
   contactInfo: ContactInfo;
   localize: Localize;
-  emailAndPassword: Pick<User, 'email' | 'password' | 'invalidEmail' | 'invalidPassword' | 'shortPassword'>;
+  emailAndPassword: Pick<User, 'email' | 'password'>;
   travelDocuments: TravelDocuments;
   internalTravelAgent: Omit<User, 'password'>;
   loyaltyProgram: LoyaltyProgram;
