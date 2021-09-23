@@ -43,14 +43,13 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       );
   });
 
-  // TODO: Uncomment when bug is fixed (DT-8477)
-  /*it('should verify that error message is displayed', () => {
-      cy.get('dib-company-management dib-reference-fields dib-cost-center .warning-message')
-      .should('not.be.visible')
+  it('should verify that error message is displayed', () => {
+    cy.get('dib-company-management dib-reference-fields dib-cost-center .warning-message')
+      .should('be.visible')
       .contains(
         'If you uncheck this box, and have not assigned any cost center to an employee, they will not be able to complete their trip booking if cost centers are set as mandatory '
       );
-    });*/
+  });
 
   it('should uncheck "Make cost centers mandatory in each travel booking" check-box', () => {
     cy.get('dib-company-management dib-reference-fields dib-cost-center .checkbox-label')
@@ -99,6 +98,24 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
     );
   });
 
+  it('should sort cost center by name', () => {
+    cy.get('dib-company-management dib-reference-fields dib-cost-center dib-sort-icons').click();
+
+    cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell:first').should(
+      'have.text',
+      referenceFields.costCenter.name
+    );
+    cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell:last')
+      .prev()
+      .prev()
+      .prev()
+      .should('have.text', 'AAA');
+
+    cy.get('dib-company-management dib-reference-fields dib-cost-center dib-sort-icons').click();
+
+    cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell:first').should('have.text', 'AAA');
+  });
+
   it('should edit cost center', () => {
     cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell h4')
       .contains(referenceFields.costCenter.name)
@@ -140,5 +157,27 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       'not.contain',
       referenceFields.costCenter.modifiedName
     );
+  });
+
+  it.only('should verify that last const center is not able to delete', () => {
+    cy.waitForAngular();
+
+    cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell h4')
+      .contains('AAA')
+      .parent('.table-cell')
+      .next('.table-cell')
+      .next('.table-cell')
+      .next('.button-cell')
+      .contains(' archive ')
+      .clickAttached();
+
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'contain',
+      'There is billing profile which is splitted by cost center. You must first change split type on billing profile.'
+    );
+
+    cy.waitForAngular();
   });
 });

@@ -51,6 +51,18 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
     );
   });
 
+  it.only('should submit empty form for adding new Purpose of trip', () => {
+    cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip ui-button[size="large"]')
+      .contains(referenceFields.purposeOfTrip.addActionCtaButton)
+      .click();
+
+    cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog ui-button').contains('save').click();
+
+    cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog .input-holder .error').contains(
+      ' Purpose of trip name is required.'
+    );
+  });
+
   it('should add a new purpose of trip', () => {
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip ui-button[size="large"]')
       .contains(referenceFields.purposeOfTrip.addActionCtaButton)

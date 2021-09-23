@@ -52,6 +52,16 @@ describe('Company Settings - Reference Fields - Project', () => {
     // TODO: missing `.should()`
   }); */
 
+  it.only('should submit empty form for adding new Project', () => {
+    cy.get('dib-company-management dib-reference-fields dib-project ui-button[size="large"]')
+      .contains(referenceFields.project.addActionCtaButton)
+      .click();
+
+    cy.get('.cdk-overlay-container dib-project-dialog ui-button').contains('save').click();
+
+    cy.get('.cdk-overlay-container dib-project-dialog .input-holder .error').contains(' Project name is required.');
+  });
+
   it('should add a new project', () => {
     cy.get('dib-company-management dib-reference-fields dib-project ui-button[size="large"]')
       .contains(referenceFields.project.addActionCtaButton)
