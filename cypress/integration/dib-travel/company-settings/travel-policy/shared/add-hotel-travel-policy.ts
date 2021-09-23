@@ -14,9 +14,12 @@ export const addHotelTravelPolicy = (travelPolicyDetails: TravelPolicy): void =>
     travelPolicyDetails.hotel.city
   );
   cy.get('.pac-container .pac-item').contains(travelPolicyDetails.hotel.city).click();
-  // TODO: Should be used different property `.budgetPerNight` (smaller then `.budget`)
   cy.get(
     '.cdk-overlay-container dib-travel-policy-dialog .item dib-list-item input[placeholder="Budget per night"]'
-  ).type(travelPolicyDetails.sharedDetails.budget);
-  searchAndSelectEmployee(travelPolicyDetails.employee.email);
+  ).type(travelPolicyDetails.hotel.budgetPerNight);
+  searchAndSelectEmployee(
+    travelPolicyDetails.employee.email,
+    travelPolicyDetails.employee.firstName,
+    travelPolicyDetails.employee.lastName
+  );
 };

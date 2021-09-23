@@ -1,9 +1,11 @@
 import { TravelPolicy } from '../../../../models';
 import {
-  clickTravelPolicyCtaButton,
+  cancelDialogAndConfirm,
+  closeEditFormAndConfirm,
   deleteTravelPolicyAndConfirm,
   enterSharedDetails,
   searchAndSelectEmployee,
+  updateTravelPolicy,
 } from './shared';
 
 describe('Company Settings - Travel Policy - Train', () => {
@@ -40,54 +42,71 @@ describe('Company Settings - Travel Policy - Train', () => {
     cy.get('.cdk-overlay-container .cdk-overlay-pane .select .option .option__name')
       .contains(travelPolicyDetails.train.to)
       .click();
-    // TODO: Should be used different property `.budgetPerTrain` (smaller then `.budget`)
     cy.get(
       '.cdk-overlay-container dib-travel-policy-dialog .item dib-list-item input[placeholder="Budget per train"]'
-    ).type(travelPolicyDetails.sharedDetails.budget);
-    searchAndSelectEmployee(travelPolicyDetails.employee.email);
+    ).type(travelPolicyDetails.train.budgetPerTrain);
+    searchAndSelectEmployee(
+      travelPolicyDetails.employee.email,
+      travelPolicyDetails.employee.firstName,
+      travelPolicyDetails.employee.lastName
+    );
 
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'contain',
+      'Travel policy for trains successfully created.'
+    );
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
       'contain',
       travelPolicyDetails.sharedDetails.name
     );
   });
 
-  // TODO: Should be extended to confirm added data (also this test should be added for flight and hotel)
+  it('should close edit form for train travel policy', () => {
+    closeEditFormAndConfirm(travelPolicyDetails);
+  });
+
+  it('should update train travel policy', () => {
+    updateTravelPolicy(travelPolicyDetails);
+
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog .container-text').contains('1st class ').click();
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog .item dib-list-item input[placeholder="Budget per train"]')
+      .clear()
+      .type(travelPolicyDetails.train.modifiedBudgetPerTrain);
+
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'contain',
+      'Travel policy for trains successfully updated.'
+    );
+    cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
+      'contain',
+      travelPolicyDetails.sharedDetails.modifiedName
+    );
+  });
+
   it('should expand train travel policy and display all details', () => {
     cy.waitForAngular();
 
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .button').click();
 
-    cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__item .policyEmployee').should(
-      'contain',
-      `${travelPolicyDetails.employee.firstName} ${travelPolicyDetails.employee.lastName}`
-    );
+    cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__item')
+      .should(
+        'contain',
+        'Trains should be booked more than ' +
+          `${travelPolicyDetails.sharedDetails.modifiedNumberOfDaysInAdvance}` +
+          ' days before departure date'
+      )
+      .should('contain', travelPolicyDetails.sharedDetails.modifiedBudget)
+      .should('contain', travelPolicyDetails.train.from)
+      .should('contain', travelPolicyDetails.train.to)
+      .should('contain', travelPolicyDetails.train.modifiedBudgetPerTrain)
+      .should('contain', '1st Class' || '2nd Class')
+      .should('contain', `${travelPolicyDetails.employee.firstName} ${travelPolicyDetails.employee.lastName}`);
   });
 
-  it('should update train travel policy', () => {
-    clickTravelPolicyCtaButton(travelPolicyDetails.sharedDetails.name, 'edit');
-
-    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=Name]')
-      .clear()
-      .type(travelPolicyDetails.sharedDetails.modifiedName);
-    cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
-
-    cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
-      'contain',
-      travelPolicyDetails.sharedDetails.modifiedName
-    );
-  });
-
-  // TODO: This should be added for other types and inner test should be shared fn
   it('should check cancellation of confirmation dialog', () => {
-    clickTravelPolicyCtaButton(travelPolicyDetails.sharedDetails.modifiedName, 'delete');
-
-    cy.get('.cdk-overlay-container confirmation-dialog ui-button[cancel=true]').click();
-
-    cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
-      'contain',
-      travelPolicyDetails.sharedDetails.modifiedName
-    );
+    cancelDialogAndConfirm(travelPolicyDetails);
   });
 
   it('should delete train travel policy', () => {
