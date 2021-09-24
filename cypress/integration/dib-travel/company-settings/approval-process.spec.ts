@@ -1,6 +1,7 @@
 import { ApprovalProcess, Group, TravelPolicy } from '../../../models';
 import { addGroup, deleteGroup } from '../company-employees';
 import {
+  cancelDeleteApprovalProcessAndConfirm,
   confirmApprovalProcess,
   deleteApprovalProcess,
   selectApprovalSettings,
@@ -71,8 +72,16 @@ describe('Company Settings - Approval Process', () => {
 
     cy.get('.cdk-overlay-container dib-approval-process-helptext-dialog .modal-content').scrollTo('bottom');
 
-    // TODO: Confirm dialog content (heading and paragraph) instead `.should('be.visible')`
-    cy.get('.cdk-overlay-container dib-approval-process-helptext-dialog').should('be.visible');
+    cy.get('.cdk-overlay-container dib-approval-process-helptext-dialog h2').should(
+      'contain',
+      'Setup an approval process'
+    );
+    cy.get('.cdk-overlay-container dib-approval-process-helptext-dialog p')
+      .should('contain', 'A customized approval process controls who is allowed to book what.')
+      .should(
+        'contain',
+        'Good to know: If a user is a member of multiple groups, the least restrictive group approval process will be applied'
+      );
 
     cy.get('.cdk-overlay-container dib-dialog-wrapper i').click();
   });
@@ -90,7 +99,18 @@ describe('Company Settings - Approval Process', () => {
     confirmApprovalProcess(approvalProcess);
   });
 
-  // TODO: Additional test (`it`) for: "Selected traveler already has approval process!"
+  it('should check if selected traveler already has approval process', () => {
+    cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
+
+    selectTraveler(approvalProcess.traveler);
+
+    cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'contain',
+      'Selected traveler already has approval process!'
+    );
+  });
 
   it('should delete approval process (exception from travel policy)', () => {
     deleteApprovalProcess(approvalProcess.traveler.firstName);
@@ -124,18 +144,8 @@ describe('Company Settings - Approval Process', () => {
     confirmApprovalProcess(approvalProcess);
   });
 
-  // TODO: Similar test should be added for all Approval Settings (think about reusable function)
   it('should cancel the deleting approval setting for the group/person (all trips)', () => {
-    cy.get('dib-company-management dib-approval-process dib-approval-process-item .item__left .item__content p')
-      .contains(`${approvalProcess.traveler.firstName} ${approvalProcess.traveler.lastName}`)
-      .parents('dib-approval-process-item')
-      .find('[dib-column-right] ui-button')
-      .contains('delete')
-      .clickAttached();
-
-    cy.get('.cdk-overlay-container confirmation-dialog ui-button[cancel=true]').click();
-
-    confirmApprovalProcess(approvalProcess);
+    cancelDeleteApprovalProcessAndConfirm(approvalProcess.traveler.firstName);
   });
 
   it('should delete approval process (all trips)', () => {
@@ -147,7 +157,9 @@ describe('Company Settings - Approval Process', () => {
 
     cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
 
-    // TODO: Confirm snackbar message: "Traveler or group of travelers must be selected" (instead below)
-    cy.get('.cdk-overlay-container dib-approval-process-dialog').should('be.visible');
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'contain',
+      'Traveler or group of travelers must be selected!'
+    );
   });
 });
