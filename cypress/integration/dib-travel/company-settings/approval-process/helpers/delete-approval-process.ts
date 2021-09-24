@@ -8,6 +8,6 @@ export const deleteApprovalProcess = (traveler: string): void => {
 
   cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
 
-  // TODO: Confirm snackbar message: "Approval process successfully deleted."
+  cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Approval process successfully deleted.');
   cy.get('dib-company-management dib-approval-process dib-page dib-approval-process-item').should('not.exist');
 };
