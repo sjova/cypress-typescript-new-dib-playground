@@ -14,7 +14,7 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
     cy.visit('/company-management/reference-fields/purpose-of-trip');
   });
 
-  it('should change purpose of trip fields label at checkout', () => {
+  it('should change purpose of trip field label at checkout', () => {
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip label')
       .contains('Purpose of trip')
       .next('input')
@@ -32,13 +32,17 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
     );
   });
 
-  // TODO: Uncomment when the bug is fixed (DT-8476)
-  /* it('should reset to default fields label', () => {
+  it('should reset Purpose of trip label fields to default', () => {
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip ui-button[outline="true"]')
       .contains(referenceFields.resetToDefaultCtaButton)
       .click();
-    // TODO: missing `.should()`
-  }); */
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button').contains(' Reset ').click();
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'contain',
+      referenceFields.purposeOfTrip.confirmationMessage
+    );
+  });
 
   it('should check "Display and set field to mandatory when checking out booking" check-box', () => {
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip .checkbox-label')
@@ -51,7 +55,7 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
     );
   });
 
-  it.only('should submit empty form for adding new Purpose of trip', () => {
+  it('should submit empty form for adding new Purpose of trip', () => {
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip ui-button[size="large"]')
       .contains(referenceFields.purposeOfTrip.addActionCtaButton)
       .click();
@@ -78,6 +82,17 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
 
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip').should(
       'contain',
+      referenceFields.purposeOfTrip.name
+    );
+  });
+
+  it('should search for previously added project', () => {
+    cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip ui-input input')
+      .eq(1)
+      .type(referenceFields.purposeOfTrip.name);
+
+    cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip .table-cell:first').should(
+      'have.text',
       referenceFields.purposeOfTrip.name
     );
   });

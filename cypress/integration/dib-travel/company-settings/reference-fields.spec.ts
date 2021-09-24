@@ -8,6 +8,9 @@ describe('Company Settings - Reference Fields', () => {
   });
 
   it('should check if "Employee" is displayed in header and verify that link is valid', () => {
+    cy.login();
+    cy.visit('/company-management/reference-fields/cost-center');
+
     cy.get('dib-company-management dib-reference-fields .header__details__spacer').contains('Employees page').click();
     cy.get('dib-people-management dib-employees .header__title').should('have.text', ' Employees ');
   });
