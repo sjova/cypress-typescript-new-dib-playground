@@ -14,6 +14,7 @@ describe('Company Employees - Employees (Agent)', () => {
   beforeEach(() => {
     cy.login();
     cy.visit('/people-management/employees');
+    cy.waitForAngular();
   });
 
   it('should display "Employees" in the sidebar navigation', () => {
@@ -28,8 +29,6 @@ describe('Company Employees - Employees (Agent)', () => {
   });
 
   it('should allow agent to add new employee with sending invitation to employee', () => {
-    cy.waitForAngular();
-
     addEmployee(employee.firstName, employee.lastName, employee.email);
 
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
@@ -38,26 +37,19 @@ describe('Company Employees - Employees (Agent)', () => {
   });
 
   it('should allow agent to search a certain employee', () => {
-    //TODO revisit selector one more time
-    cy.get('dib-people-management dib-employees dib-page ui-input input[name="undefined"]').type(employee.firstName, {
-      force: true,
-    });
+    cy.get('dib-people-management dib-employees dib-page ui-input input[name="undefined"]').type(employee.firstName);
 
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should(
       'not.contain',
       employee.modifiedFirstName
     );
-
-    cy.waitForAngular();
   });
 
   it('should display only invited users', () => {
-    cy.waitForAngular();
-
     cy.get('dib-people-management dib-employees dib-page ui-dropdown .selected').click();
-
     cy.waitForAngular();
+
     cy.get('.cdk-overlay-container .cdk-overlay-pane ui-panel .item').contains('Invited').click();
 
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
@@ -67,7 +59,6 @@ describe('Company Employees - Employees (Agent)', () => {
   });
 
   it('should allow agent to edit added employee', () => {
-    cy.waitForAngular();
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell h4')
       .contains(employee.firstName)
       .parent('.name-cell')
@@ -101,9 +92,7 @@ describe('Company Employees - Employees (Agent)', () => {
   });
 
   it('should allow agent to add new employee with not sending invitation to employee', () => {
-    cy.waitForAngular();
-
-    addEmployee(employee.firstName, employee.lastName, employee.email, false);
+    addEmployee(employee.firstName, employee.lastName, employee.email, true);
 
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.lastName);
@@ -112,11 +101,9 @@ describe('Company Employees - Employees (Agent)', () => {
   });
 
   it('should display only not invited users', () => {
-    cy.waitForAngular();
-
     cy.get('dib-people-management dib-employees dib-page ui-dropdown .selected').click();
-
     cy.waitForAngular();
+
     cy.get('.cdk-overlay-container .cdk-overlay-pane ui-panel .item').contains('Not invited').click();
 
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
@@ -125,19 +112,15 @@ describe('Company Employees - Employees (Agent)', () => {
   });
 
   it('should display only admins', () => {
-    cy.waitForAngular();
-
     cy.get('dib-people-management dib-employees ui-radio').contains('Show admins only').click();
 
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', 'Admin');
   });
 
   it('should display only activated users', () => {
-    cy.waitForAngular();
-
     cy.get('dib-people-management dib-employees dib-page ui-dropdown .selected').click();
-
     cy.waitForAngular();
+
     cy.get('.cdk-overlay-container .cdk-overlay-pane ui-panel .item').contains('Activated').click();
 
     cy.get('dib-people-management dib-employees dib-page .grid').should('contain', 'Activated');
@@ -146,8 +129,6 @@ describe('Company Employees - Employees (Agent)', () => {
   });
 
   it('should not allow agent to add new employee with existing email', () => {
-    cy.waitForAngular();
-
     addEmployee(employee.firstName, employee.lastName, employee.email);
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
@@ -157,7 +138,7 @@ describe('Company Employees - Employees (Agent)', () => {
     cy.get('.cdk-overlay-container simple-snack-bar button').contains('ok').click();
   });
 
-  it('should allow a agent to archive not-invited employee', () => {
+  it('should allow an agent to archive a not-invited employee', () => {
     archiveEmployee(employee);
   });
 });
