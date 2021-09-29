@@ -16,7 +16,7 @@ describe('Sign In (User)', () => {
   });
 
   it('should check if a not logged user can visit a page', () => {
-    cy.visit('https://develop--dib-travel.netlify.app/people-management/employees');
+    cy.visit('/people-management/employees');
     cy.waitForAngular();
 
     cy.get('new-login ui-input input[name=email]').should('be.visible');
