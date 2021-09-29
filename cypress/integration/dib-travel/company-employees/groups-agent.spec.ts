@@ -1,9 +1,8 @@
-import { Employee, Group } from '../../../models';
+import { Group } from '../../../models';
 import { addGroup, deleteGroup } from './shared';
 
 describe('Company Employees - Groups (Agent)', () => {
   let group: Group;
-  let employee: Employee;
 
   before(() => {
     cy.fixture('company-employees/group').then((groupFixture) => {
@@ -23,8 +22,8 @@ describe('Company Employees - Groups (Agent)', () => {
   });
 
   it('should display Groups page', () => {
-    cy.get('dib-people-management dib-groups .header').should('contain', 'Groups');
-    cy.get('dib-people-management dib-groups .header').should(
+    cy.get('dib-people-management dib-groups .header__title').should('contain', 'Groups');
+    cy.get('dib-people-management dib-groups .header__details').should(
       'contain',
       'You can create groups of employees in order to simplify on- and off-boarding in in the company. When assigning functions and authorization (e.g. Cost Centers, Billing profiles etc) you can do that to a group instead of every employee.'
     );
@@ -35,9 +34,18 @@ describe('Company Employees - Groups (Agent)', () => {
   });
 
   it('should display added employee in created group', () => {
-    cy.get('dib-people-management dib-groups dib-expandable-item .button').contains('keyboard_arrow_down').click();
-    cy.get('dib-people-management dib-groups dib-expandable-item dib-list-item').should('contain', employee.firstName);
-    cy.get('dib-people-management dib-groups dib-expandable-item dib-list-item').should('contain', employee.email);
+    cy.waitForAngular();
+
+    cy.get('dib-people-management dib-groups dib-page dib-expandable-item .button').click();
+
+    cy.get('dib-people-management dib-groups dib-page dib-expandable-item div[dib-column-350] h4').should(
+      'contain',
+      `${group.employee.firstName} ${group.employee.lastName}`
+    );
+    cy.get('dib-people-management dib-groups dib-page dib-expandable-item div[dib-column-700] h4').should(
+      'contain',
+      group.employee.email
+    );
   });
 
   it('should allow agent to edit created group', () => {
@@ -50,6 +58,9 @@ describe('Company Employees - Groups (Agent)', () => {
       .clickAttached();
 
     cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="group name*"]').clear().type(group.modifiedName);
+    cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="description"]')
+      .clear()
+      .type(group.modifiedDescription);
     cy.get('.cdk-overlay-container dib-group-dialog ui-button').contains('save').click();
 
     cy.get('dib-people-management dib-groups dib-expandable-item').should('contain', group.modifiedName);
@@ -61,7 +72,7 @@ describe('Company Employees - Groups (Agent)', () => {
   });
 
   it('should confirm that the group no longer exists', () => {
-    cy.get('dib-people-management dib-groups [dib-empty-list-label]').should(
+    cy.get('dib-people-management dib-groups dib-page [dib-empty-list-label]').should(
       'contain',
       'You have not yet created any groups.'
     );

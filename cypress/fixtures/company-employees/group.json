@@ -1,6 +1,11 @@
 {
   "name": "CY Group",
   "description": "CY Description",
+  "modifiedName": "CY Modified Group",
   "modifiedDescription": "CY Modified Description",
-  "modifiedName": "CY Modified Group"
+  "employee": {
+    "firstName": "QA",
+    "lastName": "Bot",
+    "email": "qa.tools@dibtravel.com"
+  }
 }
