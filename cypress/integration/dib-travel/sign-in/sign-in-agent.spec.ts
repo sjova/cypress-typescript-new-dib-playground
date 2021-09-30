@@ -14,6 +14,17 @@ describe('Sign In (Agent)', () => {
     cy.get('new-login .auth-container-footer a[href="/login/agent"]').click();
   });
 
+  it('should check if a not logged agent can visit a page', () => {
+    cy.resetState();
+
+    cy.visit('/people-management/employees');
+    cy.waitForAngular();
+
+    cy.get('new-login ui-input input[name=email]').should('be.visible');
+    cy.get('new-login ui-input input[name=password]').should('be.visible');
+    cy.get('new-login ui-button').should('contain', 'Sign in');
+  });
+
   it('should check agent terms and conditions redirection link', () => {
     cy.get('new-agent-login .terms a[href="https://developer.expediapartnersolutions.com/terms/agent/en/"]').should(
       'have.text',
