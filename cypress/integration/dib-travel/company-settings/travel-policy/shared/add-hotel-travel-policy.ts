@@ -17,9 +17,6 @@ export const addHotelTravelPolicy = (travelPolicyDetails: TravelPolicy): void =>
   cy.get(
     '.cdk-overlay-container dib-travel-policy-dialog .item dib-list-item input[placeholder="Budget per night"]'
   ).type(travelPolicyDetails.hotel.budgetPerNight);
-  searchAndSelectEmployee(
-    travelPolicyDetails.employee.email,
-    travelPolicyDetails.employee.firstName,
-    travelPolicyDetails.employee.lastName
-  );
+
+  searchAndSelectEmployee(travelPolicyDetails.employee);
 };

@@ -1,7 +1,7 @@
 import { clickTravelPolicyCtaButton } from '.';
 import { TravelPolicy } from '../../../../../models';
 
-export const closeEditFormAndConfirm = (travelPolicyDetails: TravelPolicy): void => {
+export const closeEditDialogAndConfirm = (travelPolicyDetails: TravelPolicy): void => {
   clickTravelPolicyCtaButton(travelPolicyDetails.sharedDetails.name, 'edit');
 
   cy.get('.cdk-overlay-container dib-dialog-wrapper i').contains('close').click();

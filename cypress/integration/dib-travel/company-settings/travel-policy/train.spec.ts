@@ -1,11 +1,11 @@
 import { TravelPolicy } from '../../../../models';
 import {
-  cancelDialogAndConfirm,
-  closeEditFormAndConfirm,
+  cancelDeleteDialogAndConfirm,
+  closeEditDialogAndConfirm,
   deleteTravelPolicyAndConfirm,
+  editTravelPolicy,
   enterSharedDetails,
   searchAndSelectEmployee,
-  updateTravelPolicy,
 } from './shared';
 
 describe('Company Settings - Travel Policy - Train', () => {
@@ -45,11 +45,7 @@ describe('Company Settings - Travel Policy - Train', () => {
     cy.get(
       '.cdk-overlay-container dib-travel-policy-dialog .item dib-list-item input[placeholder="Budget per train"]'
     ).type(travelPolicyDetails.train.budgetPerTrain);
-    searchAndSelectEmployee(
-      travelPolicyDetails.employee.email,
-      travelPolicyDetails.employee.firstName,
-      travelPolicyDetails.employee.lastName
-    );
+    searchAndSelectEmployee(travelPolicyDetails.employee);
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
@@ -62,11 +58,11 @@ describe('Company Settings - Travel Policy - Train', () => {
   });
 
   it('should close edit form for train travel policy', () => {
-    closeEditFormAndConfirm(travelPolicyDetails);
+    closeEditDialogAndConfirm(travelPolicyDetails);
   });
 
   it('should update train travel policy', () => {
-    updateTravelPolicy(travelPolicyDetails);
+    editTravelPolicy(travelPolicyDetails);
 
     cy.get('.cdk-overlay-container dib-travel-policy-dialog .container-text').contains('1st class ').click();
     cy.get('.cdk-overlay-container dib-travel-policy-dialog .item dib-list-item input[placeholder="Budget per train"]')
@@ -106,7 +102,7 @@ describe('Company Settings - Travel Policy - Train', () => {
   });
 
   it('should check cancellation of confirmation dialog', () => {
-    cancelDialogAndConfirm(travelPolicyDetails);
+    cancelDeleteDialogAndConfirm(travelPolicyDetails);
   });
 
   it('should delete train travel policy', () => {

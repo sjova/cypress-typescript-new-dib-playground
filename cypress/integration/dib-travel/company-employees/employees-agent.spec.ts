@@ -1,9 +1,9 @@
 import { getEmailWithHash } from '../../../helpers';
-import { Employee } from '../../../models';
+import { EmployeeExtended } from '../../../models';
 import { addEmployee, archiveEmployee } from './shared';
 
 describe('Company Employees - Employees (Agent)', () => {
-  let employee: Employee;
+  let employee: EmployeeExtended;
 
   before(() => {
     cy.fixture('company-employees/employee').then((employeeFixture) => {

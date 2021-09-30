@@ -1,10 +1,10 @@
 import { TravelPolicy } from '../../../../models';
 import {
   addHotelTravelPolicy,
-  cancelDialogAndConfirm,
-  closeEditFormAndConfirm,
+  cancelDeleteDialogAndConfirm,
+  closeEditDialogAndConfirm,
   deleteTravelPolicyAndConfirm,
-  updateTravelPolicy,
+  editTravelPolicy,
 } from './shared';
 
 describe('Company Settings - Travel Policy - Hotel', () => {
@@ -35,11 +35,11 @@ describe('Company Settings - Travel Policy - Hotel', () => {
   });
 
   it('should close edit form for hotel travel policy', () => {
-    closeEditFormAndConfirm(travelPolicyDetails);
+    closeEditDialogAndConfirm(travelPolicyDetails);
   });
 
   it('should update hotel travel policy', () => {
-    updateTravelPolicy(travelPolicyDetails);
+    editTravelPolicy(travelPolicyDetails);
 
     cy.get('.cdk-overlay-container dib-travel-policy-dialog star-rating').next().click();
     cy.get('.cdk-overlay-container dib-travel-policy-dialog .google-places-autocomplete-input')
@@ -81,7 +81,7 @@ describe('Company Settings - Travel Policy - Hotel', () => {
   });
 
   it('should check cancellation of confirmation dialog', () => {
-    cancelDialogAndConfirm(travelPolicyDetails);
+    cancelDeleteDialogAndConfirm(travelPolicyDetails);
   });
 
   it('should delete hotel travel policy', () => {

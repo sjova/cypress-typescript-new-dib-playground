@@ -1,4 +1,4 @@
-import { User } from '../user';
+import { User } from '../shared';
 
 export interface TravelPolicy {
   flight: Flight;
@@ -18,11 +18,8 @@ export interface SharedDetails {
   modifiedBudget: string;
 }
 
-interface Base {
+interface Flight {
   type: string;
-}
-
-interface Flight extends Base {
   budgetException: string;
   durationBudgetException: string;
   from: string;
@@ -31,14 +28,16 @@ interface Flight extends Base {
   budgetPerFlight: string;
 }
 
-interface Hotel extends Base {
+interface Hotel {
+  type: string;
   city: string;
   modifiedCity: string;
   budgetPerNight: string;
   modifiedBudgetPerNight: string;
 }
 
-interface Train extends Base {
+interface Train {
+  type: string;
   from: string;
   to: string;
   budgetPerTrain: string;

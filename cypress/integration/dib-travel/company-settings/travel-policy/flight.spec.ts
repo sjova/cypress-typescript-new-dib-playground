@@ -1,11 +1,11 @@
 import { TravelPolicy } from '../../../../models';
 import {
-  cancelDialogAndConfirm,
-  closeEditFormAndConfirm,
+  cancelDeleteDialogAndConfirm,
+  closeEditDialogAndConfirm,
   deleteTravelPolicyAndConfirm,
+  editTravelPolicy,
   enterSharedDetails,
   searchAndSelectEmployee,
-  updateTravelPolicy,
 } from './shared';
 
 describe('Company Settings - Travel Policy - Flight', () => {
@@ -54,11 +54,7 @@ describe('Company Settings - Travel Policy - Flight', () => {
     cy.get(
       '.cdk-overlay-container dib-travel-policy-dialog .item dib-list-item input[placeholder="Budget per flight"]'
     ).type(travelPolicyDetails.flight.budgetPerFlight);
-    searchAndSelectEmployee(
-      travelPolicyDetails.employee.email,
-      travelPolicyDetails.employee.firstName,
-      travelPolicyDetails.employee.lastName
-    );
+    searchAndSelectEmployee(travelPolicyDetails.employee);
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
@@ -71,11 +67,11 @@ describe('Company Settings - Travel Policy - Flight', () => {
   });
 
   it('should close edit form for flight travel policy', () => {
-    closeEditFormAndConfirm(travelPolicyDetails);
+    closeEditDialogAndConfirm(travelPolicyDetails);
   });
 
   it('should update flight travel policy', () => {
-    updateTravelPolicy(travelPolicyDetails);
+    editTravelPolicy(travelPolicyDetails);
 
     cy.get('.cdk-overlay-container dib-travel-policy-dialog dib-checkbox').click({ multiple: true });
     cy.get('.cdk-overlay-container dib-travel-policy-dialog dib-checkbox label .container-text')
@@ -148,7 +144,7 @@ describe('Company Settings - Travel Policy - Flight', () => {
   });
 
   it('should check cancellation of confirmation dialog', () => {
-    cancelDialogAndConfirm(travelPolicyDetails);
+    cancelDeleteDialogAndConfirm(travelPolicyDetails);
   });
 
   it('should delete flight travel policy', () => {
