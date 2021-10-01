@@ -6,7 +6,7 @@ Cypress TypeScript DIB Playground
 
 Operating System: **macOS Catalina 10.15.7 (19H1217)**
 
-IDE: **Visual Studio Code 1.60.0**
+IDE: **Visual Studio Code 1.60.2**
 
 ```
 git --version
@@ -16,13 +16,19 @@ nvm --version
 0.38.0
 
 node --version
-v14.17.5
+v14.18.0
 
 npm --version
-6.14.14
+6.14.15
 
 yarn --version
 1.22.11
+
+npx cypress --version
+Cypress package version: 8.5.0
+Cypress binary version: 8.5.0
+Electron version: 13.2.0
+Bundled Node version: 14.16.0
 ```
 
 ## Getting Started
