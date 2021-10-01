@@ -1,26 +1,44 @@
 {
   "flight": {
     "type": "FLIGHT",
-    "budgetException": "250",
-    "from": "Belgrad",
-    "to": "Stockholm",
+    "budgetException": "25000",
+    "from": "BEG",
+    "to": "STO",
     "ticketType": "One way",
-    "durationBudgetException": "24"
+    "durationBudgetException": "24",
+    "budgetPerFlight": "20000"
+  },
+  "modifiedFlight": {
+    "budgetException": "250",
+    "from": "BER",
+    "to": "AMS",
+    "ticketType": "Return",
+    "durationBudgetException": "12",
+    "budgetPerFlight": "200"
   },
   "hotel": {
     "type": "HOTEL",
-    "city": "Belgrade"
+    "city": "Belgrade",
+    "modifiedCity": "Berlin",
+    "budgetPerNight": "20000",
+    "modifiedBudgetPerNight": "200"
   },
   "train": {
     "type": "TRAIN",
     "from": "Stockholm Central",
-    "to": "Malmö C"
+    "to": "Malmö C",
+    "budgetPerTrain": "20000",
+    "modifiedFrom": "Helsingborg C",
+    "modifiedTo": "Stockholm Södra",
+    "modifiedBudgetPerTrain": "200"
   },
   "sharedDetails": {
     "name": "CY Travel Policy Test",
-    "modifiedName": "CY Modified Travel Tolicy Test",
     "numberOfDaysInAdvance": "2",
-    "budget": "500"
+    "budget": "50000",
+    "modifiedName": "CY Modified Travel Policy Test",
+    "modifiedNumberOfDaysInAdvance": "4",
+    "modifiedBudget": "500"
   },
   "employee": {
     "firstName": "QA",

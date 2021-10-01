@@ -1,9 +1,10 @@
-export const searchAndSelectEmployee = (employeeEmail: string): void => {
-  cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=Search]').type(employeeEmail);
-  cy.get('.cdk-overlay-container dib-travel-policy-dialog dib-assign-members .members .user-email')
-    // TODO: Implement `.contains` based on first and last name
-    .contains(employeeEmail)
-    .prev('.member')
+import { Employee } from '../../../../../models';
+
+export const searchAndSelectEmployee = (employee: Employee): void => {
+  cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=Search]').type(employee.email);
+  cy.get('.cdk-overlay-container dib-travel-policy-dialog dib-assign-members .members .user')
+    .contains(`${employee.firstName} ${employee.lastName}`)
+    .parents('.member')
     .click();
   cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
 };

@@ -27,7 +27,9 @@ declare global {
       checkToken(token: string): void;
 
       /**
-       * @todo Revisit usage of this later
+       * @deprecated Please use default `cy.click()` in combination with `cy.waitForAngular()`.
+       *
+       * @todo Remove from tests and delete the command
        *
        * Click attached DOM element
        *
@@ -60,19 +62,6 @@ declare global {
        *    cy.dataCy('greeting')
        */
       dataCy(value: string): Chainable<JQuery<HTMLElement>>;
-
-      /**
-       * Get iframe document body
-       *
-       * @param {string} selector - Iframe selector
-       *
-       * @example
-       *    cy.getIframeBody('dib-foo iframe')
-       *
-       *    cy.getIframeBody('iframe[data-cy="dib-foo-iframe"]').find('#run-button').should('have.text', 'Try it').click()
-       *    cy.getIframeBody('iframe[data-cy="dib-foo-iframe"]').find('#result').should('include.text', '"some response"')
-       */
-      getIframeBody(selector: string): Cypress.Chainable<JQuery<HTMLElement>>;
 
       /**
        * @todo Used for Cypress demo purposes and must be revisited before usage

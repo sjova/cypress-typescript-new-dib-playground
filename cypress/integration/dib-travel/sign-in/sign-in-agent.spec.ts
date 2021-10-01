@@ -15,6 +15,8 @@ describe('Sign In (Agent)', () => {
   });
 
   it('should check if a not logged agent can visit a page', () => {
+    cy.resetState();
+
     cy.visit('/people-management/employees');
     cy.waitForAngular();
 

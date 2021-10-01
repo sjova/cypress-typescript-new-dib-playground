@@ -4,7 +4,6 @@ import {
   clickAttached,
   clickLink,
   dataCy,
-  getIframeBody,
   getSessionStorage,
   iframeFix,
   login,
@@ -21,7 +20,6 @@ Cypress.Commands.add('checkToken', checkToken);
 Cypress.Commands.add('clickAttached', { prevSubject: 'element' }, clickAttached);
 Cypress.Commands.add('clickLink', clickLink);
 Cypress.Commands.add('dataCy', dataCy);
-Cypress.Commands.add('getIframeBody', getIframeBody);
 Cypress.Commands.add('getSessionStorage', getSessionStorage);
 Cypress.Commands.add('iframeFix', iframeFix);
 Cypress.Commands.add('login', login);

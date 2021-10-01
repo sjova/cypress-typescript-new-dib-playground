@@ -38,7 +38,7 @@ describe('Company Settings - Approval Process', () => {
     addHotelTravelPolicy(travelPolicyDetails); // TODO: Do we need to include other types (Flight, Train)?
 
     cy.visit('/people-management/groups');
-    addGroup(group.name, false);
+    addGroup(group.name, group.description, false);
 
     cy.resetState();
   });

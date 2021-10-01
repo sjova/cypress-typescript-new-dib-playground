@@ -67,6 +67,8 @@
 - Please don't write dummy tests (always consider the benefit of the written test)
 - Inside forms testing, we need to cover the following items: form validation (ex. validation and error messages: required, minlength/maxlength, min/max, email, input type, etc.), disabled fields (if any), help/hint text (if any), invalid form submit, valid form submit, confirm submitted data (on UI/UX if available or in sending API data)
 - Inside dialogs testing, we need to cover the following items: open/launch dialog (it doesn't have to be a separate test), close/cancel the dialog (cancel or close button or both), dialog action/CTA (ex. actions: ok, submit, add, update, archive, delete, etc.)
+- Make sure you don't have too much repetitive code when using the `if/else` statement
+- If you extend an existing feature (function, command, etc.), check usage in all places after the change.
 
 ## Branch Naming Conventions
 
