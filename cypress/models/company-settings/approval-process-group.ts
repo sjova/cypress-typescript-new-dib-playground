@@ -1,6 +1,6 @@
 import { User } from '../shared';
 
-export interface ApprovalProcess {
+export interface ApprovalProcessGroup {
   traveler: Pick<User, 'firstName' | 'lastName'>;
   travelersGroupName: string;
 }
