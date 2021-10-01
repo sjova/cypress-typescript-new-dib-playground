@@ -1,10 +1,10 @@
 import { selectTravelerGroup } from '.';
-import { ApprovalProcess } from '../../../../../models';
+import { ApprovalProcessGroup } from '../../../../../models';
 
-export const addApprovalProcessForGroupAndConfirm = (approvalProcessForGroup: ApprovalProcess): void => {
+export const addApprovalProcessAndConfirm = (approvalProcessGroup: ApprovalProcessGroup): void => {
   cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
 
-  selectTravelerGroup(approvalProcessForGroup);
+  selectTravelerGroup(approvalProcessGroup);
 
   cy.get('.cdk-overlay-container dib-approval-process-dialog .radio-button-group label')
     .contains("Don't need approval (exception from travel policy)")
@@ -15,5 +15,5 @@ export const addApprovalProcessForGroupAndConfirm = (approvalProcessForGroup: Ap
   cy.get('dib-company-management dib-approval-process dib-approval-process-item .item__left')
     .first()
     .find('.item__content p')
-    .should('contain', approvalProcessForGroup.travelersGroupName);
+    .should('contain', approvalProcessGroup.travelersGroupName);
 };
