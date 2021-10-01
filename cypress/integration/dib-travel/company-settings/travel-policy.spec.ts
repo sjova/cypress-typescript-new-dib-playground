@@ -9,13 +9,4 @@ describe('Company Settings - Travel Policy', () => {
 
     cy.get('.cdk-overlay-container dib-navbar-panel').contains('Travel Policy ').should('exist');
   });
-
-  // TODO: Nenad - We need to discuss this?
-  it('should submit empty travel policy form', () => {
-    cy.get('dib-company-management dib-travel-policy ui-button[type=primary]').click();
-
-    cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
-
-    cy.get('.cdk-overlay-container dib-travel-policy-dialog').should('be.visible');
-  });
 });
