@@ -1,4 +1,4 @@
-import { User } from '../../models/user';
+import { User } from '../../models';
 
 export const typeLogin = (user: Pick<User, 'email' | 'password'>): void => {
   cy.get('input[name=email]').type(user.email);
