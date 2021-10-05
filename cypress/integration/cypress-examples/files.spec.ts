@@ -1,3 +1,5 @@
+/* eslint-disable mocha/no-sibling-hooks */
+
 // JSON fixture file can be loaded directly using
 import requiredExample from '../../fixtures/example.json';
 

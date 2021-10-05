@@ -30,6 +30,9 @@ describe('Company Settings - Approval Process', () => {
     });
   });
 
+  // TODO: Rethink a better way to execute prepare data actions instead of duplicated `before()`
+  // Maybe load multiple fixtures and then execute prepare actions
+  // eslint-disable-next-line mocha/no-sibling-hooks
   before(() => {
     cy.login();
 

@@ -1,4 +1,6 @@
-// Please don't modify or delete this file
+// PLEASE DON'T MODIFY OR DELETE THIS FILE
+
+/* eslint-disable mocha/no-hooks-for-single-case */
 
 import { CreditCard } from '../../../models';
 

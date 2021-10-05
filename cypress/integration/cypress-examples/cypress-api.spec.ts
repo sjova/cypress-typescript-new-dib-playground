@@ -1,3 +1,6 @@
+/* eslint-disable mocha/max-top-level-suites */
+/* eslint-disable mocha/no-hooks-for-single-case */
+
 describe('Cypress.Commands', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/cypress-api');

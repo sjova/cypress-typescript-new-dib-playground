@@ -1,4 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
+/* eslint-disable mocha/no-hooks-for-single-case */
+
 describe('Viewport', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/commands/viewport');

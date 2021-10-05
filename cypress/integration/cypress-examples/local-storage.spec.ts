@@ -1,3 +1,5 @@
+/* eslint-disable mocha/no-hooks-for-single-case */
+
 describe('Local Storage', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/commands/local-storage');
