@@ -1,4 +1,4 @@
-import { ReferenceFields } from '../../../../models';
+import { ReferenceFields } from '@cy/models';
 
 describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
   let referenceFields: ReferenceFields;

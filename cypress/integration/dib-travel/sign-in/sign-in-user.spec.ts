@@ -1,4 +1,4 @@
-import { DibTravelAccounts } from '../../../models';
+import { DibTravelAccounts } from '@cy/models';
 
 describe('Sign In (User)', () => {
   let accounts: DibTravelAccounts;

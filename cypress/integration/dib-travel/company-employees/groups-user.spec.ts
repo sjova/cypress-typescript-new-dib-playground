@@ -1,4 +1,4 @@
-import { Group } from '../../../models';
+import { Group } from '@cy/models';
 import { addGroup, deleteGroup } from './shared';
 
 describe('Company Employees - Groups (User)', () => {

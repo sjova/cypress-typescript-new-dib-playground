@@ -1,4 +1,4 @@
-import { DibTravelAccounts, ReferenceFields } from '../../../../models';
+import { DibTravelAccounts, ReferenceFields } from '@cy/models';
 
 describe('Company Settings - Reference Fields - Cost Center', () => {
   let referenceFields: ReferenceFields;

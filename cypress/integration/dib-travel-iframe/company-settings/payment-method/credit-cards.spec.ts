@@ -1,5 +1,5 @@
-import { getEmailWithHash } from '../../../../helpers';
-import { CreditCard, PaymentMethod } from '../../../../models';
+import { getEmailWithHash } from '@cy/helpers';
+import { CreditCard, PaymentMethod } from '@cy/models';
 
 describe('Company Settings - Payment Method - Credit Cards', () => {
   let creditCard: CreditCard;

@@ -1,4 +1,4 @@
-import { TravelPolicy } from '../../../../../models';
+import { TravelPolicy } from '@cy/models';
 import { enterSharedDetails } from './enter-shared-details';
 import { searchAndSelectEmployee } from './search-and-select-employee';
 

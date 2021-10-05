@@ -1,5 +1,5 @@
-import { getEmailWithHash } from '../../../../helpers';
-import { PaymentMethod } from '../../../../models';
+import { getEmailWithHash } from '@cy/helpers';
+import { PaymentMethod } from '@cy/models';
 import { clickLodgeCardCtaButton } from './helpers';
 
 describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {

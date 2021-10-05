@@ -1,4 +1,4 @@
-import { User } from '../../models';
+import { User } from '@cy/models';
 
 declare global {
   namespace Cypress {

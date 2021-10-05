@@ -1,4 +1,4 @@
-import { ApprovalProcessGroup, Group, TravelPolicy } from '../../../models';
+import { ApprovalProcessGroup, Group, TravelPolicy } from '@cy/models';
 import { addGroup, deleteGroup } from '../company-employees';
 import {
   addApprovalProcessAndConfirm,

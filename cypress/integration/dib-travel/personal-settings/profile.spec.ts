@@ -1,4 +1,4 @@
-import { ProfileDetails } from '../../../models';
+import { ProfileDetails } from '@cy/models';
 import { clickCtaInsideSection, getSection } from './helpers';
 
 describe('Personal Settings - Profile', () => {

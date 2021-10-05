@@ -1,4 +1,4 @@
-import { getFirstWord } from '../../../../../helpers';
+import { getFirstWord } from '@cy/helpers';
 
 export const selectApprovalSettings = (settings: ApprovalSettings, groupName: string): void => {
   let inputSelectorPosition = -1;

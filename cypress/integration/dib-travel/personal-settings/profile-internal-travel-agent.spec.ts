@@ -1,5 +1,5 @@
-import { getEmailWithHash } from '../../../helpers';
-import { ProfileDetails } from '../../../models';
+import { getEmailWithHash } from '@cy/helpers';
+import { ProfileDetails } from '@cy/models';
 import { addEmployee, archiveEmployee } from '../company-employees';
 
 describe('Personal Settings - Profile - Internal Travel Agent', () => {

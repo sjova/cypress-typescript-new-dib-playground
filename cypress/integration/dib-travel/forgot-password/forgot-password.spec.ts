@@ -1,5 +1,5 @@
-import { DibTravelAccounts } from '../../../models';
-import { getEmailWithHash } from '../../../helpers';
+import { getEmailWithHash } from '@cy/helpers';
+import { DibTravelAccounts } from '@cy/models';
 
 describe('Forgot Password', () => {
   let accounts: DibTravelAccounts;

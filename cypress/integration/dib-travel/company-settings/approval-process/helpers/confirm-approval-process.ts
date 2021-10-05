@@ -1,4 +1,4 @@
-import { ApprovalProcessGroup } from '../../../../../models';
+import { ApprovalProcessGroup } from '@cy/models';
 
 export const confirmApprovalProcess = (approvalProcessGroup: ApprovalProcessGroup): void => {
   cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Approval process successfully created.');

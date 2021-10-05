@@ -2,7 +2,7 @@
 
 /* eslint-disable mocha/no-hooks-for-single-case */
 
-import { CreditCard } from '../../../models';
+import { CreditCard } from '@cy/models';
 
 describe('Personal Settings - Credit Cards (Iframe Demo)', () => {
   let creditCard: CreditCard;
