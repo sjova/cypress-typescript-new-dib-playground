@@ -44,13 +44,27 @@ describe('Company Settings - Reference Fields - Project', () => {
     );
   });
 
-  // TODO: Uncomment when the bug is fixed (DT-8476)
-  /* it('should reset to default fields label', () => {
+  it('should reset Project field label to default', () => {
     cy.get('dib-company-management dib-reference-fields dib-project ui-button[outline="true"]')
       .contains(referenceFields.resetToDefaultCtaButton)
       .click();
-    // TODO: missing `.should()`
-  }); */
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button').contains(' Reset ').click();
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'contain',
+      referenceFields.project.confirmationMessage
+    );
+  });
+
+  it('should submit empty form for adding new Project', () => {
+    cy.get('dib-company-management dib-reference-fields dib-project ui-button[size="large"]')
+      .contains(referenceFields.project.addActionCtaButton)
+      .click();
+
+    cy.get('.cdk-overlay-container dib-project-dialog ui-button').contains('save').click();
+
+    cy.get('.cdk-overlay-container dib-project-dialog .input-holder .error').contains(' Project name is required.');
+  });
 
   it('should add a new project', () => {
     cy.get('dib-company-management dib-reference-fields dib-project ui-button[size="large"]')
@@ -64,6 +78,17 @@ describe('Company Settings - Reference Fields - Project', () => {
     cy.get('.cdk-overlay-container dib-project-dialog ui-button').contains('save').click();
 
     cy.get('dib-company-management dib-reference-fields dib-project').should('contain', referenceFields.project.name);
+  });
+
+  it('should search for previously added project', () => {
+    cy.get('dib-company-management dib-reference-fields dib-project ui-input input')
+      .eq(1)
+      .type(referenceFields.project.name);
+
+    cy.get('dib-company-management dib-reference-fields dib-project .table-cell:first').should(
+      'have.text',
+      referenceFields.project.name
+    );
   });
 
   it('should edit the project', () => {
