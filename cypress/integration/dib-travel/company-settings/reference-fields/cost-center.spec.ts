@@ -1,11 +1,16 @@
-import { ReferenceFields } from '../../../../models';
+import { DibTravelAccounts, ReferenceFields } from '../../../../models';
 
 describe('Company Settings - Reference Fields - Cost Center', () => {
   let referenceFields: ReferenceFields;
+  let accounts: DibTravelAccounts;
 
   before(() => {
     cy.fixture('company-settings/reference-fields').then((referenceFixture) => {
       referenceFields = referenceFixture;
+    });
+
+    cy.fixture('dib-travel-accounts.json').then((dibTravelAccounts) => {
+      accounts = dibTravelAccounts;
     });
   });
 
@@ -88,11 +93,11 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
     );
 
     cy.get('.cdk-overlay-container dib-cost-center-dialog dib-assign-members dib-input input').type(
-      'qa.tools@dibtravel.com'
+      accounts.defaultAccount.email
     );
 
     cy.get('.cdk-overlay-container dib-cost-center-dialog dib-assign-members .members')
-      .contains('qa.tools@dibtravel.com')
+      .contains(accounts.defaultAccount.email)
       .click();
     cy.get('.cdk-overlay-container dib-cost-center-dialog ui-button').contains('save').click();
 
@@ -115,6 +120,8 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
     );
   });
 
+  // TODO: This test requires a hardcoded "AAA" value (added before test execution).
+  // We should revisit if there is a better implementation for this case.
   it('should sort cost center by name', () => {
     cy.get('dib-company-management dib-reference-fields dib-cost-center dib-sort-icons').click();
 
@@ -134,6 +141,8 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
   });
 
   it('should edit cost center', () => {
+    cy.waitForAngular();
+
     cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell h4')
       .contains(referenceFields.costCenter.name)
       .parent('.table-cell')
@@ -141,7 +150,7 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       .next('.table-cell')
       .next('.button-cell')
       .contains('edit')
-      .clickAttached();
+      .click();
 
     cy.get('.cdk-overlay-container dib-cost-center-dialog input[placeholder="Cost Center Name*"]')
       .clear()
@@ -176,6 +185,8 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
     );
   });
 
+  // TODO: This test requires a hardcoded "AAA" value (added before test execution).
+  // We should revisit if there is a better implementation for this case.
   it('should verify that last const center is not able to delete', () => {
     cy.waitForAngular();
 
@@ -186,7 +197,7 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       .next('.table-cell')
       .next('.button-cell')
       .contains(' archive ')
-      .clickAttached();
+      .click();
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
 
@@ -194,7 +205,5 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       'contain',
       'There is billing profile which is splitted by cost center. You must first change split type on billing profile.'
     );
-
-    cy.waitForAngular();
   });
 });
