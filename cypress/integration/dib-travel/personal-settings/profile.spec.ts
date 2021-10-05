@@ -136,7 +136,7 @@ describe('Personal Settings - Profile', () => {
       .type(profileDetails.emailAndPassword.email);
     cy.get('.cdk-overlay-container dib-change-email input[name="password"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password.replace(/[0-9]/g, ''));
+      .type(profileDetails.emailAndPassword.password.replace(/\d/g, ''));
     cy.get('.cdk-overlay-container dib-change-email ui-button').click();
 
     cy.get('.cdk-overlay-container dib-change-email dib-input .dib-input-error').should(
@@ -169,7 +169,7 @@ describe('Personal Settings - Profile', () => {
       .type(profileDetails.emailAndPassword.password);
     cy.get('.cdk-overlay-container change-password input[name="newPassword"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password.replace(/[0-9]/g, ''));
+      .type(profileDetails.emailAndPassword.password.replace(/\d/g, ''));
     cy.get('.cdk-overlay-container change-password input[name="confirmNewPassword"]')
       .clear()
       .type(profileDetails.emailAndPassword.password);
@@ -186,7 +186,7 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container change-password input[name="password"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password.replace(/[0-9]/g, ''));
+      .type(profileDetails.emailAndPassword.password.replace(/\d/g, ''));
     cy.get('.cdk-overlay-container change-password input[name="newPassword"]')
       .clear()
       .type(profileDetails.emailAndPassword.password);
@@ -405,7 +405,7 @@ describe('Personal Settings - Profile', () => {
       .parent('.grid-data')
       .next('.grid-button')
       .find('button')
-      .clickAttached();
+      .click();
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type="warning"] button').click();
 
@@ -450,7 +450,7 @@ describe('Personal Settings - Profile', () => {
       .parent('.grid-data')
       .next('.grid-button')
       .find('button')
-      .clickAttached();
+      .click();
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type="warning"] button').click();
 
