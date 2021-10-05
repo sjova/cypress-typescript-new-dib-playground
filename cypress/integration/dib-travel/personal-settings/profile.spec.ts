@@ -24,6 +24,8 @@ describe('Personal Settings - Profile', () => {
   it('should edit personal info', () => {
     clickCtaInsideSection('Personal info');
 
+    cy.get('.cdk-overlay-container ui-form-dialog dib-radio-group').contains('Mrs').click();
+
     cy.get('.cdk-overlay-container ui-form-dialog dib-input input[name="firstName"]')
       .clear()
       .type(profileDetails.personalInfo.firstName);
@@ -44,6 +46,7 @@ describe('Personal Settings - Profile', () => {
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Profile Successfully Updated');
 
     getSection('Personal info').within(() => {
+      cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.gender);
       cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.firstName);
       cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.lastName);
       cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.birthDay);
@@ -111,6 +114,37 @@ describe('Personal Settings - Profile', () => {
     });
   });
 
+  it('should display error that email address is not valid', () => {
+    clickCtaInsideSection('email & password', 'edit email');
+
+    cy.get('.cdk-overlay-container dib-change-email input[name="email"]')
+      .clear()
+      .type(profileDetails.emailAndPassword.email.replace('@', ''));
+    cy.get('.cdk-overlay-container dib-change-email input[name="password"]')
+      .clear()
+      .type(profileDetails.emailAndPassword.password);
+    cy.get('.cdk-overlay-container dib-change-email ui-button').click();
+
+    cy.get('.cdk-overlay-container dib-change-email dib-input .dib-input-error').should('contain', 'Email not valid');
+  });
+
+  it('should display error that password is not correct when user try to change an email', () => {
+    clickCtaInsideSection('email & password', 'edit email');
+
+    cy.get('.cdk-overlay-container dib-change-email input[name="email"]')
+      .clear()
+      .type(profileDetails.emailAndPassword.email);
+    cy.get('.cdk-overlay-container dib-change-email input[name="password"]')
+      .clear()
+      .type(profileDetails.emailAndPassword.password.replace(/\d/g, ''));
+    cy.get('.cdk-overlay-container dib-change-email ui-button').click();
+
+    cy.get('.cdk-overlay-container dib-change-email dib-input .dib-input-error').should(
+      'contain',
+      'Password is not correct'
+    );
+  });
+
   it('should change email address', () => {
     clickCtaInsideSection('email & password', 'edit email');
 
@@ -125,6 +159,66 @@ describe('Personal Settings - Profile', () => {
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Email Successfully Updated');
 
     getSection('email & password').find('.profile-info__row').should('contain', profileDetails.emailAndPassword.email);
+  });
+
+  it('should display error that password must be equal', () => {
+    clickCtaInsideSection('email & password', 'edit password');
+
+    cy.get('.cdk-overlay-container change-password input[name="password"]')
+      .clear()
+      .type(profileDetails.emailAndPassword.password);
+    cy.get('.cdk-overlay-container change-password input[name="newPassword"]')
+      .clear()
+      .type(profileDetails.emailAndPassword.password.replace(/\d/g, ''));
+    cy.get('.cdk-overlay-container change-password input[name="confirmNewPassword"]')
+      .clear()
+      .type(profileDetails.emailAndPassword.password);
+    cy.get('.cdk-overlay-container change-password ui-button').click();
+
+    cy.get('.cdk-overlay-container change-password dib-input .dib-input-error').should(
+      'contain',
+      'Passwords must be equal'
+    );
+  });
+
+  it('should display error that old password is not correct', () => {
+    clickCtaInsideSection('email & password', 'edit password');
+
+    cy.get('.cdk-overlay-container change-password input[name="password"]')
+      .clear()
+      .type(profileDetails.emailAndPassword.password.replace(/\d/g, ''));
+    cy.get('.cdk-overlay-container change-password input[name="newPassword"]')
+      .clear()
+      .type(profileDetails.emailAndPassword.password);
+    cy.get('.cdk-overlay-container change-password input[name="confirmNewPassword"]')
+      .clear()
+      .type(profileDetails.emailAndPassword.password);
+    cy.get('.cdk-overlay-container change-password ui-button').click();
+
+    cy.get('.cdk-overlay-container change-password dib-input .dib-input-error').should(
+      'contain',
+      'Old password is not correct'
+    );
+  });
+
+  it('should display error that minimum length is 6 for password', () => {
+    clickCtaInsideSection('email & password', 'edit password');
+
+    cy.get('.cdk-overlay-container change-password input[name="password"]')
+      .clear()
+      .type(profileDetails.emailAndPassword.password);
+    cy.get('.cdk-overlay-container change-password input[name="newPassword"]')
+      .clear()
+      .type(profileDetails.emailAndPassword.password.replace(/\D/g, ''));
+    cy.get('.cdk-overlay-container change-password input[name="confirmNewPassword"]')
+      .clear()
+      .type(profileDetails.emailAndPassword.password.replace(/\D/g, ''));
+    cy.get('.cdk-overlay-container change-password ui-button').click();
+
+    cy.get('.cdk-overlay-container change-password dib-input .dib-input-error').should(
+      'contain',
+      'Minimum length is 6'
+    );
   });
 
   it('should change password', () => {
@@ -142,6 +236,16 @@ describe('Personal Settings - Profile', () => {
     cy.get('.cdk-overlay-container change-password ui-button').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Password Successfully Updated');
+  });
+
+  it('should submit empty form for travel document', () => {
+    cy.get('dib-profile dib-account dib-travel-documents ui-button').click();
+    cy.get('.cdk-overlay-container dib-travel-document-dialog ui-button').click();
+
+    cy.get('.cdk-overlay-container dib-travel-document-dialog dib-input .dib-input-error').should(
+      'contain',
+      'Required'
+    );
   });
 
   it('should add travel document', () => {
@@ -254,11 +358,6 @@ describe('Personal Settings - Profile', () => {
   });
 
   it('should delete travel document', () => {
-    cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getEmployees');
-
-    cy.wait('@getEmployees');
-
-    // TODO: Revisit above intercept
     cy.waitForAngular();
 
     cy.get('dib-profile dib-account .travel-documents')
@@ -275,14 +374,14 @@ describe('Personal Settings - Profile', () => {
     );
   });
 
-  it('should add loyalty program', () => {
+  it('should add flight loyalty program', () => {
     cy.waitForAngular();
 
     cy.get('dib-profile dib-account .loyalty-program ui-button').click();
 
     cy.get('.cdk-overlay-container dib-add-loyalty ui-button').click();
     cy.get('.cdk-overlay-container dib-add-loyalty dib-loyalty-auto-complete')
-      .type(profileDetails.loyaltyProgram.provider)
+      .type(profileDetails.loyaltyProgram.flightProvider)
       .type('{downarrow}')
       .type('{enter}');
     cy.get('.cdk-overlay-container dib-add-loyalty input[name="program"]').type(profileDetails.loyaltyProgram.number);
@@ -292,24 +391,21 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Loyalty program saved');
 
-    cy.get('dib-profile dib-account .loyalty-name').eq(0).should('contain', profileDetails.loyaltyProgram.provider);
+    cy.get('dib-profile dib-account .loyalty-name')
+      .eq(0)
+      .should('contain', profileDetails.loyaltyProgram.flightProvider);
     cy.get('dib-profile dib-account .loyalty-name').eq(1).should('contain', profileDetails.loyaltyProgram.number);
   });
 
-  it('should delete loyalty program', () => {
-    // cy.intercept('GET', '/api/secure/v1/customers/*/memberships').as('getMemberships');
-
-    // cy.wait('@getMemberships');
-
-    // TODO: Revisit above intercept
+  it('should delete flight loyalty program', () => {
     cy.waitForAngular();
 
     cy.get('dib-profile dib-account .loyalty-name')
-      .contains(profileDetails.loyaltyProgram.provider)
+      .contains(profileDetails.loyaltyProgram.flightProvider)
       .parent('.grid-data')
       .next('.grid-button')
       .find('button')
-      .clickAttached();
+      .click();
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type="warning"] button').click();
 
@@ -318,6 +414,51 @@ describe('Personal Settings - Profile', () => {
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Loyalty program successfully deleted');
 
     cy.get('dib-profile dib-account .profile-info .loyalty-program__grid').should('not.exist');
-    cy.get('dib-profile dib-account .profile-info').should('not.contain', profileDetails.loyaltyProgram.provider);
+    cy.get('dib-profile dib-account .profile-info').should('not.contain', profileDetails.loyaltyProgram.flightProvider);
+  });
+
+  it('should add train loyalty program', () => {
+    cy.waitForAngular();
+
+    cy.get('dib-profile dib-account .loyalty-program ui-button').click();
+
+    cy.get('.cdk-overlay-container dib-add-loyalty dib-radio-group').contains('Train').click();
+
+    cy.get('.cdk-overlay-container dib-add-loyalty ui-button').click();
+    cy.get('.cdk-overlay-container dib-add-loyalty dib-loyalty-auto-complete')
+      .type(profileDetails.loyaltyProgram.trainProvider)
+      .type('{downarrow}')
+      .type('{enter}');
+    cy.get('.cdk-overlay-container dib-add-loyalty input[name="program"]').type(profileDetails.loyaltyProgram.number);
+    cy.get('.cdk-overlay-container dib-add-loyalty ui-button').click();
+
+    cy.waitForAngular();
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Loyalty program saved');
+
+    cy.get('dib-profile dib-account .loyalty-name')
+      .eq(0)
+      .should('contain', profileDetails.loyaltyProgram.trainProvider);
+    cy.get('dib-profile dib-account .loyalty-name').eq(1).should('contain', profileDetails.loyaltyProgram.number);
+  });
+
+  it('should delete train loyalty program', () => {
+    cy.waitForAngular();
+
+    cy.get('dib-profile dib-account .loyalty-name')
+      .contains(profileDetails.loyaltyProgram.trainProvider)
+      .parent('.grid-data')
+      .next('.grid-button')
+      .find('button')
+      .click();
+
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type="warning"] button').click();
+
+    cy.waitForAngular();
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Loyalty program successfully deleted');
+
+    cy.get('dib-profile dib-account .profile-info .loyalty-program__grid').should('not.exist');
+    cy.get('dib-profile dib-account .profile-info').should('not.contain', profileDetails.loyaltyProgram.trainProvider);
   });
 });

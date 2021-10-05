@@ -11,6 +11,7 @@ export interface ProfileDetails {
 }
 
 interface PersonalInfo extends Pick<User, 'firstName' | 'lastName'> {
+  gender: string;
   birthDay: string;
   birthMonth: string;
   birthYear: string;
@@ -42,6 +43,7 @@ interface TravelDocuments {
 }
 
 interface LoyaltyProgram {
-  provider: string;
+  flightProvider: string;
+  trainProvider: string;
   number: string;
 }

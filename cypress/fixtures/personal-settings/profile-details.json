@@ -1,5 +1,6 @@
 {
   "personalInfo": {
+    "gender": "MRS",
     "firstName": "QA",
     "lastName": "Bot",
     "birthDay": "05",
@@ -38,7 +39,8 @@
     "email": "qa.tools+cy.ci.profile.[hash]@dibtravel.com"
   },
   "loyaltyProgram": {
-    "provider": "Etihad",
+    "flightProvider": "Etihad",
+    "trainProvider": "MTRX",
     "number": "123456"
   }
 }
