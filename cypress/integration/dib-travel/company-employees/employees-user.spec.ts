@@ -1,5 +1,5 @@
-import { getEmailWithHash } from '../../../helpers';
-import { EmployeeExtended } from '../../../models';
+import { getEmailWithHash } from '@cy/helpers';
+import { EmployeeExtended } from '@cy/models';
 import { addEmployee, archiveEmployee } from './shared';
 
 describe('Company Employees - Employees (User)', () => {

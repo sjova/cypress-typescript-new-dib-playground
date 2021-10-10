@@ -1,4 +1,4 @@
-import { Employee } from '../../../../../models';
+import { Employee } from '@cy/models';
 
 export const searchAndSelectEmployee = (employee: Employee): void => {
   cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=Search]').type(employee.email);

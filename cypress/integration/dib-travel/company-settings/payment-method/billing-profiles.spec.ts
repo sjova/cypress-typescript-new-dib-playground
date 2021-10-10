@@ -1,5 +1,5 @@
-import { getEmailWithHash, getFirstWord } from '../../../../helpers';
-import { Group, PaymentMethod } from '../../../../models';
+import { getEmailWithHash, getFirstWord } from '@cy/helpers';
+import { Group, PaymentMethod } from '@cy/models';
 import { addGroup, deleteGroup } from '../../company-employees';
 import { clickBillingProfileCtaAction } from './helpers';
 
@@ -29,6 +29,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     });
   });
 
+  // eslint-disable-next-line mocha/no-sibling-hooks
   before(() => {
     cy.login();
     cy.visit('/people-management/groups');

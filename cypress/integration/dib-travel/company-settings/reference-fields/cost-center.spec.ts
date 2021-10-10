@@ -1,11 +1,16 @@
-import { ReferenceFields } from '../../../../models';
+import { DibTravelAccounts, ReferenceFields } from '@cy/models';
 
 describe('Company Settings - Reference Fields - Cost Center', () => {
   let referenceFields: ReferenceFields;
+  let accounts: DibTravelAccounts;
 
   before(() => {
     cy.fixture('company-settings/reference-fields').then((referenceFixture) => {
       referenceFields = referenceFixture;
+    });
+
+    cy.fixture('dib-travel-accounts.json').then((dibTravelAccounts) => {
+      accounts = dibTravelAccounts;
     });
   });
 
@@ -43,14 +48,13 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       );
   });
 
-  // TODO: Uncomment when bug is fixed (DT-8477)
-  /*it('should verify that error message is displayed', () => {
-      cy.get('dib-company-management dib-reference-fields dib-cost-center .warning-message')
-      .should('not.be.visible')
+  it('should verify that error message is displayed', () => {
+    cy.get('dib-company-management dib-reference-fields dib-cost-center .warning-message')
+      .should('be.visible')
       .contains(
         'If you uncheck this box, and have not assigned any cost center to an employee, they will not be able to complete their trip booking if cost centers are set as mandatory '
       );
-    });*/
+  });
 
   it('should uncheck "Make cost centers mandatory in each travel booking" check-box', () => {
     cy.get('dib-company-management dib-reference-fields dib-cost-center .checkbox-label')
@@ -88,7 +92,13 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       referenceFields.costCenter.description
     );
 
-    cy.get('.cdk-overlay-container dib-cost-center-dialog dib-assign-members .members').contains('QA Bot').click();
+    cy.get('.cdk-overlay-container dib-cost-center-dialog dib-assign-members dib-input input').type(
+      accounts.defaultAccount.email
+    );
+
+    cy.get('.cdk-overlay-container dib-cost-center-dialog dib-assign-members .members')
+      .contains(accounts.defaultAccount.email)
+      .click();
     cy.get('.cdk-overlay-container dib-cost-center-dialog ui-button').contains('save').click();
 
     cy.waitForAngular();
@@ -99,7 +109,40 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
     );
   });
 
+  it('should search for previously added cost center', () => {
+    cy.get('dib-company-management dib-reference-fields dib-cost-center ui-input input').type(
+      referenceFields.costCenter.name
+    );
+
+    cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell:first').should(
+      'have.text',
+      referenceFields.costCenter.name
+    );
+  });
+
+  // TODO: This test requires a hardcoded "AAA" value (added before test execution).
+  // We should revisit if there is a better implementation for this case.
+  it('should sort cost center by name', () => {
+    cy.get('dib-company-management dib-reference-fields dib-cost-center dib-sort-icons').click();
+
+    cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell:first').should(
+      'have.text',
+      referenceFields.costCenter.name
+    );
+    cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell:last')
+      .prev()
+      .prev()
+      .prev()
+      .should('have.text', 'AAA');
+
+    cy.get('dib-company-management dib-reference-fields dib-cost-center dib-sort-icons').click();
+
+    cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell:first').should('have.text', 'AAA');
+  });
+
   it('should edit cost center', () => {
+    cy.waitForAngular();
+
     cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell h4')
       .contains(referenceFields.costCenter.name)
       .parent('.table-cell')
@@ -107,7 +150,7 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       .next('.table-cell')
       .next('.button-cell')
       .contains('edit')
-      .clickAttached();
+      .click();
 
     cy.get('.cdk-overlay-container dib-cost-center-dialog input[placeholder="Cost Center Name*"]')
       .clear()
@@ -139,6 +182,28 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
     cy.get('dib-company-management dib-reference-fields dib-cost-center .grid').should(
       'not.contain',
       referenceFields.costCenter.modifiedName
+    );
+  });
+
+  // TODO: This test requires a hardcoded "AAA" value (added before test execution).
+  // We should revisit if there is a better implementation for this case.
+  it('should verify that last const center is not able to delete', () => {
+    cy.waitForAngular();
+
+    cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell h4')
+      .contains('AAA')
+      .parent('.table-cell')
+      .next('.table-cell')
+      .next('.table-cell')
+      .next('.button-cell')
+      .contains(' archive ')
+      .click();
+
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'contain',
+      'There is billing profile which is splitted by cost center. You must first change split type on billing profile.'
     );
   });
 });

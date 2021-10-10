@@ -1,4 +1,4 @@
-import { TravelPolicy } from '../../../../models';
+import { TravelPolicy } from '@cy/models';
 import {
   addHotelTravelPolicy,
   cancelDeleteDialogAndConfirm,

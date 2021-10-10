@@ -1,5 +1,5 @@
-import { selectTravelerGroup } from '.';
-import { ApprovalProcessGroup } from '../../../../../models';
+import { ApprovalProcessGroup } from '@cy/models';
+import { selectTravelerGroup } from './select-traveler-group';
 
 export const addApprovalProcessAndConfirm = (approvalProcessGroup: ApprovalProcessGroup): void => {
   cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();

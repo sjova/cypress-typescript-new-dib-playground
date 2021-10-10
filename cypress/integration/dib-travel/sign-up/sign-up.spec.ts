@@ -1,5 +1,5 @@
-import { getEmailWithHash } from '../../../helpers';
-import { DibTravelAccounts, SignUpUser } from '../../../models';
+import { getEmailWithHash } from '@cy/helpers';
+import { DibTravelAccounts, SignUpUser } from '@cy/models';
 
 describe('Sign Up', () => {
   let accounts: DibTravelAccounts;

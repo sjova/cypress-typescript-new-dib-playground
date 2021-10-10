@@ -1,4 +1,4 @@
-import { User } from '../../../../models';
+import { User } from '@cy/models';
 
 export const archiveEmployee = (employee: Omit<User, 'password'>, includeAssertion = true): void => {
   cy.get('dib-people-management dib-employees dib-page .grid .table-cell h4')

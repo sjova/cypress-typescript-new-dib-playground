@@ -200,8 +200,8 @@ DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accoun
 
 ## Cypress Config Notes
 
-- `"defaultCommandTimeout": 14000` - revisit this later when we speed up the Angular front-end application (current Angular loading time is around 4-6-12 seconds, and we added 2 seconds on top of that)
-- `"requestTimeout": 12000` - revisit this later when we speed up the front-end Angular application
+- `"defaultCommandTimeout": 20000` - revisit this later when we speed up the Angular front-end application (current Angular loading time is around 4-6-12 seconds)
+- `"requestTimeout": 18000` - revisit this later when we speed up the front-end Angular application
 
 ## ToDo Decision
 

@@ -1,4 +1,4 @@
-import { SharedDetails } from '../../../../../models';
+import { SharedDetails } from '@cy/models';
 
 export const enterSharedDetails = (policyType: string, sharedDetails: SharedDetails): void => {
   cy.get('.cdk-overlay-container dib-travel-policy-dialog .dib-select').select(policyType);

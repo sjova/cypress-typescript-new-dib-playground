@@ -1,6 +1,8 @@
-// Please don't modify or delete this file
+// PLEASE DON'T MODIFY OR DELETE THIS FILE
 
-import { CreditCard } from '../../../models';
+/* eslint-disable mocha/no-hooks-for-single-case */
+
+import { CreditCard } from '@cy/models';
 
 describe('Personal Settings - Credit Cards (Iframe Demo)', () => {
   let creditCard: CreditCard;

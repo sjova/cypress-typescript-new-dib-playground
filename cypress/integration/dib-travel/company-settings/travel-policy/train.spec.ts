@@ -1,4 +1,4 @@
-import { TravelPolicy } from '../../../../models';
+import { TravelPolicy } from '@cy/models';
 import {
   cancelDeleteDialogAndConfirm,
   closeEditDialogAndConfirm,
@@ -106,6 +106,8 @@ describe('Company Settings - Travel Policy - Train', () => {
   });
 
   it('should delete train travel policy', () => {
+    cy.waitForAngular();
+
     deleteTravelPolicyAndConfirm(travelPolicyDetails.sharedDetails.modifiedName);
   });
 });

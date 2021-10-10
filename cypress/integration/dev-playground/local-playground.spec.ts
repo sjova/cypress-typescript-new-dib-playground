@@ -15,8 +15,9 @@
 </html>
 */
 
+/*
 describe('Local Playground - Querying', () => {
-  it.skip('should demonstrate get in local playground', () => {
+  it('should demonstrate get in local playground', () => {
     // https://www.npmjs.com/package/lite-server
     cy.visit('http://localhost:3000/');
 
@@ -33,3 +34,4 @@ describe('Local Playground - Querying', () => {
       .and('have.css', 'position', 'static');
   });
 });
+ */

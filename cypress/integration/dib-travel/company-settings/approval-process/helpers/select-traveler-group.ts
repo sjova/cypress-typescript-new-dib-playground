@@ -1,5 +1,5 @@
-import { getFirstWord } from '../../../../../helpers';
-import { ApprovalProcessGroup } from '../../../../../models';
+import { getFirstWord } from '@cy/helpers';
+import { ApprovalProcessGroup } from '@cy/models';
 
 export const selectTravelerGroup = (approvalProcessGroup: ApprovalProcessGroup): void => {
   cy.get('.cdk-overlay-container dib-approval-process-dialog dib-input')

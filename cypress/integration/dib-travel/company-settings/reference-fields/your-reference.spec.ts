@@ -1,4 +1,4 @@
-import { ReferenceFields } from '../../../../models';
+import { ReferenceFields } from '@cy/models';
 
 describe('Company Settings - Reference Fields - Your Reference', () => {
   let referenceFields: ReferenceFields;
@@ -32,13 +32,17 @@ describe('Company Settings - Reference Fields - Your Reference', () => {
     );
   });
 
-  // TODO: Uncomment when the bug is fixed (DT-8476)
-  /* it('should reset to default fields label', () => {
+  it('should reset Your reference field label to default', () => {
     cy.get('dib-company-management dib-reference-fields dib-your-reference ui-button[outline="true"]')
       .contains(referenceFields.resetToDefaultCtaButton)
       .click();
-    // TODO: missing `.should()`
-  }); */
+    cy.get('.cdk-overlay-container confirmation-dialog ui-button').contains(' Reset ').click();
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'contain',
+      referenceFields.yourReference.confirmationMessage
+    );
+  });
 
   it('should check "Display and set field to mandatory when checking out booking" check-box', () => {
     cy.get('dib-company-management dib-reference-fields dib-your-reference .checkbox-label')

@@ -1,4 +1,4 @@
-import dibTravelAccounts from '../../fixtures/dib-travel-accounts.json';
+import dibTravelAccounts from '@cy/fixtures/dib-travel-accounts.json';
 
 export const login = (
   email = dibTravelAccounts.defaultAccount.email,
