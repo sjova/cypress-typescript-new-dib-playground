@@ -4,5 +4,5 @@ export const clickBillingProfileCtaAction = (email: string, ctaButtonLabel: stri
     .parents('dib-item')
     .find('.right ui-button')
     .contains(ctaButtonLabel)
-    .clickAttached();
+    .click();
 };

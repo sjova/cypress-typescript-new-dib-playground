@@ -2,11 +2,14 @@ import { User } from '../shared';
 
 export interface PaymentMethod {
   companyInformation: CompanyInformation;
+  modifiedCompanyInformation: CompanyInformation;
   primaryContact: PrimaryContact;
   lodgeCard: LodgeCard;
+  modifiedLodgeCard: LodgeCard;
   invoiceRecipient: InvoiceRecipient;
   person: Pick<User, 'firstName' | 'lastName'>;
   groupName: string;
+  currency: Currency;
 }
 interface CompanyInformation {
   companyLegalName: string;
@@ -29,10 +32,16 @@ interface LodgeCard {
   number: string;
   expiryMonth: string;
   expiryYear: string;
-  currency: string;
+  expiryDateTrailingValue: string;
 }
-
 interface InvoiceRecipient {
   email: string;
   vatNumber: string;
+  modifiedEmail: string;
+  modifiedVatNumber: string;
+}
+
+interface Currency {
+  originalCurrency: string;
+  modifiedCurrency: string;
 }

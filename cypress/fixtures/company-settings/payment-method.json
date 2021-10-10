@@ -9,6 +9,16 @@
     "city": "Belgrade",
     "country": "Serbia"
   },
+  "modifiedCompanyInformation": {
+    "companyLegalName": "CY Modified Dib Services AB",
+    "companyRegistrationNumber": "1234123456",
+    "vatNumber": "343434343434343",
+    "taxId": "8989898989",
+    "address": "Bastugatan 25",
+    "zipCode": "118 25",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
   "primaryContact": {
     "firstName": "CY Petar",
     "lastName": "CY Petrovic",
@@ -23,11 +33,26 @@
     "number": "36227206271667",
     "expiryMonth": "06",
     "expiryYear": "2031",
-    "currency": "EUR"
+    "expiryDateTrailingValue": "06/2031"
+  },
+  "modifiedLodgeCard": {
+    "provider": "AirPlus",
+    "name": "CY Modified Test Lodge Card",
+    "number": "4242424242424242",
+    "expiryMonth": "07",
+    "expiryYear": "2030",
+    "currency": "SEK",
+    "expiryDateTrailingValue": "07/2030"
   },
   "invoiceRecipient": {
     "email": "qa.tools+cy.ci.invoice-recipient.[hash]@dibtravel.com",
-    "vatNumber": "343434343434343"
+    "vatNumber": "343434343434343",
+    "modifiedEmail": "qa.tools+cy.ci.invoice-recipient.modified.[hash]@dibtravel.com",
+    "modifiedVatNumber": "454545454545454"
+  },
+  "currency": {
+    "originalCurrency": "EUR",
+    "modifiedCurrency": "SEK"
   },
   "person": {
     "firstName": "QA",
