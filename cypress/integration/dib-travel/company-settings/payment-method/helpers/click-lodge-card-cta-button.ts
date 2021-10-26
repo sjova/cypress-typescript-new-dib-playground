@@ -4,5 +4,5 @@ export const clickLodgeCardCtaButton = (email: string, ctaButtonLabel: string): 
     .parents('dib-item')
     .find('.right ui-button')
     .contains(ctaButtonLabel)
-    .clickAttached();
+    .click();
 };

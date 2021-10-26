@@ -4,8 +4,8 @@ export const deleteGroup = (groupName: string): void => {
     .parent('.item__main')
     .next('[dib-column-right]')
     .find('ui-button button')
-    .contains('delete')
-    .clickAttached();
+    .contains(' Delete ')
+    .click();
 
-  cy.get('.cdk-overlay-container confirmation-dialog ui-button').contains('Delete').click();
+  cy.get('.cdk-overlay-container confirmation-dialog ui-button').contains(' Delete ').click();
 };
