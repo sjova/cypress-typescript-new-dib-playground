@@ -1,4 +1,4 @@
-import { CreditCard, PaymentMethod } from '../../../../../models';
+import { CreditCard, PaymentMethod } from '@cy/models';
 
 export const addCreditCard = (paymentMethod: PaymentMethod, creditCard: CreditCard): void => {
   cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();

@@ -1,4 +1,4 @@
-import { PaymentMethod } from '../../../../../models';
+import { PaymentMethod } from '@cy/models';
 
 export const deleteCreditCardAndConfirm = (paymentMethod: PaymentMethod): void => {
   cy.waitForAngular();

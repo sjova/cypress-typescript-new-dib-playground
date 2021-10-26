@@ -99,9 +99,20 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
       .find('.CardNumberField input[name="cardnumber"]')
       .type(creditCard.visa3DSecure.number);
 
-    // TODO: Confirm Visa 3D Secure credit card authentication (this test will fail, and the next one) - iframe
-
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog ui-button[type=success]').click();
+
+    cy.waitForAngular();
+
+    cy.get('body > div > iframe[name^="__privateStripeFrame"]')
+      .switchToIframe()
+      .find('iframe#challengeFrame')
+      .switchToIframe()
+      .find('iframe[name=acsFrame]')
+      .switchToIframe()
+      .find('.container .source .actions button#test-source-authorize-3ds')
+      .click();
+
+    cy.waitForAngular();
 
     confirmAddedCreditCard(paymentMethod, creditCard);
   });
