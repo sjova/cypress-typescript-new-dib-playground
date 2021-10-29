@@ -7,18 +7,18 @@ import {
   editTravelPolicy,
 } from './shared';
 
-describe('Company Settings - Travel Policy - Hotel', () => {
+describe('Company Settings - Travel Settings - Travel Policy - Hotel', () => {
   let travelPolicyDetails: TravelPolicy;
 
   before(() => {
-    cy.fixture('company-settings/travel-policy-details').then((travelPolicyDetailsFixture) => {
+    cy.fixture('company-settings/travel-settings-details').then((travelPolicyDetailsFixture) => {
       travelPolicyDetails = travelPolicyDetailsFixture;
     });
   });
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/company-management/travel-policy');
+    cy.visit('/company-management/travel-settings');
   });
 
   it('should add hotel travel policy', () => {

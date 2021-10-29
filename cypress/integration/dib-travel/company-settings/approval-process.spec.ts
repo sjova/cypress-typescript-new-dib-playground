@@ -9,7 +9,7 @@ import {
   selectTraveler,
   selectTravelerGroup,
 } from './approval-process';
-import { addHotelTravelPolicy, deleteTravelPolicy } from './travel-policy';
+import { addHotelTravelPolicy, deleteTravelPolicy } from './travel-settings/travel-policy';
 
 describe('Company Settings - Approval Process', () => {
   let group: Group;
@@ -21,7 +21,7 @@ describe('Company Settings - Approval Process', () => {
       group = groupFixture;
     });
 
-    cy.fixture('company-settings/travel-policy-details').then((travelPolicyFixture) => {
+    cy.fixture('company-settings/travel-settings-details').then((travelPolicyFixture) => {
       travelPolicyDetails = travelPolicyFixture;
     });
 
@@ -36,7 +36,7 @@ describe('Company Settings - Approval Process', () => {
   before(() => {
     cy.login();
 
-    cy.visit('/company-management/travel-policy');
+    cy.visit('/company-management/travel-settings');
     addHotelTravelPolicy(travelPolicyDetails); // TODO: Do we need to include other types (Flight, Train)?
 
     cy.visit('/people-management/groups');
@@ -50,7 +50,7 @@ describe('Company Settings - Approval Process', () => {
 
     cy.login();
 
-    cy.visit('/company-management/travel-policy');
+    cy.visit('/company-management/travel-settings');
     deleteTravelPolicy(travelPolicyDetails.sharedDetails.name);
 
     cy.visit('/people-management/groups');
