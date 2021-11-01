@@ -4,7 +4,7 @@ describe('Cypress.config()', () => {
 
     expect(myConfig).to.have.property('animationDistanceThreshold', 5);
     expect(myConfig).to.have.property('defaultCommandTimeout', 25000);
-    expect(myConfig).to.have.property('requestTimeout', 18000);
+    expect(myConfig).to.have.property('requestTimeout', 20000);
     expect(myConfig).to.have.property('responseTimeout', 30000);
     expect(myConfig).to.have.property('pageLoadTimeout', 60000);
 

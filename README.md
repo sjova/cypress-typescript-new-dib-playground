@@ -4,31 +4,31 @@ Cypress TypeScript DIB Playground
 
 ## System Requirements
 
-Operating System: **macOS Catalina 10.15.7 (19H1217)**
+Operating System: **macOS Big Sur 11.6.1**
 
-IDE: **Visual Studio Code 1.60.2**
+IDE: **Visual Studio Code 1.61.2**
 
 ```
 git --version
-git version 2.33.0
+git version 2.33.1
 
 nvm --version
-0.38.0
+0.39.0
 
 node --version
-v14.18.0
+v14.18.1
 
 npm --version
 6.14.15
 
 yarn --version
-1.22.11
+1.22.17
 
 npx cypress --version
-Cypress package version: 8.5.0
-Cypress binary version: 8.5.0
-Electron version: 13.2.0
-Bundled Node version: 14.16.0
+Cypress package version: 8.7.0
+Cypress binary version: 8.7.0
+Electron version: 14.1.0
+Bundled Node version: 14.17.0
 ```
 
 ## Getting Started
@@ -200,8 +200,8 @@ DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accoun
 
 ## Cypress Config Notes
 
-- `"defaultCommandTimeout": 25000` - revisit this later when we speed up the Angular front-end application (current Angular loading time is around 4-6-12 seconds)
-- `"requestTimeout": 18000` - revisit this later when we speed up the front-end Angular application
+- `"defaultCommandTimeout": 25000` - revisit this later when we speed up the Angular front-end application
+- `"requestTimeout": 20000` - revisit this later when we speed up the Angular front-end application
 
 ## ToDo Decision
 
@@ -294,3 +294,5 @@ describe('Local Playground - Querying', () => {
 - [API](https://docs.cypress.io/api/table-of-contents)
 - [Mocha](https://mochajs.org/)
 - [Chai](https://www.chaijs.com/)
+- [Cypress Changelog](https://docs.cypress.io/guides/references/changelog)
+- [Cypress Roadmap](https://docs.cypress.io/guides/references/roadmap)
