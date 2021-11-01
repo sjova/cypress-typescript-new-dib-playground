@@ -1,6 +1,6 @@
 {
   "flight": {
-    "type": "FLIGHT",
+    "type": "Flight",
     "budgetException": "25000",
     "from": "BEG",
     "to": "STO",
@@ -17,14 +17,14 @@
     "budgetPerFlight": "200"
   },
   "hotel": {
-    "type": "HOTEL",
+    "type": "Hotel",
     "city": "Belgrade",
     "modifiedCity": "Berlin",
     "budgetPerNight": "20000",
     "modifiedBudgetPerNight": "200"
   },
   "train": {
-    "type": "TRAIN",
+    "type": "Train",
     "from": "Stockholm Central",
     "to": "Malmö C",
     "budgetPerTrain": "20000",

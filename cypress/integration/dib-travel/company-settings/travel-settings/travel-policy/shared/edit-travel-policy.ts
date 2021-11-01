@@ -2,7 +2,7 @@ import { TravelPolicy } from '@cy/models';
 import { clickTravelPolicyCtaButton } from './click-travel-policy-cta-button';
 
 export const editTravelPolicy = (travelPolicyDetails: TravelPolicy): void => {
-  clickTravelPolicyCtaButton(travelPolicyDetails.sharedDetails.name, 'edit');
+  clickTravelPolicyCtaButton(travelPolicyDetails.sharedDetails.name, 'Edit');
 
   cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=name]')
     .clear()
