@@ -1,4 +1,4 @@
-describe('Company Settings - Travel Policy', () => {
+describe('Company Settings - Travel Settings', () => {
   it('should display "Travel Settings" in the sidebar navigation', () => {
     cy.login();
     cy.visit('/company-management/travel-settings');
