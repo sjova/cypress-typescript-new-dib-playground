@@ -5,11 +5,11 @@ export const selectApprovalSettings = (settings: ApprovalSettings, groupName: st
   let groupSelectorPosition = -1;
 
   switch (settings) {
-    case 'Only out of policy trips':
+    case 'Only out of policy travels':
       inputSelectorPosition = 2;
       groupSelectorPosition = 2;
       break;
-    case 'All trips':
+    case 'All travels':
       inputSelectorPosition = 3;
       groupSelectorPosition = 2;
       break;
@@ -24,7 +24,8 @@ export const selectApprovalSettings = (settings: ApprovalSettings, groupName: st
   cy.get('.cdk-overlay-container dib-approval-process-dialog .members .group')
     .eq(groupSelectorPosition)
     .contains(groupName, { matchCase: false })
-    .clickAttached();
+    //TODO: Revisit this, because for now we must use {force: true}, instead clickAttached() option
+    .click({ force: true });
 };
 
-type ApprovalSettings = 'Exception from travel policy' | 'Only out of policy trips' | 'All trips';
+type ApprovalSettings = 'Exception from travel policy' | 'Only out of policy travels' | 'All travels';
