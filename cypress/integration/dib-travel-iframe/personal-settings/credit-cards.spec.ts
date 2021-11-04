@@ -41,6 +41,99 @@ describe('Personal Settings - Credit Cards', () => {
   //   });
   // });
 
+  it('should enter invalid credit card number', () => {
+    cy.get('dib-profile dib-payment ui-button[type="primary"] button').contains('Add Credit Card').click();
+
+    cy.get('.cdk-overlay-container dib-add-card-dialog dib-stripe-card-input iframe')
+      .switchToIframe()
+      .find('.CardField-input-wrapper .CardNumberField input[name="cardnumber"]')
+      .type('1111 1111 1111 1111');
+
+    cy.get('.cdk-overlay-container dib-add-card-dialog .dib-input-error').should(
+      'have.text',
+      'Your card number is invalid.'
+    );
+  });
+
+  it('should enter expired credit card ', () => {
+    cy.get('dib-profile dib-payment ui-button[type="primary"] button').contains('Add Credit Card').click();
+
+    cy.get('.cdk-overlay-container dib-add-card-dialog dib-stripe-card-input iframe')
+      .switchToIframe()
+      .find('.CardField-input-wrapper .CardNumberField input[name="cardnumber"]')
+      .type(`${creditCard.visa.number}${creditCard.expiryMonth}${creditCard.expiryYear}`);
+
+    cy.get('.cdk-overlay-container dib-add-card-dialog .dib-input-error').should(
+      'have.text',
+      "Your card's expiration year is in the past."
+    );
+  });
+
+  it('should enter credit card with invalid postal code ', () => {
+    cy.get('dib-profile dib-payment ui-button[type="primary"] button').contains('Add Credit Card').click();
+
+    cy.get('.cdk-overlay-container dib-add-card-dialog dib-stripe-card-input iframe')
+      .switchToIframe()
+      .find('.CardField-input-wrapper .CardNumberField input[name="cardnumber"]')
+      .type(
+        `${creditCard.visa.number}${creditCard.expiryMonth}${creditCard.expiryYear.slice(-2)}${
+          creditCard.cvc
+        }${creditCard.zipCode.slice(-2)}`
+      );
+
+    cy.get('.cdk-overlay-container dib-add-card-dialog .title').click();
+
+    cy.get('.cdk-overlay-container dib-add-card-dialog .dib-input-error').should(
+      'have.text',
+      'Your postal code is incomplete.'
+    );
+  });
+
+  it('should enter credit card with invalid security code - CVC ', () => {
+    cy.get('dib-profile dib-payment ui-button[type="primary"] button').contains('Add Credit Card').click();
+
+    cy.get('.cdk-overlay-container dib-add-card-dialog dib-stripe-card-input iframe')
+      .switchToIframe()
+      .find('.CardField-input-wrapper .CardNumberField input[name="cardnumber"]')
+      .type(
+        `${creditCard.visa.number}${creditCard.expiryMonth}${creditCard.expiryYear.slice(-2)}${creditCard.cvc}${
+          creditCard.zipCode
+        }`
+      );
+
+    cy.get('.cdk-overlay-container dib-add-card-dialog dib-stripe-card-input iframe')
+      .switchToIframe()
+      .find('.CardField-input-wrapper .CardField-cvc input[name="cvc"]')
+      .clear()
+      .type(creditCard.cvc.slice(-2));
+
+    cy.get('.cdk-overlay-container dib-add-card-dialog .title').click();
+
+    cy.get('.cdk-overlay-container dib-add-card-dialog .dib-input-error').should(
+      'have.text',
+      "Your card's security code is incomplete."
+    );
+  });
+
+  it('should not be able to add new Discovery credit card', () => {
+    cy.get('dib-profile dib-payment ui-button[type="primary"] button').contains('Add Credit Card').click();
+
+    cy.get('.cdk-overlay-container dib-add-card-dialog dib-stripe-card-input iframe')
+      .switchToIframe()
+      .find('.CardField-input-wrapper .CardNumberField input[name="cardnumber"]')
+      .type(
+        `${creditCard.discovery.number}${creditCard.expiryMonth}${creditCard.expiryYear.slice(-2)}${creditCard.cvc}${
+          creditCard.zipCode
+        }`
+      );
+    cy.get('.cdk-overlay-container dib-add-card-dialog .title').click();
+
+    cy.get('.cdk-overlay-container dib-add-card-dialog .dib-input-error').should(
+      'have.text',
+      'Your card is not supported.'
+    );
+  });
+
   it('should add new VISA credit card', () => {
     cy.get('dib-profile dib-payment ui-button[type="primary"] button').contains('Add Credit Card').click();
 
@@ -131,7 +224,7 @@ describe('Personal Settings - Credit Cards', () => {
       .find('.CardField-input-wrapper .CardNumberField input[name="cardnumber"]')
       .type(
         `${creditCard.americanExpress.number}${creditCard.expiryMonth}${creditCard.expiryYear.slice(-2)}${
-          creditCard.cvc + '1'
+          creditCard.americanExpress.cvv
         }${creditCard.zipCode}`
       );
 
