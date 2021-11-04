@@ -176,6 +176,7 @@ describe('Company Settings - Travel Settings - Company Rates', () => {
       companyRatesDetails.companyRates.discountName
     );
   });
+
   it('should delete discount for car type (Sixt/Avis)', () => {
     editDiscount(companyRatesDetails);
 
