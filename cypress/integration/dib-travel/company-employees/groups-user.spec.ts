@@ -1,5 +1,5 @@
 import { Group } from '@cy/models';
-import { addGroup, deleteGroup } from './shared';
+import { addGroup, cancelDeleteGroupAndConfirm, deleteGroup, editGroup } from './shared';
 
 describe('Company Employees - Groups (User)', () => {
   let group: Group;
@@ -33,6 +33,15 @@ describe('Company Employees - Groups (User)', () => {
     addGroup(group.name, group.description);
   });
 
+  // TODO: This is blocked by bug ticket DT-7943
+  // it('should not alow user to add new group with existing name ', () => {
+  //   cy.get('dib-people-management dib-groups .header ui-button').contains('Add Group').click();
+
+  //   cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="Group name*"]').type(group.name);
+
+  //   cy.get('.cdk-overlay-container dib-group-dialog ui-button').contains('Save').click();
+  // });
+
   it('should display added employee in created group', () => {
     cy.waitForAngular();
 
@@ -48,23 +57,13 @@ describe('Company Employees - Groups (User)', () => {
     );
   });
 
+  //TODO: This is blocked by bug ticket DT-9984
   it('should allow user to edit created group', () => {
-    cy.get('dib-people-management dib-groups dib-expandable-item h2')
-      .contains(group.name)
-      .parent('.item__main')
-      .next('[dib-column-right]')
-      .find('ui-button button')
-      .contains('edit')
-      .clickAttached();
+    editGroup(group.modifiedName, group.modifiedDescription);
+  });
 
-    cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="group name*"]').clear().type(group.modifiedName);
-    cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="description"]')
-      .clear()
-      .type(group.modifiedDescription);
-    cy.get('.cdk-overlay-container dib-group-dialog ui-button').contains('save').click();
-
-    cy.get('dib-people-management dib-groups dib-expandable-item').should('contain', group.modifiedName);
-    cy.get('dib-people-management dib-groups dib-expandable-item').should('contain', group.modifiedDescription);
+  it('should cancel confirmation dialog for deleting group', () => {
+    cancelDeleteGroupAndConfirm(group.modifiedName, group.modifiedDescription);
   });
 
   it('should allow user to delete created group', () => {
