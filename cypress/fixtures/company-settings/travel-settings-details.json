@@ -44,5 +44,12 @@
     "firstName": "QA",
     "lastName": "Bot",
     "email": "qa.tools@dibtravel.com"
+  },
+
+  "companyRates": {
+    "discountName": "CY Discount Name",
+    "discountCode": "001",
+    "modifiedDiscountName": "CY Modified Discount Name",
+    "modifiedDiscountCode": "002"
   }
 }

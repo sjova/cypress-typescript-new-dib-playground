@@ -1,7 +1,7 @@
-import { TravelPolicy } from '@cy/models';
+import { TravelSettings } from '@cy/models';
 import { clickTravelPolicyCtaButton } from './click-travel-policy-cta-button';
 
-export const cancelDeleteDialogAndConfirm = (travelPolicyDetails: TravelPolicy): void => {
+export const cancelDeleteDialogAndConfirm = (travelPolicyDetails: TravelSettings): void => {
   clickTravelPolicyCtaButton(travelPolicyDetails.sharedDetails.modifiedName, 'Delete');
 
   cy.get('.cdk-overlay-container confirmation-dialog ui-button[cancel=true]').click();
