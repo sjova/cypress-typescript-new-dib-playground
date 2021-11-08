@@ -6,7 +6,7 @@ import {
   archiveBillingProfile,
   cancelAddBillingProfile,
   clickBillingProfileCtaAction,
-  submitEmptyForm,
+  submitEmptyBillingProfileForm,
 } from './helpers';
 
 describe('Company Settings - Payment Method - Billing Profiles', () => {
@@ -74,7 +74,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
   it('should not be able to submit an empty billing profile form', () => {
     cy.get('dib-company-management dib-payment-method dib-billing-profiles ui-button[type=primary]').click();
 
-    submitEmptyForm();
+    submitEmptyBillingProfileForm();
   });
 
   it('should add a billing profile', () => {

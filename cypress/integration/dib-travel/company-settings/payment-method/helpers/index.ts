@@ -4,4 +4,4 @@ export * from './cancel-add-billing-profile';
 export * from './cancel-card-form-and-confirm';
 export * from './click-billing-profile-cta-action';
 export * from './click-lodge-card-cta-button';
-export * from './submit-empty-form';
+export * from './submit-empty-billing-profile-form';
