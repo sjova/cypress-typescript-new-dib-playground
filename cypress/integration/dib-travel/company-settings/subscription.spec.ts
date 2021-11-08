@@ -6,7 +6,7 @@ import {
   archiveBillingProfile,
   cancelAddBillingProfile,
   clickBillingProfileCtaAction,
-  submitEmptyForm,
+  submitEmptyBillingProfileForm,
 } from './payment-method/helpers';
 
 describe('Company Settings - Subscription', () => {
@@ -69,7 +69,7 @@ describe('Company Settings - Subscription', () => {
     cy.get('.cdk-overlay-container dib-navbar-panel').contains('Subscription').should('exist');
   });
 
-  it('should check overview tab for subscription', () => {
+  it('should check Overview tab', () => {
     cy.get('dib-company-management dib-subscription dib-subscription-overview h3')
       .should('contain', 'Pricing plans')
       .should('contain', 'Licenses')
@@ -93,7 +93,7 @@ describe('Company Settings - Subscription', () => {
     );
   });
 
-  it('should check pricing plans tab for subscription', () => {
+  it('should check Pricing Plans tab', () => {
     cy.visit(subscriptionLink + 'pricing-plans');
 
     cy.get('dib-company-management dib-subscription dib-subscription-pricing-plans h3')
@@ -101,7 +101,8 @@ describe('Company Settings - Subscription', () => {
       .should('contain', 'Enterprise');
     cy.get('dib-company-management dib-subscription dib-subscription-pricing-plans .subscription-table small').should(
       'contain',
-      'Subscription renewal date: Apr 2, 2022 (148  days from now) '
+      'Subscription renewal date: Apr 2, 2022',
+      ' (days from now) '
     );
     cy.get('dib-company-management dib-subscription dib-subscription-pricing-plans button').should(
       'contain',
@@ -148,16 +149,15 @@ describe('Company Settings - Subscription', () => {
     cy.get('.cdk-overlay-container dib-request-enterprise-dialog').should('not.exist');
   });
 
-  it('should check licenses tab for subscription', () => {
+  it('should check Licenses tab', () => {
     cy.visit(subscriptionLink + 'licenses');
 
     cy.get('dib-company-management dib-subscription dib-subscription-licenses h3')
       .should('contain', ' Number of Licenses ')
       .should('contain', ' Additional Licenses ');
     cy.get('dib-company-management dib-subscription dib-subscription-licenses p')
-      .should('contain', ' Subscription renewal date: Apr 2, 2022 (148  days from now) ')
-      .should('contain', ' 72 EUR per user ')
-      .should('contain', ' 8 ');
+      .should('contain', ' Subscription renewal date: Apr 2, 2022', ' (days from now) ')
+      .should('contain', ' 72 EUR per user ');
     cy.get('dib-company-management dib-subscription dib-subscription-licenses .subscription-table__row__pricing')
       .should('contain', ' 1 x 72 EUR = 72 EUR ')
       .should('contain', ' Total cost: 72 EUR ');
@@ -175,7 +175,7 @@ describe('Company Settings - Subscription', () => {
     cy.get('dib-company-management dib-subscription dib-subscription-licenses input').should('have.value', '1');
   });
 
-  it('should cancel confirmation dialog for buying license', () => {
+  it('should cancel confirmation dialog for buying new license', () => {
     cy.visit(subscriptionLink + 'licenses');
 
     cy.get('dib-company-management dib-subscription dib-subscription-licenses ui-button').contains('Buy now').click();
@@ -185,14 +185,17 @@ describe('Company Settings - Subscription', () => {
     cy.get('.cdk-overlay-container confirmation-dialog').should('not.exist');
   });
 
-  it('should buy license for subscription', () => {
+  it('should buy new license for subscription', () => {
     cy.visit(subscriptionLink + 'licenses');
 
     cy.get('dib-company-management dib-subscription dib-subscription-licenses ui-button').contains('Buy now').click();
 
     cy.get('.cdk-overlay-container confirmation-dialog button').contains(' Buy ').click();
 
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Purchase completed successfully');
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'contain',
+      'Purchase completed successfully' || 'Purchase could not be completed'
+    );
   });
 
   it('should cancel form for adding billing profile', () => {
@@ -212,7 +215,7 @@ describe('Company Settings - Subscription', () => {
       .contains(' Add New Billing Profile ')
       .click();
 
-    submitEmptyForm();
+    submitEmptyBillingProfileForm();
   });
 
   it('should add a billing profile', () => {
@@ -221,6 +224,8 @@ describe('Company Settings - Subscription', () => {
     cy.get('dib-company-management dib-subscription dib-subscription-payment-method span')
       .contains(' Add New Billing Profile ')
       .click();
+
+    cy.waitForAngular();
 
     addBillingProfile(paymentMethod);
 
@@ -239,5 +244,33 @@ describe('Company Settings - Subscription', () => {
 
     clickBillingProfileCtaAction(paymentMethod.primaryContact.email, 'Archive ');
     archiveBillingProfile();
+  });
+
+  it('should check Purchase History tab', () => {
+    cy.visit(subscriptionLink + 'purchase-history');
+
+    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p')
+      .should('contain', ' Date ')
+      .should('contain', ' Invoice number ')
+      .should('contain', ' Description ')
+      .should('contain', ' Amount ')
+      .should('contain', ' Status ')
+      .should('contain', ' Invoice ')
+      .should('contain', 'Apr')
+      .should('contain', 'ci-')
+      .should(
+        'contain',
+        ' Upgrade to subscription plan BUSINESS PRO ANNUAL .',
+        ' 1 license(s) have been added in [BUSINESS PRO] ANNUAL plan. '
+      )
+      .should(
+        'contain',
+        'License(s) added to subscription.',
+        '1 license(s) have been added in [BUSINESS PRO] ANNUAL plan.'
+      )
+      .should('contain', 'EUR')
+      .should('contain', 'RSD')
+      .should('contain', ' Completed ')
+      .should('contain', ' Download invoice ');
   });
 });
