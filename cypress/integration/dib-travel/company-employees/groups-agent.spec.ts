@@ -34,13 +34,13 @@ describe('Company Employees - Groups (Agent)', () => {
   });
 
   // TODO: This is blocked by bug ticket DT-7943
-  // it('should not alow agent to add new group with existing name ', () => {
-  //   cy.get('dib-people-management dib-groups .header ui-button').contains('Add Group').click();
+  /* it('should not alow agent to add new group with existing name ', () => {
+    cy.get('dib-people-management dib-groups .header ui-button').contains('Add Group').click();
 
-  //   cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="Group name*"]').type(group.name);
+    cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="Group name*"]').type(group.name);
 
-  //   cy.get('.cdk-overlay-container dib-group-dialog ui-button').contains('Save').click();
-  // });
+    cy.get('.cdk-overlay-container dib-group-dialog ui-button').contains('Save').click();
+  }); */
 
   it('should display added employee in created group', () => {
     cy.waitForAngular();
@@ -57,7 +57,7 @@ describe('Company Employees - Groups (Agent)', () => {
     );
   });
 
-  //TODO: This is blocked by bug ticket DT-9984
+  // TODO: This is blocked by bug ticket DT-9984
   it('should allow agent to edit created group', () => {
     editGroup(group.modifiedName, group.modifiedDescription);
   });
