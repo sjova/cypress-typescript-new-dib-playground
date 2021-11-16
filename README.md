@@ -196,12 +196,26 @@ Here, the glob is appropriately restricted to the `scripts/` directory. It will 
 
 ## DIB Travel Accounts
 
-DIB Travel Accounts fixture is located here: `cypress/fixtures/dib-travel-accounts.json`. The interface (type) for this fixture is located here: `cypress/models/dib-travel-accounts.ts` (this fixture is stored externally). And these two files should not be modified.
+DIB Travel Accounts are stored in our shared drive here: `Dib Technology/03. Quality Assurance (QA)/Cypress/DIB Travel Accounts` and should be added separately in this file: `cypress/fixtures/dib-travel-accounts.json`. The interface (type) for this fixture is located here: `cypress/models/dib-travel-accounts.ts` (this fixture is stored externally). And these two files should not be modified.
+
+If you skip the previous step, you will get the following error:
+
+```sh
+Error: Webpack Compilation Error
+./cypress/support/commands/login.ts
+Module not found: Error: Can't resolve '@cy/fixtures/dib-travel-accounts.json' in '/Users/DibUsername/Projects/cypress-typescript-new-dib-playground/cypress/support/commands'
+resolve '@cy/fixtures/dib-travel-accounts.json' in '/Users/DibUsername/Projects/cypress-typescript-new-dib-playground/cypress/support/commands'
+  Parsed request is a module
+  using description file: /Users/DibUsername/Projects/cypress-typescript-new-dib-playground/package.json (relative path: ./cypress/support/commands)
+    Field 'browser' doesn't contain a valid alias configuration
+    Looked for and couldn't find the file at the following paths:
+    ...
+```
 
 ## Cypress Config Notes
 
-- `"defaultCommandTimeout": 25000` - revisit this later when we speed up the Angular front-end application
-- `"requestTimeout": 20000` - revisit this later when we speed up the Angular front-end application
+- `"defaultCommandTimeout": 60000` - revisit this later when we speed up the Angular front-end application
+- `"requestTimeout": 45000` - revisit this later when we speed up the Angular front-end application
 
 ## ToDo Decision
 

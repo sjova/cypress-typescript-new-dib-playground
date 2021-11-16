@@ -1,1 +1,1 @@
-export * from './delete-credit-cards';
+export * from './delete-credit-card';
