@@ -29,11 +29,12 @@ describe('Company Employees - Employees (User)', () => {
   });
 
   it('should allow user to add new employee with sending invitation to employee', () => {
-    addEmployee(employee.firstName, employee.lastName, employee.email);
+    addEmployee(employee.firstName, employee.lastName, employee.email, true);
 
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.lastName);
     cy.get('dib-people-management dib-employees dib-page .grid .table-cell').should('contain', employee.email);
+    cy.get('dib-people-management dib-employees').should('contain', 'Invited');
   });
 
   it('should allow user to search a certain employee', () => {
@@ -92,12 +93,11 @@ describe('Company Employees - Employees (User)', () => {
   });
 
   it('should allow user to add new employee with not sending invitation to employee', () => {
-    addEmployee(employee.firstName, employee.lastName, employee.email, true);
+    addEmployee(employee.firstName, employee.lastName, employee.email);
 
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.lastName);
     cy.get('dib-people-management dib-employees dib-page .grid .table-cell').should('contain', employee.email);
-    cy.get('dib-people-management dib-employees').should('contain', 'Not invited');
   });
 
   it('should display only not invited users', () => {
