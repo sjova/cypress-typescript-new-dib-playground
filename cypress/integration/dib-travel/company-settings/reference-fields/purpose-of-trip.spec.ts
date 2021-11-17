@@ -60,7 +60,7 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
       .contains(referenceFields.purposeOfTrip.addActionCtaButton)
       .click();
 
-    cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog ui-button').contains('save').click();
+    cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog ui-button').contains('Save').click();
 
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog .input-holder .error').contains(
       ' Purpose of trip name is required.'
@@ -78,7 +78,7 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog input[name="description"]').type(
       referenceFields.purposeOfTrip.description
     );
-    cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog ui-button').contains('save').click();
+    cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog ui-button').contains('Save').click();
 
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip').should(
       'contain',
@@ -109,7 +109,7 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog input[name="purposeOfTripName"]')
       .clear()
       .type(referenceFields.purposeOfTrip.modifiedName);
-    cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog ui-button').contains('save').click();
+    cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog ui-button').contains('Save').click();
 
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip .grid').should(
       'contain',
@@ -123,7 +123,7 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
       .parent('.table-cell')
       .next('.table-cell')
       .next('.button-cell')
-      .contains(' archive ')
+      .contains(' Archive ')
       .clickAttached();
 
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip .grid').should(

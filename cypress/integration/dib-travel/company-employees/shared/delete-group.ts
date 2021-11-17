@@ -1,4 +1,6 @@
 export const deleteGroup = (groupName: string): void => {
+  cy.waitForAngular();
+
   cy.get('dib-people-management dib-groups dib-expandable-item h2')
     .contains(groupName)
     .parent('.item__main')

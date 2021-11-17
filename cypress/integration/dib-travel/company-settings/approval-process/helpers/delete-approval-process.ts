@@ -6,7 +6,7 @@ export const deleteApprovalProcess = (traveler: string): void => {
     .contains(traveler)
     .parents('dib-approval-process-item')
     .find('ui-button')
-    .contains('delete')
+    .contains('Delete')
     .click();
 
   cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
