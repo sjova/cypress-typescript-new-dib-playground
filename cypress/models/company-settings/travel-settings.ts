@@ -1,12 +1,13 @@
 import { User } from '../shared';
 
-export interface TravelPolicy {
+export interface TravelSettings {
   flight: Flight;
   modifiedFlight: Flight;
   hotel: Hotel;
   train: Train;
   sharedDetails: SharedDetails;
   employee: Pick<User, 'firstName' | 'lastName' | 'email'>;
+  companyRates: CompanyRates;
 }
 
 export interface SharedDetails {
@@ -44,4 +45,10 @@ interface Train {
   modifiedBudgetPerTrain: string;
   modifiedFrom: string;
   modifiedTo: string;
+}
+export interface CompanyRates {
+  discountName: string;
+  discountCode: string;
+  modifiedDiscountName: string;
+  modifiedDiscountCode: string;
 }

@@ -1,4 +1,4 @@
-import { ApprovalProcessGroup, Group, TravelPolicy } from '@cy/models';
+import { ApprovalProcessGroup, Group, TravelSettings } from '@cy/models';
 import { addGroup, deleteGroup } from '../company-employees';
 import {
   addApprovalProcessAndConfirm,
@@ -13,7 +13,7 @@ import { addHotelTravelPolicy, deleteTravelPolicy } from './travel-settings/trav
 
 describe('Company Settings - Approval Process', () => {
   let group: Group;
-  let travelPolicyDetails: TravelPolicy;
+  let travelPolicyDetails: TravelSettings;
   let approvalProcessGroup: ApprovalProcessGroup;
 
   before(() => {

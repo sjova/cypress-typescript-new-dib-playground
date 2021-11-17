@@ -1,3 +1,3 @@
 describe('Company Settings - Invoice Settings (Agent)', () => {
-  // TODO
+  // TODO: Should be covered with tests
 });

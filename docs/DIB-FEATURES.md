@@ -27,7 +27,8 @@
 - [COMPANY SETTINGS/PAYMENT METHOD/BILLING PROFILES](https://develop--dib-travel.netlify.app/company-management/payment-method/billing-profiles) - `dib-company-management dib-payment-method dib-billing-profiles`
 - [COMPANY SETTINGS/PAYMENT METHOD/CREDIT CARDS](https://develop--dib-travel.netlify.app/company-management/payment-method/credit-cards) - `dib-company-management dib-payment-method dib-payment-method-credit-cards`
 - [COMPANY SETTINGS/PAYMENT METHOD/LODGE CARDS](https://develop--dib-travel.netlify.app/company-management/payment-method/lodge-cards) - `dib-company-management dib-payment-method dib-lodge-cards`
-- [COMPANY SETTINGS/TRAVEL POLICY](https://develop--dib-travel.netlify.app/company-management/travel-policy) - `dib-company-management dib-travel-policy`
+- [COMPANY SETTINGS/TRAVEL-SETTINGS/TRAVEL POLICY](https://develop--dib-travel.netlify.app/company-management/travel-settings/travel-policy) - `dib-company-management dib-travel-settings dib-travel-policy`
+- [COMPANY SETTINGS/TRAVEL-SETTINGS/COMPANY-RATES](https://develop--dib-travel.netlify.app/company-management/travel-settings/company-rates) - `dib-company-management dib-travel-settings dib-company-rates`
 - [COMPANY SETTINGS/APPROVAL PROCESS](https://develop--dib-travel.netlify.app/company-management/approval-process) - `dib-company-management dib-approval-process`
 - [COMPANY SETTINGS/REFERENCE FIELDS/COST CENTER](https://develop--dib-travel.netlify.app/company-management/reference-fields/cost-center) - `dib-company-management dib-reference-fields dib-cost-center`
 - [COMPANY SETTINGS/REFERENCE FIELDS/PROJECT](https://develop--dib-travel.netlify.app/company-management/reference-fields/project) - `dib-company-management dib-reference-fields dib-project`
