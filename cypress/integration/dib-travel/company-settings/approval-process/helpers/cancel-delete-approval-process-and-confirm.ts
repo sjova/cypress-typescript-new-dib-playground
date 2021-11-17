@@ -8,7 +8,7 @@ export const cancelDeleteApprovalProcessAndConfirm = (travelerName: string): voi
     .contains(travelerName)
     .parents('dib-approval-process-item')
     .find('ui-button')
-    .contains('delete')
+    .contains('Delete')
     .click();
 
   cy.get('.cdk-overlay-container confirmation-dialog ui-button[cancel=true]').click();
