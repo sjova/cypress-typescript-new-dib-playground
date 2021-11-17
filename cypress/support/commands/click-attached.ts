@@ -1,5 +1,5 @@
 /**
- * TODO: Revisit usage of this later
+ * TODO: Remove from tests and delete the command
  *
  * Angular elements may get detached between when we find them and when `.click()` is called.
  * Here we use JQuery `.trigger('click')` right after ensuring the element is attached.

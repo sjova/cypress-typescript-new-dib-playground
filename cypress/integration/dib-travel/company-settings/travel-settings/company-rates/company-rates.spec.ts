@@ -1,5 +1,5 @@
 import { TravelSettings } from '@cy/models';
-import { AddNewDiscount, confirmAddedDiscount, deleteDiscountAndConfirm, editDiscount } from './shared';
+import { addDiscount, confirmAddedDiscount, deleteDiscountAndConfirm, editDiscount } from './shared';
 
 describe('Company Settings - Travel Settings - Company Rates', () => {
   let companyRatesDetails: TravelSettings;
@@ -16,7 +16,7 @@ describe('Company Settings - Travel Settings - Company Rates', () => {
     cy.visit('/company-management/travel-settings/company-rates');
   });
 
-  it('should confirm form for adding new discount type', () => {
+  it('should confirm form details for adding new discount type', () => {
     cy.get('dib-company-management dib-travel-settings dib-company-rates ui-button[type=primary]').click();
     cy.get('.cdk-overlay-container dib-company-rates-dialog button').contains(' Next ').click();
 
@@ -53,7 +53,7 @@ describe('Company Settings - Travel Settings - Company Rates', () => {
   });
 
   it('should add discount for car type (Hertz)', () => {
-    AddNewDiscount(companyRatesDetails);
+    addDiscount(companyRatesDetails);
 
     cy.get('.cdk-overlay-container dib-company-rates-dialog ui-dropdown').click();
     cy.get('.cdk-overlay-container .cdk-overlay-pane .item').contains(' Hertz ').click();
@@ -95,9 +95,12 @@ describe('Company Settings - Travel Settings - Company Rates', () => {
   });
 
   it('should check cancellation of confirmation dialog', () => {
-    cy.get('dib-company-management dib-travel-settings dib-company-rates .grid')
+    cy.get('dib-company-management dib-travel-settings dib-company-rates dib-page .grid .table-cell h4')
       .contains(companyRatesDetails.companyRates.modifiedDiscountName)
-      .parents('dib-company-rates')
+      .parent('.table-cell')
+      .next('.table-cell')
+      .next('.table-cell')
+      .next('.button-cell')
       .find('ui-button')
       .contains(' Delete ')
       .click();
@@ -119,7 +122,7 @@ describe('Company Settings - Travel Settings - Company Rates', () => {
   });
 
   it('should add discount for car type (Avis)', () => {
-    AddNewDiscount(companyRatesDetails);
+    addDiscount(companyRatesDetails);
 
     cy.get('.cdk-overlay-container dib-company-rates-dialog ui-dropdown').click();
     cy.get('.cdk-overlay-container .cdk-overlay-pane .item').contains(' Avis ').click();
@@ -128,7 +131,7 @@ describe('Company Settings - Travel Settings - Company Rates', () => {
   });
 
   it('should add discount for car type (Europcar)', () => {
-    AddNewDiscount(companyRatesDetails);
+    addDiscount(companyRatesDetails);
 
     cy.get('.cdk-overlay-container dib-company-rates-dialog ui-dropdown').click();
     cy.get('.cdk-overlay-container .cdk-overlay-pane .item').contains(' Sixt ').click();

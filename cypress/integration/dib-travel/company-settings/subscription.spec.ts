@@ -1,3 +1,3 @@
 describe('Company Settings - Subscription', () => {
-  // TODO
+  // TODO: Should be covered with testsTODO
 });
