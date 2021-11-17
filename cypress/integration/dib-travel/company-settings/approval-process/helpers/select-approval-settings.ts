@@ -24,7 +24,6 @@ export const selectApprovalSettings = (settings: ApprovalSettings, groupName: st
   cy.get('.cdk-overlay-container dib-approval-process-dialog .members .group')
     .eq(groupSelectorPosition)
     .contains(groupName, { matchCase: false })
-    //TODO: Revisit this, because for now we must use {force: true}, instead clickAttached() option
     .click({ force: true });
 };
 

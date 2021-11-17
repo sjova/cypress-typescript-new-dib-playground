@@ -1,4 +1,4 @@
-import { TravelPolicy } from '@cy/models';
+import { TravelSettings } from '@cy/models';
 import {
   cancelDeleteDialogAndConfirm,
   closeEditDialogAndConfirm,
@@ -9,7 +9,7 @@ import {
 } from './shared';
 
 describe('Company Settings - Travel Settings - Travel Policy - Flight', () => {
-  let travelPolicyDetails: TravelPolicy;
+  let travelPolicyDetails: TravelSettings;
 
   before(() => {
     cy.fixture('company-settings/travel-settings-details').then((travelPolicyDetailsFixture) => {
