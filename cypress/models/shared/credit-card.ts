@@ -4,6 +4,7 @@ export interface CreditCard {
   mastercard: CreditCardType;
   dinersClub: CreditCardType;
   americanExpress: CreditCardType;
+  discover: CreditCardType;
   expiryMonth: string;
   expiryYear: string;
   cvc: string;
