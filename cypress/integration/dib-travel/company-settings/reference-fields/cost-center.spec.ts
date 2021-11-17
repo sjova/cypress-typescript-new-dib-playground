@@ -85,10 +85,10 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       .contains(referenceFields.costCenter.addActionCtaButton)
       .click();
 
-    cy.get('.cdk-overlay-container dib-cost-center-dialog input[placeholder="Cost Center Name*"]').type(
+    cy.get('.cdk-overlay-container dib-cost-center-dialog input[placeholder="Cost center name*"]').type(
       referenceFields.costCenter.name
     );
-    cy.get('.cdk-overlay-container dib-cost-center-dialog input[placeholder="Cost Center Description"]').type(
+    cy.get('.cdk-overlay-container dib-cost-center-dialog input[placeholder="Cost center description"]').type(
       referenceFields.costCenter.description
     );
 
@@ -152,7 +152,7 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       .contains('edit')
       .click();
 
-    cy.get('.cdk-overlay-container dib-cost-center-dialog input[placeholder="Cost Center Name*"]')
+    cy.get('.cdk-overlay-container dib-cost-center-dialog input[placeholder="Cost center name*"]')
       .clear()
       .type(referenceFields.costCenter.modifiedName);
     cy.get('.cdk-overlay-container dib-cost-center-dialog ui-button').contains('save').click();
@@ -172,7 +172,7 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       .next('.table-cell')
       .next('.table-cell')
       .next('.button-cell')
-      .contains(' archive ')
+      .contains(' Archive ')
       .clickAttached();
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
@@ -196,7 +196,7 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       .next('.table-cell')
       .next('.table-cell')
       .next('.button-cell')
-      .contains(' archive ')
+      .contains(' Archive ')
       .click();
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();

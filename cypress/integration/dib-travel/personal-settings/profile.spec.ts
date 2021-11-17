@@ -263,7 +263,7 @@ describe('Personal Settings - Profile', () => {
       .parent('select')
       .select(profileDetails.travelDocuments.documentType);
     cy.get('.cdk-overlay-container dib-travel-document-dialog dib-select-wrapper')
-      .contains('Gender')
+      .contains('Title')
       .parent('select')
       .select(profileDetails.travelDocuments.gender);
     cy.get('.cdk-overlay-container dib-travel-document-dialog dib-input input[name="firstName"]').type(
