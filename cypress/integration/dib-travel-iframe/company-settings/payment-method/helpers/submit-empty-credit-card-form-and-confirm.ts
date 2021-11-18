@@ -1,4 +1,4 @@
-export const submitEmptyCreditCardForm = (): void => {
+export const submitEmptyCreditCardFormAndConfirm = (): void => {
   cy.get('.cdk-overlay-container dib-add-credit-card-dialog ui-button[type=success]').click();
 
   cy.get('.cdk-overlay-container dib-add-credit-card-dialog .error')

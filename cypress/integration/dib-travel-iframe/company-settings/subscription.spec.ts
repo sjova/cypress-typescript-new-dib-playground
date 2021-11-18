@@ -2,10 +2,10 @@ import { getEmailWithHash } from '@cy/helpers';
 import { CreditCard, PaymentMethod } from '@cy/models';
 import {
   addCreditCard,
-  cancelAddCreditCard,
+  cancelAddingCreditCard,
   confirmAddedCreditCard,
   deleteCreditCardAndConfirm,
-  submitEmptyCreditCardForm,
+  submitEmptyCreditCardFormAndConfirm,
 } from './payment-method/helpers';
 
 describe('Company Settings - Subscription', () => {
@@ -45,7 +45,7 @@ describe('Company Settings - Subscription', () => {
       .contains(' Add new Credit Card ')
       .click();
 
-    cancelAddCreditCard();
+    cancelAddingCreditCard();
   });
 
   it('should not be able to submit an empty credit card form', () => {
@@ -53,7 +53,7 @@ describe('Company Settings - Subscription', () => {
       .contains(' Add new Credit Card ')
       .click();
 
-    submitEmptyCreditCardForm();
+    submitEmptyCreditCardFormAndConfirm();
   });
 
   it('should add credit card', () => {
@@ -61,7 +61,7 @@ describe('Company Settings - Subscription', () => {
       .contains(' Add new Credit Card ')
       .click();
 
-    addCreditCard(paymentMethod, creditCard);
+    addCreditCard(paymentMethod, creditCard, false);
 
     cy.get('.cdk-overlay-container dib-dialog-wrapper dib-add-credit-card-dialog .dib-dialog-form-section')
       .contains('CREDIT CARD DETAILS:')

@@ -4,16 +4,16 @@ import { addGroup, deleteGroup } from '../company-employees';
 import {
   addBillingProfile,
   archiveBillingProfile,
-  cancelAddBillingProfile,
+  cancelAddingBillingProfile,
   clickBillingProfileCtaAction,
-  submitEmptyBillingProfileForm,
+  submitEmptyBillingProfileFormAndConfirm,
 } from './payment-method/helpers';
 
 describe('Company Settings - Subscription', () => {
   let paymentMethod: PaymentMethod;
   let group: Group;
 
-  const subscriptionLink = '/company-management/subscription/';
+  const subscriptionBaseLink = '/company-management/subscription';
 
   before(() => {
     cy.fixture('company-employees/group').then((groupFixture) => {
@@ -37,12 +37,16 @@ describe('Company Settings - Subscription', () => {
     });
   });
 
+  // TODO: Rethink a better way to execute prepare data actions instead of duplicated `before()`
+  // Maybe load multiple fixtures and then execute prepare actions
   // eslint-disable-next-line mocha/no-sibling-hooks
   before(() => {
     cy.login();
     cy.visit('/people-management/groups');
 
     addGroup(group.name, group.description, false);
+
+    cy.waitForAngular();
 
     cy.resetState();
   });
@@ -53,14 +57,16 @@ describe('Company Settings - Subscription', () => {
     cy.login();
     cy.visit('/people-management/groups');
 
-    cy.waitForAngular();
-
     deleteGroup(group.name);
   });
 
   beforeEach(() => {
     cy.login();
-    cy.visit(subscriptionLink);
+    cy.visit(subscriptionBaseLink);
+  });
+
+  afterEach(() => {
+    cy.waitForAngular();
   });
 
   it('should display "Subscription" in the sidebar navigation', () => {
@@ -69,6 +75,7 @@ describe('Company Settings - Subscription', () => {
     cy.get('.cdk-overlay-container dib-navbar-panel').contains('Subscription').should('exist');
   });
 
+  // TODO: Revisit under the hood logic behind current values
   it('should check Overview tab', () => {
     cy.get('dib-company-management dib-subscription dib-subscription-overview h3')
       .should('contain', 'Pricing plans')
@@ -93,8 +100,9 @@ describe('Company Settings - Subscription', () => {
     );
   });
 
+  // TODO: Revisit under the hood logic behind current values
   it('should check Pricing Plans tab', () => {
-    cy.visit(subscriptionLink + 'pricing-plans');
+    cy.visit(`${subscriptionBaseLink}/pricing-plans`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-pricing-plans h3')
       .should('contain', ' Business Pro')
@@ -117,7 +125,7 @@ describe('Company Settings - Subscription', () => {
   });
 
   it('should cancel form for Request Enterprise plan', () => {
-    cy.visit(subscriptionLink + 'pricing-plans');
+    cy.visit(`${subscriptionBaseLink}/pricing-plans`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-pricing-plans button')
       .contains(' Contact us ')
@@ -135,7 +143,7 @@ describe('Company Settings - Subscription', () => {
   });
 
   it('should send request for Enterprise plan', () => {
-    cy.visit(subscriptionLink + 'pricing-plans');
+    cy.visit(`${subscriptionBaseLink}/pricing-plans`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-pricing-plans button')
       .contains(' Contact us ')
@@ -149,8 +157,10 @@ describe('Company Settings - Subscription', () => {
     cy.get('.cdk-overlay-container dib-request-enterprise-dialog').should('not.exist');
   });
 
+  // TODO: Revisit under the hood logic behind current values
+  // TODO: We need to do the internal calculation and to compare values (calculated vs. displayed)
   it('should check Licenses tab', () => {
-    cy.visit(subscriptionLink + 'licenses');
+    cy.visit(`${subscriptionBaseLink}/licenses`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-licenses h3')
       .should('contain', ' Number of Licenses ')
@@ -164,7 +174,7 @@ describe('Company Settings - Subscription', () => {
   });
 
   it('should increment/decrement number of licenses', () => {
-    cy.visit(subscriptionLink + 'licenses');
+    cy.visit(`${subscriptionBaseLink}/licenses`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-licenses button i').contains('add').click();
 
@@ -176,7 +186,7 @@ describe('Company Settings - Subscription', () => {
   });
 
   it('should cancel confirmation dialog for buying new license', () => {
-    cy.visit(subscriptionLink + 'licenses');
+    cy.visit(`${subscriptionBaseLink}/licenses`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-licenses ui-button').contains('Buy now').click();
 
@@ -186,7 +196,7 @@ describe('Company Settings - Subscription', () => {
   });
 
   it('should buy new license for subscription', () => {
-    cy.visit(subscriptionLink + 'licenses');
+    cy.visit(`${subscriptionBaseLink}/licenses`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-licenses ui-button').contains('Buy now').click();
 
@@ -199,27 +209,28 @@ describe('Company Settings - Subscription', () => {
   });
 
   it('should cancel form for adding billing profile', () => {
-    cy.visit(subscriptionLink + 'payment-method');
+    cy.visit(`${subscriptionBaseLink}/payment-method`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-payment-method span')
       .contains(' Add New Billing Profile ')
       .click();
 
-    cancelAddBillingProfile();
+    cancelAddingBillingProfile();
   });
 
   it('should not be able to submit an empty billing profile form', () => {
-    cy.visit(subscriptionLink + 'payment-method');
+    cy.visit(`${subscriptionBaseLink}/payment-method`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-payment-method span')
       .contains(' Add New Billing Profile ')
       .click();
 
-    submitEmptyBillingProfileForm();
+    submitEmptyBillingProfileFormAndConfirm();
   });
 
+  // TODO: This should be revisited (more specific: `addBillingProfile` method)
   it('should add a billing profile', () => {
-    cy.visit(subscriptionLink + 'payment-method');
+    cy.visit(`${subscriptionBaseLink}/payment-method`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-payment-method span')
       .contains(' Add New Billing Profile ')
@@ -247,7 +258,7 @@ describe('Company Settings - Subscription', () => {
   });
 
   it('should check Purchase History tab', () => {
-    cy.visit(subscriptionLink + 'purchase-history');
+    cy.visit(`${subscriptionBaseLink}/purchase-history`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p')
       .should('contain', ' Date ')

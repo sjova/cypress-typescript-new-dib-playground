@@ -2,10 +2,10 @@ import { getEmailWithHash } from '@cy/helpers';
 import { CreditCard, PaymentMethod } from '@cy/models';
 import {
   addCreditCard,
-  cancelAddCreditCard,
+  cancelAddingCreditCard,
   confirmAddedCreditCard,
   deleteCreditCardAndConfirm,
-  submitEmptyCreditCardForm,
+  submitEmptyCreditCardFormAndConfirm,
 } from './helpers';
 
 describe('Company Settings - Payment Method - Credit Cards', () => {
@@ -42,6 +42,10 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
     cy.waitForAngular();
   });
 
+  afterEach(() => {
+    cy.waitForAngular();
+  });
+
   it('should close the form for adding new credit card', () => {
     cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();
 
@@ -53,18 +57,16 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
   it('should cancel the adding new credit card', () => {
     cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();
 
-    cancelAddCreditCard();
+    cancelAddingCreditCard();
   });
 
   it('should not be able to submit an empty credit card form', () => {
     cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();
 
-    submitEmptyCreditCardForm();
+    submitEmptyCreditCardFormAndConfirm();
   });
 
   it('should add Visa credit card', () => {
-    cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();
-
     addCreditCard(paymentMethod, creditCard);
 
     cy.get('.cdk-overlay-container dib-dialog-wrapper dib-add-credit-card-dialog .dib-dialog-form-section')
@@ -87,8 +89,6 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
   });
 
   it('should add Visa 3D Secure credit card', () => {
-    cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();
-
     addCreditCard(paymentMethod, creditCard);
 
     cy.get('.cdk-overlay-container dib-dialog-wrapper dib-add-credit-card-dialog .dib-dialog-form-section')
@@ -124,8 +124,6 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
   });
 
   it('should add Mastercard credit card', () => {
-    cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();
-
     addCreditCard(paymentMethod, creditCard);
 
     cy.get('.cdk-overlay-container dib-dialog-wrapper dib-add-credit-card-dialog .dib-dialog-form-section')
@@ -148,8 +146,6 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
   });
 
   it('should add American Express credit card', () => {
-    cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();
-
     addCreditCard(paymentMethod, creditCard);
 
     cy.get('.cdk-overlay-container dib-dialog-wrapper dib-add-credit-card-dialog .dib-dialog-form-section')

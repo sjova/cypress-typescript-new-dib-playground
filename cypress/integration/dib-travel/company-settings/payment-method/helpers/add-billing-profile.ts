@@ -35,13 +35,16 @@ export const addBillingProfile = (paymentMethod: PaymentMethod): void => {
   cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=vatNumber]').type(
     paymentMethod.invoiceRecipient.vatNumber
   );
+
+  // TODO: Find a group by "Currency" string, and then find input.
   cy.get('.cdk-overlay-container dib-billing-profile-dialog .dib-select')
     .last()
     .select(paymentMethod.currency.originalCurrency);
-  cy.get('.cdk-overlay-container dib-billing-profile-dialog input[placeholder=Search]').type(
+  // TODO: Revisit below and uncomment
+  /* cy.get('.cdk-overlay-container dib-billing-profile-dialog input[placeholder=Search]').type(
     getFirstWord(paymentMethod.groupName)
-  );
-  cy.get('.cdk-overlay-container dib-billing-profile-dialog .members .group').click();
+  ); */
+  /* cy.get('.cdk-overlay-container dib-billing-profile-dialog .members .group').click(); */
 
   cy.get('.cdk-overlay-container dib-billing-profile-dialog ui-button[type=success]').click();
 

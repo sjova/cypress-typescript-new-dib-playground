@@ -4,9 +4,9 @@ import { addGroup, deleteGroup } from '../../company-employees';
 import {
   addBillingProfile,
   archiveBillingProfile,
-  cancelAddBillingProfile,
+  cancelAddingBillingProfile,
   clickBillingProfileCtaAction,
-  submitEmptyBillingProfileForm,
+  submitEmptyBillingProfileFormAndConfirm,
 } from './helpers';
 
 describe('Company Settings - Payment Method - Billing Profiles', () => {
@@ -44,6 +44,8 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
 
     addGroup(group.name, group.description, false);
 
+    cy.waitForAngular();
+
     cy.resetState();
   });
 
@@ -52,8 +54,6 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
 
     cy.login();
     cy.visit('/people-management/groups');
-
-    cy.waitForAngular();
 
     deleteGroup(group.name);
   });
@@ -65,16 +65,20 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     cy.waitForAngular();
   });
 
+  afterEach(() => {
+    cy.waitForAngular();
+  });
+
   it('should close the form for adding billing profile', () => {
     cy.get('dib-company-management dib-payment-method dib-billing-profiles ui-button[type=primary]').click();
 
-    cancelAddBillingProfile();
+    cancelAddingBillingProfile();
   });
 
   it('should not be able to submit an empty billing profile form', () => {
     cy.get('dib-company-management dib-payment-method dib-billing-profiles ui-button[type=primary]').click();
 
-    submitEmptyBillingProfileForm();
+    submitEmptyBillingProfileFormAndConfirm();
   });
 
   it('should add a billing profile', () => {
@@ -102,6 +106,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     cy.get('.cdk-overlay-container dib-billing-profile-dialog').should('not.exist');
   });
 
+  // TODO: Revisit this and below tests if needed
   it('should update a billing profile', () => {
     clickBillingProfileCtaAction(paymentMethod.primaryContact.email, 'Edit');
 
