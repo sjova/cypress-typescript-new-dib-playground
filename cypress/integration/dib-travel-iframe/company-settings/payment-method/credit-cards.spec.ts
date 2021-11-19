@@ -1,6 +1,12 @@
 import { getEmailWithHash } from '@cy/helpers';
 import { CreditCard, PaymentMethod } from '@cy/models';
-import { addCreditCard, confirmAddedCreditCard, deleteCreditCardAndConfirm } from './helpers';
+import {
+  addCreditCard,
+  cancelAddingCreditCard,
+  confirmAddedCreditCard,
+  deleteCreditCardAndConfirm,
+  submitEmptyCreditCardFormAndConfirm,
+} from './helpers';
 
 describe('Company Settings - Payment Method - Credit Cards', () => {
   let creditCard: CreditCard;
@@ -36,6 +42,10 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
     cy.waitForAngular();
   });
 
+  afterEach(() => {
+    cy.waitForAngular();
+  });
+
   it('should close the form for adding new credit card', () => {
     cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();
 
@@ -47,25 +57,13 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
   it('should cancel the adding new credit card', () => {
     cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();
 
-    cy.get('.cdk-overlay-container dib-add-credit-card-dialog ui-button').contains('Cancel').click();
-
-    cy.get('.cdk-overlay-container dib-add-credit-card-dialog').should('not.exist');
+    cancelAddingCreditCard();
   });
 
   it('should not be able to submit an empty credit card form', () => {
     cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();
 
-    cy.get('.cdk-overlay-container dib-add-credit-card-dialog ui-button[type=success]').click();
-
-    cy.get('.cdk-overlay-container dib-add-credit-card-dialog .error')
-      .should('contain', 'Postal code is required.')
-      .should('contain', 'City is required.')
-      .should('contain', 'Country is required.')
-      .should('contain', 'Street name is required.')
-      .should('contain', 'Email is required.')
-      .should('contain', 'VAT is required.')
-      .should('contain', 'First name is required.')
-      .should('contain', 'Last name is required.');
+    submitEmptyCreditCardFormAndConfirm();
   });
 
   it('should add Visa credit card', () => {
@@ -80,6 +78,8 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
       .type(creditCard.visa.number);
 
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog ui-button[type=success]').click();
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Company Shared Credit Card Added');
 
     confirmAddedCreditCard(paymentMethod, creditCard);
   });
@@ -114,6 +114,8 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
 
     cy.waitForAngular();
 
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Company Shared Credit Card Added');
+
     confirmAddedCreditCard(paymentMethod, creditCard);
   });
 
@@ -134,6 +136,8 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
 
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog ui-button[type=success]').click();
 
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Company Shared Credit Card Added');
+
     confirmAddedCreditCard(paymentMethod, creditCard);
   });
 
@@ -153,6 +157,8 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
       .type(creditCard.americanExpress.number);
 
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog ui-button[type=success]').click();
+
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Company Shared Credit Card Added');
 
     confirmAddedCreditCard(paymentMethod, creditCard);
   });

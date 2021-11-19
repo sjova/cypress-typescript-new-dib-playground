@@ -1,7 +1,13 @@
-import { getEmailWithHash, getFirstWord } from '@cy/helpers';
+import { getEmailWithHash } from '@cy/helpers';
 import { Group, PaymentMethod } from '@cy/models';
 import { addGroup, deleteGroup } from '../../company-employees';
-import { clickBillingProfileCtaAction } from './helpers';
+import {
+  addBillingProfile,
+  archiveBillingProfile,
+  cancelAddingBillingProfile,
+  clickBillingProfileCtaAction,
+  submitEmptyBillingProfileFormAndConfirm,
+} from './helpers';
 
 describe('Company Settings - Payment Method - Billing Profiles', () => {
   let paymentMethod: PaymentMethod;
@@ -38,6 +44,8 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
 
     addGroup(group.name, group.description, false);
 
+    cy.waitForAngular();
+
     cy.resetState();
   });
 
@@ -46,8 +54,6 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
 
     cy.login();
     cy.visit('/people-management/groups');
-
-    cy.waitForAngular();
 
     deleteGroup(group.name);
   });
@@ -59,73 +65,27 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     cy.waitForAngular();
   });
 
+  afterEach(() => {
+    cy.waitForAngular();
+  });
+
   it('should close the form for adding billing profile', () => {
     cy.get('dib-company-management dib-payment-method dib-billing-profiles ui-button[type=primary]').click();
 
-    cy.get('.cdk-overlay-container dib-dialog-wrapper i').contains('close').click();
-
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog').should('not.exist');
+    cancelAddingBillingProfile();
   });
 
   it('should not be able to submit an empty billing profile form', () => {
     cy.get('dib-company-management dib-payment-method dib-billing-profiles ui-button[type=primary]').click();
 
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog ui-button[type=success]').click();
-
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Please fill out all required fields');
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog dib-input .dib-input-error').should(
-      'contain',
-      'Required'
-    );
+    submitEmptyBillingProfileFormAndConfirm();
   });
 
   it('should add a billing profile', () => {
     cy.get('dib-company-management dib-payment-method dib-billing-profiles ui-button[type=primary]').click();
 
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=legalName]').type(
-      paymentMethod.companyInformation.companyLegalName
-    );
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=taxId]').type(
-      paymentMethod.companyInformation.taxId
-    );
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=city]').type(
-      paymentMethod.companyInformation.city
-    );
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog .dib-select')
-      .first()
-      .select(paymentMethod.companyInformation.country);
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=streetName]').type(
-      paymentMethod.companyInformation.address
-    );
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=zipcode]').type(
-      paymentMethod.companyInformation.zipCode
-    );
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=contactFirstName]').type(
-      paymentMethod.primaryContact.firstName
-    );
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=contactLastName]').type(
-      paymentMethod.primaryContact.lastName
-    );
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=contactEmail]').type(
-      paymentMethod.primaryContact.email
-    );
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=invoiceRecipientEmail]').type(
-      paymentMethod.invoiceRecipient.email
-    );
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=vatNumber]').type(
-      paymentMethod.invoiceRecipient.vatNumber
-    );
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog .dib-select')
-      .last()
-      .select(paymentMethod.currency.originalCurrency);
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[placeholder=Search]').type(
-      getFirstWord(paymentMethod.groupName)
-    );
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog .members .group').click();
+    addBillingProfile(paymentMethod);
 
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog ui-button[type=success]').click();
-
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Successfully added billing profile.');
     cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item .content')
       .should('contain', paymentMethod.companyInformation.taxId)
       .should('contain', paymentMethod.primaryContact.firstName)
@@ -146,6 +106,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     cy.get('.cdk-overlay-container dib-billing-profile-dialog').should('not.exist');
   });
 
+  // TODO: Revisit this and below tests if needed
   it('should update a billing profile', () => {
     clickBillingProfileCtaAction(paymentMethod.primaryContact.email, 'Edit');
 
@@ -241,16 +202,6 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
 
   it('should archive a billing profile', () => {
     clickBillingProfileCtaAction(paymentMethod.primaryContact.modifiedEmail, 'Archive ');
-
-    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
-
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-      'contain',
-      'Successfully archived billing profile.'
-    );
-    cy.get('dib-company-management dib-payment-method dib-billing-profiles .billing-profiles').should(
-      'contain',
-      ' You have not added any billing profiles yet. '
-    );
+    archiveBillingProfile();
   });
 });

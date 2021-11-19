@@ -214,8 +214,8 @@ resolve '@cy/fixtures/dib-travel-accounts.json' in '/Users/DibUsername/Projects/
 
 ## Cypress Config Notes
 
-- `"defaultCommandTimeout": 60000` - revisit this later when we speed up the Angular front-end application
-- `"requestTimeout": 45000` - revisit this later when we speed up the Angular front-end application
+- `"defaultCommandTimeout": 40000` - default x10, revisit this later when we speed up the Angular front-end application
+- `"requestTimeout": 50000` - default x10, revisit this later when we speed up the Angular front-end application
 
 ## ToDo Decision
 
