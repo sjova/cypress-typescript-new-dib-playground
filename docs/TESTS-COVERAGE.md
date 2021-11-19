@@ -2,24 +2,46 @@
 
 ## DONE
 
-- cy-accounts-fixture (internal)
+- cy-accounts-fixture (internal) [Sasa Jovanovic]
+- sign-up [Dusan Petrovic]
+- sign-in (user, agent) [Dusan Petrovic]
+- forgot-password [Dusan Petrovic]
+- personal-settings
+  - profile [Stefan Nikolic]
+  - credit-cards [Stefan Nikolic]
+- company-employees
+  - employees-user [Dusan Petrovic, Stefan Nikolic]
+  - employees-agent [Dusan Petrovic, Stefan Nikolic]
+  - groups-user [Dusan Petrovic, Nenad Tripunovic]
+  - groups-agent [Dusan Petrovic, Nenad Tripunovic]
+- company-settings
+  - payment-method [Nenad Tripunovic]
+  - travel-settings [Nenad Tripunovic]
+  - approval-process [Nenad Tripunovic]
+  - reference-fields [Stefan Nikolic]
+  - subscription [Nenad Tripunovic]
 
 ## IN PROGRESS
 
-- sign-up; **TODO: Double-check that everything is covered.** [Dusan Petrovic]
-- sign-in (user, agent); **TODO: Double-check that everything is covered.** [Dusan Petrovic]
-- forgot-password; **TODO: Double-check that everything is covered.** [Dusan Petrovic]
-- personal-settings (profile, credit-cards - todo); **TODO: Double-check that everything is covered, and cover credit-cards with tests..** [Stefan Nikolic]
-- company-employees (employees-user, employees-agent, groups-user, groups-agent); **TODO: Double-check that everything is covered.** [Dusan Petrovic]
-- company-settings (payment-method, travel-settings - todo, approval-process, invoice-settings, reference-fields, subscription - todo); **TODO: Double-check that everything is covered.** [Nenad Tripunovic]
+- sign-up [Nenad Tripunovic/Stefan Nikolic: tooltip]
+- company-employees
+  - groups [Nenad Tripunovic: Jira bugs on hold]
+- company-settings
+  - travel-settings [Nenad Tripunovic: add taxi]
+  - approval-process [Nenad Tripunovic: maintenance and double-check]
+  - subscription [Nenad Tripunovic: add new helpers, maintenance and double-check]
 
-## TODO
+## TODO PRIMARY (QUICK?)
 
+- company-settings (invoice-settings) [Stefan Nikolic: double-check with PM]
 - company-report (analytics-reporting, invoices); there isn’t much work to do?
 - my-travels (active, past); there isn’t much work to do?
-- flights; feature, require a lot of time
-- hotels; feature, require a lot of time
-- rail-bus; feature, require a lot of time
-- cars; feature, require a lot of time
 - group; there isn’t much work to do?
-- other (agent); there isn’t much work to do?
+
+## TODO SECONDARY (PM DISCUSSION?)
+
+- flights; feature, require a lot of time (partially done?)
+- hotels; feature, require a lot of time (skip?)
+- rail-bus; feature, require a lot of time (skip?)
+- cars; feature, require a lot of time (good candidate?)
+- other (agent); there isn’t much work to do? (double-check with PM?)
