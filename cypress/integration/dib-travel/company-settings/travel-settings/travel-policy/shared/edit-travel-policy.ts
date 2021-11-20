@@ -7,9 +7,6 @@ export const editTravelPolicy = (travelPolicyDetails: TravelSettings): void => {
   cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=name]')
     .clear()
     .type(travelPolicyDetails.sharedDetails.modifiedName);
-  cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=numberOfDaysInAdvance]')
-    .clear()
-    .type(travelPolicyDetails.sharedDetails.modifiedNumberOfDaysInAdvance);
   cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder=Budget]')
     .clear()
     .type(travelPolicyDetails.sharedDetails.modifiedBudget);

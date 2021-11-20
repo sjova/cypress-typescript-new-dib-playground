@@ -27,7 +27,6 @@
 - company-employees
   - groups [Nenad Tripunovic: Jira bugs on hold]
 - company-settings
-  - travel-settings [Nenad Tripunovic: add taxi]
   - approval-process [Nenad Tripunovic: maintenance and double-check]
   - subscription [Nenad Tripunovic: add new helpers, maintenance and double-check]
 

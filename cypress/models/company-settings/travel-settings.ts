@@ -5,6 +5,7 @@ export interface TravelSettings {
   modifiedFlight: Flight;
   hotel: Hotel;
   train: Train;
+  taxi: Taxi;
   sharedDetails: SharedDetails;
   employee: Pick<User, 'firstName' | 'lastName' | 'email'>;
   companyRates: CompanyRates;
@@ -45,6 +46,9 @@ interface Train {
   modifiedBudgetPerTrain: string;
   modifiedFrom: string;
   modifiedTo: string;
+}
+interface Taxi {
+  type: string;
 }
 export interface CompanyRates {
   discountName: string;
