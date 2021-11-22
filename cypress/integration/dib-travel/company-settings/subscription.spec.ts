@@ -82,14 +82,10 @@ describe('Company Settings - Subscription', () => {
       .should('contain', 'Licenses')
       .should('contain', 'Renewal date')
       .should('contain', 'Renewal subscription');
-    cy.get('dib-company-management dib-subscription dib-subscription-overview .table-row p').should(
-      'contain',
-      ' Business Pro '
-    );
-    cy.get('dib-company-management dib-subscription dib-subscription-overview .table-row a').should(
-      'contain',
-      'Apr 2, 2022'
-    );
+    cy.get('dib-company-management dib-subscription dib-subscription-overview .table-row p')
+      .should('contain', ' Business Pro ')
+      .should('contain', 'Apr 2, 2022');
+
     cy.get('dib-company-management dib-subscription dib-subscription-overview .table-footer span').should(
       'have.text',
       'For any questions regarding your subscription '
