@@ -42,6 +42,8 @@ describe('Company Settings - Travel Settings - Travel Policy - Hotel', () => {
   });
 
   it('should update hotel travel policy', () => {
+    cy.waitForAngular();
+
     editTravelPolicy(travelPolicyDetails);
 
     cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=numberOfDaysInAdvance]')
