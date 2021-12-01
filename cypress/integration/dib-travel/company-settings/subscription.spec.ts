@@ -235,15 +235,15 @@ describe('Company Settings - Subscription', () => {
     cy.visit(`${subscriptionBaseLink}/licenses`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-licenses .subscription-table__row__value').then(
-      ($numberOfLicenses) => {
-        const numberBeforePurchase = parseInt($numberOfLicenses.text());
+      (numberOfLicenses) => {
+        const numberBeforePurchase = parseInt(numberOfLicenses.text());
         cy.get('dib-company-management dib-subscription dib-subscription-licenses ui-button').contains('Buy').click();
         cy.get('.cdk-overlay-container confirmation-dialog button')
           .contains(' Buy ')
           .click()
           .waitForAngular()
           .then(() => {
-            const numberAfterPurchase = parseInt($numberOfLicenses.text());
+            const numberAfterPurchase = parseInt(numberOfLicenses.text());
             expect(numberAfterPurchase).to.eq(numberBeforePurchase + 1);
           });
       }
