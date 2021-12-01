@@ -3,8 +3,8 @@ describe('Company Settings - Invoice Settings (Agent)', () => {
     cy.loginAgent();
     cy.visit('/company-management/invoice-settings');
   });
+
   it('should display "Invoice Settings" in the sidebar navigation', () => {
-    cy.visit('');
     cy.get('dib-navbar dib-hamburger-icon').click();
 
     cy.get('.cdk-overlay-container dib-navbar-panel').should('contain', ' Invoice Settings ');
@@ -20,6 +20,7 @@ describe('Company Settings - Invoice Settings (Agent)', () => {
 
   it('should all check-boxes be un-checked and input fields disabled', () => {
     cy.waitForAngular();
+
     cy.get('dib-company-management dib-invoice-settings ui-checkbox input[type="checkbox"]')
       // Computed size is zero, and we need to use `{ force: true }`
       .check({ force: true })
@@ -78,6 +79,7 @@ describe('Company Settings - Invoice Settings (Agent)', () => {
 
   it('should check Cancel changes button', () => {
     cy.waitForAngular();
+
     cy.get('dib-company-management dib-invoice-settings ui-checkbox input[type="checkbox"]')
       // Computed size is zero, and we need to use `{ force: true }`
       .uncheck({ force: true })
@@ -94,6 +96,7 @@ describe('Company Settings - Invoice Settings (Agent)', () => {
 
   it('should click cancel button after all check-boxes be checked and input fields should be disabled', () => {
     cy.waitForAngular();
+
     cy.get('dib-company-management dib-invoice-settings ui-checkbox input[type="checkbox"]')
       // Computed size is zero, and we need to use `{ force: true }`
       .uncheck({ force: true })
@@ -119,6 +122,7 @@ describe('Company Settings - Invoice Settings (Agent)', () => {
 
   it('should all check-boxes be checked and input fields enabled', () => {
     cy.waitForAngular();
+
     cy.get('dib-company-management dib-invoice-settings ui-checkbox input[type="checkbox"]')
       // Computed size is zero, and we need to use `{ force: true }`
       .uncheck({ force: true })
@@ -140,18 +144,12 @@ describe('Company Settings - Invoice Settings (Agent)', () => {
       'class',
       'focused'
     );
-
-    /*   Another way to check are all 102 input fields are active
-    //   for (let inputField = 0; inputField < 102; inputField++) {
-    //   cy.get('dib-company-management dib-invoice-settings ui-input ui-control-wrapper')
-    //     .eq(inputField)
-    //     .should('have.attr', 'class', 'focused');
-     } */
   });
 
-  /* TODO: Uncomment when bug (DT-10506) is fixed.
-  it('should check Reset to Default button', () => {
+  // TODO: Uncomment when bug (DT-10506) is fixed
+  /* it('should check Reset to Default button', () => {
     cy.waitForAngular();
+
     cy.get('dib-company-management dib-invoice-settings ui-button').contains(' Reset To Default ').click();
 
     cy.get('.cdk-overlay-container confirmation-dialog span').should(
@@ -161,10 +159,6 @@ describe('Company Settings - Invoice Settings (Agent)', () => {
 
     cy.get('.cdk-overlay-container confirmation-dialog .button').contains(' Save ').click();
 
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-    'contain',
-    'Successfully saved!'
-    );
-
-  });*/
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Successfully saved!');
+  }); */
 });
