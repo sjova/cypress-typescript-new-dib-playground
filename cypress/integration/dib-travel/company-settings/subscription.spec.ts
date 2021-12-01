@@ -8,6 +8,7 @@ import {
   clickBillingProfileCtaAction,
   submitEmptyBillingProfileFormAndConfirm,
 } from './payment-method/helpers';
+import { confirmFirstPagePreview, confirmSecondPagePreview } from './subscription/helpers';
 
 describe('Company Settings - Subscription', () => {
   let paymentMethod: PaymentMethod;
@@ -82,14 +83,23 @@ describe('Company Settings - Subscription', () => {
       .should('contain', 'Licenses')
       .should('contain', 'Renewal date')
       .should('contain', 'Renewal subscription');
-    cy.get('dib-company-management dib-subscription dib-subscription-overview .table-row p').should(
-      'contain',
-      ' Business Pro '
-    );
-    cy.get('dib-company-management dib-subscription dib-subscription-overview .table-row a').should(
-      'contain',
-      'Apr 2, 2022'
-    );
+    cy.get('dib-company-management dib-subscription dib-subscription-overview .table-row p')
+      .should('contain', ' Business Pro ')
+      .should('contain', 'Apr 2, 2022');
+
+    cy.get('dib-company-management dib-subscription dib-subscription-overview .row-value')
+      .eq(1)
+      .invoke('text')
+      .then((numberOfLicenses) => {
+        cy.visit(`${subscriptionBaseLink}/licenses`);
+
+        cy.get(
+          'dib-company-management dib-subscription dib-subscription-licenses .subscription-table__row__value'
+        ).should('contain', numberOfLicenses);
+      });
+
+    cy.visit(`${subscriptionBaseLink}/overview`);
+
     cy.get('dib-company-management dib-subscription dib-subscription-overview .table-footer span').should(
       'have.text',
       'For any questions regarding your subscription '
@@ -171,6 +181,32 @@ describe('Company Settings - Subscription', () => {
     cy.get('dib-company-management dib-subscription dib-subscription-licenses .subscription-table__row__pricing')
       .should('contain', ' 1 x 72 EUR = 72 EUR ')
       .should('contain', ' Total cost: 72 EUR ');
+
+    cy.get('dib-company-management dib-subscription dib-subscription-licenses dib-tooltip:first')
+      .invoke('show')
+      .contains('info_outline')
+      .trigger('mouseover', 'bottom')
+      .click();
+    cy.get('.tooltip-content').should(
+      'contain',
+      'Additional licenses will be valid until the Apr 01, 2022, after which they will be automatically renewed.'
+    );
+    cy.get('dib-company-management dib-subscription dib-subscription-licenses dib-tooltip')
+      .eq(1)
+      .invoke('show')
+      .contains('info_outline')
+      .trigger('mouseover', 'bottom')
+      .click();
+    cy.get('.tooltip-content').should('contain', 'Price of the next licence');
+    cy.get('dib-company-management dib-subscription dib-subscription-licenses dib-tooltip:last')
+      .invoke('show')
+      .contains('info_outline')
+      .trigger('mouseover', 'bottom')
+      .click();
+    cy.get('.tooltip-content').should(
+      'contain',
+      'If you purchase a license during a month, we will prorate the price on your first invoice'
+    );
   });
 
   it('should increment/decrement number of licenses', () => {
@@ -198,9 +234,20 @@ describe('Company Settings - Subscription', () => {
   it('should buy new license for subscription', () => {
     cy.visit(`${subscriptionBaseLink}/licenses`);
 
-    cy.get('dib-company-management dib-subscription dib-subscription-licenses ui-button').contains('Buy now').click();
-
-    cy.get('.cdk-overlay-container confirmation-dialog button').contains(' Buy ').click();
+    cy.get('dib-company-management dib-subscription dib-subscription-licenses .subscription-table__row__value').then(
+      (numberOfLicenses) => {
+        const numberBeforePurchase = parseInt(numberOfLicenses.text());
+        cy.get('dib-company-management dib-subscription dib-subscription-licenses ui-button').contains('Buy').click();
+        cy.get('.cdk-overlay-container confirmation-dialog button')
+          .contains(' Buy ')
+          .click()
+          .waitForAngular()
+          .then(() => {
+            const numberAfterPurchase = parseInt(numberOfLicenses.text());
+            expect(numberAfterPurchase).to.eq(numberBeforePurchase + 1);
+          });
+      }
+    );
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
@@ -283,5 +330,64 @@ describe('Company Settings - Subscription', () => {
       .should('contain', 'RSD')
       .should('contain', ' Completed ')
       .should('contain', ' Download invoice ');
+  });
+
+  it('should check pagination on Purchase History tab', () => {
+    cy.visit(`${subscriptionBaseLink}/purchase-history`);
+
+    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination ul li')
+      .contains('2')
+      .click();
+
+    confirmSecondPagePreview();
+
+    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination ul li')
+      .contains('1')
+      .click();
+
+    confirmFirstPagePreview();
+
+    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
+      .contains('keyboard_arrow_right')
+      .click();
+
+    confirmSecondPagePreview();
+
+    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
+      .contains('keyboard_arrow_left')
+      .click();
+
+    confirmFirstPagePreview();
+
+    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
+      .contains('last_page')
+      .click();
+
+    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+      'not.contain',
+      ' Apr 2, 2021 '
+    );
+
+    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
+      .contains('first_page')
+      .click();
+
+    confirmFirstPagePreview();
+
+    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination span')
+      .contains('20')
+      .click();
+
+    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+      'contain',
+      ' Apr 2, 2021 ' && ' Nov 18, 2021 '
+    );
+
+    cy.reload();
+
+    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+      'not.contain',
+      ' Nov 18, 2021 '
+    );
   });
 });
