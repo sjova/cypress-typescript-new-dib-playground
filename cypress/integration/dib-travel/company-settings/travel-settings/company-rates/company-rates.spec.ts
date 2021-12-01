@@ -180,7 +180,7 @@ describe('Company Settings - Travel Settings - Company Rates', () => {
     );
   });
 
-  it('should delete discount for car type (Sixt/Avis)', () => {
+  it('should delete discounts for car type (Sixt/Avis)', () => {
     editDiscount(companyRatesDetails);
 
     cy.get('.cdk-overlay-container dib-company-rates-dialog input[name=discountName')

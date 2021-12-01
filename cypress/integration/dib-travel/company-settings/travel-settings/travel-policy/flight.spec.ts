@@ -27,6 +27,9 @@ describe('Company Settings - Travel Settings - Travel Policy - Flight', () => {
 
     enterSharedDetails(travelPolicyDetails.flight.type, travelPolicyDetails.sharedDetails);
 
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=numberOfDaysInAdvance]').type(
+      travelPolicyDetails.sharedDetails.numberOfDaysInAdvance
+    );
     cy.get('.cdk-overlay-container dib-travel-policy-dialog dib-checkbox').click({ multiple: true });
     cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=budgetException]').type(
       travelPolicyDetails.flight.budgetException
@@ -71,8 +74,13 @@ describe('Company Settings - Travel Settings - Travel Policy - Flight', () => {
   });
 
   it('should update flight travel policy', () => {
+    cy.waitForAngular();
+
     editTravelPolicy(travelPolicyDetails);
 
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=numberOfDaysInAdvance]')
+      .clear()
+      .type(travelPolicyDetails.sharedDetails.modifiedNumberOfDaysInAdvance);
     cy.get('.cdk-overlay-container dib-travel-policy-dialog dib-checkbox').click({ multiple: true });
     cy.get('.cdk-overlay-container dib-travel-policy-dialog dib-checkbox label .container-text')
       .contains('Economy')
@@ -144,6 +152,8 @@ describe('Company Settings - Travel Settings - Travel Policy - Flight', () => {
   });
 
   it('should check cancellation of confirmation dialog', () => {
+    cy.waitForAngular();
+
     cancelDeleteDialogAndConfirm(travelPolicyDetails);
   });
 

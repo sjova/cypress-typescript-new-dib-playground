@@ -30,8 +30,8 @@
   - groups (TODO: Revisit 2 Jira bugs: editing group, create group with same name) [Nenad Tripunovic]
 - company-settings
   - travel-settings (TODO: Add taxi) [Nenad Tripunovic]
-  - approval-process (TODO: Maintenance and double-check) [Nenad Tripunovic]
-  - subscription (TODO: Add new helpers, maintenance and double-check) [Nenad Tripunovic]
+  - approval-process [Nenad Tripunovic: maintenance and double-check]
+  - subscription [Nenad Tripunovic: add new helpers, maintenance and double-check]
 
 ## TODO (INITIAL COVERAGE)
 

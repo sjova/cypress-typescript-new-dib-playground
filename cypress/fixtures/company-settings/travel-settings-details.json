@@ -32,6 +32,9 @@
     "modifiedTo": "Stockholm Södra",
     "modifiedBudgetPerTrain": "200"
   },
+  "taxi": {
+    "type": "Taxi"
+  },
   "sharedDetails": {
     "name": "CY Travel Policy Test",
     "numberOfDaysInAdvance": "2",
