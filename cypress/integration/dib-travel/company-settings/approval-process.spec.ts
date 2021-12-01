@@ -58,6 +58,8 @@ describe('Company Settings - Approval Process', () => {
   });
 
   beforeEach(() => {
+    cy.resetState(); // TODO: Revisit this later
+
     cy.login();
 
     cy.visit('/company-management/approval-process');
