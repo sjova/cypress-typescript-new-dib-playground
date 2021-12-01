@@ -68,7 +68,7 @@ describe('Company Report - Analytics & Reporting', () => {
     );
   });
 
-  it('should check currency filter and date picker ', () => {
+  it('should check currency filter and date picker', () => {
     cy.get('dib-reporting dib-analytics-page .currency .placeholder').contains('RSD').click();
     cy.get('.cdk-overlay-container span .currency__name')
       .should('contain', 'Euro')
