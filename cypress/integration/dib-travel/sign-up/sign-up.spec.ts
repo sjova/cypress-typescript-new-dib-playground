@@ -52,6 +52,15 @@ describe('Sign Up', () => {
     cy.get('dib-signup ui-autocomplete .error').should('contain', 'Country is required');
   });
 
+  it('should check content of tooltip for mobile phone number ', () => {
+    cy.get('dib-signup ui-phone-picker dib-tooltip')
+      .invoke('show')
+      .contains('info_outline')
+      .trigger('mouseover', 'bottom')
+      .click();
+    cy.get('.tooltip-content').should('contain', 'A mobile phone number is required for e-ticketing.');
+  });
+
   it('should display error message when invalid email address is inserted', () => {
     cy.waitForAngular();
 
