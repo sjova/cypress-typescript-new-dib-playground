@@ -2,7 +2,9 @@
 
 ## DONE
 
+- dev-playground (internal) [Sasa Jovanovic]
 - cy-accounts-fixture (internal) [Sasa Jovanovic]
+- dib-travel, dib-travel-iframe (internal) [Sasa Jovanovic]
 - sign-up [Dusan Petrovic]
 - sign-in (user, agent) [Dusan Petrovic]
 - forgot-password [Dusan Petrovic]
@@ -23,24 +25,35 @@
 
 ## IN PROGRESS
 
-- sign-up [Nenad Tripunovic/Stefan Nikolic: tooltip]
+- sign-up (TODO: tooltip) [Nenad Tripunovic/Stefan Nikolic]
 - company-employees
-  - groups [Nenad Tripunovic: Jira bugs on hold]
+  - groups (TODO: Revisit 2 Jira bugs: editing group, create group with same name) [Nenad Tripunovic]
 - company-settings
+  - travel-settings (TODO: Add taxi) [Nenad Tripunovic]
   - approval-process [Nenad Tripunovic: maintenance and double-check]
   - subscription [Nenad Tripunovic: add new helpers, maintenance and double-check]
 
-## TODO PRIMARY (QUICK?)
+## TODO (INITIAL COVERAGE)
 
-- company-settings (invoice-settings) [Stefan Nikolic: double-check with PM]
-- company-report (analytics-reporting, invoices); there isn’t much work to do?
-- my-travels (active, past); there isn’t much work to do?
-- group; there isn’t much work to do?
+- subscription (purchase-history) (TODO: Discussion) [Nenad Tripunovic]
+- company-settings (invoice-settings) (TODO: Discussion) [Stefan Nikolic]
+- company-report (analytics-reporting, invoices) [Nenad Tripunovic/Stefan Nikolic]
+- my-travels (active, past) [Nenad Tripunovic/Stefan Nikolic]
+- group [Nenad Tripunovic/Stefan Nikolic]
+- other (agent) [Nenad Tripunovic/Stefan Nikolic]
 
-## TODO SECONDARY (PM DISCUSSION?)
+## TODO (MAIN FEATURES)
 
-- flights; feature, require a lot of time (partially done?)
-- hotels; feature, require a lot of time (skip?)
-- rail-bus; feature, require a lot of time (skip?)
-- cars; feature, require a lot of time (good candidate?)
-- other (agent); there isn’t much work to do? (double-check with PM?)
+- flights
+  - fare families (medium scope)
+  - loyalty program (small scope)
+- hotels
+  - a lot of UI/UX, flow, functionality changes (large scope)
+- rail-bus
+  - maybe changes after 6-9-12 months?
+- cars
+  - search (small scope)
+  - booking (small scope)
+  - travel policy (medium scope)
+  - automatic cancellation (medium scope)
+  - replace radius search with maps (6+ months)
