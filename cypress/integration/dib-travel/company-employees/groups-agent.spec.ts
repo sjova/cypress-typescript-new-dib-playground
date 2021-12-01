@@ -57,9 +57,8 @@ describe('Company Employees - Groups (Agent)', () => {
     );
   });
 
-  // TODO: This is blocked by bug ticket DT-9984
   it('should allow agent to edit created group', () => {
-    editGroup(group.modifiedName, group.modifiedDescription);
+    editGroup(group);
   });
 
   it('should cancel confirmation dialog for deleting group', () => {

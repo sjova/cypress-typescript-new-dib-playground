@@ -11,6 +11,8 @@ describe('Company Employees - Groups (User)', () => {
   });
 
   beforeEach(() => {
+    cy.resetState(); // TODO: Revisit this later
+
     cy.login();
     cy.visit('/people-management/groups');
   });
@@ -57,9 +59,8 @@ describe('Company Employees - Groups (User)', () => {
     );
   });
 
-  // TODO: This is blocked by bug ticket DT-9984
   it('should allow user to edit created group', () => {
-    editGroup(group.modifiedName, group.modifiedDescription);
+    editGroup(group);
   });
 
   it('should cancel confirmation dialog for deleting group', () => {
