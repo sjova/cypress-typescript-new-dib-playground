@@ -4,8 +4,5 @@ export const enterSharedDetails = (policyType: string, sharedDetails: SharedDeta
   cy.get('.cdk-overlay-container dib-travel-policy-dialog .dib-select').select(policyType);
 
   cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=name]').type(sharedDetails.name);
-  cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=numberOfDaysInAdvance]').type(
-    sharedDetails.numberOfDaysInAdvance
-  );
   cy.get('.cdk-overlay-container dib-travel-policy-dialog input[placeholder="Budget"]').type(sharedDetails.budget);
 };

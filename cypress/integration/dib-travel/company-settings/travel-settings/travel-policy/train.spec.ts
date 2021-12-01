@@ -27,6 +27,9 @@ describe('Company Settings - Travel Settings - Travel Policy - Train', () => {
 
     enterSharedDetails(travelPolicyDetails.train.type, travelPolicyDetails.sharedDetails);
 
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=numberOfDaysInAdvance]').type(
+      travelPolicyDetails.sharedDetails.numberOfDaysInAdvance
+    );
     cy.get('.cdk-overlay-container dib-travel-policy-dialog dib-checkbox').click({ multiple: true });
     cy.get('.cdk-overlay-container dib-travel-policy-dialog .add-btn').click();
 
@@ -64,6 +67,9 @@ describe('Company Settings - Travel Settings - Travel Policy - Train', () => {
   it('should update train travel policy', () => {
     editTravelPolicy(travelPolicyDetails);
 
+    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=numberOfDaysInAdvance]')
+      .clear()
+      .type(travelPolicyDetails.sharedDetails.modifiedNumberOfDaysInAdvance);
     cy.get('.cdk-overlay-container dib-travel-policy-dialog .container-text').contains('1st class ').click();
     cy.get('.cdk-overlay-container dib-travel-policy-dialog .item dib-list-item input[placeholder="Budget per train"]')
       .clear()

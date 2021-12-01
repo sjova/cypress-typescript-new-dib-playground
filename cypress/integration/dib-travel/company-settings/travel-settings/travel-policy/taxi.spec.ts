@@ -1,13 +1,14 @@
 import { TravelSettings } from '@cy/models';
 import {
-  addHotelTravelPolicy,
   cancelDeleteDialogAndConfirm,
   closeEditDialogAndConfirm,
   deleteTravelPolicyAndConfirm,
   editTravelPolicy,
+  enterSharedDetails,
+  searchAndSelectEmployee,
 } from './shared';
 
-describe('Company Settings - Travel Settings - Travel Policy - Hotel', () => {
+describe('Company Settings - Travel Settings - Travel Policy - Taxi', () => {
   let travelPolicyDetails: TravelSettings;
 
   before(() => {
@@ -21,15 +22,16 @@ describe('Company Settings - Travel Settings - Travel Policy - Hotel', () => {
     cy.visit('/company-management/travel-settings');
   });
 
-  it('should add hotel travel policy', () => {
-    addHotelTravelPolicy(travelPolicyDetails);
+  it('should add taxi travel policy', () => {
+    cy.get('dib-company-management dib-travel-policy ui-button[type=primary]').click();
 
-    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=numberOfDaysInAdvance]').type(
-      travelPolicyDetails.sharedDetails.numberOfDaysInAdvance
-    );
+    enterSharedDetails(travelPolicyDetails.taxi.type, travelPolicyDetails.sharedDetails);
+
+    searchAndSelectEmployee(travelPolicyDetails.employee);
+
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
-      'Travel policy for hotel successfully created.'
+      'Travel policy for taxi successfully created.'
     );
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
       'contain',
@@ -37,32 +39,20 @@ describe('Company Settings - Travel Settings - Travel Policy - Hotel', () => {
     );
   });
 
-  it('should close edit form for hotel travel policy', () => {
+  it('should close edit form for taxi travel policy', () => {
+    cy.waitForAngular();
+
     closeEditDialogAndConfirm(travelPolicyDetails);
   });
 
-  it('should update hotel travel policy', () => {
-    cy.waitForAngular();
-
+  it('should update taxi travel policy', () => {
     editTravelPolicy(travelPolicyDetails);
-
-    cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=numberOfDaysInAdvance]')
-      .clear()
-      .type(travelPolicyDetails.sharedDetails.modifiedNumberOfDaysInAdvance);
-    cy.get('.cdk-overlay-container dib-travel-policy-dialog star-rating').next().click();
-    cy.get('.cdk-overlay-container dib-travel-policy-dialog .google-places-autocomplete-input')
-      .clear()
-      .type(travelPolicyDetails.hotel.modifiedCity);
-    cy.get('.pac-container .pac-item').contains(travelPolicyDetails.hotel.modifiedCity).click();
-    cy.get('.cdk-overlay-container dib-travel-policy-dialog .item dib-list-item input[placeholder="Budget per night"]')
-      .clear()
-      .type(travelPolicyDetails.hotel.modifiedBudgetPerNight);
 
     cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'contain',
-      'Travel policy for hotel successfully updated.'
+      'Travel policy for taxi successfully updated.'
     );
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
       'contain',
@@ -70,29 +60,24 @@ describe('Company Settings - Travel Settings - Travel Policy - Hotel', () => {
     );
   });
 
-  it('should expand hotel travel policy and display all details', () => {
+  it('should expand taxi travel policy and display all details', () => {
     cy.waitForAngular();
 
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .button').click();
 
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__item')
-      .should(
-        'contain',
-        'Hotels should be booked more than ' +
-          `${travelPolicyDetails.sharedDetails.modifiedNumberOfDaysInAdvance}` +
-          ' days in advance of check-in date'
-      )
+      .should('contain', 'All destinations')
       .should('contain', travelPolicyDetails.sharedDetails.modifiedBudget)
-      .should('contain', travelPolicyDetails.hotel.modifiedBudgetPerNight)
       .should('contain', `${travelPolicyDetails.employee.firstName} ${travelPolicyDetails.employee.lastName}`);
-    cy.get('dib-company-management dib-expandable-item dib-star-rating i').should('have.length', 5);
   });
 
   it('should check cancellation of confirmation dialog', () => {
+    cy.waitForAngular();
+
     cancelDeleteDialogAndConfirm(travelPolicyDetails);
   });
 
-  it('should delete hotel travel policy', () => {
+  it('should delete taxi travel policy', () => {
     cy.waitForAngular();
 
     deleteTravelPolicyAndConfirm(travelPolicyDetails.sharedDetails.modifiedName);
