@@ -18,7 +18,7 @@ describe('Company Report - Analytics & Reporting', () => {
   });
 
   beforeEach(() => {
-    cy.resetState();
+    cy.resetState(); // TODO: Revisit this later
 
     cy.login();
 
