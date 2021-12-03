@@ -83,9 +83,9 @@ describe('Cypress Accounts Fixture', () => {
     });
   });
 
-  it('loads a fixture and confirms that the "signUpAccount.email" is equal to "qa.tools+cy.ci.sign-up.[hash]@dibtravel.com"', () => {
+  it('loads a fixture and confirms that the "signUpAccount.email" is equal to "qa.tools+cy.ci.sign-up.hash@dibtravel.com"', () => {
     cy.fixture('dib-travel-accounts').should((accounts) => {
-      expect(accounts.signUpAccount.email).to.eq('qa.tools+cy.ci.sign-up.[hash]@dibtravel.com');
+      expect(accounts.signUpAccount.email).to.eq('qa.tools+cy.ci.sign-up.hash@dibtravel.com');
     });
   });
 });
