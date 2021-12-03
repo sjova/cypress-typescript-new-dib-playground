@@ -33,6 +33,8 @@
 
 ## TODO (MAIN FEATURES)
 
+- company-employees / employees-agent [Stefan Nikolic] (TODO: Revisit tests)
+- company-settings / payment-method / lodge-cards [Nenad Tripunovic] (TODO: Revisit tests)
 - Zendesk support chat
 - flights
   - fare families (medium scope)

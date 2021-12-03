@@ -43,15 +43,9 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     cy.visit('/people-management/groups');
 
     addGroup(group.name, group.description, false);
-
-    cy.waitForAngular();
-
-    cy.resetState();
   });
 
   after(() => {
-    cy.resetState();
-
     cy.login();
     cy.visit('/people-management/groups');
 
@@ -61,12 +55,6 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
   beforeEach(() => {
     cy.login();
     cy.visit('/company-management/payment-method/billing-profiles');
-
-    cy.waitForAngular();
-  });
-
-  afterEach(() => {
-    cy.waitForAngular();
   });
 
   it('should close the form for adding billing profile', () => {

@@ -7,22 +7,17 @@ describe('Company Report - Analytics & Reporting', () => {
     cy.fixture('company-employees/group').then((groupFixture) => {
       report = groupFixture;
     });
+  });
 
+  beforeEach(() => {
     cy.login();
+    cy.visit('/reporting/analytics');
   });
 
   it('should display "Analytics & Reporting" in the sidebar navigation', () => {
     cy.get('dib-navbar dib-hamburger-icon').click();
 
     cy.get('.cdk-overlay-container dib-navbar-panel').contains('Analytics & Reporting').should('exist');
-  });
-
-  beforeEach(() => {
-    cy.resetState(); // TODO: Revisit this later
-
-    cy.login();
-
-    cy.visit('/reporting/analytics');
   });
 
   it('should check Analytics and Reporting page', () => {

@@ -4,31 +4,31 @@ Cypress TypeScript DIB Playground
 
 ## System Requirements
 
-Operating System: **macOS Big Sur 11.6.1**
+Operating System: **macOS Big Sur 11.6.1 (20G224)**
 
-IDE: **Visual Studio Code 1.61.2**
+IDE: **Visual Studio Code 1.62.3 (Universal)**
 
 ```
 git --version
-git version 2.33.1
+git version 2.34.1
 
 nvm --version
 0.39.0
 
 node --version
-v14.18.1
+v16.5.0
 
 npm --version
-6.14.15
+7.19.1
 
 yarn --version
 1.22.17
 
 npx cypress --version
-Cypress package version: 8.7.0
-Cypress binary version: 8.7.0
-Electron version: 14.1.0
-Bundled Node version: 14.17.0
+Cypress package version: 9.1.0
+Cypress binary version: 9.1.0
+Electron version: 15.2.0
+Bundled Node version: 16.5.0
 ```
 
 ## Getting Started

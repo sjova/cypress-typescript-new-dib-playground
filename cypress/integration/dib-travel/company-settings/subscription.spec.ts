@@ -46,15 +46,9 @@ describe('Company Settings - Subscription', () => {
     cy.visit('/people-management/groups');
 
     addGroup(group.name, group.description, false);
-
-    cy.waitForAngular();
-
-    cy.resetState();
   });
 
   after(() => {
-    cy.resetState();
-
     cy.login();
     cy.visit('/people-management/groups');
 

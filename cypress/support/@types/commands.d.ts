@@ -40,8 +40,7 @@ declare global {
        *
        *    cy.contains('Welcome').clickAttached()
        */
-
-      clickAttached(): Cypress.Chainable<JQuery<HTMLElement>>;
+      clickAttached(subject?: HTMLElement): Cypress.Chainable<JQuery<HTMLElement>>;
 
       /**
        * @todo Used for Cypress demo purposes and must be revisited before usage
@@ -130,9 +129,9 @@ declare global {
        *
        * @param {string} key - Key name
        * @example
-       *    cy.setSessionStorage('abc123')
+       *    cy.setSessionStorage('abc', '123')
        */
-      setSessionStorage(key: string): void;
+      setSessionStorage(key: string, value: string): void;
 
       /**
        * Switch to iframe
@@ -143,7 +142,7 @@ declare global {
        *    cy.get('iframe[data-cy="dib-foo-iframe"]').switchToIframe().find('#run-button').should('have.text', 'Try it').click()
        *    cy.get('iframe[data-cy="dib-foo-iframe"]').switchToIframe().find('#result').should('include.text', '"some response"')
        */
-      switchToIframe(): Cypress.Chainable<JQuery<HTMLElement>>;
+      switchToIframe(iframeSelector?: string): Cypress.Chainable<JQuery<HTMLElement>>;
 
       /**
        * @todo Used for Cypress demo purposes and must be revisited before usage

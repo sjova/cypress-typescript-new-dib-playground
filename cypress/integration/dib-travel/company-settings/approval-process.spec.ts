@@ -41,13 +41,9 @@ describe('Company Settings - Approval Process', () => {
 
     cy.visit('/people-management/groups');
     addGroup(group.name, group.description, false);
-
-    cy.resetState();
   });
 
   after(() => {
-    cy.resetState();
-
     cy.login();
 
     cy.visit('/company-management/travel-settings');
@@ -58,8 +54,6 @@ describe('Company Settings - Approval Process', () => {
   });
 
   beforeEach(() => {
-    cy.resetState(); // TODO: Revisit this later
-
     cy.login();
 
     cy.visit('/company-management/approval-process');

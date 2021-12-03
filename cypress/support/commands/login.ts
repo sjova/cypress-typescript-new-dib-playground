@@ -4,7 +4,12 @@ export const login = (
   email = dibTravelAccounts.defaultAccount.email,
   password = dibTravelAccounts.defaultAccount.password
 ): void => {
-  cy.visit('/login');
+  cy.visit('/login', {
+    onBeforeLoad: (window) => {
+      window.localStorage.clear();
+      window.sessionStorage.clear();
+    },
+  });
 
   cy.get('new-login ui-input[type=email] input[name="email"]').type(email);
   cy.get('new-login ui-input[name=password] input[name="password"]').type(password);
@@ -21,7 +26,12 @@ export const loginAgent = (
   agentEmail = dibTravelAccounts.agentAccount.email,
   agentPassword = dibTravelAccounts.agentAccount.password
 ): void => {
-  cy.visit('login/agent');
+  cy.visit('login/agent', {
+    onBeforeLoad: (window) => {
+      window.localStorage.clear();
+      window.sessionStorage.clear();
+    },
+  });
 
   cy.get('new-agent-login ui-input[type=email] input[name=userEmail]').type(userEmail);
   cy.get('new-agent-login ui-input[type=email] input[name=email]').type(agentEmail);

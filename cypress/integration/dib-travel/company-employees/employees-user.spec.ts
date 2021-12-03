@@ -56,7 +56,7 @@ describe('Company Employees - Employees (User)', () => {
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
     cy.get('dib-people-management dib-employees .grid .table-cell').should('contain', 'Invited');
     cy.get('dib-people-management dib-employees').should('not.contain', 'Not invited');
-    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('not.contain', 'QA Bot');
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('not.contain', 'CYQA Bot');
   });
 
   it('should allow user to edit added employee', () => {
