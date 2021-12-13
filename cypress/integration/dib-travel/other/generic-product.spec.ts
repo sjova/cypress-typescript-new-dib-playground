@@ -30,7 +30,7 @@ describe('Other - Generic Product', () => {
     cy.get('home dib-product-pickers dib-tabs-header .label').contains('Other').click();
   });
 
-  it('should display "Other" in the navbar navigation', () => {
+  it('should display "Other" in the navbar', () => {
     cy.get('home dib-product-pickers dib-tabs-header .label').contains('Other').should('exist');
   });
 
@@ -175,7 +175,7 @@ describe('Other - Generic Product', () => {
     cy.get('dib-layout dib-cart-item-generic-product-v2 h2').should('contain', 'Flight taxi', 'in Sweden');
   });
 
-  it('should edit generic product (Category - Flight taxi) ', () => {
+  it('should edit generic product (Category - Flight taxi)', () => {
     cy.visit('/my-travels/active');
 
     cy.get('app-my-travels dib-travels-list .item .name')
@@ -185,9 +185,9 @@ describe('Other - Generic Product', () => {
       .contains('View more')
       .click();
 
-    cy.get('dib-layout dib-cart-item-generic-product-v2 i').contains('keyboard_arrow_down').click();
+    cy.get('dib-cart-wrapper dib-cart-item-generic-product-v2 i').contains('keyboard_arrow_down').click();
 
-    cy.get('dib-layout dib-cart-item-generic-product-v2 button').contains(' Edit ').click();
+    cy.get('dib-cart-wrapper dib-cart-item-generic-product-v2 button').contains(' Edit ').click();
 
     cy.get('.cdk-overlay-container dib-generic-product-form input[name=serviceName]')
       .clear()
@@ -260,7 +260,7 @@ describe('Other - Generic Product', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Item changed');
 
-    cy.get('dib-layout dib-cart-item-generic-product-v2 p')
+    cy.get('dib-cart-wrapper dib-cart-item-generic-product-v2 p')
       .should('contain', 'Ready for payment')
       .should('contain', genericProduct.modifiedGenericProduct.serviceName)
       .should('contain', genericProduct.modifiedGenericProduct.description)
@@ -274,7 +274,7 @@ describe('Other - Generic Product', () => {
       genericProduct.modifiedGenericProduct.totalPrice,
       'RSD'
     );
-    cy.get('dib-layout dib-cart-item-generic-product-v2 h2').should('contain', 'Flight taxi', 'in Sweden');
+    cy.get('dib-cart-wrapper dib-cart-item-generic-product-v2 h2').should('contain', 'Flight taxi', 'in Sweden');
   });
 
   it('should delete generic product (Category - Flight taxi)', () => {

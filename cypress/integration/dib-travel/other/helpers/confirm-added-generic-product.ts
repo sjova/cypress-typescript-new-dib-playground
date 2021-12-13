@@ -5,7 +5,7 @@ export const confirmAddedGenericProduct = (genericProduct: GenericProduct): void
 
   cy.get('dib-layout dib-cart-item-generic-product-v2 i').contains('keyboard_arrow_down').click();
 
-  cy.get('dib-layout dib-cart-item-generic-product-v2 p')
+  cy.get('dib-cart-wrapper dib-cart-item-generic-product-v2 p')
     .should('contain', 'Ready for payment')
     .should('contain', genericProduct.serviceName)
     .should('contain', genericProduct.description)
