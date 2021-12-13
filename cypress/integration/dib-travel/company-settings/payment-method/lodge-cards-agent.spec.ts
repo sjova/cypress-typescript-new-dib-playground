@@ -1,4 +1,4 @@
-/* import { getEmailWithHash } from '@cy/helpers';
+import { getEmailWithHash } from '@cy/helpers';
 import { PaymentMethod } from '@cy/models';
 import { cancelCardFormAndConfirm, clickLodgeCardCtaButton } from './helpers';
 
@@ -25,6 +25,7 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
 
   beforeEach(() => {
     cy.loginAgent();
+
     cy.visit('/company-management/payment-method/lodge-cards');
 
     cy.waitForAngular();
@@ -83,8 +84,7 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
       paymentMethod.companyInformation.zipCode
     );
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=city]').type(paymentMethod.companyInformation.city);
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-autocomplete').click();
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-autocomplete input').type(
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-autocomplete').type(
       paymentMethod.companyInformation.country
     );
     cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.companyInformation.country).click();
@@ -182,10 +182,9 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=city]')
       .clear()
       .type(paymentMethod.modifiedCompanyInformation.city);
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-autocomplete').click();
-    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-autocomplete input')
-      .clear()
-      .type(paymentMethod.modifiedCompanyInformation.country);
+    cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-autocomplete').type(
+      paymentMethod.modifiedCompanyInformation.country
+    );
     cy.get('.cdk-overlay-container ui-panel .item').contains(paymentMethod.modifiedCompanyInformation.country).click();
 
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=contactFirstName]')
@@ -271,4 +270,3 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
     );
   });
 });
- */

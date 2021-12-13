@@ -114,6 +114,7 @@ describe('Company Report - Analytics & Reporting', () => {
       .should('not.contain', report.employee.email);
   });
 
+  //TODO: This test case needs to be improved. Blocked by bug/incident ticket: DT-10568
   it('should check Cost Center filter', () => {
     cy.get('dib-reporting dib-analytics-page dib-report-filters .placeholder').contains('Cost Center').click();
 
