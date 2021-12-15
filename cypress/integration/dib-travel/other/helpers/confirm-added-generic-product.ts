@@ -1,7 +1,7 @@
 import { GenericProduct } from '@cy/models';
 
 export const confirmAddedGenericProduct = (genericProduct: GenericProduct): void => {
-  cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Item added to cart');
+  cy.get('.cdk-overlay-container simple-snack-bar > span').should('have.text', 'Item added to cart');
 
   cy.get('dib-layout dib-cart-item-generic-product-v2 i').contains('keyboard_arrow_down').click();
 

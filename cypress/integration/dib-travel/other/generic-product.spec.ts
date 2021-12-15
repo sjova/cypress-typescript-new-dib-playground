@@ -40,7 +40,7 @@ describe('Other - Generic Product', () => {
 
   it('should display link for restrictions before booking', () => {
     cy.get('home dib-covid-banner span').should(
-      'contain',
+      'have.text',
       'Get the latest travel and health restrictions before booking your trip.'
     );
     cy.get('home dib-covid-banner a[href="https://apply.joinsherpa.com/travel-restrictions"]').should(
@@ -52,7 +52,7 @@ describe('Other - Generic Product', () => {
   it('should not be able to submit an empty generic product form', () => {
     cy.get('home dib-generic-product-form ui-button[type=primary]').click();
 
-    cy.get('home dib-generic-product-form ui-input .error').should('contain', 'This field is required');
+    cy.get('home dib-generic-product-form ui-input .required-error').should('contain', 'This field is required');
   });
 
   it('should check content of tooltips for generic product form', () => {
@@ -258,7 +258,7 @@ describe('Other - Generic Product', () => {
 
     cy.get('.cdk-overlay-container dib-generic-product-form ui-button[type=primary]').click();
 
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Item changed');
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('have.text', 'Item changed');
 
     cy.get('dib-cart-wrapper dib-cart-item-generic-product-v2 p')
       .should('contain', 'Ready for payment')
@@ -313,7 +313,7 @@ describe('Other - Generic Product', () => {
 
     cy.get('home dib-generic-product-form ui-button[type=primary]').click();
 
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Bad vendor for flight taxi');
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('have.text', 'Bad vendor for flight taxi');
   });
 
   it('should not be able to add generic product with incorrect Trip ID', () => {
@@ -334,7 +334,7 @@ describe('Other - Generic Product', () => {
     cy.get('home dib-generic-product-form ui-button[type=primary]').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-      'contain',
+      'have.text',
       'Something went wrong, please try again'
     );
   });
