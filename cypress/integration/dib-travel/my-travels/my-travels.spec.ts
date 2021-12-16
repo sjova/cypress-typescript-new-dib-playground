@@ -28,7 +28,7 @@ describe('My travels', () => {
 
     cy.get('app-my-travels dib-travels-list dib-input input').type('CYQA');
 
-    cy.get('app-my-travels dib-travels-list .name').should('have.text', 'CYQA Bot bussines trip');
+    cy.get('app-my-travels dib-travels-list .name').should('have.text', 'CYQA Bot business trip');
 
     cy.get('app-my-travels dib-travels-list dib-input input').clear().type('123456789');
 
@@ -43,11 +43,11 @@ describe('My travels', () => {
 
     cy.get('app-my-travels dib-travels-list .clickable').contains(' Price ').click();
 
-    cy.get('app-my-travels dib-travels-list  .uppercase').eq(1).should('contain', '2', '764,82');
+    cy.get('app-my-travels dib-travels-list .uppercase').eq(1).should('contain', '2', '764,82');
 
     cy.get('app-my-travels dib-travels-list .clickable').contains(' Price ').click();
 
-    cy.get('app-my-travels dib-travels-list  .uppercase').eq(1).should('not.contain', '2 764,82');
+    cy.get('app-my-travels dib-travels-list .uppercase').eq(1).should('not.contain', '2 764,82');
   });
 
   it('should check sorting by date', () => {
