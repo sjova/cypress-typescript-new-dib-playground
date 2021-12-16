@@ -374,20 +374,23 @@ describe('Personal Settings - Profile', () => {
     );
   });
 
-  it('should add flight loyalty program', () => {
+  it.only('should add flight loyalty program', () => {
     cy.waitForAngular();
 
     cy.get('dib-profile dib-account .loyalty-program ui-button').click();
 
     cy.get('.cdk-overlay-container dib-add-loyalty ui-button').click();
-    cy.get('.cdk-overlay-container dib-add-loyalty dib-loyalty-auto-complete')
-      .type(profileDetails.loyaltyProgram.flightProvider)
-      .type('{downarrow}')
-      .type('{enter}');
+    cy.get('.cdk-overlay-container dib-add-loyalty dib-loyalty-auto-complete').type(
+      profileDetails.loyaltyProgram.flightProvider
+    );
+    cy.get('.cdk-overlay-container .cdk-overlay-pane .option-list').contains('AIR SEYCHELLES LIMITED').click();
+    // .type('{downarrow}')
+    // .type('{enter}');
+
     cy.get('.cdk-overlay-container dib-add-loyalty input[name="program"]').type(profileDetails.loyaltyProgram.number);
     cy.get('.cdk-overlay-container dib-add-loyalty ui-button').click();
 
-    cy.waitForAngular();
+    // cy.waitForAngular();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Loyalty program saved');
 
@@ -397,7 +400,7 @@ describe('Personal Settings - Profile', () => {
     cy.get('dib-profile dib-account .loyalty-name').eq(1).should('contain', profileDetails.loyaltyProgram.number);
   });
 
-  it('should delete flight loyalty program', () => {
+  it.only('should delete flight loyalty program', () => {
     cy.waitForAngular();
 
     cy.get('dib-profile dib-account .loyalty-name')
@@ -417,7 +420,7 @@ describe('Personal Settings - Profile', () => {
     cy.get('dib-profile dib-account .profile-info').should('not.contain', profileDetails.loyaltyProgram.flightProvider);
   });
 
-  it('should add train loyalty program', () => {
+  it.only('should add train loyalty program', () => {
     cy.waitForAngular();
 
     cy.get('dib-profile dib-account .loyalty-program ui-button').click();
@@ -425,14 +428,16 @@ describe('Personal Settings - Profile', () => {
     cy.get('.cdk-overlay-container dib-add-loyalty dib-radio-group').contains('Train').click();
 
     cy.get('.cdk-overlay-container dib-add-loyalty ui-button').click();
-    cy.get('.cdk-overlay-container dib-add-loyalty dib-loyalty-auto-complete')
-      .type(profileDetails.loyaltyProgram.trainProvider)
-      .type('{downarrow}')
-      .type('{enter}');
+    cy.get('.cdk-overlay-container dib-add-loyalty dib-loyalty-auto-complete').type(
+      profileDetails.loyaltyProgram.trainProvider
+    );
+    cy.get('.cdk-overlay-container .cdk-overlay-pane .option-list').contains('MTRX').click();
+    // .type('{downarrow}')
+    // .type('{enter}');
     cy.get('.cdk-overlay-container dib-add-loyalty input[name="program"]').type(profileDetails.loyaltyProgram.number);
     cy.get('.cdk-overlay-container dib-add-loyalty ui-button').click();
 
-    cy.waitForAngular();
+    // cy.waitForAngular();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Loyalty program saved');
 
@@ -442,7 +447,7 @@ describe('Personal Settings - Profile', () => {
     cy.get('dib-profile dib-account .loyalty-name').eq(1).should('contain', profileDetails.loyaltyProgram.number);
   });
 
-  it('should delete train loyalty program', () => {
+  it.only('should delete train loyalty program', () => {
     cy.waitForAngular();
 
     cy.get('dib-profile dib-account .loyalty-name')
