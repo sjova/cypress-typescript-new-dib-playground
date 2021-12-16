@@ -6,7 +6,7 @@ describe('My travels', () => {
   });
 
   it('should display "My Travels" in the navbar', () => {
-    cy.get('dib-navbar .navbar__content').contains(' add trip ').should('exist');
+    cy.get('dib-navbar .navbar__content').contains(' My Travels ').should('exist');
   });
 
   it('should displays message that there are no active travels', () => {
@@ -24,7 +24,7 @@ describe('My travels', () => {
   });
 
   it('should check search for past travels', () => {
-    cy.get('app-my-travels .mat-tab-links').contains(' Past ').click();
+    cy.get('app-my-travels .tab-nav-bar').contains(' Past ').click();
 
     cy.get('app-my-travels dib-travels-list dib-input input').type('CYQA');
 
@@ -39,7 +39,7 @@ describe('My travels', () => {
   });
 
   it('should check sorting by price', () => {
-    cy.get('app-my-travels .mat-tab-links').contains(' Past ').click();
+    cy.get('app-my-travels .tab-nav-bar').contains(' Past ').click();
 
     cy.get('app-my-travels dib-travels-list .clickable').contains(' Price ').click();
 
@@ -51,7 +51,7 @@ describe('My travels', () => {
   });
 
   it('should check sorting by date', () => {
-    cy.get('app-my-travels .mat-tab-links').contains(' Past ').click();
+    cy.get('app-my-travels .tab-nav-bar').contains(' Past ').click();
 
     cy.get('app-my-travels dib-travels-list .uppercase').eq(0).should('contain', ' 2 Apr 2021 ');
 
@@ -61,7 +61,7 @@ describe('My travels', () => {
   });
 
   it('should open view more section', () => {
-    cy.get('app-my-travels .mat-tab-links').contains(' Past ').click();
+    cy.get('app-my-travels .tab-nav-bar').contains(' Past ').click();
 
     cy.get('app-my-travels dib-travels-list .item .name')
       .contains('sub_981ba1a0-f9cc-48f0-9644-1343d6e70929')
@@ -77,7 +77,7 @@ describe('My travels', () => {
   });
 
   it('should check pagination on Past travels page', () => {
-    cy.get('app-my-travels .mat-tab-links').contains(' Past ').click();
+    cy.get('app-my-travels .tab-nav-bar').contains(' Past ').click();
 
     cy.get('app-my-travels dib-travels-list page-pagination ul li')
       .contains('1')
