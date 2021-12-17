@@ -74,8 +74,6 @@ describe('Company Settings - Travel Settings - Travel Policy - Flight', () => {
   });
 
   it('should update flight travel policy', () => {
-    cy.waitForAngular();
-
     editTravelPolicy(travelPolicyDetails);
 
     cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=numberOfDaysInAdvance]')
@@ -152,14 +150,10 @@ describe('Company Settings - Travel Settings - Travel Policy - Flight', () => {
   });
 
   it('should check cancellation of confirmation dialog', () => {
-    cy.waitForAngular();
-
     cancelDeleteDialogAndConfirm(travelPolicyDetails);
   });
 
   it('should delete flight travel policy', () => {
-    cy.waitForAngular();
-
     deleteTravelPolicyAndConfirm(travelPolicyDetails.sharedDetails.modifiedName);
   });
 });

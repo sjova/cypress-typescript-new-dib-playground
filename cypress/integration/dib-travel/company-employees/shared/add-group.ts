@@ -11,8 +11,6 @@ export const addGroup = (name: string, description: string, includeAssertion = t
 
     cy.get('.cdk-overlay-container dib-group-dialog ui-button').contains('Save').click();
 
-    cy.waitForAngular();
-
     if (includeAssertion) {
       cy.get('dib-people-management dib-groups dib-page dib-expandable-item .item__main h2').should('contain', name);
       cy.get('dib-people-management dib-groups dib-page dib-expandable-item .item__main p').should(

@@ -112,8 +112,6 @@ describe('Company Settings - Travel Settings - Travel Policy - Train', () => {
   });
 
   it('should delete train travel policy', () => {
-    cy.waitForAngular();
-
     deleteTravelPolicyAndConfirm(travelPolicyDetails.sharedDetails.modifiedName);
   });
 });

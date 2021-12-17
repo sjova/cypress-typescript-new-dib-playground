@@ -42,10 +42,6 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
     cy.waitForAngular();
   });
 
-  afterEach(() => {
-    cy.waitForAngular();
-  });
-
   it('should close the form for adding new credit card', () => {
     cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();
 
@@ -101,8 +97,6 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
 
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog ui-button[type=success]').click();
 
-    cy.waitForAngular();
-
     cy.get('body > div > iframe[name^="__privateStripeFrame"]')
       .switchToIframe()
       .find('iframe#challengeFrame')
@@ -111,8 +105,6 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
       .switchToIframe()
       .find('.container .source .actions button#test-source-authorize-3ds')
       .click();
-
-    cy.waitForAngular();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Company Shared Credit Card Added');
 

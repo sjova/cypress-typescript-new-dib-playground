@@ -40,8 +40,6 @@ describe('Company Settings - Travel Settings - Travel Policy - Taxi', () => {
   });
 
   it('should close edit form for taxi travel policy', () => {
-    cy.waitForAngular();
-
     closeEditDialogAndConfirm(travelPolicyDetails);
   });
 
@@ -72,14 +70,10 @@ describe('Company Settings - Travel Settings - Travel Policy - Taxi', () => {
   });
 
   it('should check cancellation of confirmation dialog', () => {
-    cy.waitForAngular();
-
     cancelDeleteDialogAndConfirm(travelPolicyDetails);
   });
 
   it('should delete taxi travel policy', () => {
-    cy.waitForAngular();
-
     deleteTravelPolicyAndConfirm(travelPolicyDetails.sharedDetails.modifiedName);
   });
 });

@@ -1,8 +1,6 @@
 import { PaymentMethod } from '@cy/models';
 
 export const deleteCreditCardAndConfirm = (paymentMethod: PaymentMethod): void => {
-  cy.waitForAngular();
-
   cy.get('dib-company-management dib-payment-method dib-credit-card .card__email')
     .contains(paymentMethod.primaryContact.email)
     .parents('dib-credit-card')
