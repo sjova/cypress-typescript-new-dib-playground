@@ -8,5 +8,5 @@ export const deleteCreditCardAndConfirm = (paymentMethod: PaymentMethod): void =
     .contains('Delete')
     .click();
 
-  cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Card Deleted');
+  cy.get('.cdk-overlay-container simple-snack-bar > span').should('have.text', 'Card Deleted');
 };

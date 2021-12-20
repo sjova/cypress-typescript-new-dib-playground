@@ -15,5 +15,5 @@ export const deleteDiscountAndConfirm = (companyRatesDetails: TravelSettings): v
 
   cy.get('.cdk-overlay-container confirmation-dialog-v2 ui-button[type=warning]').click();
 
-  cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Company rate successfully deleted!');
+  cy.get('.cdk-overlay-container simple-snack-bar > span').should('have.text', 'Company rate successfully deleted!');
 };

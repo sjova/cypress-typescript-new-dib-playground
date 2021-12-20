@@ -11,7 +11,10 @@ export const addApprovalProcessAndConfirm = (approvalProcessGroup: ApprovalProce
     .click();
   cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
 
-  cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Approval process successfully created.');
+  cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+    'have.text',
+    'Approval process successfully created.'
+  );
   cy.get('dib-company-management dib-approval-process dib-approval-process-item .item__left')
     .first()
     .find('.item__content p')

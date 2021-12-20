@@ -246,7 +246,7 @@ describe('Company Settings - Subscription', () => {
     );
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-      'contain',
+      'have.text',
       'Purchase completed successfully' || 'Purchase could not be completed'
     );
   });

@@ -133,7 +133,7 @@ describe('Company Settings - Approval Process', () => {
     cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-      'contain',
+      'have.text',
       'Selected traveler group already has approval process!'
     );
   });
@@ -166,7 +166,7 @@ describe('Company Settings - Approval Process', () => {
     cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-      'contain',
+      'have.text',
       'Approver or approver group must be selected!'
     );
   });
@@ -203,7 +203,7 @@ describe('Company Settings - Approval Process', () => {
     cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-      'contain',
+      'have.text',
       'Approver or approver group must be selected!'
     );
   });
@@ -222,7 +222,7 @@ describe('Company Settings - Approval Process', () => {
     cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-      'contain',
+      'have.text',
       'Traveler or group of travelers must be selected!'
     );
   });

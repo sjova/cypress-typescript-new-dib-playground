@@ -60,7 +60,7 @@ describe('Company Settings - Travel Settings - Travel Policy - Flight', () => {
     searchAndSelectEmployee(travelPolicyDetails.employee);
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-      'contain',
+      'have.text',
       'Travel policy for flights successfully created.'
     );
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
@@ -112,7 +112,7 @@ describe('Company Settings - Travel Settings - Travel Policy - Flight', () => {
     cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-      'contain',
+      'have.text',
       'Travel policy for flights successfully updated.'
     );
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
