@@ -130,7 +130,7 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
 
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-button[type=success]').click();
 
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Successfully added lodge card.');
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('have.text', 'Successfully added lodge card.');
     cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item')
       .should('contain', paymentMethod.lodgeCard.number.slice(-4))
       .should('contain', paymentMethod.companyInformation.vatNumber)
@@ -231,7 +231,7 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
 
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-button[type=success]').click();
 
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Successfully updated lodge card.');
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('have.text', 'Successfully updated lodge card.');
     cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item')
       .should('contain', paymentMethod.modifiedLodgeCard.number.slice(-4))
       .should('contain', paymentMethod.modifiedCompanyInformation.vatNumber)
@@ -263,7 +263,7 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
 
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Successfully archived lodge card.');
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('have.text', 'Successfully archived lodge card.');
     cy.get('dib-company-management dib-payment-method dib-lodge-cards .items').should(
       'contain',
       ' You have not added any lodge cards yet. '
