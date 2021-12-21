@@ -54,7 +54,7 @@
 
 - company-employees / groups (user, agent) (DT-7943) [Nenad Tripunovic]
 - company-settings / invoice-settings (agent) (DT-10506) [Stefan Nikolic]
-- company-report / analytics-reporting (DT-xyz?) [Nenad Tripunovic]
+- company-report / analytics-reporting (DT-10568) [Nenad Tripunovic]
 
 ## DISCUSSION
 
