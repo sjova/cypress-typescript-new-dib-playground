@@ -46,7 +46,7 @@ describe('Company Employees - Employees (Agent)', () => {
     );
   });
 
-  // TODO: Revisit status "Not invited"?
+  // TODO: Revisit status "Not invited"? [Stefan Nikolic]
   /* it('should display only invited users', () => {
     cy.get('dib-people-management dib-employees dib-page ui-dropdown .selected').click();
     cy.waitForAngular();

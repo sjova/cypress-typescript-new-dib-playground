@@ -8,6 +8,7 @@
 - sign-up [Dusan Petrovic, Nenad Tripunovic]
 - sign-in (user, agent) [Dusan Petrovic]
 - forgot-password [Dusan Petrovic]
+- my-travels (active, past) [Stefan Nikolic]
 - personal-settings
   - profile [Stefan Nikolic]
   - credit-cards [Stefan Nikolic]
@@ -24,17 +25,15 @@
   - reference-fields [Stefan Nikolic]
   - subscription [Nenad Tripunovic]
 - company-report (analytics-reporting, invoices) [Nenad Tripunovic]
+- group [Stefan Nikolic]
 
 ## IN PROGRESS
 
-- my-travels (active, past) [Stefan Nikolic]
-- group [Stefan Nikolic]
 - other (agent) [Nenad Tripunovic]
 
 ## TODO (MAIN FEATURES)
 
 - company-employees / employees-agent [Stefan Nikolic] (TODO: Revisit tests)
-- company-settings / payment-method / lodge-cards [Nenad Tripunovic] (TODO: Revisit tests)
 - Zendesk support chat
 - flights
   - fare families (medium scope)
