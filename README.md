@@ -47,9 +47,11 @@ These are the recommended project settings:
 
 ```json
 {
+  "editor.bracketPairColorization.enabled": true,
   "editor.codeActionsOnSave": ["source.fixAll", "source.organizeImports"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": "active",
   "editor.renderWhitespace": "all",
   "files.exclude": {
     ".husky": true,

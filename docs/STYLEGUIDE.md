@@ -14,7 +14,7 @@
 - If you need a prefix in naming, please use "cy"
 - Ideally, when you read `objectname.propertyName`, it should sound meaningful
 - Please use camelCase for variable naming (ex. `myVariableName`)
-- If the test is availably only for the agent, please add the following suffix in the test description: ` (Agent)`
+- If the test is available only for the agent, please add the following suffix in the test description: ` (Agent)` (same suffix in should be added in the file name)
 - **Mocha** `describe` title should start with a capital letter
 - **Mocha** `it` title should start with a lowercase letter (_it_ and _descriptive title_ together should have a meaningful meaning)
 - The KISS principle (keep it simple, stupid)
@@ -69,6 +69,7 @@
 - Inside dialogs testing, we need to cover the following items: open/launch dialog (it doesn't have to be a separate test), close/cancel the dialog (cancel or close button or both), dialog action/CTA (ex. actions: ok, submit, add, update, archive, delete, etc.)
 - Make sure you don't have too much repetitive code when using the `if/else` statement
 - If you extend an existing feature (function, command, etc.), check usage in all places after the change.
+- Remember that Cypress automatically reset the state between tests, but not in `before`, `after`, `beforeEach`, and `afterEach` hooks.
 
 ## Branch Naming Conventions
 
@@ -105,6 +106,7 @@ Before you create PR or before you push changes in your PR, please make sure tha
 - Double-check the whole user flow for the specific feature, and re-think if you missed covering some functionality with tests.
 - Please don't include sensitive data (ex. passwords, API tokens, etc.) in your commits
 - Don't forget to remove `.only` and `.skip` from your tests.
+- Please don't use `xdescribe` and `xit` in your tests.
 - Make sure that you're using the best possible selectors in your tests
 - Please skip time-consuming Cypress commands whenever is possible
 - When querying elements, try to stick with `.get()` and meaningful selector
@@ -117,3 +119,5 @@ Before you create PR or before you push changes in your PR, please make sure tha
 - Confirm your tests in Test Runner (Chrome and Electron) and run your tests headlessly (Electron) at least once
 - Execute tests at least three times
 - If the error(s) occurs randomly, it should be corrected
+- Please assign the appropriate person for the code review.
+- Please resolve all code suggestions before additional code review or before the merge.
