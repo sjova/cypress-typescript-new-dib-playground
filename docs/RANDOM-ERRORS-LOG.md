@@ -1,3 +1,3 @@
 # Random Errors Log
 
-- TODO
+- Cypress random "Aw, Snap" (TODO: Revisit this later)
