@@ -1,7 +1,7 @@
 import { GenericProduct } from '@cy/models';
 import { addGenericProduct, clickTooltip, confirmAddedGenericProduct, deleteGenericProduct } from './helpers';
 
-describe('Other - Generic Product - Agent', () => {
+describe('Other - Generic Product (Agent)', () => {
   let genericProduct: GenericProduct;
 
   const modifiedStartDate = 3;
