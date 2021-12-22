@@ -49,15 +49,13 @@ describe('Company Settings - Subscription', () => {
   });
 
   // TODO: This should be revisit after solving a problem with stripe.
-  /*after(() => {
+  after(() => {
     cy.login();
 
     cy.visit('/people-management/groups');
 
     deleteGroup(group.name);
-
-
-  });*/
+  });
 
   beforeEach(() => {
     cy.login();
@@ -225,8 +223,8 @@ describe('Company Settings - Subscription', () => {
     cy.get('.cdk-overlay-container confirmation-dialog').should('not.exist');
   });
 
-  //TODO: This should be revisit after solving a problems with stripe.
-  xit('should buy new license for subscription', () => {
+  // TODO: This should be revisit after solving a problems with stripe.
+  /*it('should buy new license for subscription', () => {
     cy.visit(`${subscriptionBaseLink}/licenses`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-licenses .subscription-table__row__value').then(
@@ -249,7 +247,7 @@ describe('Company Settings - Subscription', () => {
       'have.text',
       'Purchase completed successfully' || 'Purchase could not be completed'
     );
-  });
+  });*/
 
   it('should cancel form for adding billing profile', () => {
     cy.visit(`${subscriptionBaseLink}/payment-method`);
@@ -385,9 +383,5 @@ describe('Company Settings - Subscription', () => {
       'not.contain',
       ' Nov 18, 2021 '
     );
-
-    cy.visit('/people-management/groups');
-
-    deleteGroup(group.name);
   });
 });

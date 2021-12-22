@@ -1,13 +1,11 @@
 import { ApprovalProcessGroup, Group, TravelSettings } from '@cy/models';
 import { addGroup, deleteGroup } from '../company-employees';
 import {
-  addApprovalProcessAndConfirm,
   cancelDeleteApprovalProcessAndConfirm,
   confirmApprovalProcess,
   deleteApprovalProcess,
   selectApprovalSettings,
   selectTraveler,
-  selectTravelerGroup,
 } from './approval-process';
 import { addHotelTravelPolicy, deleteTravelPolicy } from './travel-settings/travel-policy';
 
@@ -122,8 +120,8 @@ describe('Company Settings - Approval Process', () => {
     deleteApprovalProcess(approvalProcessGroup.traveler.firstName);
   });
 
-  //TODO: This should be revisit after solving a problem with stripe.
-  xit('should check if selected traveler group already has approval process', () => {
+  // TODO: This should be revisit after solving a problem with stripe.
+  /*it('should check if selected traveler group already has approval process', () => {
     addApprovalProcessAndConfirm(approvalProcessGroup);
 
     cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
@@ -136,11 +134,11 @@ describe('Company Settings - Approval Process', () => {
       'have.text',
       'Selected traveler group already has approval process!'
     );
-  });
+  });*/
 
-  xit('should delete approval process for traveler group (this overrides any travel policy)', () => {
+  /*it('should delete approval process for traveler group (this overrides any travel policy)', () => {
     deleteApprovalProcess(approvalProcessGroup.travelersGroupName);
-  });
+  });*/
 
   it('should add approval process (only out of policy travels)', () => {
     cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
