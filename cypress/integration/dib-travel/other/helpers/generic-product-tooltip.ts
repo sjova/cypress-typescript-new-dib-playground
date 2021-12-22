@@ -1,6 +1,6 @@
-export const tooltip = (arg: number): void => {
+export const clickTooltip = (tooltipPosition: number): void => {
   cy.get('home dib-generic-product-form dib-tooltip')
-    .eq(arg)
+    .eq(tooltipPosition)
     .invoke('show')
     .contains('info_outline')
     .trigger('mouseover', 'bottom')

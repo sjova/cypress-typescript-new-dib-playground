@@ -1,8 +1,10 @@
 import { GenericProduct } from '@cy/models';
-import { addGenericProduct, confirmAddedGenericProduct, deleteGenericProduct, tooltip } from './helpers';
+import { addGenericProduct, clickTooltip, confirmAddedGenericProduct, deleteGenericProduct } from './helpers';
 
-describe('Other - Generic Product', () => {
+describe('Other - Generic Product - Agent', () => {
   let genericProduct: GenericProduct;
+
+  const modifiedStartDate = 3;
 
   const selectForAddingGenericProduct = (containerItem: string): void => {
     cy.get('home dib-generic-product-form ui-control-wrapper label')
@@ -56,36 +58,36 @@ describe('Other - Generic Product', () => {
   });
 
   it('should check content of tooltips for generic product form', () => {
-    tooltip(0);
+    clickTooltip(0);
 
     cy.get('.tooltip-content').should(
       'contain',
       'Used for reconciliation and search in backoffice - PUT IN THE TICKET NR'
     );
 
-    tooltip(1);
+    clickTooltip(1);
 
     cy.get('.tooltip-content').should(
       'contain',
       'Used for updating an existing travel shopping cart - defined by entering its Trip ID'
     );
 
-    tooltip(2);
+    clickTooltip(2);
 
     cy.get('.tooltip-content').should('contain', 'For hotels only');
 
-    tooltip(3);
+    clickTooltip(3);
 
     cy.get('.tooltip-content').should(
       'contain',
       'Choose if sale is done as “Passthrough” (i.e. cannot add markup & not legally responsibility for service) or “In own name” (possible to mark-up price to customer & legally responsible for service'
     );
 
-    tooltip(5);
+    clickTooltip(5);
 
     cy.get('.tooltip-content').should('contain', 'Set in traveler profile');
 
-    tooltip(6);
+    clickTooltip(6);
 
     cy.get('.tooltip-content').should('contain', 'Set in traveler profile');
   });
@@ -213,7 +215,7 @@ describe('Other - Generic Product', () => {
     cy.get('.cdk-overlay-container dib-generic-product-form .checkmark').click();
 
     cy.get('.cdk-overlay-container dib-generic-product-form span').contains('01').click();
-    cy.get('.cdk-overlay-container ui-date-picker-calendar-v2 span').contains(3).click();
+    cy.get('.cdk-overlay-container ui-date-picker-calendar-v2 span').contains(modifiedStartDate).click();
     // Computed size is zero, and we need to use `{ force: true }`
     cy.get('.cdk-overlay-container .cdk-overlay-backdrop').last().click({ force: true });
     cy.get('.cdk-overlay-container dib-generic-product-form input[name=hours]')
@@ -266,8 +268,7 @@ describe('Other - Generic Product', () => {
       .should('contain', genericProduct.modifiedGenericProduct.description)
       .should('contain', 'Agent Reservation');
     cy.get('dib-layout dib-cart-item-generic-product-v2 .details dib-booking-dates-v2')
-      .should('contain', 3)
-      .should('contain', 3)
+      .should('contain', modifiedStartDate)
       .should('contain', ' 15: 15 ');
     cy.get('dib-layout dib-cart-item-generic-product-v2 span').should(
       'contain',
