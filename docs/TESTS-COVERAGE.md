@@ -57,6 +57,7 @@
 
 ## DISCUSSION
 
+- `cypress/fixtures/other/generic-product.json` - revisit approach for `tripId` (tests should work in all environments)
 - company-settings / subscription / purchase-history [Nenad Tripunovic] (docs ref, file download)
 - company-settings / invoice-settings (agent) [Stefan Nikolic] (docs ref)
 - sign-up / subscription plan [Nenad Tripunovic] (docs ref)

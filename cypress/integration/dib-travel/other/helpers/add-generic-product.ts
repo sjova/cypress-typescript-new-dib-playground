@@ -1,9 +1,9 @@
 import { GenericProduct } from '@cy/models';
 
-const startDate = 1;
-const endDate = 2;
-
 export const addGenericProduct = (genericProduct: GenericProduct) => {
+  const startDate = 1;
+  const endDate = 2;
+
   cy.get('home dib-generic-product-form input[name=serviceName]').type(genericProduct.serviceName);
 
   cy.get('home dib-generic-product-form input[name=bookingReferenceId]').type(genericProduct.bookingReferenceId);
