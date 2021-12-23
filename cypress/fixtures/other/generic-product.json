@@ -1,0 +1,23 @@
+{
+  "serviceName": "CY Credit Note Test",
+  "bookingReferenceId": "CY ABC123",
+  "tripId": "981ba1a0-f9cc-48f0-9644-1343d6e70929",
+  "hours": "12",
+  "minutes": "12",
+  "description": "CY Description Credit Note Test",
+  "totalPrice": "150",
+  "purchasePrice": "100",
+  "serviceLocationCity": "Stockholm",
+  "airportCode": "AC123",
+  "modifiedGenericProduct": {
+    "serviceName": "CY Modified Credit Note Test",
+    "bookingReferenceId": "CY DEF456",
+    "hours": "15",
+    "minutes": "15",
+    "description": "CY Modified Description Credit Note Test",
+    "totalPrice": "250",
+    "purchasePrice": "200",
+    "serviceLocationCity": "Malmö",
+    "airportCode": "AC456"
+  }
+}
