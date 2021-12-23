@@ -28,7 +28,7 @@ describe('Company Settings - Travel Settings - Travel Policy - Hotel', () => {
       travelPolicyDetails.sharedDetails.numberOfDaysInAdvance
     );
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-      'contain',
+      'have.text',
       'Travel policy for hotel successfully created.'
     );
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
@@ -42,8 +42,6 @@ describe('Company Settings - Travel Settings - Travel Policy - Hotel', () => {
   });
 
   it('should update hotel travel policy', () => {
-    cy.waitForAngular();
-
     editTravelPolicy(travelPolicyDetails);
 
     cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=numberOfDaysInAdvance]')
@@ -61,7 +59,7 @@ describe('Company Settings - Travel Settings - Travel Policy - Hotel', () => {
     cy.get('.cdk-overlay-container dib-travel-policy-dialog ui-button[type=success]').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-      'contain',
+      'have.text',
       'Travel policy for hotel successfully updated.'
     );
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__header__title').should(
@@ -93,8 +91,6 @@ describe('Company Settings - Travel Settings - Travel Policy - Hotel', () => {
   });
 
   it('should delete hotel travel policy', () => {
-    cy.waitForAngular();
-
     deleteTravelPolicyAndConfirm(travelPolicyDetails.sharedDetails.modifiedName);
   });
 });

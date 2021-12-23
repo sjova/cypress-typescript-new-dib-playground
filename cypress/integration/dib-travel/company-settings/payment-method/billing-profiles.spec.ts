@@ -84,6 +84,15 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       .should('contain', paymentMethod.currency.originalCurrency)
       .should('contain', paymentMethod.invoiceRecipient.email)
       .should('contain', paymentMethod.invoiceRecipient.vatNumber);
+
+    cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-tooltip')
+      .invoke('show')
+      .trigger('mouseover', 'bottom')
+      .click();
+    cy.get('.tooltip-content').should(
+      'contain',
+      'You can split your invoices on either Your reference or Cost center.'
+    );
   });
 
   it('should close the form for editing billing profile', () => {
@@ -167,7 +176,10 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
 
     cy.get('.cdk-overlay-container dib-invoice-split-dialog ui-button[type=success]').click();
 
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Successfully updated billing profile.');
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'have.text',
+      'Successfully updated billing profile.'
+    );
   });
 
   it('should send the request split invoice change (by reference field)', () => {
@@ -177,7 +189,10 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
 
     cy.get('.cdk-overlay-container dib-invoice-split-dialog ui-button[type=success]').click();
 
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Successfully updated billing profile.');
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+      'have.text',
+      'Successfully updated billing profile.'
+    );
   });
 
   it('should cancel the archiving billing profile', () => {

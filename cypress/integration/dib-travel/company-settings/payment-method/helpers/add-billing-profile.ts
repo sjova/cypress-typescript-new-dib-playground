@@ -48,5 +48,5 @@ export const addBillingProfile = (paymentMethod: PaymentMethod): void => {
 
   cy.get('.cdk-overlay-container dib-billing-profile-dialog ui-button[type=success]').click();
 
-  cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Successfully added billing profile.');
+  cy.get('.cdk-overlay-container simple-snack-bar > span').should('have.text', 'Successfully added billing profile.');
 };

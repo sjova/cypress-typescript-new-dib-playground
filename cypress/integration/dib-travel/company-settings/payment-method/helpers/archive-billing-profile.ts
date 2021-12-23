@@ -1,6 +1,4 @@
 export const archiveBillingProfile = (): void => {
-  cy.waitForAngular();
-
   cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
 
   cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Successfully archived billing profile.');
