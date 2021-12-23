@@ -73,7 +73,7 @@ describe('Company Settings - Subscription', () => {
 
     cy.get('.cdk-overlay-container dib-add-credit-card-dialog ui-button[type=success]').click();
 
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Company Shared Credit Card Added');
+    cy.get('.cdk-overlay-container simple-snack-bar > span').should('have.text', 'Company Shared Credit Card Added');
 
     cy.visit('/company-management/payment-method/credit-cards');
 
