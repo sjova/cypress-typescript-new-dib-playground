@@ -67,7 +67,8 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
     );
   });
 
-  it('should add a new purpose of trip', () => {
+  // TODO: The tests below are blocked (AMS-37)
+  /*it('should add a new purpose of trip', () => {
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip ui-button[size="large"]')
       .contains(referenceFields.purposeOfTrip.addActionCtaButton)
       .click();
@@ -104,7 +105,7 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
       .next('.table-cell')
       .next('.button-cell')
       .contains('edit')
-      .clickAttached();
+      .click();
 
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog input[name="purposeOfTripName"]')
       .clear()
@@ -124,7 +125,7 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
       .next('.table-cell')
       .next('.button-cell')
       .contains(' Archive ')
-      .clickAttached();
+      .click();
 
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip .grid').should(
       'not.contain',
@@ -135,5 +136,5 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
       'contain',
       referenceFields.purposeOfTrip.confirmationMessage2
     );
-  });
+  });*/
 });

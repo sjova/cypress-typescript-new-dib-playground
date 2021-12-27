@@ -29,7 +29,7 @@ describe('Company Employees - Employees (Agent)', () => {
   });
 
   it('should allow agent to add new employee with sending invitation to employee', () => {
-    addEmployee(employee.firstName, employee.lastName, employee.email);
+    addEmployee(employee.firstName, employee.lastName, employee.email, true);
 
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.lastName);
@@ -46,8 +46,7 @@ describe('Company Employees - Employees (Agent)', () => {
     );
   });
 
-  // TODO: Revisit status "Not invited"? [Stefan Nikolic]
-  /* it('should display only invited users', () => {
+  it('should display only invited users', () => {
     cy.get('dib-people-management dib-employees dib-page ui-dropdown .selected').click();
     cy.waitForAngular();
 
@@ -57,7 +56,7 @@ describe('Company Employees - Employees (Agent)', () => {
     cy.get('dib-people-management dib-employees .grid .table-cell').should('contain', 'Invited');
     cy.get('dib-people-management dib-employees').should('not.contain', 'Not invited');
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('not.contain', 'CYQA Bot');
-  }); */
+  });
 
   it('should allow agent to edit added employee', () => {
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell h4')
@@ -68,7 +67,7 @@ describe('Company Employees - Employees (Agent)', () => {
       .next('.button-cell')
       .find('ui-button button')
       .contains('edit')
-      .clickAttached();
+      .click();
 
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]')
       .clear()
@@ -93,7 +92,7 @@ describe('Company Employees - Employees (Agent)', () => {
   });
 
   it('should allow agent to add new employee with not sending invitation to employee', () => {
-    addEmployee(employee.firstName, employee.lastName, employee.email, true);
+    addEmployee(employee.firstName, employee.lastName, employee.email);
 
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.lastName);

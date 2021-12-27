@@ -190,10 +190,6 @@ describe('Company Settings - Travel Settings - Company Rates', () => {
     cy.get('.cdk-overlay-container dib-company-rates-dialog button').contains(' Save ').click();
 
     deleteDiscountAndConfirm(companyRatesDetails);
-
-    // TODO: This should be revisit later, because it used to work without refreshing the page.
-    cy.reload();
-
     deleteDiscountAndConfirm(companyRatesDetails);
 
     cy.get('dib-company-management dib-travel-settings dib-company-rates .grid').should(

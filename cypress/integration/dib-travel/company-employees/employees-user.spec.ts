@@ -68,7 +68,7 @@ describe('Company Employees - Employees (User)', () => {
       .next('.button-cell')
       .find('ui-button button')
       .contains('edit')
-      .clickAttached();
+      .click();
 
     cy.get('.cdk-overlay-container dib-employee-dialog ui-input input[name="firstName"]')
       .clear()

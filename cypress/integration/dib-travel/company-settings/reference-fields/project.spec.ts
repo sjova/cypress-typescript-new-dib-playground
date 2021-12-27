@@ -66,7 +66,8 @@ describe('Company Settings - Reference Fields - Project', () => {
     cy.get('.cdk-overlay-container dib-project-dialog .input-holder .error').contains(' Project name is required.');
   });
 
-  it('should add a new project', () => {
+  // TODO: The tests below are blocked (AMS-37)
+  /*it('should add a new project', () => {
     cy.get('dib-company-management dib-reference-fields dib-project ui-button[size="large"]')
       .contains(referenceFields.project.addActionCtaButton)
       .click();
@@ -98,7 +99,7 @@ describe('Company Settings - Reference Fields - Project', () => {
       .next('.table-cell')
       .next('.button-cell')
       .contains('edit')
-      .clickAttached();
+      .click();
 
     cy.get('.cdk-overlay-container dib-project-dialog input[name="projectName"]')
       .clear()
@@ -118,7 +119,7 @@ describe('Company Settings - Reference Fields - Project', () => {
       .next('.table-cell')
       .next('.button-cell')
       .contains(' Archive ')
-      .clickAttached();
+      .click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').contains(referenceFields.project.confirmationMessage2);
 
@@ -126,5 +127,5 @@ describe('Company Settings - Reference Fields - Project', () => {
       'not.contain',
       referenceFields.project.modifiedName
     );
-  });
+  });*/
 });

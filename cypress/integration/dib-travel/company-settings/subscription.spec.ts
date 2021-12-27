@@ -48,7 +48,6 @@ describe('Company Settings - Subscription', () => {
     addGroup(group.name, group.description, false);
   });
 
-  // TODO: This should be revisit after solving a problem with stripe.
   after(() => {
     cy.login();
 
@@ -223,8 +222,7 @@ describe('Company Settings - Subscription', () => {
     cy.get('.cdk-overlay-container confirmation-dialog').should('not.exist');
   });
 
-  // TODO: This should be revisit after solving a problems with stripe.
-  /*it('should buy new license for subscription', () => {
+  it('should buy new license for subscription', () => {
     cy.visit(`${subscriptionBaseLink}/licenses`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-licenses .subscription-table__row__value').then(
@@ -239,7 +237,6 @@ describe('Company Settings - Subscription', () => {
             const numberAfterPurchase = parseInt(numberOfLicenses.text());
             expect(numberAfterPurchase).to.eq(numberBeforePurchase + 1);
           });
-        cy.waitForAngular();
       }
     );
 
@@ -247,7 +244,7 @@ describe('Company Settings - Subscription', () => {
       'have.text',
       'Purchase completed successfully' || 'Purchase could not be completed'
     );
-  });*/
+  });
 
   it('should cancel form for adding billing profile', () => {
     cy.visit(`${subscriptionBaseLink}/payment-method`);

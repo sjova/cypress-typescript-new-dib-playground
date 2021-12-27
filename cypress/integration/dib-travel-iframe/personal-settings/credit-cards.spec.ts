@@ -147,7 +147,7 @@ describe('Personal Settings - Credit Cards', () => {
 
   // TODO: Revisit this
   // Error: `body > div > iframe[name^="__privateStripeFrame"]`
-  /* it('should add new Visa 3D Secure credit card', () => {
+  it('should add new Visa 3D Secure credit card', () => {
     cy.get('dib-profile dib-payment ui-button[type="primary"] button').click();
 
     cy.get('.cdk-overlay-container dib-add-card-dialog dib-stripe-card-input iframe')
@@ -172,17 +172,14 @@ describe('Personal Settings - Credit Cards', () => {
       .find('.container .source .actions button#test-source-authorize-3ds')
       .click();
 
-    cy.waitForAngular();
-
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Card Added');
 
     cy.get('dib-profile dib-payment dib-credit-card .card').should('contain', creditCard.visa3DSecure.number.slice(-4));
-  }); */
+  });
 
-  // TODO: Revisit this
-  /* it('should delete Visa 3D Secure credit card', () => {
+  it('should delete Visa 3D Secure credit card', () => {
     deleteCreditCard(creditCard.visa3DSecure.number);
-  }); */
+  });
 
   it('should add new MasterCard credit card', () => {
     cy.get('dib-profile dib-payment ui-button[type="primary"] button').contains('Add Credit Card').click();
