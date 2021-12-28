@@ -66,8 +66,7 @@ describe('Company Settings - Reference Fields - Project', () => {
     cy.get('.cdk-overlay-container dib-project-dialog .input-holder .error').contains(' Project name is required.');
   });
 
-  // TODO: The tests below are blocked (AMS-37)
-  /*it('should add a new project', () => {
+  it('should add a new project', () => {
     cy.get('dib-company-management dib-reference-fields dib-project ui-button[size="large"]')
       .contains(referenceFields.project.addActionCtaButton)
       .click();
@@ -127,5 +126,5 @@ describe('Company Settings - Reference Fields - Project', () => {
       'not.contain',
       referenceFields.project.modifiedName
     );
-  });*/
+  });
 });

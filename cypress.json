@@ -1,6 +1,6 @@
 {
   "$schema": "https://on.cypress.io/cypress.schema.json",
-  "baseUrl": "https://feature-dt-10924-stripe-upgrade--dib-travel.netlify.app/",
+  "baseUrl": "https://develop--dib-travel.netlify.app/",
   "blockHosts": ["*stripe.com"],
   "pluginsFile": "cypress/plugins/index.ts",
   "supportFile": "cypress/support/index.ts",

@@ -67,8 +67,7 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
     );
   });
 
-  // TODO: The tests below are blocked (AMS-37)
-  /*it('should add a new purpose of trip', () => {
+  it('should add a new purpose of trip', () => {
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip ui-button[size="large"]')
       .contains(referenceFields.purposeOfTrip.addActionCtaButton)
       .click();
@@ -136,5 +135,5 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
       'contain',
       referenceFields.purposeOfTrip.confirmationMessage2
     );
-  });*/
+  });
 });
