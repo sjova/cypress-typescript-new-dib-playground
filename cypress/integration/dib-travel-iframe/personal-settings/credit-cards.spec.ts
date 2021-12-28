@@ -170,8 +170,6 @@ describe('Personal Settings - Credit Cards', () => {
       .find('.container .source .actions button#test-source-authorize-3ds')
       .click();
 
-    cy.waitForAngular();
-
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Card Added');
 
     cy.get('dib-profile dib-payment dib-credit-card .card').should('contain', creditCard.visa3DSecure.number.slice(-4));

@@ -173,7 +173,7 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       .next('.table-cell')
       .next('.button-cell')
       .contains(' Archive ')
-      .clickAttached();
+      .click();
 
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
 

@@ -1,3 +1,3 @@
 # Random Errors Log
 
-- Cypress random "Aw, Snap" (TODO: Revisit this later)
+- Cypress random error "Aw, Snap", "Error code: 5" (TODO: Revisit this later)

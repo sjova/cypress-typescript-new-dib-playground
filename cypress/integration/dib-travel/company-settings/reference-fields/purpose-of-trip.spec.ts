@@ -104,7 +104,7 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
       .next('.table-cell')
       .next('.button-cell')
       .contains('edit')
-      .clickAttached();
+      .click();
 
     cy.get('.cdk-overlay-container dib-purpose-of-trip-dialog input[name="purposeOfTripName"]')
       .clear()
@@ -124,7 +124,7 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
       .next('.table-cell')
       .next('.button-cell')
       .contains(' Archive ')
-      .clickAttached();
+      .click();
 
     cy.get('dib-company-management dib-reference-fields dib-purpose-of-trip .grid').should(
       'not.contain',

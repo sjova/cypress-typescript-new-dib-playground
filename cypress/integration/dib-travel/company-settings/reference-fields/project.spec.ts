@@ -98,7 +98,7 @@ describe('Company Settings - Reference Fields - Project', () => {
       .next('.table-cell')
       .next('.button-cell')
       .contains('edit')
-      .clickAttached();
+      .click();
 
     cy.get('.cdk-overlay-container dib-project-dialog input[name="projectName"]')
       .clear()
@@ -118,7 +118,7 @@ describe('Company Settings - Reference Fields - Project', () => {
       .next('.table-cell')
       .next('.button-cell')
       .contains(' Archive ')
-      .clickAttached();
+      .click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').contains(referenceFields.project.confirmationMessage2);
 
