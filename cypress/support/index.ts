@@ -4,7 +4,6 @@
 import {
   asyncAdd,
   checkToken,
-  clickAttached,
   clickLink,
   dataCy,
   getSessionStorage,
@@ -20,7 +19,6 @@ import {
 
 Cypress.Commands.add('asyncAdd', asyncAdd);
 Cypress.Commands.add('checkToken', checkToken);
-Cypress.Commands.add('clickAttached', { prevSubject: 'element' }, clickAttached);
 Cypress.Commands.add('clickLink', clickLink);
 Cypress.Commands.add('dataCy', dataCy);
 Cypress.Commands.add('getSessionStorage', getSessionStorage);
@@ -33,8 +31,13 @@ Cypress.Commands.add('switchToIframe', { prevSubject: 'element' }, switchToIfram
 Cypress.Commands.add('typeLogin', typeLogin);
 Cypress.Commands.add('waitForAngular', { prevSubject: ['optional', 'element'] }, waitForAngular);
 
-// TODO: Revisit this later
+// Speedup Stripe analytics API calls
+// Primarily used for iframe tests: `cypress/integration/dib-travel-iframe/*`
 before(() => {
+  cy.intercept('POST', 'https://r.stripe.com/0');
+});
+
+/* before(() => {
   cy.intercept('POST', 'https://r.stripe.com/0', {
     statusCode: 200,
     body: '',
@@ -49,3 +52,4 @@ before(() => {
     },
   });
 });
+ */

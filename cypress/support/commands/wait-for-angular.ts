@@ -6,7 +6,9 @@
 // https://dev.to/codedivoire/angular-testability-dealing-with-selenium-or-protractor-timeouts-479f
 // https://gitmemory.com/issue/cypress-io/cypress/7306/649658924
 
-export const waitForAngular = (subject?: JQuery<HTMLElement>): Cypress.Chainable<unknown> => {
+// TODO: Revisit `subject` type
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const waitForAngular = (subject?: any): Cypress.Chainable<unknown> => {
   console.time('cy.waitForAngular() duration'); // start timer (will be removed later)
   cy.log('waitForAngular...');
 

@@ -13,7 +13,9 @@
 // https://medium.com/@michabahr/testing-stripe-elements-with-cypress-5a2fc17ab27b
 // https://medium.com/@you54f/configuring-cypress-to-work-with-iframes-cross-origin-sites-afff5efcf61f
 
-export const switchToIframe = (iframeSelector: string): Cypress.Chainable<JQuery<HTMLElement>> => {
+// TODO: Revisit `iframeSelector` type
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const switchToIframe = (iframeSelector: any): Cypress.Chainable<JQuery<HTMLElement>> => {
   // get the `iframe > document > body`, and retry until the body element is not empty
 
   cy.log('switchToIframe');

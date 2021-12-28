@@ -8,7 +8,8 @@ export const archiveEmployee = (employee: Omit<User, 'password'>, includeAsserti
     .next('.button-cell')
     .find('ui-button button')
     .contains(' Archive ')
-    .clickAttached();
+    // TODO: Revisit if will work without `{force: true}`
+    .click({ force: true });
 
   cy.get('.cdk-overlay-container confirmation-dialog ui-button').contains(' Archive ').click();
 

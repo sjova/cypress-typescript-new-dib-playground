@@ -145,8 +145,6 @@ describe('Personal Settings - Credit Cards', () => {
     deleteCreditCard(creditCard.visa.number);
   });
 
-  // TODO: Revisit this
-  // Error: `body > div > iframe[name^="__privateStripeFrame"]`
   it('should add new Visa 3D Secure credit card', () => {
     cy.get('dib-profile dib-payment ui-button[type="primary"] button').click();
 

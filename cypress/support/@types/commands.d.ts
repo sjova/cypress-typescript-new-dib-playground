@@ -27,22 +27,6 @@ declare global {
       checkToken(token: string): void;
 
       /**
-       * @deprecated Please use default `cy.click()` in combination with `cy.waitForAngular()`.
-       *
-       * @todo Remove from tests and delete the command
-       *
-       * Click attached DOM element
-       *
-       * @example
-       *    cy.get('button').clickAttached()
-       *
-       *    cy.focused().clickAttached()
-       *
-       *    cy.contains('Welcome').clickAttached()
-       */
-      clickAttached(subject?: HTMLElement): Cypress.Chainable<JQuery<HTMLElement>>;
-
-      /**
        * @todo Used for Cypress demo purposes and must be revisited before usage
        *
        * Click on a link with a specific label
