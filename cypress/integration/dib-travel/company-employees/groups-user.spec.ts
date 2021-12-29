@@ -42,7 +42,7 @@ describe('Company Employees - Groups (User)', () => {
     cy.get('.cdk-overlay-container dib-group-dialog ui-button').contains('Save').click();
   }); */
 
-  it('should display added employee in created group', () => {
+  /*it('should display added employee in created group', () => {
     cy.waitForAngular();
 
     cy.get('dib-people-management dib-groups dib-page dib-expandable-item .button').click();
@@ -55,7 +55,7 @@ describe('Company Employees - Groups (User)', () => {
       'contain',
       group.employee.email
     );
-  });
+  });*/
 
   it('should allow user to edit created group', () => {
     editGroup(group);

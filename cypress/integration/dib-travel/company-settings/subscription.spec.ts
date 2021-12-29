@@ -222,6 +222,7 @@ describe('Company Settings - Subscription', () => {
     cy.get('.cdk-overlay-container confirmation-dialog').should('not.exist');
   });
 
+  // TODO: Rethink a better way to organize this test below (we may not need `reload()` in the future)
   it('should buy new license for subscription', () => {
     cy.visit(`${subscriptionBaseLink}/licenses`);
 
@@ -229,20 +230,20 @@ describe('Company Settings - Subscription', () => {
       (numberOfLicenses) => {
         const numberBeforePurchase = parseInt(numberOfLicenses.text());
         cy.get('dib-company-management dib-subscription dib-subscription-licenses ui-button').contains('Buy').click();
-        cy.get('.cdk-overlay-container confirmation-dialog button')
-          .contains(' Buy ')
-          .click()
-          .waitForAngular()
+        cy.get('.cdk-overlay-container confirmation-dialog button').contains(' Buy ').click();
+
+        cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+          'have.text',
+          'Purchase completed successfully' || 'Purchase could not be completed'
+        );
+
+        cy.waitForAngular()
+          .reload()
           .then(() => {
             const numberAfterPurchase = parseInt(numberOfLicenses.text());
             expect(numberAfterPurchase).to.eq(numberBeforePurchase + 1);
           });
       }
-    );
-
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-      'have.text',
-      'Purchase completed successfully' || 'Purchase could not be completed'
     );
   });
 
