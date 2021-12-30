@@ -1,6 +1,4 @@
-// TODO: Blocked by bug (DT-11014)
-
-/*import { TravelSettings } from '@cy/models';
+import { TravelSettings } from '@cy/models';
 import { addDiscount, confirmAddedDiscount, deleteDiscountAndConfirm, editDiscount } from './shared';
 
 describe('Company Settings - Travel Settings - Company Rates', () => {
@@ -199,4 +197,4 @@ describe('Company Settings - Travel Settings - Company Rates', () => {
       'There are no company rates'
     );
   });
-});*/
+});
