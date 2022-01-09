@@ -2,6 +2,8 @@
 import { PaymentMethod } from '@cy/models';
 
 export const addBillingProfile = (paymentMethod: PaymentMethod): void => {
+  cy.waitForAngular();
+
   cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=legalName]').type(
     paymentMethod.companyInformation.companyLegalName
   );

@@ -3,6 +3,8 @@ import { enterSharedDetails } from './enter-shared-details';
 import { searchAndSelectEmployee } from './search-and-select-employee';
 
 export const addHotelTravelPolicy = (travelPolicyDetails: TravelSettings): void => {
+  cy.waitForAngular();
+
   cy.get('dib-company-management dib-travel-policy ui-button[type=primary]').click();
 
   enterSharedDetails(travelPolicyDetails.hotel.type, travelPolicyDetails.sharedDetails);

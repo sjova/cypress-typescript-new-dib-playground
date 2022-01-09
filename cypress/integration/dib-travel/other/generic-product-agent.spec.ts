@@ -83,11 +83,11 @@ describe('Other - Generic Product (Agent)', () => {
       'Choose if sale is done as “Passthrough” (i.e. cannot add markup & not legally responsibility for service) or “In own name” (possible to mark-up price to customer & legally responsible for service'
     );
 
-    clickTooltip(5);
+    clickTooltip(4);
 
     cy.get('.tooltip-content').should('contain', 'Set in traveler profile');
 
-    clickTooltip(6);
+    clickTooltip(5);
 
     cy.get('.tooltip-content').should('contain', 'Set in traveler profile');
   });
