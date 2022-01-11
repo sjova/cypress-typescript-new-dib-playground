@@ -1,14 +1,5 @@
 export const selectApprovalSettings = (settings: ApprovalSettings, groupName: string): void => {
-  let inputSelectorPosition = -1;
-
-  switch (settings) {
-    case 'Only out of policy travels':
-      inputSelectorPosition = 1;
-      break;
-    case 'All travels':
-      inputSelectorPosition = 1;
-      break;
-  }
+  const inputSelectorPosition = 1;
 
   cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 label').contains(settings).click();
 
