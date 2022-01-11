@@ -40,7 +40,7 @@ describe('Company Settings - Approval Process', () => {
     addHotelTravelPolicy(travelPolicyDetails); // TODO: Do we need to include other types (Flight, Train)?
 
     cy.visit('/people-management/groups');
-    addGroup(group.name, group.description, false);
+    addGroup(group.name, group.description, `${group.employee.firstName} ${group.employee.lastName}`, false);
   });
 
   after(() => {
@@ -89,10 +89,11 @@ describe('Company Settings - Approval Process', () => {
 
     selectTraveler(approvalProcessGroup.traveler);
 
-    cy.get('.cdk-overlay-container dib-approval-process-dialog .radio-button-group label')
+    // Computed size is zero, and we need to use `{ force: true }`
+    cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 label')
       .contains('Do not need approval (this overrides any travel policy)')
-      .click();
-    cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
+      .click({ force: true });
+    cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click();
 
     confirmApprovalProcess(approvalProcessGroup);
   });
@@ -102,11 +103,12 @@ describe('Company Settings - Approval Process', () => {
 
     selectTraveler(approvalProcessGroup.traveler);
 
-    cy.get('.cdk-overlay-container dib-approval-process-dialog .radio-button-group label')
+    // Computed size is zero, and we need to use `{ force: true }`
+    cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 label')
       .contains('Do not need approval (this overrides any travel policy)')
-      .click();
+      .click({ force: true });
 
-    cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
+    cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'have.text',
@@ -129,7 +131,7 @@ describe('Company Settings - Approval Process', () => {
 
     selectTravelerGroup(approvalProcessGroup);
 
-    cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
+    cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'have.text',
@@ -148,7 +150,7 @@ describe('Company Settings - Approval Process', () => {
 
     selectApprovalSettings('Only out of policy travels', approvalProcessGroup.travelersGroupName);
 
-    cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
+    cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click({ force: true });
 
     confirmApprovalProcess(approvalProcessGroup);
   });
@@ -158,11 +160,12 @@ describe('Company Settings - Approval Process', () => {
 
     selectTraveler(approvalProcessGroup.traveler);
 
-    cy.get('.cdk-overlay-container dib-approval-process-dialog .radio-button-group label')
+    // Computed size is zero, and we need to use `{ force: true }`
+    cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 label')
       .contains('Only out of policy travels')
-      .click();
+      .click({ force: true });
 
-    cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
+    cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'have.text',
@@ -185,7 +188,7 @@ describe('Company Settings - Approval Process', () => {
 
     selectApprovalSettings('All travels', approvalProcessGroup.travelersGroupName);
 
-    cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
+    cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click({ force: true });
 
     confirmApprovalProcess(approvalProcessGroup);
   });
@@ -195,11 +198,12 @@ describe('Company Settings - Approval Process', () => {
 
     selectTraveler(approvalProcessGroup.traveler);
 
-    cy.get('.cdk-overlay-container dib-approval-process-dialog .radio-button-group label')
+    // Computed size is zero, and we need to use `{ force: true }`
+    cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 label')
       .contains('All travels')
-      .click();
+      .click({ force: true });
 
-    cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
+    cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'have.text',
@@ -215,14 +219,15 @@ describe('Company Settings - Approval Process', () => {
     deleteApprovalProcess(approvalProcessGroup.traveler.firstName);
   });
 
-  it('should not be able to submit an empty approval process form', () => {
+  // TODO: Blocked by bug ticket (DT-11156)
+  /*it('should not be able to submit an empty approval process form', () => {
     cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
 
-    cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
+    cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'have.text',
       'Traveler or group of travelers must be selected!'
     );
-  });
+  });*/
 });

@@ -30,7 +30,7 @@ describe('Company Employees - Groups (Agent)', () => {
   });
 
   it('should allow agent to add new group', () => {
-    addGroup(group.name, group.description);
+    addGroup(group.name, group.description, `${group.employee.firstName} ${group.employee.lastName}`);
   });
 
   // TODO: This is blocked by bug ticket (DT-7943)
@@ -42,8 +42,7 @@ describe('Company Employees - Groups (Agent)', () => {
     cy.get('.cdk-overlay-container dib-group-dialog ui-button').contains('Save').click();
   }); */
 
-  // TODO: This test is blocked by bug ticket (DT-11016)
-  /*it('should display added employee in created group', () => {
+  it('should display added employee in created group', () => {
     cy.waitForAngular();
 
     cy.get('dib-people-management dib-groups dib-page dib-expandable-item .button').click();
@@ -56,7 +55,7 @@ describe('Company Employees - Groups (Agent)', () => {
       'contain',
       group.employee.email
     );
-  });*/
+  });
 
   it('should allow agent to edit created group', () => {
     editGroup(group);
