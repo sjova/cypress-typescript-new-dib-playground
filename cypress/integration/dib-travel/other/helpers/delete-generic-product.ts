@@ -1,7 +1,7 @@
 import { GenericProduct } from '@cy/models';
 
 export const deleteGenericProduct = (genericProduct: GenericProduct): void => {
-  cy.visit('/my-travels/active');
+  cy.visitAngularUrl('/my-travels/active');
 
   cy.waitForAngular();
 

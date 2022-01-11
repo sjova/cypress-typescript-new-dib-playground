@@ -19,7 +19,7 @@ describe('Company Settings - Travel Settings - Travel Policy - Taxi', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/company-management/travel-settings');
+    cy.visitAngularUrl('/company-management/travel-settings');
   });
 
   it('should add taxi travel policy', () => {

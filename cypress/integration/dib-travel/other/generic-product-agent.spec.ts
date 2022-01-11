@@ -178,7 +178,7 @@ describe('Other - Generic Product (Agent)', () => {
   });
 
   it('should edit generic product (Category - Flight taxi)', () => {
-    cy.visit('/my-travels/active');
+    cy.visitAngularUrl('/my-travels/active');
 
     cy.get('app-my-travels dib-travels-list .item .name')
       .contains(genericProduct.serviceName)

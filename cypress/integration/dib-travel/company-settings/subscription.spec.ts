@@ -43,7 +43,7 @@ describe('Company Settings - Subscription', () => {
   // eslint-disable-next-line mocha/no-sibling-hooks
   before(() => {
     cy.login();
-    cy.visit('/people-management/groups');
+    cy.visitAngularUrl('/people-management/groups');
 
     addGroup(group.name, group.description, false);
   });
@@ -51,7 +51,7 @@ describe('Company Settings - Subscription', () => {
   after(() => {
     cy.login();
 
-    cy.visit('/people-management/groups');
+    cy.visitAngularUrl('/people-management/groups');
 
     deleteGroup(group.name);
   });

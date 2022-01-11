@@ -12,7 +12,7 @@ describe('Personal Settings - Profile', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/profile/account');
+    cy.visitAngularUrl('/profile/account');
   });
 
   it('should display "Profile" in the sidebar navigation', () => {

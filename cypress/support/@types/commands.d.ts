@@ -140,6 +140,15 @@ declare global {
       typeLogin(user: Pick<User, 'email' | 'password'>): void;
 
       /**
+       * @todo This is a temp. workaround and will be revisited soon
+       *
+       * Visit Angular url
+       *
+       * @param {string} url - Url
+       */
+      visitAngularUrl(url: string): void;
+
+      /**
        * Wait for Angular until it becomes ready
        *
        * @example

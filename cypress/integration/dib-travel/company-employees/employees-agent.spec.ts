@@ -13,7 +13,7 @@ describe('Company Employees - Employees (Agent)', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/people-management/employees');
+    cy.visitAngularUrl('/people-management/employees');
     cy.waitForAngular();
   });
 

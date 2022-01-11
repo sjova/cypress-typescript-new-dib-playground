@@ -40,14 +40,14 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
   // eslint-disable-next-line mocha/no-sibling-hooks
   before(() => {
     cy.login();
-    cy.visit('/people-management/groups');
+    cy.visitAngularUrl('/people-management/groups');
 
     addGroup(group.name, group.description, false);
   });
 
   after(() => {
     cy.login();
-    cy.visit('/people-management/groups');
+    cy.visitAngularUrl('/people-management/groups');
 
     deleteGroup(group.name);
   });

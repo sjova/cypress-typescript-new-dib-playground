@@ -1,7 +1,7 @@
 describe('Company Settings - Invoice Settings (Agent)', () => {
   beforeEach(() => {
     cy.loginAgent();
-    cy.visit('/company-management/invoice-settings');
+    cy.visitAngularUrl('/company-management/invoice-settings');
   });
 
   it('should display "Invoice Settings" in the sidebar navigation', () => {

@@ -10,7 +10,7 @@ describe('Company Report - Invoices', () => {
   });
 
   it('should check Invoices page', () => {
-    cy.visit('/reporting/invoices');
+    cy.visitAngularUrl('/reporting/invoices');
 
     cy.get('dib-reporting dib-invoices h1').should('have.text', ' Invoices ');
 
