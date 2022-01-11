@@ -13,5 +13,5 @@ export const editTravelPolicy = (travelPolicyDetails: TravelSettings): void => {
     .clear()
     .type(travelPolicyDetails.sharedDetails.modifiedBudget);
   cy.get('.cdk-overlay-container dib-travel-policy-dialog currency-picker .currency').click();
-  cy.get('.cdk-overlay-container dib-travel-policy-dialog currency-picker .symbol').contains('€').click();
+  cy.get('.cdk-overlay-container dib-travel-policy-dialog currency-picker .name').contains(' Euro ').click();
 };

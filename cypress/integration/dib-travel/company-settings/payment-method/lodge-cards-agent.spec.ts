@@ -46,6 +46,8 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
   });
 
   it('should not be able to submit an empty lodge card form', () => {
+    cy.waitForAngular();
+
     cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]').click();
 
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-button[type=success]').click();

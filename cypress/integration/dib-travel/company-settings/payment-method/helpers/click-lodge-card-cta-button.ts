@@ -1,4 +1,6 @@
 export const clickLodgeCardCtaButton = (email: string, ctaButtonLabel: string): void => {
+  cy.waitForAngular();
+
   cy.get('dib-company-management dib-payment-method dib-lodge-cards dib-item .left .content .content')
     .contains(email)
     .parents('dib-item')

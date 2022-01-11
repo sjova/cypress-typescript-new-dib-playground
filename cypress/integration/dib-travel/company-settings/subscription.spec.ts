@@ -226,23 +226,31 @@ describe('Company Settings - Subscription', () => {
   it('should buy new license for subscription', () => {
     cy.visit(`${subscriptionBaseLink}/licenses`);
 
+    cy.intercept('GET', '/api/secure/v2/corporations/*/subscriptions/current').as('currentSubscriptionState');
+
     cy.get('dib-company-management dib-subscription dib-subscription-licenses .subscription-table__row__value').then(
       (numberOfLicenses) => {
         const numberBeforePurchase = parseInt(numberOfLicenses.text());
+        const numberAfterPurchase = parseInt(numberOfLicenses.text());
+
         cy.get('dib-company-management dib-subscription dib-subscription-licenses ui-button').contains('Buy').click();
         cy.get('.cdk-overlay-container confirmation-dialog button').contains(' Buy ').click();
 
-        cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-          'have.text',
-          'Purchase completed successfully' || 'Purchase could not be completed'
-        );
-
-        cy.waitForAngular()
-          .reload()
-          .then(() => {
-            const numberAfterPurchase = parseInt(numberOfLicenses.text());
-            expect(numberAfterPurchase).to.eq(numberBeforePurchase + 1);
+        cy.get('.cdk-overlay-container simple-snack-bar > span')
+          .invoke('text')
+          .then((message) => {
+            expect(message).to.be.oneOf(['Purchase completed successfully', 'Purchase could not be completed']);
           });
+
+        cy.reload();
+
+        cy.wait('@currentSubscriptionState').then(() => {
+          if (numberBeforePurchase == numberBeforePurchase + 1) {
+            expect(numberAfterPurchase).to.eq(numberBeforePurchase + 1);
+          } else {
+            expect(numberAfterPurchase).to.eq(numberBeforePurchase);
+          }
+        });
       }
     );
   });
@@ -372,7 +380,8 @@ describe('Company Settings - Subscription', () => {
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
       'contain',
-      ' Apr 2, 2021 ' && ' Nov 18, 2021 '
+      ' Apr 2, 2021 ',
+      ' Nov 18, 2021 '
     );
 
     cy.reload();

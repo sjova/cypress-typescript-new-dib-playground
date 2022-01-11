@@ -3,6 +3,8 @@ import { GenericProduct } from '@cy/models';
 export const deleteGenericProduct = (genericProduct: GenericProduct): void => {
   cy.visit('/my-travels/active');
 
+  cy.waitForAngular();
+
   cy.get('app-my-travels dib-travels-list .item .name')
     .contains(genericProduct.serviceName)
     .parents('dib-travels-list')
