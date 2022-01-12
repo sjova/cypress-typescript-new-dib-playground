@@ -8,10 +8,11 @@ export const addApprovalProcessAndConfirm = (approvalProcessGroup: ApprovalProce
 
   selectTravelerGroup(approvalProcessGroup);
 
-  cy.get('.cdk-overlay-container dib-approval-process-dialog .radio-button-group label')
+  // Computed size is zero, and we need to use `{ force: true }`
+  cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 label')
     .contains('Do not need approval (this overrides any travel policy)')
-    .click();
-  cy.get('.cdk-overlay-container dib-approval-process-dialog ui-button[type=success]').click();
+    .click({ force: true });
+  cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click();
 
   cy.get('.cdk-overlay-container simple-snack-bar > span').should(
     'have.text',

@@ -42,7 +42,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     cy.login();
     cy.visit('/people-management/groups');
 
-    addGroup(group.name, group.description, false);
+    addGroup(group.name, group.description, `${group.employee.firstName} ${group.employee.lastName}`, false);
   });
 
   after(() => {
@@ -142,10 +142,10 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=vatNumber]')
       .clear()
       .type(paymentMethod.invoiceRecipient.modifiedVatNumber);
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[placeholder=Search]')
-      .clear()
-      .type(paymentMethod.person.firstName);
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog .members .user').click();
+    cy.get('.cdk-overlay-container dib-billing-profile-dialog  ui-control-wrapper .container').click();
+
+    cy.get('.cdk-overlay-container ui-dropdown-panel .checkbox-label').contains(paymentMethod.groupName).click();
+    cy.get('.cdk-overlay-container ui-dropdown-panel .checkbox-label').contains(paymentMethod.person.firstName).click();
 
     cy.get('.cdk-overlay-container dib-billing-profile-dialog ui-button[type=success]').click();
 
