@@ -1,7 +1,7 @@
 describe('Wait For Angular Until It Becomes Ready', () => {
   describe('Simple Querying', () => {
     beforeEach(() => {
-      cy.visit('/login');
+      cy.visitApp('/login');
     });
 
     it('should demonstrate the usage of "waitForAngular" and "get" commands', () => {
@@ -24,7 +24,7 @@ describe('Wait For Angular Until It Becomes Ready', () => {
 
   describe('Element Existence', () => {
     beforeEach(() => {
-      cy.visit('/login');
+      cy.visitApp('/login');
       cy.waitForAngular();
     });
 

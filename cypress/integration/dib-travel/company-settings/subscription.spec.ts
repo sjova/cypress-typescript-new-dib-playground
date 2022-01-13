@@ -58,7 +58,7 @@ describe('Company Settings - Subscription', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit(subscriptionBaseLink);
+    cy.visitAngularUrl(subscriptionBaseLink);
   });
 
   it('should display "Subscription" in the sidebar navigation', () => {
@@ -82,14 +82,14 @@ describe('Company Settings - Subscription', () => {
       .eq(1)
       .invoke('text')
       .then((numberOfLicenses) => {
-        cy.visit(`${subscriptionBaseLink}/licenses`);
+        cy.visitAngularUrl(`${subscriptionBaseLink}/licenses`);
 
         cy.get(
           'dib-company-management dib-subscription dib-subscription-licenses .subscription-table__row__value'
         ).should('contain', numberOfLicenses);
       });
 
-    cy.visit(`${subscriptionBaseLink}/overview`);
+    cy.visitAngularUrl(`${subscriptionBaseLink}/overview`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-overview .table-footer span').should(
       'have.text',
@@ -103,7 +103,7 @@ describe('Company Settings - Subscription', () => {
 
   // TODO: Revisit under the hood logic behind current values
   it('should check Pricing Plans tab', () => {
-    cy.visit(`${subscriptionBaseLink}/pricing-plans`);
+    cy.visitAngularUrl(`${subscriptionBaseLink}/pricing-plans`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-pricing-plans h3')
       .should('contain', ' Business Pro')
@@ -126,7 +126,7 @@ describe('Company Settings - Subscription', () => {
   });
 
   it('should cancel form for Request Enterprise plan', () => {
-    cy.visit(`${subscriptionBaseLink}/pricing-plans`);
+    cy.visitAngularUrl(`${subscriptionBaseLink}/pricing-plans`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-pricing-plans button')
       .contains(' Contact us ')
@@ -144,7 +144,7 @@ describe('Company Settings - Subscription', () => {
   });
 
   it('should send request for Enterprise plan', () => {
-    cy.visit(`${subscriptionBaseLink}/pricing-plans`);
+    cy.visitAngularUrl(`${subscriptionBaseLink}/pricing-plans`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-pricing-plans button')
       .contains(' Contact us ')
@@ -161,7 +161,7 @@ describe('Company Settings - Subscription', () => {
   // TODO: Revisit under the hood logic behind current values
   // TODO: We need to do the internal calculation and to compare values (calculated vs. displayed)
   it('should check Licenses tab', () => {
-    cy.visit(`${subscriptionBaseLink}/licenses`);
+    cy.visitAngularUrl(`${subscriptionBaseLink}/licenses`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-licenses h3')
       .should('contain', ' Number of Licenses ')
@@ -201,7 +201,7 @@ describe('Company Settings - Subscription', () => {
   });
 
   it('should increment/decrement number of licenses', () => {
-    cy.visit(`${subscriptionBaseLink}/licenses`);
+    cy.visitAngularUrl(`${subscriptionBaseLink}/licenses`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-licenses button i').contains('add').click();
 
@@ -213,7 +213,7 @@ describe('Company Settings - Subscription', () => {
   });
 
   it('should cancel confirmation dialog for buying new license', () => {
-    cy.visit(`${subscriptionBaseLink}/licenses`);
+    cy.visitAngularUrl(`${subscriptionBaseLink}/licenses`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-licenses ui-button').contains('Buy now').click();
 
@@ -224,7 +224,7 @@ describe('Company Settings - Subscription', () => {
 
   // TODO: Rethink a better way to organize this test below (we may not need `reload()` in the future)
   it('should buy new license for subscription', () => {
-    cy.visit(`${subscriptionBaseLink}/licenses`);
+    cy.visitAngularUrl(`${subscriptionBaseLink}/licenses`);
 
     cy.intercept('GET', '/api/secure/v2/corporations/*/subscriptions/current').as('currentSubscriptionState');
 
@@ -256,7 +256,7 @@ describe('Company Settings - Subscription', () => {
   });
 
   it('should cancel form for adding billing profile', () => {
-    cy.visit(`${subscriptionBaseLink}/payment-method`);
+    cy.visitAngularUrl(`${subscriptionBaseLink}/payment-method`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-payment-method span')
       .contains(' Add New Billing Profile ')
@@ -266,7 +266,7 @@ describe('Company Settings - Subscription', () => {
   });
 
   it('should not be able to submit an empty billing profile form', () => {
-    cy.visit(`${subscriptionBaseLink}/payment-method`);
+    cy.visitAngularUrl(`${subscriptionBaseLink}/payment-method`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-payment-method span')
       .contains(' Add New Billing Profile ')
@@ -277,7 +277,7 @@ describe('Company Settings - Subscription', () => {
 
   // TODO: This should be revisited (more specific: `addBillingProfile` method)
   it('should add a billing profile', () => {
-    cy.visit(`${subscriptionBaseLink}/payment-method`);
+    cy.visitAngularUrl(`${subscriptionBaseLink}/payment-method`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-payment-method span')
       .contains(' Add New Billing Profile ')
@@ -287,7 +287,7 @@ describe('Company Settings - Subscription', () => {
 
     addBillingProfile(paymentMethod);
 
-    cy.visit('/company-management/payment-method/billing-profiles');
+    cy.visitAngularUrl('/company-management/payment-method/billing-profiles');
 
     cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item .content')
       .should('contain', paymentMethod.companyInformation.taxId)
@@ -305,7 +305,7 @@ describe('Company Settings - Subscription', () => {
   });
 
   it('should check Purchase History tab', () => {
-    cy.visit(`${subscriptionBaseLink}/purchase-history`);
+    cy.visitAngularUrl(`${subscriptionBaseLink}/purchase-history`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p')
       .should('contain', ' Date ')
@@ -333,7 +333,7 @@ describe('Company Settings - Subscription', () => {
   });
 
   it('should check pagination on Purchase History tab', () => {
-    cy.visit(`${subscriptionBaseLink}/purchase-history`);
+    cy.visitAngularUrl(`${subscriptionBaseLink}/purchase-history`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination ul li')
       .contains('2')

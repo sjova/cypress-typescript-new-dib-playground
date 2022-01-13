@@ -1,66 +1,53 @@
 export const visitAngularUrl = (url: string): void => {
-  // TODO: Temp. workaround
+  // TODO: This is a temp. workaround and will be revisited soon
 
   const urlSegments = url.split('/');
-  const mainSegment = urlSegments[1];
+  const urlLastSegment = urlSegments[urlSegments.length - 1];
+  const tabTitle = urlLastSegment.replace(/-/g, ' ');
 
-  switch (mainSegment) {
-    case 'my-travels':
-      cy.get(`dib-navbar a[href="/${urlSegments[1]}"`).click;
-      cy.get(`app-my-travels nav a[href="${url}"`).click();
-      break;
-    default:
-      cy.get('dib-navbar dib-hamburger-icon').click();
-      cy.get(`.cdk-overlay-container dib-navbar-panel a[href="${url}"]`).click();
-      break;
+  if (url.includes('/company-management/payment-method/')) {
+    // feature section - tab navigation
+
+    cy.get('dib-navbar dib-hamburger-icon').click();
+    cy.get('.cdk-overlay-container dib-navbar-panel a[href="/company-management/payment-method"]').click();
+
+    cy.get('dib-company-management dib-payment-method dib-sub-tabs .sub-tabs a')
+      .contains(tabTitle, { matchCase: false })
+      .click();
+  } else if (url.includes('/company-management/reference-fields/')) {
+    // feature section - tab navigation
+
+    cy.get('dib-navbar dib-hamburger-icon').click();
+    cy.get('.cdk-overlay-container dib-navbar-panel a[href="/company-management/reference-fields"]').click();
+
+    cy.get('dib-company-management dib-reference-fields dib-sub-tabs .sub-tabs a')
+      .contains(tabTitle, { matchCase: false })
+      .click();
+  } else if (url.includes('/company-management/subscription/')) {
+    // feature section - tab navigation
+
+    cy.get('dib-navbar dib-hamburger-icon').click();
+    cy.get('.cdk-overlay-container dib-navbar-panel a[href="/company-management/subscription"]').click();
+
+    cy.get('dib-company-management dib-subscription .sub-tabs a').contains(tabTitle, { matchCase: false }).click();
+  } else if (url.includes('/company-management/travel-settings/')) {
+    // feature section - tab navigation
+
+    cy.get('dib-navbar dib-hamburger-icon').click();
+    cy.get('.cdk-overlay-container dib-navbar-panel a[href="/company-management/travel-settings"]').click();
+
+    cy.get('dib-company-management dib-travel-settings dib-sub-tabs .sub-tabs a')
+      .contains(tabTitle, { matchCase: false })
+      .click();
+  } else if (url.includes('/my-travels/')) {
+    // top header - link navigation
+
+    cy.get('[data-cy="navbar-my-travels-link"]').click();
+    cy.get(`app-my-travels nav a[href="${url}"`).click();
+  } else {
+    // right sidebar - main navigation
+
+    cy.get('dib-navbar dib-hamburger-icon').click();
+    cy.get(`.cdk-overlay-container dib-navbar-panel a[href="${url}"]`).click();
   }
 };
-
-/*
-Remains to cover:
-
-cy.visit('/company-management/payment-method/billing-profiles');
-// dib-company-management dib-payment-method dib-sub-tabs a
-// Billing profiles
-// Credit cards - not used?
-// Lodge Cards - not used?
-
-cy.visit('/company-management/reference-fields/cost-center');
-// dib-company-management dib-reference-fields dib-sub-tabs a
-// Cost center
-// Project - not used?
-// Purpose of trip - not used?
-// Your reference - not used?
-
-cy.visit('/company-management/subscription/licenses');
-cy.visit('/company-management/subscription/overview');
-cy.visit('/company-management/subscription/pricing-plans');
-cy.visit('/company-management/subscription/payment-method');
-cy.visit('/company-management/subscription/purchase-history');
-// dib-company-management dib-subscription a
-// Overview
-// Pricing plans
-// Licenses
-// Payment method
-// Purchase history
-
-cy.visit('/company-management/payment-method/lodge-cards');
-// dib-company-management dib-payment-method dib-sub-tabs a
-// Billing profiles - not used?
-// Credit cards - not used?
-// Lodge Cards
-
-cy.visit('/company-management/reference-fields/project');
-cy.visit('/company-management/reference-fields/purpose-of-trip');
-cy.visit('/company-management/reference-fields/your-reference');
-// dib-company-management dib-reference-fields dib-page dib-sub-tabs a
-// Cost center - not used?
-// Project
-// Purpose of trip
-// Your reference
-
-cy.visit('/company-management/travel-settings/company-rates');
-// dib-company-management dib-travel-settings dib-sub-tabs a
-// Travel policy - not used?
-// Company Rates
-*/

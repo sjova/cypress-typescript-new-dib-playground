@@ -11,7 +11,7 @@ describe('Company Settings - Reference Fields - Project', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/company-management/reference-fields/project');
+    cy.visitAngularUrl('/company-management/reference-fields/project');
   });
 
   it('should check "Display and set field to mandatory when checking out booking" check-box', () => {

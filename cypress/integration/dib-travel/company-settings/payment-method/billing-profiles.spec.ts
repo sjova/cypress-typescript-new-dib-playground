@@ -54,7 +54,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/company-management/payment-method/billing-profiles');
+    cy.visitAngularUrl('/company-management/payment-method/billing-profiles');
   });
 
   it('should close the form for adding billing profile', () => {

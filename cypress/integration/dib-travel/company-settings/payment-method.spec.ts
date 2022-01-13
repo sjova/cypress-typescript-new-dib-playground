@@ -1,7 +1,7 @@
 describe('Company Settings - Payment Method', () => {
   it('should display "Payment Method" in the sidebar navigation', () => {
     cy.login();
-    cy.visit('/company-management/payment-method/billing-profiles');
+    cy.visitAngularUrl('/company-management/payment-method/billing-profiles');
 
     cy.get('dib-navbar dib-hamburger-icon').click();
 

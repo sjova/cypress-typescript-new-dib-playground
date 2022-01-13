@@ -26,7 +26,7 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
   beforeEach(() => {
     cy.loginAgent();
 
-    cy.visit('/company-management/payment-method/lodge-cards');
+    cy.visitAngularUrl('/company-management/payment-method/lodge-cards');
 
     cy.waitForAngular();
   });

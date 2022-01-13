@@ -37,7 +37,7 @@ describe('Company Settings - Payment Method - Credit Cards', () => {
     cy.iframeFix();
 
     cy.login();
-    cy.visit('/company-management/payment-method/credit-cards');
+    cy.visitAngularUrl('/company-management/payment-method/credit-cards');
 
     cy.waitForAngular();
   });

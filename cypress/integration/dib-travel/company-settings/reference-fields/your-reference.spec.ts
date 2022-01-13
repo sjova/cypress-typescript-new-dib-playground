@@ -11,7 +11,7 @@ describe('Company Settings - Reference Fields - Your Reference', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/company-management/reference-fields/your-reference');
+    cy.visitAngularUrl('/company-management/reference-fields/your-reference');
   });
 
   it('should change your reference fields label at checkout', () => {

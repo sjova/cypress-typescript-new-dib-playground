@@ -10,14 +10,12 @@ describe('Sign In (Agent)', () => {
   });
 
   beforeEach(() => {
-    cy.visit('/login');
+    cy.visitApp('/login');
     cy.get('new-login .auth-container-footer a[href="/login/agent"]').click();
   });
 
   it('should check if a not logged agent can visit a page', () => {
-    cy.resetState();
-
-    cy.visitAngularUrl('/people-management/employees');
+    cy.visit('/people-management/employees');
     cy.waitForAngular();
 
     cy.get('new-login ui-input input[name=email]').should('be.visible');

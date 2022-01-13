@@ -10,15 +10,11 @@ describe('Sign In (User)', () => {
   });
 
   beforeEach(() => {
-    cy.visit('/login');
-
-    cy.waitForAngular();
+    cy.visitApp('/login');
   });
 
   it('should check if a not logged user can visit a page', () => {
-    cy.resetState();
-
-    cy.visitAngularUrl('/people-management/employees');
+    cy.visit('/people-management/employees');
     cy.waitForAngular();
 
     cy.get('new-login ui-input input[name=email]').should('be.visible');
