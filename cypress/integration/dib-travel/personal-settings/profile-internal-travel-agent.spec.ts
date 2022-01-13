@@ -35,14 +35,13 @@ describe('Personal Settings - Profile - Internal Travel Agent', () => {
 
     cy.get('dib-profile dib-account dib-internal-agents ui-button').contains('Add').click();
 
-    cy.get('.cdk-overlay-container dib-internal-agents-dialog dib-assign-members dib-input input').type(
-      profileDetails.internalTravelAgent.email
-    );
-
-    cy.get('.cdk-overlay-container dib-internal-agents-dialog dib-assign-members .member .user')
+    cy.get('.cdk-overlay-container dib-internal-agents-dialog  ui-control-wrapper .container').click();
+    cy.get('.cdk-overlay-container ui-dropdown-panel .checkbox-label')
       .contains(`${profileDetails.internalTravelAgent.firstName} ${profileDetails.internalTravelAgent.lastName}`)
       .click();
-    cy.get('.cdk-overlay-container dib-internal-agents-dialog ui-button').contains('Add').click();
+
+    // Computed size is zero, and we need to use `{ force: true }`
+    cy.get('.cdk-overlay-container dib-internal-agents-dialog ui-button').contains('Add').click({ force: true });
 
     cy.get('dib-profile dib-account dib-internal-agents .--first').should(
       'contain',

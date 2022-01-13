@@ -1,4 +1,4 @@
-// import { getFirstWord } from '@cy/helpers';
+import { getFirstWord } from '@cy/helpers';
 import { PaymentMethod } from '@cy/models';
 
 export const addBillingProfile = (paymentMethod: PaymentMethod): void => {
@@ -42,11 +42,12 @@ export const addBillingProfile = (paymentMethod: PaymentMethod): void => {
   cy.get('.cdk-overlay-container dib-billing-profile-dialog .dib-select')
     .last()
     .select(paymentMethod.currency.originalCurrency);
-  // TODO: Revisit below and uncomment
-  /* cy.get('.cdk-overlay-container dib-billing-profile-dialog input[placeholder=Search]').type(
+
+  cy.get('.cdk-overlay-container dib-billing-profile-dialog  ui-control-wrapper .container').click();
+  cy.get('.cdk-overlay-container dib-billing-profile-dialog  ui-control-wrapper .container').type(
     getFirstWord(paymentMethod.groupName)
   );
-  cy.get('.cdk-overlay-container dib-billing-profile-dialog .members .group').click(); */
+  cy.get('.cdk-overlay-container ui-dropdown-panel .checkbox-label').contains(paymentMethod.groupName).click();
 
   cy.get('.cdk-overlay-container dib-billing-profile-dialog ui-button[type=success]').click();
 

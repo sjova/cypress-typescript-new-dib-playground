@@ -1,16 +1,16 @@
-import { DibTravelAccounts, ReferenceFields } from '@cy/models';
+import { Group, ReferenceFields } from '@cy/models';
 
 describe('Company Settings - Reference Fields - Cost Center', () => {
   let referenceFields: ReferenceFields;
-  let accounts: DibTravelAccounts;
+  let group: Group;
 
   before(() => {
     cy.fixture('company-settings/reference-fields').then((referenceFixture) => {
       referenceFields = referenceFixture;
     });
 
-    cy.fixture('dib-travel-accounts.json').then((dibTravelAccounts) => {
-      accounts = dibTravelAccounts;
+    cy.fixture('company-employees/group.json').then((employeeName) => {
+      group = employeeName;
     });
   });
 
@@ -92,13 +92,12 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       referenceFields.costCenter.description
     );
 
-    cy.get('.cdk-overlay-container dib-cost-center-dialog dib-assign-members dib-input input').type(
-      accounts.defaultAccount.email
-    );
+    cy.get('.cdk-overlay-container dib-cost-center-dialog  ui-control-wrapper .container').click();
 
-    cy.get('.cdk-overlay-container dib-cost-center-dialog dib-assign-members .members')
-      .contains(accounts.defaultAccount.email)
+    cy.get('.cdk-overlay-container ui-dropdown-panel .checkbox-label')
+      .contains(`${group.employee.firstName} ${group.employee.lastName}`)
       .click();
+
     cy.get('.cdk-overlay-container dib-cost-center-dialog ui-button').contains('save').click();
 
     cy.waitForAngular();

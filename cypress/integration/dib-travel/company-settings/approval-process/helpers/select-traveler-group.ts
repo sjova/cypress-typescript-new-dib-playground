@@ -1,15 +1,11 @@
-import { getFirstWord } from '@cy/helpers';
 import { ApprovalProcessGroup } from '@cy/models';
 
 export const selectTravelerGroup = (approvalProcessGroup: ApprovalProcessGroup): void => {
   cy.waitForAngular();
 
-  cy.get('.cdk-overlay-container dib-approval-process-dialog dib-input')
-    .first()
-    .type(getFirstWord(approvalProcessGroup.travelersGroupName));
+  cy.get('.cdk-overlay-container dib-approval-process-dialog-v2  ui-control-wrapper .container').click();
 
-  cy.get('.cdk-overlay-container dib-approval-process-dialog .members .group')
-    .first()
+  cy.get('.cdk-overlay-container ui-dropdown-panel .checkbox-label')
     .contains(approvalProcessGroup.travelersGroupName, { matchCase: false })
     .click();
 };

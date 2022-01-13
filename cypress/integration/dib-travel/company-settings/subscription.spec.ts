@@ -45,7 +45,7 @@ describe('Company Settings - Subscription', () => {
     cy.login();
     cy.visitAngularUrl('/people-management/groups');
 
-    addGroup(group.name, group.description, false);
+    addGroup(group.name, group.description, `${group.employee.firstName} ${group.employee.lastName}`, false);
   });
 
   after(() => {

@@ -1,4 +1,4 @@
-export const addGroup = (name: string, description: string, includeAssertion = true): void => {
+export const addGroup = (name: string, description: string, employee: string, includeAssertion = true): void => {
   cy.intercept('GET', '/api/secure/v1/corporations/*/employees').as('getCorporationsEmployees');
 
   cy.wait('@getCorporationsEmployees').then(() => {
@@ -7,7 +7,9 @@ export const addGroup = (name: string, description: string, includeAssertion = t
     cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="Group name*"]').type(name);
     cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="Description"]').type(description);
 
-    cy.get('.cdk-overlay-container dib-group-dialog dib-assign-members .member').click();
+    cy.get('.cdk-overlay-container dib-group-dialog  ui-control-wrapper .container').click();
+
+    cy.get('.cdk-overlay-container ui-dropdown-panel .checkbox-label').contains(employee).click();
 
     cy.get('.cdk-overlay-container dib-group-dialog ui-button').contains('Save').click();
 
