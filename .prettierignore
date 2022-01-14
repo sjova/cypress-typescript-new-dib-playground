@@ -3,10 +3,13 @@
 .idea
 .vscode
 .yarn-integrity
+cypress/fixtures/dib-travel-accounts.json
 cypress/fixtures/profile.json
 cypress/fixtures/users.json
+cypress/results
 cypress/screenshots
 cypress/videos
+mochawesome-report
 node_modules
 npm-debug.log*
 package-lock.json
