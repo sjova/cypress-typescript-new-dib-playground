@@ -26,14 +26,14 @@
   - subscription [Nenad Tripunovic]
 - company-report (analytics-reporting, invoices) [Nenad Tripunovic]
 - group [Stefan Nikolic]
+- other (agent) [Nenad Tripunovic]
 
 ## IN PROGRESS
 
-- other (agent) [Nenad Tripunovic]
+- Maintenance, fixes and cleanup
 
 ## TODO (MAIN FEATURES)
 
-- company-employees / employees-agent [Stefan Nikolic] (TODO: Revisit tests)
 - Zendesk support chat
 - flights
   - fare families (medium scope)
