@@ -10,7 +10,7 @@ describe('Company Settings - Reference Fields', () => {
   });
 
   it('should check if "Employee" is displayed in header and verify that link is valid', () => {
-    cy.visit('/company-management/reference-fields/cost-center');
+    cy.visitAngularUrl('/company-management/reference-fields/cost-center');
 
     cy.get('dib-company-management dib-reference-fields .header__details__description')
       .contains('Employees page')

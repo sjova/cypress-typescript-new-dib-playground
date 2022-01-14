@@ -14,7 +14,7 @@ describe('Personal Settings - Credit Cards', () => {
     cy.iframeFix();
 
     cy.login();
-    cy.visit('/profile/payment');
+    cy.visitAngularUrl('/profile/payment');
 
     cy.waitForAngular();
   });

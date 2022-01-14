@@ -18,7 +18,7 @@ describe('Company Settings - Travel Settings - Travel Policy - Hotel', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/company-management/travel-settings');
+    cy.visitAngularUrl('/company-management/travel-settings');
   });
 
   it('should add hotel travel policy', () => {

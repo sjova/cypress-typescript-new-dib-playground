@@ -17,7 +17,7 @@ describe('Company Settings - Payment Method - Credit Cards (Iframe Demo)', () =>
     cy.iframeFix();
 
     cy.login();
-    cy.visit('/company-management/payment-method/credit-cards');
+    cy.visitAngularUrl('/company-management/payment-method/credit-cards');
   });
 
   it('should populate credit card details inside the iframe', () => {

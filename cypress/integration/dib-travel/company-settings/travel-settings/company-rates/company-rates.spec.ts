@@ -13,7 +13,7 @@ describe('Company Settings - Travel Settings - Company Rates', () => {
   beforeEach(() => {
     cy.login();
 
-    cy.visit('/company-management/travel-settings/company-rates');
+    cy.visitAngularUrl('/company-management/travel-settings/company-rates');
   });
 
   it('should confirm form details for adding new discount type', () => {

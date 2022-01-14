@@ -1,7 +1,7 @@
 describe('Company Settings - Travel Settings', () => {
   it('should display "Travel Settings" in the sidebar navigation', () => {
     cy.login();
-    cy.visit('/company-management/travel-settings');
+    cy.visitAngularUrl('/company-management/travel-settings');
 
     cy.get('dib-navbar dib-hamburger-icon').click();
 

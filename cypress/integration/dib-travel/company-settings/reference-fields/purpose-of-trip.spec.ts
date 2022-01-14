@@ -11,7 +11,7 @@ describe('Company Settings - Reference Fields - Purpose Of Trip', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/company-management/reference-fields/purpose-of-trip');
+    cy.visitAngularUrl('/company-management/reference-fields/purpose-of-trip');
   });
 
   it('should change purpose of trip field label at checkout', () => {

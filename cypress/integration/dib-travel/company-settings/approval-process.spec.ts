@@ -36,27 +36,27 @@ describe('Company Settings - Approval Process', () => {
   before(() => {
     cy.login();
 
-    cy.visit('/company-management/travel-settings');
+    cy.visitAngularUrl('/company-management/travel-settings');
     addHotelTravelPolicy(travelPolicyDetails); // TODO: Do we need to include other types (Flight, Train)?
 
-    cy.visit('/people-management/groups');
+    cy.visitAngularUrl('/people-management/groups');
     addGroup(group.name, group.description, `${group.employee.firstName} ${group.employee.lastName}`, false);
   });
 
   after(() => {
     cy.login();
 
-    cy.visit('/company-management/travel-settings');
+    cy.visitAngularUrl('/company-management/travel-settings');
     deleteTravelPolicy(travelPolicyDetails.sharedDetails.name);
 
-    cy.visit('/people-management/groups');
+    cy.visitAngularUrl('/people-management/groups');
     deleteGroup(group.name);
   });
 
   beforeEach(() => {
     cy.login();
 
-    cy.visit('/company-management/approval-process');
+    cy.visitAngularUrl('/company-management/approval-process');
   });
 
   it('should display "Approval Process" in the sidebar navigation', () => {

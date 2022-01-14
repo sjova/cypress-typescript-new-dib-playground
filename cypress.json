@@ -8,6 +8,6 @@
   "video": false,
   "viewportHeight": 720,
   "viewportWidth": 1280,
-  "defaultCommandTimeout": 20000,
-  "requestTimeout": 25000
+  "defaultCommandTimeout": 40000,
+  "requestTimeout": 50000
 }

@@ -22,14 +22,14 @@ describe('Personal Settings - Profile - Internal Travel Agent', () => {
   });
 
   it('should add Internal travel agent', () => {
-    cy.visit('/people-management/employees');
+    cy.visitAngularUrl('/people-management/employees');
     addEmployee(
       profileDetails.internalTravelAgent.firstName,
       profileDetails.internalTravelAgent.lastName,
       profileDetails.internalTravelAgent.email
     );
 
-    cy.visit('/profile/account');
+    cy.visitAngularUrl('/profile/account');
 
     cy.waitForAngular();
 
@@ -50,7 +50,7 @@ describe('Personal Settings - Profile - Internal Travel Agent', () => {
   });
 
   it('should delete Internal travel agent', () => {
-    cy.visit('/profile/account');
+    cy.visitAngularUrl('/profile/account');
 
     cy.waitForAngular();
 
@@ -66,7 +66,7 @@ describe('Personal Settings - Profile - Internal Travel Agent', () => {
       `${profileDetails.internalTravelAgent.firstName} ${profileDetails.internalTravelAgent.lastName}`
     );
 
-    cy.visit('/people-management/employees');
+    cy.visitAngularUrl('/people-management/employees');
     archiveEmployee(profileDetails.internalTravelAgent, false);
   });
 });

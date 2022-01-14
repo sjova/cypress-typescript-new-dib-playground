@@ -10,14 +10,10 @@ describe('Sign In (User)', () => {
   });
 
   beforeEach(() => {
-    cy.visit('/login');
-
-    cy.waitForAngular();
+    cy.visitApp('/login');
   });
 
   it('should check if a not logged user can visit a page', () => {
-    cy.resetState();
-
     cy.visit('/people-management/employees');
     cy.waitForAngular();
 

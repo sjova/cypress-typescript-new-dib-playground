@@ -37,7 +37,7 @@ describe('Company Settings - Subscription', () => {
     cy.iframeFix();
 
     cy.login();
-    cy.visit('/company-management/subscription/payment-method');
+    cy.visitAngularUrl('/company-management/subscription/payment-method');
   });
 
   it('should cancel the adding new credit card', () => {
@@ -75,7 +75,7 @@ describe('Company Settings - Subscription', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('have.text', 'Company Shared Credit Card Added');
 
-    cy.visit('/company-management/payment-method/credit-cards');
+    cy.visitAngularUrl('/company-management/payment-method/credit-cards');
 
     confirmAddedCreditCard(paymentMethod, creditCard);
 

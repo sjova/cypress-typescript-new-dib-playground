@@ -11,7 +11,7 @@ describe('Company Report - Analytics & Reporting', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/reporting/analytics');
+    cy.visitAngularUrl('/reporting/analytics');
   });
 
   it('should display "Analytics & Reporting" in the sidebar navigation', () => {

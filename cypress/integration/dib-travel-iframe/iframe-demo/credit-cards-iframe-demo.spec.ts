@@ -17,7 +17,7 @@ describe('Personal Settings - Credit Cards (Iframe Demo)', () => {
     cy.iframeFix();
 
     cy.login();
-    cy.visit('/profile/payment');
+    cy.visitAngularUrl('/profile/payment');
   });
 
   it('should populate credit card details inside the iframe', () => {

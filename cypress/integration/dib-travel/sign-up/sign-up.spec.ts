@@ -16,7 +16,7 @@ describe('Sign Up', () => {
   });
 
   beforeEach(() => {
-    cy.visit('/sign-up');
+    cy.visitApp('/sign-up');
   });
 
   it('should check user terms and conditions redirection link', () => {

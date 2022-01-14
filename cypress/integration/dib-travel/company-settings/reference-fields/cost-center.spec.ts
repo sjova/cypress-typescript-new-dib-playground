@@ -16,7 +16,7 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/company-management/reference-fields/cost-center');
+    cy.visitAngularUrl('/company-management/reference-fields/cost-center');
   });
 
   it('should both check-boxes be checked', () => {

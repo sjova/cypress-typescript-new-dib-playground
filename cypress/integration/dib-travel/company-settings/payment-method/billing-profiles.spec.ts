@@ -40,21 +40,21 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
   // eslint-disable-next-line mocha/no-sibling-hooks
   before(() => {
     cy.login();
-    cy.visit('/people-management/groups');
+    cy.visitAngularUrl('/people-management/groups');
 
     addGroup(group.name, group.description, `${group.employee.firstName} ${group.employee.lastName}`, false);
   });
 
   after(() => {
     cy.login();
-    cy.visit('/people-management/groups');
+    cy.visitAngularUrl('/people-management/groups');
 
     deleteGroup(group.name);
   });
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/company-management/payment-method/billing-profiles');
+    cy.visitAngularUrl('/company-management/payment-method/billing-profiles');
   });
 
   it('should close the form for adding billing profile', () => {

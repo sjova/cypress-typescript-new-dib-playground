@@ -11,7 +11,7 @@ describe('Forgot Password', () => {
   });
 
   beforeEach(() => {
-    cy.visit('/login');
+    cy.visitApp('/login');
     cy.get('new-login .forgot-password-wrapper a[href="/forgot-password"]').click();
   });
 
