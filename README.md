@@ -286,6 +286,8 @@ This will generate multiple reports here:
 - `cypress/results/combined-mochawesome.json`
 - `mochawesome-report/combined-mochawesome.html` - this report is most valuable for humans :)
 
+Also, you can delete previously generated reports with the following command `yarn cy:report:delete`.
+
 ## Useful Docs
 
 - Getting Started

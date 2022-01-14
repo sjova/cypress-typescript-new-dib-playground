@@ -32,7 +32,7 @@
     "cy:run:dib:sign-up": "cypress run --spec 'cypress/integration/dib-travel/sign-up/**/*.spec.ts'",
     "cy:run:all": "cypress run",
     "cy:spec": "cypress run --spec",
-    "cy:report:delete": "rm cypress/results/* || true",
+    "cy:report:delete": "rm -Rf cypress/results || rm -Rf mochawesome-report || true",
     "cy:report:merge:junit": "jrm ./cypress/results/combined-junit.xml \"./cypress/results/*.xml\"",
     "cy:report:merge:mochawesome": "mochawesome-merge ./cypress/results/*.json > ./cypress/results/combined-mochawesome.json",
     "cy:report:mochawesome": "marge cypress/results/combined-mochawesome.json",
