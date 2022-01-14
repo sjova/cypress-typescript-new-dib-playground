@@ -105,8 +105,10 @@ dist
 
 # Cypress
 cypress/fixtures/dib-travel-accounts.json
+cypress/results
 cypress/screenshots
 cypress/videos
+mochawesome-report
 
 # Visual Studio Code
 .vscode/settings.json
