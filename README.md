@@ -274,6 +274,18 @@ describe('Local Playground - Querying', () => {
 });
 ```
 
+## Cypress Reporters
+
+We included the following Cypress reporters in the project: default [spec](https://mochajs.org/#spec), [mocha-junit-reporter](https://github.com/michaelleeallen/mocha-junit-reporter) and [mochawesome](https://github.com/adamgruber/mochawesome).
+
+After running DIB tests headlessly (e.g., `yarn cy:run:dib`), you can generate Cypress reports with the following command: `yarn cy:report`.
+
+This will generate multiple reports here:
+
+- `cypress/results/combined-junit.xml`
+- `cypress/results/combined-mochawesome.json`
+- `mochawesome-report/combined-mochawesome.html` - this report is most valuable for humans :)
+
 ## Useful Docs
 
 - Getting Started
