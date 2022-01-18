@@ -154,6 +154,7 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
 
   // TODO: This test requires a hardcoded "AAA" value (added before test execution) - BUG, should be deleted in database on CI.
   // We should revisit if there is a better implementation for this case.
+  // We should delete this code because when BUG is fixed, we should be able to delete all cost centers always.
 
   /*it('should verify that last const center is not able to delete', () => {
     cy.waitForAngular();
