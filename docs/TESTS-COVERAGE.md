@@ -8,7 +8,6 @@
 - sign-up [Dusan Petrovic, Nenad Tripunovic]
 - sign-in (user, agent) [Dusan Petrovic]
 - forgot-password [Dusan Petrovic]
-- my-travels (active, past) [Stefan Nikolic]
 - personal-settings
   - profile [Stefan Nikolic]
   - credit-cards [Stefan Nikolic]
@@ -24,7 +23,8 @@
   - approval-process [Nenad Tripunovic]
   - reference-fields [Stefan Nikolic]
   - subscription [Nenad Tripunovic]
-- company-report (analytics-reporting, invoices) [Nenad Tripunovic]
+- company-report (invoices, analytics-reporting) [Nenad Tripunovic]
+- my-travels (active, past) [Stefan Nikolic]
 - group [Stefan Nikolic]
 - other (agent) [Nenad Tripunovic]
 
@@ -53,10 +53,13 @@
 
 - company-employees / groups (user, agent) (DT-7943) [Nenad Tripunovic]
 - company-settings / invoice-settings (agent) (DT-10506) [Stefan Nikolic]
+- company-settings / approval-process (DT-11156 [Nenad Tripunovic]
 - company-report / analytics-reporting (DT-10568) [Nenad Tripunovic]
 
 ## DISCUSSION
 
+- company-employees / employees-agent (discussion, do we really need agent flow?)
+- company-employees / groups-agent (discussion, do we really need agent flow?)
 - `cypress/fixtures/other/generic-product.json` - revisit approach for `tripId` (tests should work in all environments)
 - company-settings / subscription / purchase-history [Nenad Tripunovic] (docs ref, file download)
 - company-settings / invoice-settings (agent) [Stefan Nikolic] (docs ref)
