@@ -12,9 +12,13 @@
     "cy:open:dev": "cypress open --config testFiles=dev-playground/**/*.spec.ts",
     "cy:open:dib": "cypress open --config testFiles=dib-travel/**/*.spec.ts",
     "cy:open:dib:iframe": "cypress open --config testFiles=dib-travel-iframe/**/*.spec.ts,chromeWebSecurity=false,blockHosts=null,defaultCommandTimeout=40000,requestTimeout=50000",
+    "cy:open:dib:dev": "CYPRESS_BASE_URL=https://develop--dib-travel.netlify.app/ cypress open --config testFiles=dib-travel/**/*.spec.ts",
+    "cy:open:dib:iframe:dev": "CYPRESS_BASE_URL=https://develop--dib-travel.netlify.app/ cypress open --config testFiles=dib-travel-iframe/**/*.spec.ts,chromeWebSecurity=false,blockHosts=null,defaultCommandTimeout=40000,requestTimeout=50000",
     "cy:run:dev": "cypress run --spec 'cypress/integration/dev-playground/*.spec.ts'",
     "cy:run:dib": "cypress run --spec 'cypress/integration/dib-travel/**/*.spec.ts'",
     "cy:run:dib:iframe": "cypress run --config chromeWebSecurity=false,blockHosts=null,defaultCommandTimeout=40000,requestTimeout=50000 --spec 'cypress/integration/dib-travel-iframe/**/*.spec.ts'",
+    "cy:run:dib:dev": "CYPRESS_BASE_URL=https://develop--dib-travel.netlify.app/ cypress run --spec 'cypress/integration/dib-travel/**/*.spec.ts'",
+    "cy:run:dib:iframe:dev": "CYPRESS_BASE_URL=https://develop--dib-travel.netlify.app/ cypress run --config chromeWebSecurity=false,blockHosts=null,defaultCommandTimeout=40000,requestTimeout=50000 --spec 'cypress/integration/dib-travel-iframe/**/*.spec.ts'",
     "cy:run:dib:cars": "cypress run --spec 'cypress/integration/dib-travel/cars/**/*.spec.ts'",
     "cy:run:dib:company-employees": "cypress run --spec 'cypress/integration/dib-travel/company-employees/**/*.spec.ts'",
     "cy:run:dib:company-report": "cypress run --spec 'cypress/integration/dib-travel/company-report/**/*.spec.ts'",
@@ -39,9 +43,7 @@
     "cy:report": "npm run cy:report:merge:junit && npm run cy:report:merge:mochawesome && npm run cy:report:mochawesome",
     "eslint": "eslint cypress --ext ts --fix",
     "prepare": "husky install",
-    "prettier": "prettier --write .",
-    "test:ci": "CYPRESS_BASE_URL=https://ci.app.com cypress open",
-    "test:staging": "CYPRESS_BASE_URL=https://staging.app.com cypress open"
+    "prettier": "prettier --write ."
   },
   "repository": {
     "type": "git",
