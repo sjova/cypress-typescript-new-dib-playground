@@ -1,4 +1,4 @@
-import { getEmailWithHash } from '@cy/helpers';
+import { getEmailWithHash, getTestingEnvironment } from '@cy/helpers';
 import { Group, PaymentMethod } from '@cy/models';
 import { addGroup, deleteGroup } from '../company-employees';
 import {
@@ -12,13 +12,27 @@ import {
 describe('Company Settings - Subscription', () => {
   let paymentMethod: PaymentMethod;
   let group: Group;
-  const subscriptionStartDate = 'Jun 24, 2022' || 'Apr 2, 2022';
-  const subscriptionEndDate = 'Jun 23, 2022' || 'Apr 1, 2022';
-  const environment = 'staging-' || 'CI-';
+
+  let testingEnvironment: string;
+
+  let subscriptionStartDate: string;
+  let subscriptionEndDate: string;
 
   const subscriptionBaseLink = '/company-management/subscription';
 
   before(() => {
+    testingEnvironment = getTestingEnvironment();
+
+    if (testingEnvironment === 'staging') {
+      subscriptionStartDate = 'Jun 24, 2022';
+      subscriptionEndDate = 'Jun 23, 2022';
+    } else if (testingEnvironment === 'ci') {
+      subscriptionStartDate = 'Apr 2, 2022';
+      subscriptionEndDate = 'Apr 1, 2022';
+    } else {
+      // TODO: Revisit this on production
+    }
+
     cy.fixture('company-employees/group').then((groupFixture) => {
       group = groupFixture;
     });
@@ -318,7 +332,7 @@ describe('Company Settings - Subscription', () => {
       .should('contain', ' Status ')
       .should('contain', ' Invoice ')
       .should('contain', subscriptionStartDate.substring(0, 3))
-      .should('contain', environment)
+      .should('contain', `${testingEnvironment}-`)
       .should(
         'contain',
         ' Upgrade to subscription plan BUSINESS PRO ANNUAL .',
@@ -348,7 +362,7 @@ describe('Company Settings - Subscription', () => {
       .contains('1')
       .click();
 
-    confirmFirstPagePreview();
+    confirmFirstPagePreview(subscriptionStartDate);
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
       .contains('keyboard_arrow_right')
@@ -360,7 +374,7 @@ describe('Company Settings - Subscription', () => {
       .contains('keyboard_arrow_left')
       .click();
 
-    confirmFirstPagePreview();
+    confirmFirstPagePreview(subscriptionStartDate);
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
       .contains('last_page')
@@ -368,14 +382,14 @@ describe('Company Settings - Subscription', () => {
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
       'not.contain',
-      ' Apr 2, 2021 '
+      subscriptionStartDate
     );
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
       .contains('first_page')
       .click();
 
-    confirmFirstPagePreview();
+    confirmFirstPagePreview(subscriptionStartDate);
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination span')
       .contains('20')
@@ -383,7 +397,7 @@ describe('Company Settings - Subscription', () => {
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
       'contain',
-      ' Apr 2, 2021 ',
+      subscriptionStartDate,
       ' Nov 18, 2021 '
     );
 

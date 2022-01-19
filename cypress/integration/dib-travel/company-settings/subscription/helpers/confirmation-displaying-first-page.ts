@@ -1,6 +1,3 @@
-export const confirmFirstPagePreview = (): void => {
-  cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
-    'contain',
-    ' Apr 2, 2021 '
-  );
+export const confirmFirstPagePreview = (date: string): void => {
+  cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should('contain', date);
 };
