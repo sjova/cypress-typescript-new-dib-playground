@@ -1,4 +1,7 @@
+import { getTestingEnvironment } from '@cy/helpers';
 import { CreditCard, PaymentMethod } from '@cy/models';
+
+let testingEnvironment: string;
 
 export const addCreditCard = (
   paymentMethod: PaymentMethod,
@@ -9,31 +12,35 @@ export const addCreditCard = (
     cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();
   }
 
+  testingEnvironment = getTestingEnvironment();
+
   // TODO: This should be discussed, because on the staging environment, we don't have section "COMPANY INFORMATION"
-  /*cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=postalCode]').type(
-    paymentMethod.companyInformation.zipCode
-  );
-  cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=city]').type(
-    paymentMethod.companyInformation.city
-  );
+  if (testingEnvironment === 'ci') {
+    cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=postalCode]').type(
+      paymentMethod.companyInformation.zipCode
+    );
+    cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=city]').type(
+      paymentMethod.companyInformation.city
+    );
 
-  const countryDropdownItemHeight = 42; // computed item height
-  const countryDropdownSerbiaPosition = 103 - 3; // to be 2nd item after scroll
-  cy.get('.cdk-overlay-container dib-add-credit-card-dialog ui-dropdown').click();
-  cy.get('.cdk-overlay-container ui-panel cdk-virtual-scroll-viewport')
-    .scrollTo(0, countryDropdownItemHeight * countryDropdownSerbiaPosition)
-    .contains(paymentMethod.companyInformation.country)
-    .click();
+    const countryDropdownItemHeight = 42; // computed item height
+    const countryDropdownSerbiaPosition = 103 - 3; // to be 2nd item after scroll
+    cy.get('.cdk-overlay-container dib-add-credit-card-dialog ui-dropdown').click();
+    cy.get('.cdk-overlay-container ui-panel cdk-virtual-scroll-viewport')
+      .scrollTo(0, countryDropdownItemHeight * countryDropdownSerbiaPosition)
+      .contains(paymentMethod.companyInformation.country)
+      .click();
 
-  cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=streetName]').type(
-    paymentMethod.companyInformation.address
-  );
-  cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=invoiceRecipientEmail]').type(
-    paymentMethod.invoiceRecipient.email
-  );
-  cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=vatNumber]').type(
-    paymentMethod.companyInformation.vatNumber
-  );*/
+    cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=streetName]').type(
+      paymentMethod.companyInformation.address
+    );
+    cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=invoiceRecipientEmail]').type(
+      paymentMethod.invoiceRecipient.email
+    );
+    cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=vatNumber]').type(
+      paymentMethod.companyInformation.vatNumber
+    );
+  }
 
   cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=firstName]').type(
     paymentMethod.primaryContact.firstName

@@ -15,20 +15,26 @@ describe('Company Settings - Subscription', () => {
 
   let testingEnvironment: string;
 
-  let subscriptionStartDate: string;
-  let subscriptionEndDate: string;
+  let subscriptionRenewalDate: string;
+  let subscriptionValidDate: string;
+  // TODO: Uncomment these variables and conditions when the number of licenses on stage exceeds 10.
+  /*let subscriptionStartDate: string;
+  let subscriptionEndDate: string;*/
 
   const subscriptionBaseLink = '/company-management/subscription';
 
   before(() => {
     testingEnvironment = getTestingEnvironment();
-
     if (testingEnvironment === 'staging') {
-      subscriptionStartDate = 'Jun 24, 2022';
-      subscriptionEndDate = 'Jun 23, 2022';
+      subscriptionRenewalDate = 'Jun 24, 2022';
+      subscriptionValidDate = 'Jun 23, 2022';
+      /*subscriptionStartDate = 'Jun 24, 2021';
+      subscriptionEndDate = '';*/
     } else if (testingEnvironment === 'ci') {
-      subscriptionStartDate = 'Apr 2, 2022';
-      subscriptionEndDate = 'Apr 01, 2022';
+      subscriptionRenewalDate = 'Apr 2, 2022';
+      subscriptionValidDate = 'Apr 01, 2022';
+      /*subscriptionStartDate = 'Apr 2, 2021';
+      subscriptionEndDate = 'Nov 18, 2021';*/
     } else {
       // TODO: Revisit this on production
     }
@@ -92,7 +98,7 @@ describe('Company Settings - Subscription', () => {
       .should('contain', 'Renewal subscription');
     cy.get('dib-company-management dib-subscription dib-subscription-overview .table-row p')
       .should('contain', ' Business Pro ')
-      .should('contain', subscriptionStartDate);
+      .should('contain', subscriptionRenewalDate);
 
     cy.get('dib-company-management dib-subscription dib-subscription-overview .row-value')
       .eq(1)
@@ -126,7 +132,7 @@ describe('Company Settings - Subscription', () => {
       .should('contain', 'Enterprise');
     cy.get('dib-company-management dib-subscription dib-subscription-pricing-plans .subscription-table small').should(
       'contain',
-      `Subscription renewal date: ${subscriptionStartDate}`,
+      `Subscription renewal date: ${subscriptionRenewalDate}`,
       ' (days from now) '
     );
     cy.get('dib-company-management dib-subscription dib-subscription-pricing-plans button').should(
@@ -183,7 +189,7 @@ describe('Company Settings - Subscription', () => {
       .should('contain', ' Number of Licenses ')
       .should('contain', ' Additional Licenses ');
     cy.get('dib-company-management dib-subscription dib-subscription-licenses p')
-      .should('contain', ` Subscription renewal date: ${subscriptionStartDate}`, ' (days from now) ')
+      .should('contain', ` Subscription renewal date: ${subscriptionRenewalDate}`, ' (days from now) ')
       .should('contain', ' 72 EUR per user ');
     cy.get('dib-company-management dib-subscription dib-subscription-licenses .subscription-table__row__pricing')
       .should('contain', ' 1 x 72 EUR = 72 EUR ')
@@ -196,7 +202,7 @@ describe('Company Settings - Subscription', () => {
       .click();
     cy.get('.tooltip-content').should(
       'contain',
-      `Additional licenses will be valid until the ${subscriptionEndDate}, after which they will be automatically renewed.`
+      `Additional licenses will be valid until the ${subscriptionValidDate}, after which they will be automatically renewed.`
     );
     cy.get('dib-company-management dib-subscription dib-subscription-licenses dib-tooltip')
       .eq(1)
@@ -331,7 +337,7 @@ describe('Company Settings - Subscription', () => {
       .should('contain', ' Amount ')
       .should('contain', ' Status ')
       .should('contain', ' Invoice ')
-      .should('contain', subscriptionStartDate.substring(0, 3))
+      .should('contain', subscriptionRenewalDate.substring(0, 3))
       .should('contain', `${testingEnvironment}-`)
       .should(
         'contain',
@@ -356,25 +362,37 @@ describe('Company Settings - Subscription', () => {
       .contains('2')
       .click();
 
-    confirmSecondPagePreview();
+    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+      'contain',
+      subscriptionEndDate
+    );
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination ul li')
       .contains('1')
       .click();
 
-    confirmFirstPagePreview(subscriptionStartDate);
+    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+      'contain',
+      subscriptionStartDate
+    );
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
       .contains('keyboard_arrow_right')
       .click();
 
-    confirmSecondPagePreview();
+    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+      'contain',
+      subscriptionEndDate
+    );
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
       .contains('keyboard_arrow_left')
       .click();
 
-    confirmFirstPagePreview(subscriptionStartDate);
+    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+      'contain',
+      subscriptionStartDate
+    );
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
       .contains('last_page')
@@ -389,7 +407,10 @@ describe('Company Settings - Subscription', () => {
       .contains('first_page')
       .click();
 
-    confirmFirstPagePreview(subscriptionStartDate);
+    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+      'contain',
+      subscriptionStartDate
+    );
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination span')
       .contains('20')
@@ -398,14 +419,14 @@ describe('Company Settings - Subscription', () => {
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
       'contain',
       subscriptionStartDate,
-      ' Nov 18, 2021 '
+      subscriptionEndDate
     );
 
     cy.reload();
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
       'not.contain',
-      ' Nov 18, 2021 '
+      subscriptionEndDate
     );
   });*/
 });
