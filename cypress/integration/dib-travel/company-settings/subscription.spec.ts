@@ -28,7 +28,7 @@ describe('Company Settings - Subscription', () => {
       subscriptionEndDate = 'Jun 23, 2022';
     } else if (testingEnvironment === 'ci') {
       subscriptionStartDate = 'Apr 2, 2022';
-      subscriptionEndDate = 'Apr 1, 2022';
+      subscriptionEndDate = 'Apr 01, 2022';
     } else {
       // TODO: Revisit this on production
     }
