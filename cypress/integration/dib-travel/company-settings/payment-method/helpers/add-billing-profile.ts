@@ -31,12 +31,14 @@ export const addBillingProfile = (paymentMethod: PaymentMethod): void => {
   cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=contactEmail]').type(
     paymentMethod.primaryContact.email
   );
-  cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=invoiceRecipientEmail]').type(
+
+  // TODO: This should be discussed, because on the staging environment, we don't have section "INVOICE RECIPIENT E-MAIL AND VAT NUMBER"
+  /*cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=invoiceRecipientEmail]').type(
     paymentMethod.invoiceRecipient.email
   );
   cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=vatNumber]').type(
     paymentMethod.invoiceRecipient.vatNumber
-  );
+  );*/
 
   // TODO: Find a group by "Currency" string, and then find input.
   cy.get('.cdk-overlay-container dib-billing-profile-dialog .dib-select')

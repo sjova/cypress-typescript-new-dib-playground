@@ -9,7 +9,8 @@ export const addCreditCard = (
     cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards ui-button[type=primary]').click();
   }
 
-  cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=postalCode]').type(
+  // TODO: This should be discussed, because on the staging environment, we don't have section "COMPANY INFORMATION"
+  /*cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=postalCode]').type(
     paymentMethod.companyInformation.zipCode
   );
   cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=city]').type(
@@ -32,7 +33,7 @@ export const addCreditCard = (
   );
   cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=vatNumber]').type(
     paymentMethod.companyInformation.vatNumber
-  );
+  );*/
 
   cy.get('.cdk-overlay-container dib-add-credit-card-dialog input[name=firstName]').type(
     paymentMethod.primaryContact.firstName
