@@ -94,8 +94,6 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
     );
   });
 
-  // TODO: This test requires a hardcoded "AAA" value (added before test execution).
-  // We should revisit if there is a better implementation for this case.
   it('should sort cost center by name', () => {
     addCostCenter(referenceFields.costCenter.modifiedName, referenceFields.costCenter.description, group);
 
@@ -151,28 +149,4 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       referenceFields.costCenter.modifiedName
     );
   });
-
-  // TODO: This test requires a hardcoded "AAA" value (added before test execution) - BUG, should be deleted in database on CI.
-  // We should revisit if there is a better implementation for this case.
-  // We should delete this code because when BUG is fixed, we should be able to delete all cost centers always.
-
-  /*it('should verify that last const center is not able to delete', () => {
-    cy.waitForAngular();
-
-    cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell h4')
-      .contains('AAA')
-      .parent('.table-cell')
-      .next('.table-cell')
-      .next('.table-cell')
-      .next('.button-cell')
-      .contains(' Archive ')
-      .click();
-
-    cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
-
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-      'contain',
-      'There is billing profile which is splitted by cost center. You must first change split type on billing profile.'
-    );
-  }); */
 });

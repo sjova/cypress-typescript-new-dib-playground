@@ -11,6 +11,4 @@ export const deleteCostCenter = (referenceFields: string) => {
     .click();
 
   cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
-
-  cy.waitForAngular();
 };
