@@ -92,7 +92,7 @@ describe('Company Report - Analytics & Reporting', () => {
       .should('contain', report.employee.firstName)
       .should('contain', report.employee.lastName)
       .should('contain', report.employee.email)
-      .should('contain', 'AAA')
+      .should('contain', '[No Cost Centers]')
       .should('contain', 'Credit Card')
       .should('contain', '[No Tags]');
   });

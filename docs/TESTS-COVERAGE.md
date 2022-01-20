@@ -51,10 +51,9 @@
 
 ## BLOCKERS
 
-- company-employees / groups (user, agent) (DT-7943) [Nenad Tripunovic]
+- company-employees / groups (user, agent) (DT-11016) (CI, Staging) [Nenad Tripunovic]
 - company-settings / invoice-settings (agent) (DT-10506) [Stefan Nikolic]
-- company-settings / approval-process (DT-11156 [Nenad Tripunovic]
-- company-report / analytics-reporting (DT-10568) [Nenad Tripunovic]
+- company-report / analytics-reporting (DT-10568) (CI, Staging) [Nenad Tripunovic]
 
 ## DISCUSSION
 
@@ -66,3 +65,5 @@
 - sign-up / subscription plan [Nenad Tripunovic] (docs ref)
 - company-report / invoices (file download)
 - single feature / checkout (file download)
+- company-settings / payment-method / billing profiles (docs ref)
+- company-settings / payment-method / credit cards (docs ref)

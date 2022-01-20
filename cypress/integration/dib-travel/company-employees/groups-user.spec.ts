@@ -33,14 +33,18 @@ describe('Company Employees - Groups (User)', () => {
     addGroup(group.name, group.description, `${group.employee.firstName} ${group.employee.lastName}`);
   });
 
-  // TODO: This is blocked by bug ticket (DT-7943)
-  /* it('should not alow user to add new group with existing name ', () => {
+  it('should not alow user to add new group with existing name ', () => {
     cy.get('dib-people-management dib-groups .header ui-button').contains('Add Group').click();
 
     cy.get('.cdk-overlay-container dib-group-dialog input[placeholder="Group name*"]').type(group.name);
 
     cy.get('.cdk-overlay-container dib-group-dialog ui-button').contains('Save').click();
-  }); */
+
+    cy.get('.cdk-overlay-container dib-group-dialog .dib-input-error').should(
+      'have.text',
+      ' Group with the provided name already exists! '
+    );
+  });
 
   it('should display added employee in created group', () => {
     cy.waitForAngular();

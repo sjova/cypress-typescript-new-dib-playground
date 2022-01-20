@@ -6,6 +6,7 @@ export const addGroup = (name: string, description: string, employee: string, in
 
   cy.get('.cdk-overlay-container dib-group-dialog  ui-control-wrapper .container').click();
 
+  // TODO: We have a randomly blocker by ticket (DT-11016) - We should discussed together about this issue.
   cy.get('.cdk-overlay-container ui-dropdown-panel .checkbox-label').contains(employee).click();
 
   cy.get('.cdk-overlay-container dib-group-dialog ui-button').contains('Save').click();
