@@ -150,6 +150,7 @@ describe('Company Settings - Approval Process', () => {
 
     selectApprovalSettings('Only out of policy travels', approvalProcessGroup.travelersGroupName);
 
+    // Computed size is zero, and we need to use `{ force: true }`
     cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click({ force: true });
 
     confirmApprovalProcess(approvalProcessGroup);
@@ -167,9 +168,9 @@ describe('Company Settings - Approval Process', () => {
 
     cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click();
 
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+    cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 .error').should(
       'have.text',
-      'Approver or approver group must be selected!'
+      'This field is required'
     );
   });
 
@@ -188,6 +189,7 @@ describe('Company Settings - Approval Process', () => {
 
     selectApprovalSettings('All travels', approvalProcessGroup.travelersGroupName);
 
+    // Computed size is zero, and we need to use `{ force: true }`
     cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click({ force: true });
 
     confirmApprovalProcess(approvalProcessGroup);
@@ -205,9 +207,9 @@ describe('Company Settings - Approval Process', () => {
 
     cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click();
 
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+    cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 .error').should(
       'have.text',
-      'Approver or approver group must be selected!'
+      'This field is required'
     );
   });
 
@@ -219,15 +221,14 @@ describe('Company Settings - Approval Process', () => {
     deleteApprovalProcess(approvalProcessGroup.traveler.firstName);
   });
 
-  // TODO: Blocked by bug ticket (DT-11156)
-  /*it('should not be able to submit an empty approval process form', () => {
+  it('should not be able to submit an empty approval process form', () => {
     cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
 
     cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click();
 
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
+    cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 .error').should(
       'have.text',
-      'Traveler or group of travelers must be selected!'
+      'This field is required'
     );
-  });*/
+  });
 });

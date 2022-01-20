@@ -1,4 +1,4 @@
-import { getEmailWithHash } from '@cy/helpers';
+import { getEmailWithHash, getTestingEnvironment } from '@cy/helpers';
 import { Group, PaymentMethod } from '@cy/models';
 import { addGroup, deleteGroup } from '../../company-employees';
 import {
@@ -13,7 +13,11 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
   let paymentMethod: PaymentMethod;
   let group: Group;
 
+  let testingEnvironment: string;
+
   before(() => {
+    testingEnvironment = getTestingEnvironment();
+
     cy.fixture('company-employees/group').then((groupFixture) => {
       group = groupFixture;
     });
@@ -81,18 +85,13 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       .should('contain', paymentMethod.primaryContact.email)
       .should('contain', paymentMethod.companyInformation.address)
       .should('contain', 1)
-      .should('contain', paymentMethod.currency.originalCurrency)
-      .should('contain', paymentMethod.invoiceRecipient.email)
-      .should('contain', paymentMethod.invoiceRecipient.vatNumber);
-
-    cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-tooltip')
-      .invoke('show')
-      .trigger('mouseover', 'bottom')
-      .click();
-    cy.get('.tooltip-content').should(
-      'contain',
-      'You can split your invoices on either Your reference or Cost center.'
-    );
+      .should('contain', paymentMethod.currency.originalCurrency);
+    // TODO: This should be discussed, because on the staging environment, we don't have section "INVOICE RECIPIENT E-MAIL AND VAT NUMBER"
+    if (testingEnvironment === 'ci') {
+      cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item .content')
+        .should('contain', paymentMethod.invoiceRecipient.email)
+        .should('contain', paymentMethod.invoiceRecipient.vatNumber);
+    }
   });
 
   it('should close the form for editing billing profile', () => {
@@ -136,12 +135,16 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       .clear()
       .type(paymentMethod.primaryContact.modifiedEmail);
 
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=invoiceRecipientEmail]')
-      .clear()
-      .type(paymentMethod.invoiceRecipient.modifiedEmail);
-    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=vatNumber]')
-      .clear()
-      .type(paymentMethod.invoiceRecipient.modifiedVatNumber);
+    // TODO: This should be discussed, because on the staging environment, we don't have section "INVOICE RECIPIENT E-MAIL AND VAT NUMBER"
+    if (testingEnvironment === 'ci') {
+      cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=invoiceRecipientEmail]')
+        .clear()
+        .type(paymentMethod.invoiceRecipient.modifiedEmail);
+      cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=vatNumber]')
+        .clear()
+        .type(paymentMethod.invoiceRecipient.modifiedVatNumber);
+    }
+
     cy.get('.cdk-overlay-container dib-billing-profile-dialog  ui-control-wrapper .container').click();
 
     cy.get('.cdk-overlay-container ui-dropdown-panel .checkbox-label').contains(paymentMethod.groupName).click();
@@ -158,41 +161,13 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       .should('contain', paymentMethod.primaryContact.modifiedEmail)
       .should('contain', paymentMethod.modifiedCompanyInformation.address)
       .should('contain', 2)
-      .should('contain', paymentMethod.currency.originalCurrency)
-      .should('contain', paymentMethod.invoiceRecipient.modifiedEmail)
-      .should('contain', paymentMethod.invoiceRecipient.modifiedVatNumber);
-  });
-
-  it('should cancel the request split invoice change', () => {
-    clickBillingProfileCtaAction(paymentMethod.primaryContact.modifiedEmail, 'Request change');
-
-    cy.get('.cdk-overlay-container dib-invoice-split-dialog button').contains(' Cancel ').click();
-
-    cy.get('.cdk-overlay-container dib-invoice-split-dialog').should('not.exist');
-  });
-
-  it('should send the request split invoice change (by cost center)', () => {
-    clickBillingProfileCtaAction(paymentMethod.primaryContact.modifiedEmail, 'Request change');
-
-    cy.get('.cdk-overlay-container dib-invoice-split-dialog ui-button[type=success]').click();
-
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-      'have.text',
-      'Successfully updated billing profile.'
-    );
-  });
-
-  it('should send the request split invoice change (by reference field)', () => {
-    clickBillingProfileCtaAction(paymentMethod.primaryContact.modifiedEmail, 'Request change');
-
-    cy.get('.cdk-overlay-container dib-invoice-split-dialog .radio-label').contains(' By Your reference ').click();
-
-    cy.get('.cdk-overlay-container dib-invoice-split-dialog ui-button[type=success]').click();
-
-    cy.get('.cdk-overlay-container simple-snack-bar > span').should(
-      'have.text',
-      'Successfully updated billing profile.'
-    );
+      .should('contain', paymentMethod.currency.originalCurrency);
+    // TODO: This should be discussed, because on the staging environment, we don't have section "INVOICE RECIPIENT E-MAIL AND VAT NUMBER"
+    if (testingEnvironment === 'ci') {
+      cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item .content')
+        .should('contain', paymentMethod.invoiceRecipient.modifiedEmail)
+        .should('contain', paymentMethod.invoiceRecipient.modifiedVatNumber);
+    }
   });
 
   it('should cancel the archiving billing profile', () => {

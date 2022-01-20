@@ -1,8 +1,12 @@
-import { getFirstWord } from '@cy/helpers';
+import { getFirstWord, getTestingEnvironment } from '@cy/helpers';
 import { PaymentMethod } from '@cy/models';
+
+let testingEnvironment: string;
 
 export const addBillingProfile = (paymentMethod: PaymentMethod): void => {
   cy.waitForAngular();
+
+  testingEnvironment = getTestingEnvironment();
 
   cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=legalName]').type(
     paymentMethod.companyInformation.companyLegalName
@@ -31,12 +35,16 @@ export const addBillingProfile = (paymentMethod: PaymentMethod): void => {
   cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=contactEmail]').type(
     paymentMethod.primaryContact.email
   );
-  cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=invoiceRecipientEmail]').type(
-    paymentMethod.invoiceRecipient.email
-  );
-  cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=vatNumber]').type(
-    paymentMethod.invoiceRecipient.vatNumber
-  );
+
+  // TODO: This should be discussed, because on the staging environment, we don't have section "INVOICE RECIPIENT E-MAIL AND VAT NUMBER"
+  if (testingEnvironment === 'ci') {
+    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=invoiceRecipientEmail]').type(
+      paymentMethod.invoiceRecipient.email
+    );
+    cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=vatNumber]').type(
+      paymentMethod.invoiceRecipient.vatNumber
+    );
+  }
 
   // TODO: Find a group by "Currency" string, and then find input.
   cy.get('.cdk-overlay-container dib-billing-profile-dialog .dib-select')

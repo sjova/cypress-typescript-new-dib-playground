@@ -1,4 +1,25 @@
+import { getTestingEnvironment } from '@cy/helpers';
+
 describe('My travels', () => {
+  let testingEnvironment: string;
+
+  let myTravelsDate: string;
+  let myTravelsPrice: string;
+
+  before(() => {
+    testingEnvironment = getTestingEnvironment();
+
+    if (testingEnvironment === 'staging') {
+      myTravelsDate = ' 24 Jun 2021 ';
+      myTravelsPrice = ' 1RSD';
+    } else if (testingEnvironment === 'ci') {
+      myTravelsDate = ' 2 Apr 2021 ';
+      myTravelsPrice = ' 1RSD';
+    } else {
+      // TODO: Revisit this on production
+    }
+  });
+
   beforeEach(() => {
     cy.login();
 
@@ -38,46 +59,49 @@ describe('My travels', () => {
     );
   });
 
-  // TODO: Revisit the assertions in this test below (by price)
   it('should check sorting by price', () => {
     cy.get('app-my-travels .tab-nav-bar').contains(' Past ').click();
 
     cy.get('app-my-travels dib-travels-list .clickable').contains(' Price ').click();
 
-    cy.get('app-my-travels dib-travels-list .uppercase').eq(1).should('contain', '1', '974,87');
+    cy.get('app-my-travels dib-travels-list .uppercase').eq(1).should('have.text', myTravelsPrice);
 
     cy.get('app-my-travels dib-travels-list .clickable').contains(' Price ').click();
 
-    cy.get('app-my-travels dib-travels-list .uppercase').eq(1).should('not.contain', '1', '974,87');
+    cy.get('app-my-travels dib-travels-list .uppercase').eq(1).should('not.have.text', myTravelsPrice);
   });
 
   it('should check sorting by date', () => {
     cy.get('app-my-travels .tab-nav-bar').contains(' Past ').click();
 
-    cy.get('app-my-travels dib-travels-list .uppercase').eq(0).should('contain', ' 2 Apr 2021 ');
+    cy.get('app-my-travels dib-travels-list .uppercase').eq(0).should('contain', myTravelsDate);
 
     cy.get('app-my-travels dib-travels-list .clickable').contains(' Travel date ').click();
 
-    cy.get('app-my-travels dib-travels-list .uppercase').eq(0).should('not.contain', ' 2 Apr 2021 ');
+    cy.get('app-my-travels dib-travels-list .uppercase').eq(0).should('not.contain', myTravelsDate);
   });
 
   it('should open view more section', () => {
     cy.get('app-my-travels .tab-nav-bar').contains(' Past ').click();
 
+    cy.get('app-my-travels dib-travels-list dib-input input').type('CYQA');
+
     cy.get('app-my-travels dib-travels-list .item .name')
-      .contains('sub_981ba1a0-f9cc-48f0-9644-1343d6e70929')
+      .contains('CYQA Bot business trip')
       .parents('dib-travels-list')
       .find('a .button__label')
       .contains('View more')
       .click();
 
-    cy.get('dib-cart-wrapper dib-cart2 dib-cart-payment-section .status').should(
+    cy.get('dib-trip-wrapper dib-cart dib-cart-payment-section .status').should(
       'have.text',
       ' PAID & CONFIRMED TRAVEL '
     );
   });
 
-  it('should check pagination on Past travels page', () => {
+  // TODO: Should be uncomment when we have more PAST booking on staging env
+
+  /*it('should check pagination on Past travels page', () => {
     cy.get('app-my-travels .tab-nav-bar').contains(' Past ').click();
 
     cy.get('app-my-travels dib-travels-list page-pagination ul li')
@@ -125,5 +149,5 @@ describe('My travels', () => {
     cy.get('app-my-travels dib-travels-list page-pagination span')
       .contains('30')
       .should('have.css', 'color', 'rgb(33, 33, 33)');
-  });
+  });*/
 });
