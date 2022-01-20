@@ -1,6 +1,6 @@
 import { Group } from '@cy/models';
 
-export const addCostCenter = (referenceFieldsName: string, referenceFieldsDescription: string, group: Group) => {
+export const addCostCenter = (referenceFieldsName: string, referenceFieldsDescription: string, group: Group): void => {
   cy.waitForAngular();
 
   cy.get('dib-company-management dib-reference-fields dib-cost-center ui-button[size="large"]')
@@ -21,8 +21,6 @@ export const addCostCenter = (referenceFieldsName: string, referenceFieldsDescri
     .click();
 
   cy.get('.cdk-overlay-container dib-cost-center-dialog ui-button').contains('save').click();
-
-  cy.waitForAngular();
 
   cy.get('dib-company-management dib-reference-fields dib-cost-center').should('contain', referenceFieldsName);
 };

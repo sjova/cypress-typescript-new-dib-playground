@@ -134,6 +134,8 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
       .type(referenceFields.costCenter.modifiedName);
     cy.get('.cdk-overlay-container dib-cost-center-dialog ui-button').contains('save').click();
 
+    cy.waitForAngular();
+
     cy.get('dib-company-management dib-reference-fields dib-cost-center .grid').should(
       'contain',
       referenceFields.costCenter.modifiedName

@@ -10,5 +10,7 @@ export const deleteCostCenter = (referenceFields: string) => {
     .contains(' Archive ')
     .click();
 
+  cy.waitForAngular();
+
   cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning').click();
 };
