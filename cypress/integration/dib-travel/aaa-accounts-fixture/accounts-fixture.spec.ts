@@ -35,11 +35,31 @@ describe('Cypress Accounts Fixture', () => {
     });
 
     cy.fixture('dib-travel-accounts').should((accounts) => {
+      expect(accounts.defaultAccount.firstName).to.exist;
+    });
+
+    cy.fixture('dib-travel-accounts').should((accounts) => {
+      expect(accounts.defaultAccount.lastName).to.exist;
+    });
+
+    cy.fixture('dib-travel-accounts').should((accounts) => {
       expect(accounts.defaultAccount.email).to.exist;
     });
 
     cy.fixture('dib-travel-accounts').should((accounts) => {
       expect(accounts.defaultAccount.password).to.exist;
+    });
+  });
+
+  it('loads a fixture and confirms that the "defaultAccount.firstName" is equal to "CYQA"', () => {
+    cy.fixture('dib-travel-accounts').should((accounts) => {
+      expect(accounts.defaultAccount.firstName).to.eq('CYQA');
+    });
+  });
+
+  it('loads a fixture and confirms that the "defaultAccount.lastName" is equal to "Bot"', () => {
+    cy.fixture('dib-travel-accounts').should((accounts) => {
+      expect(accounts.defaultAccount.lastName).to.eq('Bot');
     });
   });
 
@@ -83,9 +103,9 @@ describe('Cypress Accounts Fixture', () => {
     });
   });
 
-  it('loads a fixture and confirms that the "signUpAccount.email" is equal to "qa.tools+cy.ci.sign-up.[hash]@dibtravel.com"', () => {
+  it('loads a fixture and confirms that the "signUpAccount.email" is equal to "qa.tools+cy.[env].sign-up.[hash]@dibtravel.com"', () => {
     cy.fixture('dib-travel-accounts').should((accounts) => {
-      expect(accounts.signUpAccount.email).to.eq('qa.tools+cy.ci.sign-up.[hash]@dibtravel.com');
+      expect(accounts.signUpAccount.email).to.eq('qa.tools+cy.[env].sign-up.[hash]@dibtravel.com');
     });
   });
 });
