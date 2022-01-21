@@ -98,7 +98,7 @@ describe('Company Settings - Approval Process', () => {
   it('should add approval process (this overrides any travel policy)', () => {
     cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
 
-    selectTraveler(approvalProcessGroup.traveler);
+    selectTraveler(accounts.defaultAccount);
 
     // Computed size is zero, and we need to use `{ force: true }`
     cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 label')
@@ -112,7 +112,7 @@ describe('Company Settings - Approval Process', () => {
   it('should check if selected traveler already has approval process', () => {
     cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
 
-    selectTraveler(approvalProcessGroup.traveler);
+    selectTraveler(accounts.defaultAccount);
 
     // Computed size is zero, and we need to use `{ force: true }`
     cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 label')
@@ -128,11 +128,11 @@ describe('Company Settings - Approval Process', () => {
   });
 
   it('should cancel the deleting approval setting for the group/person (this overrides any travel policy)', () => {
-    cancelDeleteApprovalProcessAndConfirm(approvalProcessGroup.traveler.firstName);
+    cancelDeleteApprovalProcessAndConfirm(accounts.defaultAccount.firstName);
   });
 
   it('should delete approval process (this overrides any travel policy)', () => {
-    deleteApprovalProcess(approvalProcessGroup.traveler.firstName);
+    deleteApprovalProcess(accounts.defaultAccount.firstName);
   });
 
   it('should check if selected traveler group already has approval process', () => {
@@ -157,7 +157,7 @@ describe('Company Settings - Approval Process', () => {
   it('should add approval process (only out of policy travels)', () => {
     cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
 
-    selectTraveler(approvalProcessGroup.traveler);
+    selectTraveler(accounts.defaultAccount);
 
     selectApprovalSettings('Only out of policy travels', approvalProcessGroup.travelersGroupName);
 
@@ -170,7 +170,7 @@ describe('Company Settings - Approval Process', () => {
   it('should not be able to submit approval process form without approver (only out of policy travels)', () => {
     cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
 
-    selectTraveler(approvalProcessGroup.traveler);
+    selectTraveler(accounts.defaultAccount);
 
     // Computed size is zero, and we need to use `{ force: true }`
     cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 label')
@@ -186,17 +186,17 @@ describe('Company Settings - Approval Process', () => {
   });
 
   it('should cancel the deleting approval setting for the group/person (only out of policy travels)', () => {
-    cancelDeleteApprovalProcessAndConfirm(approvalProcessGroup.traveler.firstName);
+    cancelDeleteApprovalProcessAndConfirm(accounts.defaultAccount.firstName);
   });
 
   it('should delete approval process (only out of policy travels)', () => {
-    deleteApprovalProcess(approvalProcessGroup.traveler.firstName);
+    deleteApprovalProcess(accounts.defaultAccount.firstName);
   });
 
   it('should add approval process (all travels)', () => {
     cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
 
-    selectTraveler(approvalProcessGroup.traveler);
+    selectTraveler(accounts.defaultAccount);
 
     selectApprovalSettings('All travels', approvalProcessGroup.travelersGroupName);
 
@@ -209,7 +209,7 @@ describe('Company Settings - Approval Process', () => {
   it('should not be able to submit approval process form without approver (all travels)', () => {
     cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
 
-    selectTraveler(approvalProcessGroup.traveler);
+    selectTraveler(accounts.defaultAccount);
 
     // Computed size is zero, and we need to use `{ force: true }`
     cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 label')
@@ -225,11 +225,11 @@ describe('Company Settings - Approval Process', () => {
   });
 
   it('should cancel the deleting approval setting for the group/person (all travels)', () => {
-    cancelDeleteApprovalProcessAndConfirm(approvalProcessGroup.traveler.firstName);
+    cancelDeleteApprovalProcessAndConfirm(accounts.defaultAccount.firstName);
   });
 
   it('should delete approval process (all travels)', () => {
-    deleteApprovalProcess(approvalProcessGroup.traveler.firstName);
+    deleteApprovalProcess(accounts.defaultAccount.firstName);
   });
 
   it('should not be able to submit an empty approval process form', () => {

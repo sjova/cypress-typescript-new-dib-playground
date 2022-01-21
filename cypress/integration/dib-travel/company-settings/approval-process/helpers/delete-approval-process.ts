@@ -1,9 +1,9 @@
-export const deleteApprovalProcess = (traveler: string): void => {
+export const deleteApprovalProcess = (travelerName: string): void => {
   // TODO: Revisit this line later, and maybe move in test `beforeEach` or test itself
   cy.waitForAngular();
 
   cy.get('dib-company-management dib-approval-process dib-approval-process-item')
-    .contains(traveler)
+    .contains(travelerName)
     .parents('dib-approval-process-item')
     .find('ui-button')
     .contains('Delete')
