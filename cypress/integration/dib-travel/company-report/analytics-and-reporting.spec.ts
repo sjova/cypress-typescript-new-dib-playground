@@ -102,7 +102,9 @@ describe('Company Report - Analytics & Reporting', () => {
 
     cy.waitForAngular();
 
-    cy.get('.cdk-overlay-container label .option__name').contains('CYQA Bot').click();
+    cy.get('.cdk-overlay-container label .option__name')
+      .contains(`${accounts.defaultAccount.firstName} ${accounts.defaultAccount.lastName}`)
+      .click();
 
     cy.get('.cdk-overlay-container ui-button[type=success').click();
 

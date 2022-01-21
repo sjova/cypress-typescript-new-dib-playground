@@ -22,10 +22,10 @@
   "primaryContact": {
     "firstName": "CY Petar",
     "lastName": "CY Petrovic",
-    "email": "qa.tools+cy.ci.payment-method.[hash]@dibtravel.com",
+    "email": "qa.tools+cy.[env].payment-method.[hash]@dibtravel.com",
     "modifiedFirstName": "CY Dragan",
     "modifiedLastName": "CY Draganovic",
-    "modifiedEmail": "qa.tools+cy.ci.payment-method.modified.[hash]@dibtravel.com"
+    "modifiedEmail": "qa.tools+cy.[env].payment-method.modified.[hash]@dibtravel.com"
   },
   "lodgeCard": {
     "provider": "Diners",
@@ -45,9 +45,9 @@
     "expiryDateTrailingValue": "07/2030"
   },
   "invoiceRecipient": {
-    "email": "qa.tools+cy.ci.invoice-recipient.[hash]@dibtravel.com",
+    "email": "qa.tools+cy.[env].invoice-recipient.[hash]@dibtravel.com",
     "vatNumber": "343434343434343",
-    "modifiedEmail": "qa.tools+cy.ci.invoice-recipient.modified.[hash]@dibtravel.com",
+    "modifiedEmail": "qa.tools+cy.[env].invoice-recipient.modified.[hash]@dibtravel.com",
     "modifiedVatNumber": "454545454545454"
   },
   "currency": {

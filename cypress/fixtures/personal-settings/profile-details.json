@@ -30,7 +30,7 @@
   "internalTravelAgent": {
     "firstName": "CY Petar",
     "lastName": "CY Petrovic",
-    "email": "qa.tools+cy.ci.profile.[hash]@dibtravel.com"
+    "email": "qa.tools+cy.[env].profile.[hash]@dibtravel.com"
   },
   "loyaltyProgram": {
     "flightProvider": "Etihad",

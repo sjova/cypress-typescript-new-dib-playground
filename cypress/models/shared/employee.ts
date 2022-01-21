@@ -1,6 +1,6 @@
 import { User } from './user';
 
-// TODO: Revisit usage
+// TODO: Revisit this later
 export type Employee = Pick<User, 'firstName' | 'lastName' | 'email'>;
 
 export interface EmployeeExtended extends Employee {

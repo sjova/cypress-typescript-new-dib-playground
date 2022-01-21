@@ -1,6 +1,9 @@
 import { getTestingEnvironment } from '@cy/helpers';
+import { DibTravelAccounts } from '@cy/models';
 
 describe('My travels', () => {
+  let accounts: DibTravelAccounts;
+
   let testingEnvironment: string;
 
   let myTravelsDate: string;
@@ -18,6 +21,10 @@ describe('My travels', () => {
     } else {
       // TODO: Revisit this on production
     }
+
+    cy.fixture('dib-travel-accounts').then((accountsFixture) => {
+      accounts = accountsFixture;
+    });
   });
 
   beforeEach(() => {
@@ -47,9 +54,12 @@ describe('My travels', () => {
   it('should check search for past travels', () => {
     cy.get('app-my-travels .tab-nav-bar').contains(' Past ').click();
 
-    cy.get('app-my-travels dib-travels-list dib-input input').type('CYQA');
+    cy.get('app-my-travels dib-travels-list dib-input input').type(`${accounts.defaultAccount.firstName}`);
 
-    cy.get('app-my-travels dib-travels-list .name').should('have.text', 'CYQA Bot business trip');
+    cy.get('app-my-travels dib-travels-list .name').should(
+      'have.text',
+      `${accounts.defaultAccount.firstName} ${accounts.defaultAccount.lastName} business trip`
+    );
 
     cy.get('app-my-travels dib-travels-list dib-input input').clear().type('123456789');
 
@@ -84,10 +94,10 @@ describe('My travels', () => {
   it('should open view more section', () => {
     cy.get('app-my-travels .tab-nav-bar').contains(' Past ').click();
 
-    cy.get('app-my-travels dib-travels-list dib-input input').type('CYQA');
+    cy.get('app-my-travels dib-travels-list dib-input input').type(`${accounts.defaultAccount.firstName}`);
 
     cy.get('app-my-travels dib-travels-list .item .name')
-      .contains('CYQA Bot business trip')
+      .contains(`${accounts.defaultAccount.firstName} ${accounts.defaultAccount.lastName} business trip`)
       .parents('dib-travels-list')
       .find('a .button__label')
       .contains('View more')

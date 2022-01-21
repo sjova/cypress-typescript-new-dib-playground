@@ -1,11 +1,17 @@
 import { getEmailWithHash } from '@cy/helpers';
-import { EmployeeExtended } from '@cy/models';
+import { DibTravelAccounts, EmployeeExtended } from '@cy/models';
 import { addEmployee, archiveEmployee } from './shared';
 
 describe('Company Employees - Employees (Agent)', () => {
+  let accounts: DibTravelAccounts;
+
   let employee: EmployeeExtended;
 
   before(() => {
+    cy.fixture('dib-travel-accounts').then((accountsFixture) => {
+      accounts = accountsFixture;
+    });
+
     cy.fixture('company-employees/employee').then((employeeFixture) => {
       employee = { ...employeeFixture, email: getEmailWithHash(employeeFixture.email) };
     });
@@ -55,7 +61,10 @@ describe('Company Employees - Employees (Agent)', () => {
     cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('contain', employee.firstName);
     cy.get('dib-people-management dib-employees .grid .table-cell').should('contain', 'Invited');
     cy.get('dib-people-management dib-employees').should('not.contain', 'Not invited');
-    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should('not.contain', 'CYQA Bot');
+    cy.get('dib-people-management dib-employees dib-page .grid .name-cell').should(
+      'not.contain',
+      `${accounts.defaultAccount.firstName} ${accounts.defaultAccount.lastName}`
+    );
   });
 
   it('should allow agent to edit added employee', () => {
