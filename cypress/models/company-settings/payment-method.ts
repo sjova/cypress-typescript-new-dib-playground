@@ -7,7 +7,6 @@ export interface PaymentMethod {
   lodgeCard: LodgeCard;
   modifiedLodgeCard: LodgeCard;
   invoiceRecipient: InvoiceRecipient;
-  person: Pick<User, 'firstName' | 'lastName'>;
   groupName: string;
   currency: Currency;
 }

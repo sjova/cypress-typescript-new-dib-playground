@@ -54,9 +54,5 @@
     "originalCurrency": "EUR",
     "modifiedCurrency": "SEK"
   },
-  "person": {
-    "firstName": "CYQA",
-    "lastName": "Bot"
-  },
   "groupName": "CY Group"
 }

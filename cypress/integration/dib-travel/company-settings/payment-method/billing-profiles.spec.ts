@@ -159,7 +159,9 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     cy.get('.cdk-overlay-container dib-billing-profile-dialog  ui-control-wrapper .container').click();
 
     cy.get('.cdk-overlay-container ui-dropdown-panel .checkbox-label').contains(paymentMethod.groupName).click();
-    cy.get('.cdk-overlay-container ui-dropdown-panel .checkbox-label').contains(paymentMethod.person.firstName).click();
+    cy.get('.cdk-overlay-container ui-dropdown-panel .checkbox-label')
+      .contains(accounts.defaultAccount.firstName)
+      .click();
 
     cy.get('.cdk-overlay-container dib-billing-profile-dialog ui-button[type=success]').click();
 
