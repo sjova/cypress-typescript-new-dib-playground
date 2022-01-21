@@ -1,17 +1,18 @@
-import { Group, ReferenceFields } from '@cy/models';
+import { DibTravelAccounts, ReferenceFields } from '@cy/models';
 import { addCostCenter, deleteCostCenter } from './helpers';
 
 describe('Company Settings - Reference Fields - Cost Center', () => {
+  let accounts: DibTravelAccounts;
+
   let referenceFields: ReferenceFields;
-  let group: Group;
 
   before(() => {
-    cy.fixture('company-settings/reference-fields').then((referenceFixture) => {
-      referenceFields = referenceFixture;
+    cy.fixture('dib-travel-accounts').then((accountsFixture) => {
+      accounts = accountsFixture;
     });
 
-    cy.fixture('company-employees/group.json').then((employeeName) => {
-      group = employeeName;
+    cy.fixture('company-settings/reference-fields').then((referenceFixture) => {
+      referenceFields = referenceFixture;
     });
   });
 
@@ -21,7 +22,7 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
   });
 
   it('should add new cost center', () => {
-    addCostCenter(referenceFields.costCenter.name, referenceFields.costCenter.description, group);
+    addCostCenter(referenceFields.costCenter.name, referenceFields.costCenter.description, accounts.defaultAccount);
   });
 
   it('should both check-boxes be checked', () => {
@@ -95,7 +96,11 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
   });
 
   it('should sort cost center by name', () => {
-    addCostCenter(referenceFields.costCenter.modifiedName, referenceFields.costCenter.description, group);
+    addCostCenter(
+      referenceFields.costCenter.modifiedName,
+      referenceFields.costCenter.description,
+      accounts.defaultAccount
+    );
 
     cy.get('dib-company-management dib-reference-fields dib-cost-center dib-sort-icons').click();
 

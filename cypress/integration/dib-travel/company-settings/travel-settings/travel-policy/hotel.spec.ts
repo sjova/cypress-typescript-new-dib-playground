@@ -28,7 +28,7 @@ describe('Company Settings - Travel Settings - Travel Policy - Hotel', () => {
   });
 
   it('should add hotel travel policy', () => {
-    addHotelTravelPolicy(travelPolicyDetails);
+    addHotelTravelPolicy(travelPolicyDetails, accounts.defaultAccount);
 
     cy.get('.cdk-overlay-container dib-travel-policy-dialog input[name=numberOfDaysInAdvance]').type(
       travelPolicyDetails.sharedDetails.numberOfDaysInAdvance

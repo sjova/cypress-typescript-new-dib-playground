@@ -1,8 +1,8 @@
-import { TravelSettings } from '@cy/models';
+import { TravelSettings, User } from '@cy/models';
 import { enterSharedDetails } from './enter-shared-details';
 import { searchAndSelectEmployee } from './search-and-select-employee';
 
-export const addHotelTravelPolicy = (travelPolicyDetails: TravelSettings): void => {
+export const addHotelTravelPolicy = (travelPolicyDetails: TravelSettings, employee: User): void => {
   cy.waitForAngular();
 
   cy.get('dib-company-management dib-travel-policy ui-button[type=primary]').click();
@@ -20,5 +20,5 @@ export const addHotelTravelPolicy = (travelPolicyDetails: TravelSettings): void 
     '.cdk-overlay-container dib-travel-policy-dialog .item dib-list-item input[placeholder="Budget per night"]'
   ).type(travelPolicyDetails.hotel.budgetPerNight);
 
-  searchAndSelectEmployee(travelPolicyDetails.employee);
+  searchAndSelectEmployee(employee);
 };

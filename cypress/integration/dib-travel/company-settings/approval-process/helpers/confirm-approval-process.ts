@@ -1,6 +1,6 @@
-import { ApprovalProcessGroup } from '@cy/models';
+import { User } from '@cy/models';
 
-export const confirmApprovalProcess = (approvalProcessGroup: ApprovalProcessGroup): void => {
+export const confirmApprovalProcess = (traveler: User): void => {
   cy.get('.cdk-overlay-container simple-snack-bar > span').should(
     'have.text',
     'Approval process successfully created.'
@@ -8,5 +8,5 @@ export const confirmApprovalProcess = (approvalProcessGroup: ApprovalProcessGrou
   cy.get('dib-company-management dib-approval-process dib-approval-process-item .item__left')
     .first()
     .find('.item__content p')
-    .should('contain', `${approvalProcessGroup.traveler.firstName} ${approvalProcessGroup.traveler.lastName}`);
+    .should('contain', `${traveler.firstName} ${traveler.lastName}`);
 };

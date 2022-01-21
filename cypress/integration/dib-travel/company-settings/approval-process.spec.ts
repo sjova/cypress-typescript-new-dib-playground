@@ -43,7 +43,7 @@ describe('Company Settings - Approval Process', () => {
     cy.login();
 
     cy.visitAngularUrl('/company-management/travel-settings');
-    addHotelTravelPolicy(travelPolicyDetails); // TODO: Do we need to include other types (Flight, Train)?
+    addHotelTravelPolicy(travelPolicyDetails, accounts.defaultAccount); // TODO: Do we need to include other types (Flight, Train)?
 
     cy.visitAngularUrl('/people-management/groups');
     addGroup(
@@ -106,7 +106,7 @@ describe('Company Settings - Approval Process', () => {
       .click({ force: true });
     cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click();
 
-    confirmApprovalProcess(approvalProcessGroup);
+    confirmApprovalProcess(accounts.defaultAccount);
   });
 
   it('should check if selected traveler already has approval process', () => {
@@ -164,7 +164,7 @@ describe('Company Settings - Approval Process', () => {
     // Computed size is zero, and we need to use `{ force: true }`
     cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click({ force: true });
 
-    confirmApprovalProcess(approvalProcessGroup);
+    confirmApprovalProcess(accounts.defaultAccount);
   });
 
   it('should not be able to submit approval process form without approver (only out of policy travels)', () => {
@@ -203,7 +203,7 @@ describe('Company Settings - Approval Process', () => {
     // Computed size is zero, and we need to use `{ force: true }`
     cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-button[type=success]').click({ force: true });
 
-    confirmApprovalProcess(approvalProcessGroup);
+    confirmApprovalProcess(accounts.defaultAccount);
   });
 
   it('should not be able to submit approval process form without approver (all travels)', () => {
