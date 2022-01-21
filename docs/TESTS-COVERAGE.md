@@ -58,7 +58,9 @@
 ## DISCUSSION
 
 - company-employees / employees-agent (discussion, do we really need agent flow?)
+  - revisit: `cypress/integration/dib-travel/company-employees/employees-agent.spec.ts`
 - company-employees / groups-agent (discussion, do we really need agent flow?)
+  - revisit: `cypress/integration/dib-travel/company-employees/groups-agent.spec.ts`
 - `cypress/fixtures/other/generic-product.json` - revisit approach for `tripId` (tests should work in all environments)
 - company-settings / subscription / purchase-history [Nenad Tripunovic] (docs ref, file download)
 - company-settings / invoice-settings (agent) [Stefan Nikolic] (docs ref)
