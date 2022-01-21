@@ -1,4 +1,4 @@
-import { TravelSettings } from '@cy/models';
+import { DibTravelAccounts, TravelSettings } from '@cy/models';
 import {
   cancelDeleteDialogAndConfirm,
   closeEditDialogAndConfirm,
@@ -9,9 +9,15 @@ import {
 } from './shared';
 
 describe('Company Settings - Travel Settings - Travel Policy - Flight', () => {
+  let accounts: DibTravelAccounts;
+
   let travelPolicyDetails: TravelSettings;
 
   before(() => {
+    cy.fixture('dib-travel-accounts').then((accountsFixture) => {
+      accounts = accountsFixture;
+    });
+
     cy.fixture('company-settings/travel-settings-details').then((travelPolicyDetailsFixture) => {
       travelPolicyDetails = travelPolicyDetailsFixture;
     });
@@ -57,7 +63,7 @@ describe('Company Settings - Travel Settings - Travel Policy - Flight', () => {
     cy.get(
       '.cdk-overlay-container dib-travel-policy-dialog .item dib-list-item input[placeholder="Budget per flight"]'
     ).type(travelPolicyDetails.flight.budgetPerFlight);
-    searchAndSelectEmployee(travelPolicyDetails.employee);
+    searchAndSelectEmployee(accounts.defaultAccount);
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should(
       'have.text',
@@ -146,7 +152,7 @@ describe('Company Settings - Travel Settings - Travel Policy - Flight', () => {
           `${travelPolicyDetails.modifiedFlight.durationBudgetException}` +
           ' hours'
       )
-      .should('contain', `${travelPolicyDetails.employee.firstName} ${travelPolicyDetails.employee.lastName}`);
+      .should('contain', `${accounts.defaultAccount.firstName} ${accounts.defaultAccount.lastName}`);
   });
 
   it('should check cancellation of confirmation dialog', () => {

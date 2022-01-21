@@ -1,4 +1,4 @@
-import { TravelSettings } from '@cy/models';
+import { DibTravelAccounts, TravelSettings } from '@cy/models';
 import {
   addHotelTravelPolicy,
   cancelDeleteDialogAndConfirm,
@@ -8,9 +8,15 @@ import {
 } from './shared';
 
 describe('Company Settings - Travel Settings - Travel Policy - Hotel', () => {
+  let accounts: DibTravelAccounts;
+
   let travelPolicyDetails: TravelSettings;
 
   before(() => {
+    cy.fixture('dib-travel-accounts').then((accountsFixture) => {
+      accounts = accountsFixture;
+    });
+
     cy.fixture('company-settings/travel-settings-details').then((travelPolicyDetailsFixture) => {
       travelPolicyDetails = travelPolicyDetailsFixture;
     });
@@ -82,7 +88,7 @@ describe('Company Settings - Travel Settings - Travel Policy - Hotel', () => {
       )
       .should('contain', travelPolicyDetails.sharedDetails.modifiedBudget)
       .should('contain', travelPolicyDetails.hotel.modifiedBudgetPerNight)
-      .should('contain', `${travelPolicyDetails.employee.firstName} ${travelPolicyDetails.employee.lastName}`);
+      .should('contain', `${accounts.defaultAccount.firstName} ${accounts.defaultAccount.lastName}`);
     cy.get('dib-company-management dib-expandable-item dib-star-rating i').should('have.length', 5);
   });
 

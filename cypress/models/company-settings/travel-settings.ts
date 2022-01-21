@@ -1,5 +1,3 @@
-import { User } from '../shared';
-
 export interface TravelSettings {
   flight: Flight;
   modifiedFlight: Flight;
@@ -7,7 +5,6 @@ export interface TravelSettings {
   train: Train;
   taxi: Taxi;
   sharedDetails: SharedDetails;
-  employee: Pick<User, 'firstName' | 'lastName' | 'email'>;
   companyRates: CompanyRates;
 }
 
