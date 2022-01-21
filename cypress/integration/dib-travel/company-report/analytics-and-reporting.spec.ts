@@ -68,7 +68,7 @@ describe('Company Report - Analytics & Reporting', () => {
     );
   });
 
-  // TODO: This is blocked by ticket (DT-DT-9990), but only for staging and production
+  // TODO: This is blocked by ticket (DT-9990), but only for staging and production
   it('should check currency filter and date picker', () => {
     if (testingEnvironment === 'ci') {
       cy.get('dib-reporting dib-analytics-page .currency .placeholder').contains('RSD').click();
