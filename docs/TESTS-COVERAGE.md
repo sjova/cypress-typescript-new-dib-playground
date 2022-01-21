@@ -6,8 +6,8 @@
 - cy-accounts-fixture (internal) [Sasa Jovanovic]
 - dib-travel, dib-travel-iframe (internal) [Sasa Jovanovic]
 - sign-up [Dusan Petrovic, Nenad Tripunovic]
-- sign-in (user, agent) [Dusan Petrovic]
-- forgot-password [Dusan Petrovic]
+- sign-in (user, agent) [Dusan Petrovic, Stefan Nikolic]
+- forgot-password [Dusan Petrovic, Stefan Nikolic]
 - personal-settings
   - profile [Stefan Nikolic]
   - credit-cards [Stefan Nikolic]
