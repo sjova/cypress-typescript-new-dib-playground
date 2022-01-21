@@ -54,6 +54,7 @@
 - company-employees / groups (user, agent) (DT-11016) (CI, Staging) [Nenad Tripunovic]
 - company-settings / invoice-settings (agent) (DT-10506) [Stefan Nikolic]
 - company-report / analytics-reporting (DT-10568) (CI, Staging) [Nenad Tripunovic]
+- company-report / analytics-reporting (DT-9990) (Staging) [Nenad Tripunovic]
 
 ## DISCUSSION
 

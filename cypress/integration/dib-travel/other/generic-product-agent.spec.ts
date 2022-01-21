@@ -110,7 +110,7 @@ describe('Other - Generic Product (Agent)', () => {
 
     confirmAddedGenericProduct(genericProduct);
 
-    cy.get('dib-layout dib-cart-item-generic-product-v2 h2').should('contain', 'Bus', 'in Sweden');
+    cy.get('dib-layout dib-trip-item-generic-product h2').should('contain', 'Bus', 'in Sweden');
   });
 
   it('should delete generic product (Sales model - Own name)', () => {
@@ -133,7 +133,7 @@ describe('Other - Generic Product (Agent)', () => {
 
     confirmAddedGenericProduct(genericProduct);
 
-    cy.get('dib-layout dib-cart-item-generic-product-v2 h2').should('contain', 'Bus', 'in Sweden');
+    cy.get('dib-layout dib-trip-item-generic-product h2').should('contain', 'Bus', 'in Sweden');
   });
 
   it('should delete generic product (Sales model - Passthrough)', () => {
@@ -174,7 +174,7 @@ describe('Other - Generic Product (Agent)', () => {
 
     confirmAddedGenericProduct(genericProduct);
 
-    cy.get('dib-layout dib-cart-item-generic-product-v2 h2').should('contain', 'Flight taxi', 'in Sweden');
+    cy.get('dib-layout dib-trip-item-generic-product h2').should('contain', 'Flight taxi', 'in Sweden');
   });
 
   it('should edit generic product (Category - Flight taxi)', () => {
@@ -187,9 +187,9 @@ describe('Other - Generic Product (Agent)', () => {
       .contains('View more')
       .click();
 
-    cy.get('dib-cart-wrapper dib-cart-item-generic-product-v2 i').contains('keyboard_arrow_down').click();
+    cy.get('dib-layout dib-trip-item-generic-product i').contains('keyboard_arrow_down').click();
 
-    cy.get('dib-cart-wrapper dib-cart-item-generic-product-v2 button').contains(' Edit ').click();
+    cy.get('dib-cart dib-trip-item-generic-product button').contains(' Edit ').click();
 
     cy.get('.cdk-overlay-container dib-generic-product-form input[name=serviceName]')
       .clear()
@@ -262,20 +262,20 @@ describe('Other - Generic Product (Agent)', () => {
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('have.text', 'Item changed');
 
-    cy.get('dib-cart-wrapper dib-cart-item-generic-product-v2 p')
+    cy.get('dib-cart dib-trip-item-generic-product p')
       .should('contain', 'Ready for payment')
       .should('contain', genericProduct.modifiedGenericProduct.serviceName)
       .should('contain', genericProduct.modifiedGenericProduct.description)
       .should('contain', 'Agent Reservation');
-    cy.get('dib-layout dib-cart-item-generic-product-v2 .details dib-booking-dates-v2')
+    cy.get('dib-layout dib-trip-item-generic-product .details dib-booking-dates')
       .should('contain', modifiedStartDate)
       .should('contain', ' 15: 15 ');
-    cy.get('dib-layout dib-cart-item-generic-product-v2 span').should(
+    cy.get('dib-layout dib-trip-item-generic-product span').should(
       'contain',
       genericProduct.modifiedGenericProduct.totalPrice,
       'RSD'
     );
-    cy.get('dib-cart-wrapper dib-cart-item-generic-product-v2 h2').should('contain', 'Flight taxi', 'in Sweden');
+    cy.get('dib-cart dib-trip-item-generic-product h2').should('contain', 'Flight taxi', 'in Sweden');
   });
 
   it('should delete generic product (Category - Flight taxi)', () => {
