@@ -1,10 +1,16 @@
-import { Group } from '@cy/models';
+import { DibTravelAccounts, Group } from '@cy/models';
 import { addGroup, cancelDeleteGroupAndConfirm, deleteGroup, editGroup } from './shared';
 
 describe('Company Employees - Groups (User)', () => {
+  let accounts: DibTravelAccounts;
+
   let group: Group;
 
   before(() => {
+    cy.fixture('dib-travel-accounts').then((accountsFixture) => {
+      accounts = accountsFixture;
+    });
+
     cy.fixture('company-employees/group').then((groupFixture) => {
       group = groupFixture;
     });
@@ -30,7 +36,7 @@ describe('Company Employees - Groups (User)', () => {
   });
 
   it('should allow user to add new group', () => {
-    addGroup(group.name, group.description, `${group.employee.firstName} ${group.employee.lastName}`);
+    addGroup(group.name, group.description, `${accounts.defaultAccount.firstName} ${accounts.defaultAccount.lastName}`);
   });
 
   it('should not alow user to add new group with existing name ', () => {
@@ -53,11 +59,11 @@ describe('Company Employees - Groups (User)', () => {
 
     cy.get('dib-people-management dib-groups dib-page dib-expandable-item div[dib-column-350] h4').should(
       'contain',
-      `${group.employee.firstName} ${group.employee.lastName}`
+      `${accounts.defaultAccount.firstName} ${accounts.defaultAccount.lastName}`
     );
     cy.get('dib-people-management dib-groups dib-page dib-expandable-item div[dib-column-700] h4').should(
       'contain',
-      group.employee.email
+      accounts.defaultAccount.email
     );
   });
 

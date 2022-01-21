@@ -1,4 +1,4 @@
-import { ApprovalProcessGroup, Group, TravelSettings } from '@cy/models';
+import { ApprovalProcessGroup, DibTravelAccounts, Group, TravelSettings } from '@cy/models';
 import { addGroup, deleteGroup } from '../company-employees';
 import {
   addApprovalProcessAndConfirm,
@@ -12,11 +12,17 @@ import {
 import { addHotelTravelPolicy, deleteTravelPolicy } from './travel-settings/travel-policy';
 
 describe('Company Settings - Approval Process', () => {
+  let accounts: DibTravelAccounts;
+
   let group: Group;
   let travelPolicyDetails: TravelSettings;
   let approvalProcessGroup: ApprovalProcessGroup;
 
   before(() => {
+    cy.fixture('dib-travel-accounts').then((accountsFixture) => {
+      accounts = accountsFixture;
+    });
+
     cy.fixture('company-employees/group').then((groupFixture) => {
       group = groupFixture;
     });
@@ -40,7 +46,12 @@ describe('Company Settings - Approval Process', () => {
     addHotelTravelPolicy(travelPolicyDetails); // TODO: Do we need to include other types (Flight, Train)?
 
     cy.visitAngularUrl('/people-management/groups');
-    addGroup(group.name, group.description, `${group.employee.firstName} ${group.employee.lastName}`, false);
+    addGroup(
+      group.name,
+      group.description,
+      `${accounts.defaultAccount.firstName} ${accounts.defaultAccount.lastName}`,
+      false
+    );
   });
 
   after(() => {

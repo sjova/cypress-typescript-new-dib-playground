@@ -1,5 +1,5 @@
 import { getEmailWithHash, getTestingEnvironment } from '@cy/helpers';
-import { Group, PaymentMethod } from '@cy/models';
+import { DibTravelAccounts, Group, PaymentMethod } from '@cy/models';
 import { addGroup, deleteGroup } from '../../company-employees';
 import {
   addBillingProfile,
@@ -10,6 +10,8 @@ import {
 } from './helpers';
 
 describe('Company Settings - Payment Method - Billing Profiles', () => {
+  let accounts: DibTravelAccounts;
+
   let paymentMethod: PaymentMethod;
   let group: Group;
 
@@ -17,6 +19,10 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
 
   before(() => {
     testingEnvironment = getTestingEnvironment();
+
+    cy.fixture('dib-travel-accounts').then((accountsFixture) => {
+      accounts = accountsFixture;
+    });
 
     cy.fixture('company-employees/group').then((groupFixture) => {
       group = groupFixture;
@@ -46,7 +52,12 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     cy.login();
     cy.visitAngularUrl('/people-management/groups');
 
-    addGroup(group.name, group.description, `${group.employee.firstName} ${group.employee.lastName}`, false);
+    addGroup(
+      group.name,
+      group.description,
+      `${accounts.defaultAccount.firstName} ${accounts.defaultAccount.lastName}`,
+      false
+    );
   });
 
   after(() => {

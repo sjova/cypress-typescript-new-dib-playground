@@ -1,11 +1,11 @@
-import { Group } from '@cy/models';
+import { DibTravelAccounts } from '@cy/models';
 
 describe('Company Report - Analytics & Reporting', () => {
-  let report: Group;
+  let accounts: DibTravelAccounts;
 
   before(() => {
-    cy.fixture('company-employees/group').then((groupFixture) => {
-      report = groupFixture;
+    cy.fixture('dib-travel-accounts').then((accountsFixture) => {
+      accounts = accountsFixture;
     });
   });
 
@@ -89,9 +89,9 @@ describe('Company Report - Analytics & Reporting', () => {
       .should('contain', 'Payment Type')
       .should('contain', 'Tag');
     cy.get('dib-reporting dib-analytics-page dib-report-filters p')
-      .should('contain', report.employee.firstName)
-      .should('contain', report.employee.lastName)
-      .should('contain', report.employee.email)
+      .should('contain', accounts.defaultAccount.firstName)
+      .should('contain', accounts.defaultAccount.lastName)
+      .should('contain', accounts.defaultAccount.email)
       .should('contain', '[No Cost Centers]')
       .should('contain', 'Credit Card')
       .should('contain', '[No Tags]');
@@ -109,9 +109,9 @@ describe('Company Report - Analytics & Reporting', () => {
     cy.get('dib-reporting dib-analytics-page dib-report-filters span').contains(' Show selected details ').click();
 
     cy.get('dib-reporting dib-analytics-page dib-report-filters p')
-      .should('not.contain', report.employee.firstName)
-      .should('not.contain', report.employee.lastName)
-      .should('not.contain', report.employee.email);
+      .should('not.contain', accounts.defaultAccount.firstName)
+      .should('not.contain', accounts.defaultAccount.lastName)
+      .should('not.contain', accounts.defaultAccount.email);
   });
 
   // TODO: This test case needs to be improved. Blocked by bug/incident ticket: DT-10568
