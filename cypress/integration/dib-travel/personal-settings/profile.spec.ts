@@ -1,10 +1,16 @@
-import { ProfileDetails } from '@cy/models';
+import { DibTravelAccounts, ProfileDetails } from '@cy/models';
 import { clickCtaInsideSection, getSection } from './helpers';
 
 describe('Personal Settings - Profile', () => {
+  let accounts: DibTravelAccounts;
+
   let profileDetails: ProfileDetails;
 
   before(() => {
+    cy.fixture('dib-travel-accounts').then((accountsFixture) => {
+      accounts = accountsFixture;
+    });
+
     cy.fixture('personal-settings/profile-details').then((profileDetailsFixture) => {
       profileDetails = profileDetailsFixture;
     });
@@ -28,10 +34,10 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container ui-form-dialog dib-input input[name="firstName"]')
       .clear()
-      .type(profileDetails.personalInfo.firstName);
+      .type(accounts.defaultAccount.firstName);
     cy.get('.cdk-overlay-container ui-form-dialog dib-input input[name="lastName"]')
       .clear()
-      .type(profileDetails.personalInfo.lastName);
+      .type(accounts.defaultAccount.lastName);
     cy.get('.cdk-overlay-container ui-form-dialog dib-select-dob select.day').select(
       profileDetails.personalInfo.birthDay
     );
@@ -47,8 +53,8 @@ describe('Personal Settings - Profile', () => {
 
     getSection('Personal info').within(() => {
       cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.gender);
-      cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.firstName);
-      cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.lastName);
+      cy.get('.profile-info__row').should('contain', accounts.defaultAccount.firstName);
+      cy.get('.profile-info__row').should('contain', accounts.defaultAccount.lastName);
       cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.birthDay);
       cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.birthMonth);
       cy.get('.profile-info__row').should('contain', profileDetails.personalInfo.birthYear);
@@ -119,10 +125,10 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container dib-change-email input[name="email"]')
       .clear()
-      .type(profileDetails.emailAndPassword.email.replace('@', ''));
+      .type(accounts.defaultAccount.email.replace('@', ''));
     cy.get('.cdk-overlay-container dib-change-email input[name="password"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password);
+      .type(accounts.defaultAccount.password);
     cy.get('.cdk-overlay-container dib-change-email ui-button').click();
 
     cy.get('.cdk-overlay-container dib-change-email dib-input .dib-input-error').should('contain', 'Email not valid');
@@ -131,12 +137,10 @@ describe('Personal Settings - Profile', () => {
   it('should display error that password is not correct when user try to change an email', () => {
     clickCtaInsideSection('email & password', 'edit email');
 
-    cy.get('.cdk-overlay-container dib-change-email input[name="email"]')
-      .clear()
-      .type(profileDetails.emailAndPassword.email);
+    cy.get('.cdk-overlay-container dib-change-email input[name="email"]').clear().type(accounts.defaultAccount.email);
     cy.get('.cdk-overlay-container dib-change-email input[name="password"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password.replace(/\d/g, ''));
+      .type(accounts.defaultAccount.password.replace(/\d/g, ''));
     cy.get('.cdk-overlay-container dib-change-email ui-button').click();
 
     cy.get('.cdk-overlay-container dib-change-email dib-input .dib-input-error').should(
@@ -148,17 +152,15 @@ describe('Personal Settings - Profile', () => {
   it('should change email address', () => {
     clickCtaInsideSection('email & password', 'edit email');
 
-    cy.get('.cdk-overlay-container dib-change-email input[name="email"]')
-      .clear()
-      .type(profileDetails.emailAndPassword.email);
+    cy.get('.cdk-overlay-container dib-change-email input[name="email"]').clear().type(accounts.defaultAccount.email);
     cy.get('.cdk-overlay-container dib-change-email input[name="password"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password);
+      .type(accounts.defaultAccount.password);
     cy.get('.cdk-overlay-container dib-change-email ui-button').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Email Successfully Updated');
 
-    getSection('email & password').find('.profile-info__row').should('contain', profileDetails.emailAndPassword.email);
+    getSection('email & password').find('.profile-info__row').should('contain', accounts.defaultAccount.email);
   });
 
   it('should display error that password must be equal', () => {
@@ -166,13 +168,13 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container change-password input[name="password"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password);
+      .type(accounts.defaultAccount.password);
     cy.get('.cdk-overlay-container change-password input[name="newPassword"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password.replace(/\d/g, ''));
+      .type(accounts.defaultAccount.password.replace(/\d/g, ''));
     cy.get('.cdk-overlay-container change-password input[name="confirmNewPassword"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password);
+      .type(accounts.defaultAccount.password);
     cy.get('.cdk-overlay-container change-password ui-button').click();
 
     cy.get('.cdk-overlay-container change-password dib-input .dib-input-error').should(
@@ -186,13 +188,13 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container change-password input[name="password"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password.replace(/\d/g, ''));
+      .type(accounts.defaultAccount.password.replace(/\d/g, ''));
     cy.get('.cdk-overlay-container change-password input[name="newPassword"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password);
+      .type(accounts.defaultAccount.password);
     cy.get('.cdk-overlay-container change-password input[name="confirmNewPassword"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password);
+      .type(accounts.defaultAccount.password);
     cy.get('.cdk-overlay-container change-password ui-button').click();
 
     cy.get('.cdk-overlay-container change-password dib-input .dib-input-error').should(
@@ -206,13 +208,13 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container change-password input[name="password"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password);
+      .type(accounts.defaultAccount.password);
     cy.get('.cdk-overlay-container change-password input[name="newPassword"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password.replace(/\D/g, ''));
+      .type(accounts.defaultAccount.password.replace(/\D/g, ''));
     cy.get('.cdk-overlay-container change-password input[name="confirmNewPassword"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password.replace(/\D/g, ''));
+      .type(accounts.defaultAccount.password.replace(/\D/g, ''));
     cy.get('.cdk-overlay-container change-password ui-button').click();
 
     cy.get('.cdk-overlay-container change-password dib-input .dib-input-error').should(
@@ -226,13 +228,13 @@ describe('Personal Settings - Profile', () => {
 
     cy.get('.cdk-overlay-container change-password input[name="password"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password);
+      .type(accounts.defaultAccount.password);
     cy.get('.cdk-overlay-container change-password input[name="newPassword"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password);
+      .type(accounts.defaultAccount.password);
     cy.get('.cdk-overlay-container change-password input[name="confirmNewPassword"]')
       .clear()
-      .type(profileDetails.emailAndPassword.password);
+      .type(accounts.defaultAccount.password);
     cy.get('.cdk-overlay-container change-password ui-button').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('contain', 'Password Successfully Updated');
@@ -267,10 +269,10 @@ describe('Personal Settings - Profile', () => {
       .parent('select')
       .select(profileDetails.travelDocuments.gender);
     cy.get('.cdk-overlay-container dib-travel-document-dialog dib-input input[name="firstName"]').type(
-      profileDetails.personalInfo.firstName
+      accounts.defaultAccount.firstName
     );
     cy.get('.cdk-overlay-container dib-travel-document-dialog dib-input input[name="lastName"]').type(
-      profileDetails.personalInfo.lastName
+      accounts.defaultAccount.lastName
     );
 
     cy.get('.cdk-overlay-container dib-travel-document-dialog dib-input-label .dib-label')

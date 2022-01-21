@@ -1,8 +1,6 @@
 {
   "personalInfo": {
     "gender": "MRS",
-    "firstName": "CYQA",
-    "lastName": "Bot",
     "birthDay": "05",
     "birthMonth": "07",
     "birthYear": "1980"
@@ -17,10 +15,6 @@
   "localize": {
     "language": "English",
     "currency": "RSD"
-  },
-  "emailAndPassword": {
-    "email": "qa.tools@dibtravel.com",
-    "password": "testing1234"
   },
   "travelDocuments": {
     "documentType": "Passport",
