@@ -1,11 +1,16 @@
+import { getTestingEnvironment } from '@cy/helpers';
 import { DibTravelAccounts } from '@cy/models';
 
 describe('Company Report - Analytics & Reporting', () => {
   let accounts: DibTravelAccounts;
 
+  let testingEnvironment: string;
+
   before(() => {
     cy.fixture('dib-travel-accounts').then((accountsFixture) => {
       accounts = accountsFixture;
+
+      testingEnvironment = getTestingEnvironment();
     });
   });
 
@@ -63,18 +68,21 @@ describe('Company Report - Analytics & Reporting', () => {
     );
   });
 
+  // TODO: This is blocked by ticket (DT-9990), but only for staging and production
   it('should check currency filter and date picker', () => {
-    cy.get('dib-reporting dib-analytics-page .currency .placeholder').contains('RSD').click();
-    cy.get('.cdk-overlay-container span .currency__name')
-      .should('contain', 'Euro')
-      .should('contain', 'Serbian Dinar')
-      .should('contain', 'Swedish Krona')
-      .should('contain', 'United States Dollar');
-    cy.get('.cdk-overlay-container span .currency__code')
-      .should('contain', '€')
-      .should('contain', 'RSD')
-      .should('contain', 'SEK')
-      .should('contain', '$');
+    if (testingEnvironment === 'ci') {
+      cy.get('dib-reporting dib-analytics-page .currency .placeholder').contains('RSD').click();
+      cy.get('.cdk-overlay-container span .currency__name')
+        .should('contain', 'Euro')
+        .should('contain', 'Serbian Dinar')
+        .should('contain', 'Swedish Krona')
+        .should('contain', 'United States Dollar');
+      cy.get('.cdk-overlay-container span .currency__code')
+        .should('contain', '€')
+        .should('contain', 'RSD')
+        .should('contain', 'SEK')
+        .should('contain', '$');
+    }
 
     cy.get('dib-reporting dib-analytics-page .date-range-picker').click();
     cy.get('.cdk-overlay-container sat-calendar-header').should('exist');
@@ -116,7 +124,6 @@ describe('Company Report - Analytics & Reporting', () => {
       .should('not.contain', accounts.defaultAccount.email);
   });
 
-  // TODO: This test case needs to be improved. Blocked by bug/incident ticket: DT-10568
   it('should check Cost Center filter', () => {
     cy.get('dib-reporting dib-analytics-page dib-report-filters .placeholder').contains('Cost Center').click();
 
@@ -128,7 +135,8 @@ describe('Company Report - Analytics & Reporting', () => {
 
     cy.get('dib-reporting dib-analytics-page dib-report-filters span').contains(' Show selected details ').click();
 
-    cy.get('dib-reporting dib-analytics-page dib-report-filters p').should('not.contain', 'AAA');
+    // TODO: This is blocked by bug/incident ticket (DT-10568)
+    // cy.get('dib-reporting dib-analytics-page dib-report-filters p').should('not.contain', '[No Cost Centers]');
   });
 
   it('should check Payment Type filter', () => {
