@@ -52,7 +52,8 @@ describe('Company Employees - Groups (User)', () => {
     );
   });
 
-  it('should display added employee in created group', () => {
+  // TODO: This is blocked by ticket (DT-11016)
+  /*it('should display added employee in created group', () => {
     cy.waitForAngular();
 
     cy.get('dib-people-management dib-groups dib-page dib-expandable-item .button').click();
@@ -65,7 +66,7 @@ describe('Company Employees - Groups (User)', () => {
       'contain',
       accounts.defaultAccount.email
     );
-  });
+  });*/
 
   it('should allow user to edit created group', () => {
     editGroup(group);
