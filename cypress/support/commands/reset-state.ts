@@ -1,3 +1,8 @@
+/**
+ * Reset state
+ *
+ * Clear data in local storage and all browser cookies. To prevent a state from being shared across tests, Cypress automatically clears data in local storage and all cookies before each test
+ */
 export const resetState = (): void => {
   cy.clearLocalStorage();
 

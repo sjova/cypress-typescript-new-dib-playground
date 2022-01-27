@@ -1,3 +1,12 @@
+/**
+ * @todo This is a temp. workaround and will be revisited
+ *
+ * Visit Angular URL via the available navigation
+ *
+ * Since `cy.visit()` causing full page reload in Angular application
+ *
+ * @param {string} url - Url
+ */
 export const visitAngularUrl = (url: string): void => {
   // TODO: This is a temp. workaround and will be revisited soon
 

@@ -1,11 +1,13 @@
-// Reference:
-// https://github.com/angular/angular/blob/master/packages/platform-browser/src/browser/testability.ts
-// https://angular.io/api/core/Testability
-// https://angular.io/guide/testing-components-scenarios
-// https://medium.com/code-divoire/angular-testability-dealing-with-selenium-or-protractor-timeouts-84016fcec889
-// https://dev.to/codedivoire/angular-testability-dealing-with-selenium-or-protractor-timeouts-479f
-// https://gitmemory.com/issue/cypress-io/cypress/7306/649658924
-
+/**
+ * Wait for Angular until it becomes ready
+ *
+ * @example
+ *    cy.waitForAngular()
+ *
+ *    cy.get('dib-parent').waitForAngular().find('dib-children')
+ *
+ *    cy.get('dib-parent').waitForAngular().within(() => { cy.get('dib-children') });
+ */
 // TODO: Revisit `subject` type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const waitForAngular = (subject?: any): Cypress.Chainable<unknown> => {
@@ -33,8 +35,18 @@ export const waitForAngular = (subject?: any): Cypress.Chainable<unknown> => {
     });
 };
 
+// Reference:
+// https://github.com/angular/angular/blob/master/packages/platform-browser/src/browser/testability.ts
+// https://angular.io/api/core/Testability
+// https://angular.io/guide/testing-components-scenarios
+// https://medium.com/code-divoire/angular-testability-dealing-with-selenium-or-protractor-timeouts-84016fcec889
+// https://dev.to/codedivoire/angular-testability-dealing-with-selenium-or-protractor-timeouts-479f
+// https://gitmemory.com/issue/cypress-io/cypress/7306/649658924
+
 // Here is an example for manual testing in the browser console:
-// console.time('Angular Is Ready');
-// const rootElement = window.getAllAngularRootElements()[0];
-// const testability = window.getAngularTestability(rootElement);
-// testability.whenStable(() => console.timeEnd('Angular Is Ready'));
+/*
+console.time('Angular Is Ready');
+const rootElement = window.getAllAngularRootElements()[0];
+const testability = window.getAngularTestability(rootElement);
+testability.whenStable(() => console.timeEnd('Angular Is Ready'));
+ */

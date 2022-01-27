@@ -1,3 +1,13 @@
+/**
+ * @todo Used for Cypress demo purposes and must be revisited before usage
+ *
+ * Adds two numbers asynchronously
+ *
+ * @param {number} a
+ * @param {number} b
+ * @example
+ *    cy.asyncAdd(2, 3).should('equal', 5)
+ */
 export const asyncAdd = (a: number, b: number): void => {
   cy.log(`${a} + ${b}`);
   // our application in "index.html" has placed a promise-returning

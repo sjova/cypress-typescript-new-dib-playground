@@ -1,3 +1,13 @@
+/**
+ * Login user on DIB Travel platform.
+ * Default DIB Travel account will be used if email and password are not provided.
+ *
+ * @param {string} email - User email
+ * @param {string} password - User password
+ * @example
+ *    cy.login();
+ *    cy.login('petar.petrovic@dibtravel.com', 'Secret1')
+ */
 import dibTravelAccounts from '@cy/fixtures/dib-travel-accounts.json';
 
 export const login = (
@@ -16,6 +26,17 @@ export const login = (
   cy.get('cookies-popup .cookies-popup .close-icon').click();
 };
 
+/**
+ * Login agent on DIB Travel platform.
+ * Default DIB Travel account will be used if email and password are not provided.
+ *
+ * @param {string} userEmail - User email
+ * @param {string} agentEmail - Agent email
+ * @param {string} agentPassword - Agent password
+ * @example
+ *    cy.loginAgent();
+ *    cy.loginAgent('petar.petrovic@dibtravel.com', 'milan.milanovic@dibtravel.com', 'Secret1')
+ */
 export const loginAgent = (
   userEmail = dibTravelAccounts.defaultAccount.email,
   agentEmail = dibTravelAccounts.agentAccount.email,

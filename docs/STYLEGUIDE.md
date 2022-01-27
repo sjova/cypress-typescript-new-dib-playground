@@ -70,6 +70,10 @@
 - Make sure you don't have too much repetitive code when using the `if/else` statement
 - If you extend an existing feature (function, command, etc.), check usage in all places after the change.
 - Remember that Cypress automatically reset the state between tests, but not in `before`, `after`, `beforeEach`, and `afterEach` hooks.
+- If the text contains a non-breaking space entity `&nbsp;` then use the Unicode character `\u00a0` instead of `&nbsp;`.
+- Please don't use OR logical operator in `should` and `contains`. Consider using `oneOf` (e.g., `expect(2).to.be.oneOf([1,2,3])`, `.and.be.oneOf([500, 501])`, `.should('be.oneOf', [200, 304])`)
+- When debugging isolated issues inside of the test case, make sure that you have enabled screenshots and videos in cypress configuration
+- When different loading times of the environment cause problems, control the tests more (add more `should` assertions, use `waitForAngular` when necessary, add more network route waits, etc.)
 
 ## Branch Naming Conventions
 
