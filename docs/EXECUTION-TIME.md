@@ -5,65 +5,62 @@
 ```
        Spec                                              Tests  Passing  Failing  Pending  Skipped
   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ ✔  dib-travel/company-employees/employ      01:19       13       13        -        -        - │
-  │    ees-agent.spec.ts                                                                           │
+  │ ✔  dib-travel/aaa-accounts-fixture/acc      354ms       11       11        -        -        - │
+  │    ounts-fixture.spec.ts                                                                       │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-employees/employ      01:13       13       13        -        -        - │
+  │ ✔  dib-travel/company-employees/employ      01:28       13       13        -        -        - │
   │    ees-user.spec.ts                                                                            │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-employees/groups      00:39        8        8        -        -        - │
-  │    -agent.spec.ts                                                                              │
-  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-employees/groups      00:38        8        8        -        -        - │
+  │ ✔  dib-travel/company-employees/groups      00:42        8        8        -        -        - │
   │    -user.spec.ts                                                                               │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-report/analytics      00:49        8        8        -        -        - │
+  │ ✔  dib-travel/company-report/analytics      01:09        8        8        -        -        - │
   │    -and-reporting.spec.ts                                                                      │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
   │ ✔  dib-travel/company-report/invoices.      00:08        2        2        -        -        - │
   │    spec.ts                                                                                     │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-settings/approva      01:50       16       16        -        -        - │
+  │ ✔  dib-travel/company-settings/approva      01:51       17       17        -        -        - │
   │    l-process.spec.ts                                                                           │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-settings/invoice      01:03        9        9        -        -        - │
+  │ ✔  dib-travel/company-settings/invoice      01:01        9        9        -        -        - │
   │    -settings-agent.spec.ts                                                                     │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-settings/payment      00:05        1        1        -        -        - │
+  │ ✔  dib-travel/company-settings/payment      00:06        1        1        -        -        - │
   │    -method.spec.ts                                                                             │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-settings/payment      01:14       10       10        -        -        - │
+  │ ✔  dib-travel/company-settings/payment      01:02        7        7        -        -        - │
   │    -method/billing-profiles.spec.ts                                                            │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-settings/payment      01:07        9        9        -        -        - │
+  │ ✔  dib-travel/company-settings/payment      01:12        9        9        -        -        - │
   │    -method/lodge-cards-agent.spec.ts                                                           │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
   │ ✔  dib-travel/company-settings/payment      00:05        1        1        -        -        - │
   │    -method/lodge-cards-user.spec.ts                                                            │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-settings/referen      00:09        2        2        -        -        - │
+  │ ✔  dib-travel/company-settings/referen      00:10        2        2        -        -        - │
   │    ce-fields.spec.ts                                                                           │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-settings/referen      01:01       11       11        -        -        - │
+  │ ✔  dib-travel/company-settings/referen      00:57       10       10        -        -        - │
   │    ce-fields/cost-center.spec.ts                                                               │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-settings/referen      00:42        8        8        -        -        - │
+  │ ✔  dib-travel/company-settings/referen      00:47        8        8        -        -        - │
   │    ce-fields/project.spec.ts                                                                   │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-settings/referen      00:43        8        8        -        -        - │
+  │ ✔  dib-travel/company-settings/referen      00:48        8        8        -        -        - │
   │    ce-fields/purpose-of-trip.spec.ts                                                           │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-settings/referen      00:15        3        3        -        -        - │
+  │ ✔  dib-travel/company-settings/referen      00:17        3        3        -        -        - │
   │    ce-fields/your-reference.spec.ts                                                            │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-settings/subscri      01:56       14       14        -        -        - │
+  │ ✔  dib-travel/company-settings/subscri      01:42       13       13        -        -        - │
   │    ption.spec.ts                                                                               │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-settings/travel-      01:09       12       12        -        -        - │
+  │ ✔  dib-travel/company-settings/travel-      01:12       12       12        -        -        - │
   │    settings/company-rates/company-rate                                                         │
   │    s.spec.ts                                                                                   │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-settings/travel-      00:39        6        6        -        -        - │
+  │ ✔  dib-travel/company-settings/travel-      00:40        6        6        -        -        - │
   │    settings/travel-policy/flight.spec.                                                         │
   │    ts                                                                                          │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
@@ -71,45 +68,42 @@
   │    settings/travel-policy/hotel.spec.t                                                         │
   │    s                                                                                           │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-settings/travel-      00:30        6        6        -        -        - │
+  │ ✔  dib-travel/company-settings/travel-      00:34        6        6        -        -        - │
   │    settings/travel-policy/taxi.spec.ts                                                         │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-settings/travel-      00:35        6        6        -        -        - │
+  │ ✔  dib-travel/company-settings/travel-      00:36        6        6        -        -        - │
   │    settings/travel-policy/train.spec.t                                                         │
   │    s                                                                                           │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/company-settings/travel-      00:04        1        1        -        -        - │
+  │ ✔  dib-travel/company-settings/travel-      00:06        1        1        -        -        - │
   │    settings/travel-settings.spec.ts                                                            │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/cy-accounts-fixture/cy-a      182ms        9        9        -        -        - │
-  │    ccounts-fixture.spec.ts                                                                     │
-  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/forgot-password/forgot-p      00:13        6        6        -        -        - │
+  │ ✔  dib-travel/forgot-password/forgot-p      00:16        6        6        -        -        - │
   │    assword.spec.ts                                                                             │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/group/group.spec.ts           00:11        3        3        -        -        - │
+  │ ✔  dib-travel/group/group.spec.ts           00:12        3        3        -        -        - │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/my-travels/my-travels.sp      01:20        8        8        -        -        - │
+  │ ✔  dib-travel/my-travels/my-travels.sp      00:39        7        7        -        -        - │
   │    ec.ts                                                                                       │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/other/generic-product-ag      02:00       14       14        -        -        - │
+  │ ✔  dib-travel/other/generic-product-ag      02:23       14       14        -        -        - │
   │    ent.spec.ts                                                                                 │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/personal-settings/profil      00:21        2        2        -        -        - │
+  │ ✔  dib-travel/personal-settings/profil      00:24        2        2        -        -        - │
   │    e-internal-travel-agent.spec.ts                                                             │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/personal-settings/profil      01:56       19       19        -        -        - │
+  │ ✔  dib-travel/personal-settings/profil      02:01       19       19        -        -        - │
   │    e.spec.ts                                                                                   │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/sign-in/sign-in-agent.sp      00:25        9        9        -        -        - │
+  │ ✔  dib-travel/sign-in/sign-in-agent.sp      00:26        9        9        -        -        - │
   │    ec.ts                                                                                       │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/sign-in/sign-in-user.spe      00:25       11       11        -        -        - │
+  │ ✔  dib-travel/sign-in/sign-in-user.spe      00:36       11       11        -        -        - │
   │    c.ts                                                                                        │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔  dib-travel/sign-up/sign-up.spec.ts       00:35        9        9        -        -        - │
+  │ ✔  dib-travel/sign-up/sign-up.spec.ts       00:34        9        9        -        -        - │
   └────────────────────────────────────────────────────────────────────────────────────────────────┘
-    ✔  All specs passed!                        26:12      271      271        -        -        -
+    ✔  All specs passed!                        24:52      247      247        -        -        -
 ```
 
 ## cypress/integration/dib-travel-iframe
