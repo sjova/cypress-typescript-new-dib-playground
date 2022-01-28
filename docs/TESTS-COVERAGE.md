@@ -18,7 +18,7 @@
   - groups-agent [Dusan Petrovic, Nenad Tripunovic]
 - company-settings
   - invoice-settings (agent) [Stefan Nikolic]
-  - payment-method [Nenad Tripunovic]
+  - payment-method (agent) [Nenad Tripunovic]
   - travel-settings [Nenad Tripunovic]
   - approval-process [Nenad Tripunovic]
   - reference-fields [Stefan Nikolic]
