@@ -5,8 +5,6 @@ export const addCostCenter = (
   referenceFieldsDescription: string,
   employee: User
 ): void => {
-  cy.waitForAngular();
-
   cy.get('dib-company-management dib-reference-fields dib-cost-center ui-button[size="large"]')
     .contains('Add cost center')
     .click();

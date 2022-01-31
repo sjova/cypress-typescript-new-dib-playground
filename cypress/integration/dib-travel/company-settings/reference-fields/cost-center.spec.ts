@@ -123,8 +123,6 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
   });
 
   it('should edit cost center', () => {
-    cy.waitForAngular();
-
     cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell h4')
       .contains(referenceFields.costCenter.name)
       .parent('.table-cell')
@@ -149,6 +147,8 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
 
   it('should delete cost centers', () => {
     deleteCostCenter(referenceFields.costCenter.modifiedName);
+
+    cy.waitForAngular();
     deleteCostCenter(referenceFields.costCenter.modifiedName);
 
     cy.get('dib-company-management dib-reference-fields dib-cost-center .grid').should(
