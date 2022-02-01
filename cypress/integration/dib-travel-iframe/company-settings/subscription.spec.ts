@@ -79,6 +79,8 @@ describe('Company Settings - Subscription', () => {
 
     confirmAddedCreditCard(paymentMethod, creditCard);
 
+    cy.waitForAngular();
+
     deleteCreditCardAndConfirm(paymentMethod);
   });
 });

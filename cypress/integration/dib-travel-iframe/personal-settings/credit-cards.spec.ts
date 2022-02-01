@@ -19,10 +19,6 @@ describe('Personal Settings - Credit Cards', () => {
     cy.waitForAngular();
   });
 
-  afterEach(() => {
-    cy.waitForAngular();
-  });
-
   it('should "Credit Cards" be displayed in side bar', () => {
     cy.get('dib-navbar dib-hamburger-icon').click();
 
