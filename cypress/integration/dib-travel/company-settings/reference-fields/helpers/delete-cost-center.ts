@@ -1,6 +1,4 @@
 export const deleteCostCenter = (referenceFields: string) => {
-  cy.waitForAngular();
-
   cy.get('dib-company-management dib-reference-fields dib-cost-center .table-cell h4')
     .contains(referenceFields)
     .parent('.table-cell')
