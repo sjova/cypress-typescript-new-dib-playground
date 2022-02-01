@@ -1,6 +1,4 @@
 export const deleteCreditCard = (creditCardNumber: string): void => {
-  cy.waitForAngular();
-
   cy.get('dib-profile dib-payment dib-credit-card .card__number-box')
     .contains(creditCardNumber.slice(-4))
     .parents('dib-credit-card')
