@@ -19,9 +19,8 @@ describe('Company Settings - Subscription', () => {
 
   let subscriptionRenewalDate: string;
   let subscriptionValidDate: string;
-  // TODO: Uncomment these variables and conditions when the number of licenses on stage exceeds 10.
-  /*let subscriptionStartDate: string;
-  let subscriptionEndDate: string;*/
+  let subscriptionStartDate: string;
+  let subscriptionEndDate: string;
 
   const subscriptionBaseLink = '/company-management/subscription';
 
@@ -30,13 +29,13 @@ describe('Company Settings - Subscription', () => {
     if (testingEnvironment === 'staging') {
       subscriptionRenewalDate = 'Jun 24, 2022';
       subscriptionValidDate = 'Jun 23, 2022';
-      /*subscriptionStartDate = 'Jun 24, 2021';
-      subscriptionEndDate = '';*/
+      subscriptionStartDate = 'Jun 24, 2021';
+      subscriptionEndDate = 'Jan 21, 2022';
     } else if (testingEnvironment === 'ci') {
       subscriptionRenewalDate = 'Apr 2, 2022';
       subscriptionValidDate = 'Apr 01, 2022';
-      /*subscriptionStartDate = 'Apr 2, 2021';
-      subscriptionEndDate = 'Nov 18, 2021';*/
+      subscriptionStartDate = 'Apr 2, 2021';
+      subscriptionEndDate = 'Nov 18, 2021';
     } else {
       // TODO: Revisit this on production
     }
@@ -85,6 +84,8 @@ describe('Company Settings - Subscription', () => {
     cy.login();
 
     cy.visitAngularUrl('/people-management/groups');
+
+    cy.waitForAngular();
 
     deleteGroup(group.name);
   });
@@ -343,13 +344,10 @@ describe('Company Settings - Subscription', () => {
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p')
       .should('contain', ' Date ')
-      .should('contain', ' Invoice number ')
       .should('contain', ' Description ')
       .should('contain', ' Amount ')
       .should('contain', ' Status ')
-      .should('contain', ' Invoice ')
       .should('contain', subscriptionRenewalDate.substring(0, 3))
-      .should('contain', `${testingEnvironment}-`)
       .should(
         'contain',
         ' Upgrade to subscription plan BUSINESS PRO ANNUAL .',
@@ -361,12 +359,10 @@ describe('Company Settings - Subscription', () => {
         '1 license(s) have been added in [BUSINESS PRO] ANNUAL plan.'
       )
       .should('contain', 'EUR', 'RSD')
-      .should('contain', ' Completed ')
-      .should('contain', ' Download invoice ');
+      .should('contain', ' Completed ');
   });
 
-  // TODO: Currently we don't have enough bought licenses, so pagination is not displayed on UI/UX
-  /*it('should check pagination on Purchase History tab', () => {
+  it('should check pagination on Purchase History tab', () => {
     cy.visitAngularUrl(`${subscriptionBaseLink}/purchase-history`);
 
     cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination ul li')
@@ -439,5 +435,5 @@ describe('Company Settings - Subscription', () => {
       'not.contain',
       subscriptionEndDate
     );
-  });*/
+  });
 });
