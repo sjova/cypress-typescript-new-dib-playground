@@ -1,8 +1,6 @@
 import { TravelSettings } from '@cy/models';
 
 export const deleteDiscountAndConfirm = (companyRatesDetails: TravelSettings): void => {
-  cy.waitForAngular();
-
   cy.get('dib-company-management dib-travel-settings dib-company-rates dib-page .grid .table-cell h4')
     .contains(companyRatesDetails.companyRates.modifiedDiscountName)
     .parent('.table-cell')

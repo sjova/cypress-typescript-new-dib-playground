@@ -64,6 +64,8 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
     cy.login();
     cy.visitAngularUrl('/people-management/groups');
 
+    cy.waitForAngular();
+
     deleteGroup(group.name);
   });
 

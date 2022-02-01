@@ -19,6 +19,8 @@ describe('Company Employees - Groups (User)', () => {
   beforeEach(() => {
     cy.login();
     cy.visitAngularUrl('/people-management/groups');
+
+    cy.waitForAngular();
   });
 
   it('should display "Groups" in the sidebar navigation', () => {

@@ -4,8 +4,6 @@ import { PaymentMethod } from '@cy/models';
 let testingEnvironment: string;
 
 export const addBillingProfile = (paymentMethod: PaymentMethod): void => {
-  cy.waitForAngular();
-
   testingEnvironment = getTestingEnvironment();
 
   cy.get('.cdk-overlay-container dib-billing-profile-dialog input[name=legalName]').type(

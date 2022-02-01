@@ -1,6 +1,4 @@
 export const clickBillingProfileCtaAction = (email: string, ctaButtonLabel: string): void => {
-  cy.waitForAngular();
-
   cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item .left .content .content')
     .contains(email)
     .parents('dib-item')
