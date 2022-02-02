@@ -192,6 +192,9 @@ describe('Company Settings - Travel Settings - Company Rates', () => {
     cy.waitForAngular();
 
     deleteDiscountAndConfirm(companyRatesDetails);
+
+    cy.waitForAngular();
+
     deleteDiscountAndConfirm(companyRatesDetails);
 
     cy.get('dib-company-management dib-travel-settings dib-company-rates .grid').should(
