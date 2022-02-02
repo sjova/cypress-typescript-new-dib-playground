@@ -1,8 +1,6 @@
 import { Group } from '@cy/models';
 
 export const editGroup = (group: Group): void => {
-  cy.waitForAngular();
-
   cy.get('dib-people-management dib-groups dib-expandable-item h2')
     .contains(group.name)
     .parent('.item__main')

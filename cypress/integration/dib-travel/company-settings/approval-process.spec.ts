@@ -61,6 +61,9 @@ describe('Company Settings - Approval Process', () => {
     deleteTravelPolicy(travelPolicyDetails.sharedDetails.name);
 
     cy.visitAngularUrl('/people-management/groups');
+
+    cy.waitForAngular();
+
     deleteGroup(group.name);
   });
 
@@ -68,6 +71,8 @@ describe('Company Settings - Approval Process', () => {
     cy.login();
 
     cy.visitAngularUrl('/company-management/approval-process');
+
+    cy.waitForAngular();
   });
 
   it('should display "Approval Process" in the sidebar navigation', () => {

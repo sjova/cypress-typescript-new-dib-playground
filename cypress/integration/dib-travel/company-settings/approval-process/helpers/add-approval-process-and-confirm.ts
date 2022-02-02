@@ -2,8 +2,6 @@ import { ApprovalProcessGroup } from '@cy/models';
 import { selectTravelerGroup } from './select-traveler-group';
 
 export const addApprovalProcessAndConfirm = (approvalProcessGroup: ApprovalProcessGroup): void => {
-  cy.waitForAngular();
-
   cy.get('dib-company-management dib-approval-process ui-button[type=primary]').click();
 
   selectTravelerGroup(approvalProcessGroup);

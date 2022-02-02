@@ -144,14 +144,15 @@ describe('Company Settings - Travel Settings - Travel Policy - Flight', () => {
       .should('contain', travelPolicyDetails.modifiedFlight.to)
       .should('contain', travelPolicyDetails.modifiedFlight.budgetPerFlight)
       .should('contain', 'Economy')
-      .should(
+      // TODO: Blocked by ticket (DT-11400)
+      /*.should(
         'contain',
         'A maximum of EUR ' +
           `${travelPolicyDetails.modifiedFlight.budgetException}` +
           ' is allowed for flights longer than ' +
           `${travelPolicyDetails.modifiedFlight.durationBudgetException}` +
           ' hours'
-      )
+      )*/
       .should('contain', `${accounts.defaultAccount.firstName} ${accounts.defaultAccount.lastName}`);
   });
 
