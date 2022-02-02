@@ -147,9 +147,10 @@ describe('Company Settings - Reference Fields - Cost Center', () => {
 
   it('should delete cost centers', () => {
     deleteCostCenter(referenceFields.costCenter.modifiedName);
-
     cy.waitForAngular();
+
     deleteCostCenter(referenceFields.costCenter.modifiedName);
+    cy.waitForAngular();
 
     cy.get('dib-company-management dib-reference-fields dib-cost-center .grid').should(
       'not.contain',
