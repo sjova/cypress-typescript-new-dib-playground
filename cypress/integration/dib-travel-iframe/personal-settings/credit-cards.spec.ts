@@ -142,7 +142,7 @@ describe('Personal Settings - Credit Cards', () => {
   });
 
   it('should add new Visa 3D Secure credit card', () => {
-    cy.get('dib-profile dib-payment ui-button[type="primary"] button').click();
+    cy.get('dib-profile dib-payment ui-button[type="primary"] button').contains('Add Credit Card').click();
 
     cy.get('.cdk-overlay-container dib-add-card-dialog dib-stripe-card-input iframe')
       .switchToIframe()
