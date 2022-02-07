@@ -46,10 +46,6 @@ describe('Company Settings - Travel Settings - Company Rates', () => {
     cy.get('.cdk-overlay-container dib-company-rates-dialog button').contains(' Cancel ').click();
 
     cy.get('.cdk-overlay-container dib-company-rates-dialog').should('not.exist');
-    cy.get('dib-company-management dib-travel-settings dib-company-rates .grid').should(
-      'contain',
-      'There are no company rates'
-    );
   });
 
   it('should add discount for car type (Hertz)', () => {
@@ -115,10 +111,9 @@ describe('Company Settings - Travel Settings - Company Rates', () => {
   it('should delete modified discount for car type (Sixt)', () => {
     deleteDiscountAndConfirm(companyRatesDetails);
 
-    cy.get('dib-company-management dib-travel-settings dib-company-rates .grid').should(
-      'contain',
-      'There are no company rates'
-    );
+    cy.get('dib-company-management dib-travel-settings dib-company-rates')
+      .contains(companyRatesDetails.companyRates.modifiedDiscountName)
+      .should('not.exist');
   });
 
   it('should add discount for car type (Avis)', () => {
@@ -168,7 +163,7 @@ describe('Company Settings - Travel Settings - Company Rates', () => {
     cy.get('dib-company-management dib-travel-settings dib-company-rates .grid').contains(' Discount name ').click();
 
     cy.get('dib-company-management dib-travel-settings dib-company-rates .grid h4:first').should(
-      'have.text',
+      'not.have.text',
       companyRatesDetails.companyRates.modifiedDiscountName
     );
 
@@ -176,7 +171,7 @@ describe('Company Settings - Travel Settings - Company Rates', () => {
 
     cy.get('dib-company-management dib-travel-settings dib-company-rates .grid h4:first').should(
       'have.text',
-      companyRatesDetails.companyRates.discountName
+      companyRatesDetails.companyRates.modifiedDiscountName
     );
   });
 
@@ -197,9 +192,8 @@ describe('Company Settings - Travel Settings - Company Rates', () => {
 
     deleteDiscountAndConfirm(companyRatesDetails);
 
-    cy.get('dib-company-management dib-travel-settings dib-company-rates .grid').should(
-      'contain',
-      'There are no company rates'
-    );
+    cy.get('dib-company-management dib-travel-settings dib-company-rates')
+      .contains(companyRatesDetails.companyRates.modifiedDiscountName)
+      .should('not.exist');
   });
 });

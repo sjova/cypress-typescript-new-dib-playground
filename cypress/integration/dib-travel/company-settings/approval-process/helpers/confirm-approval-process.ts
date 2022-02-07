@@ -5,8 +5,8 @@ export const confirmApprovalProcess = (traveler: User): void => {
     'have.text',
     'Approval process successfully created.'
   );
-  cy.get('dib-company-management dib-approval-process dib-approval-process-item .item__left')
-    .first()
-    .find('.item__content p')
-    .should('contain', `${traveler.firstName} ${traveler.lastName}`);
+  cy.get('dib-company-management dib-approval-process dib-approval-process-item .item__left').should(
+    'contain',
+    `${traveler.firstName} ${traveler.lastName}`
+  );
 };

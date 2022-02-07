@@ -46,7 +46,7 @@
   "companyRates": {
     "discountName": "CY Discount Name",
     "discountCode": "001",
-    "modifiedDiscountName": "CY Modified Discount Name",
+    "modifiedDiscountName": "AAA-CY Modified Discount Name",
     "modifiedDiscountCode": "002"
   }
 }

@@ -101,7 +101,8 @@ describe('My travels', () => {
       .parents('dib-travels-list')
       .find('a .button__label')
       .contains('View more')
-      .click();
+      // Computed size is zero, and we need to use `{ force: true }`
+      .click({ force: true });
 
     cy.get('dib-trip-wrapper dib-cart dib-cart-payment-section .status').should(
       'have.text',
@@ -109,9 +110,7 @@ describe('My travels', () => {
     );
   });
 
-  // TODO: Should be uncomment when we have more PAST booking on staging env
-
-  /*it('should check pagination on Past travels page', () => {
+  it('should check pagination on Past travels page', () => {
     cy.get('app-my-travels .tab-nav-bar').contains(' Past ').click();
 
     cy.get('app-my-travels dib-travels-list page-pagination ul li')
@@ -159,5 +158,5 @@ describe('My travels', () => {
     cy.get('app-my-travels dib-travels-list page-pagination span')
       .contains('30')
       .should('have.css', 'color', 'rgb(33, 33, 33)');
-  });*/
+  });
 });

@@ -1,7 +1,8 @@
 export const selectApprovalSettings = (settings: ApprovalSettings, groupName: string): void => {
   const inputSelectorPosition = 1;
 
-  cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 label').contains(settings).click();
+  // Computed size is zero, and we need to use `{ force: true }`
+  cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 label').contains(settings).click({ force: true });
 
   cy.get('.cdk-overlay-container dib-approval-process-dialog-v2 ui-control-wrapper .container')
     .eq(inputSelectorPosition)

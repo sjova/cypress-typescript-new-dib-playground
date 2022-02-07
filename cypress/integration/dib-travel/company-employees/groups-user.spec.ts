@@ -83,9 +83,6 @@ describe('Company Employees - Groups (User)', () => {
   });
 
   it('should confirm that the group no longer exists', () => {
-    cy.get('dib-people-management dib-groups dib-page [dib-empty-list-label]').should(
-      'contain',
-      'You have not yet created any groups.'
-    );
+    cy.get('dib-people-management dib-groups dib-page').contains(group.modifiedName).should('not.exist');
   });
 });

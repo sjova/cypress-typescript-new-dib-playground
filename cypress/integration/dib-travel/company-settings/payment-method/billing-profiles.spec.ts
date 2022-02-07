@@ -75,19 +75,25 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
   });
 
   it('should close the form for adding billing profile', () => {
-    cy.get('dib-company-management dib-payment-method dib-billing-profiles ui-button[type=primary]').click();
+    cy.get('dib-company-management dib-payment-method dib-billing-profiles ui-button[type=primary]')
+      .contains(' Add a Billing Profile ')
+      .click();
 
     cancelAddingBillingProfile();
   });
 
   it('should not be able to submit an empty billing profile form', () => {
-    cy.get('dib-company-management dib-payment-method dib-billing-profiles ui-button[type=primary]').click();
+    cy.get('dib-company-management dib-payment-method dib-billing-profiles ui-button[type=primary]')
+      .contains(' Add a Billing Profile ')
+      .click();
 
     submitEmptyBillingProfileFormAndConfirm();
   });
 
   it('should add a billing profile', () => {
-    cy.get('dib-company-management dib-payment-method dib-billing-profiles ui-button[type=primary]').click();
+    cy.get('dib-company-management dib-payment-method dib-billing-profiles ui-button[type=primary]')
+      .contains(' Add a Billing Profile ')
+      .click();
 
     addBillingProfile(paymentMethod);
 
@@ -195,6 +201,6 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
 
   it('should archive a billing profile', () => {
     clickBillingProfileCtaAction(paymentMethod.primaryContact.modifiedEmail, 'Archive ');
-    archiveBillingProfile();
+    archiveBillingProfile(paymentMethod.primaryContact.modifiedEmail);
   });
 });

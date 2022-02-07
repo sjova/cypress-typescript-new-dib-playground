@@ -96,7 +96,12 @@ describe('Company Settings - Travel Settings - Travel Policy - Train', () => {
   it('should expand train travel policy and display all details', () => {
     cy.waitForAngular();
 
-    cy.get('dib-company-management dib-travel-policy dib-expandable-item .button').click();
+    cy.get('dib-company-management dib-travel-policy dib-expandable-item')
+      .contains(travelPolicyDetails.sharedDetails.modifiedName)
+      .parents('dib-expandable-item')
+      .find('.collapsed i')
+      .last()
+      .click();
 
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__item')
       .should(
