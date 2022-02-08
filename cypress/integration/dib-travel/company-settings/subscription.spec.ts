@@ -108,9 +108,16 @@ describe('Company Settings - Subscription', () => {
       .should('contain', 'Licenses')
       .should('contain', 'Renewal date')
       .should('contain', 'Renewal subscription');
-    cy.get('dib-company-management dib-subscription dib-subscription-overview .table-row p')
-      .should('contain', ' Business Pro ')
-      .should('contain', subscriptionRenewalDate);
+
+    if (
+      accounts.defaultAccount.firstName === 'CYQA' &&
+      accounts.defaultAccount.lastName === 'Bot' &&
+      accounts.defaultAccount.email === 'qa.tools@dibtravel.com'
+    ) {
+      cy.get('dib-company-management dib-subscription dib-subscription-overview .table-row p')
+        .should('contain', ' Business Pro ')
+        .should('contain', subscriptionRenewalDate);
+    }
 
     cy.get('dib-company-management dib-subscription dib-subscription-overview .row-value')
       .eq(1)
@@ -142,11 +149,18 @@ describe('Company Settings - Subscription', () => {
     cy.get('dib-company-management dib-subscription dib-subscription-pricing-plans h3')
       .should('contain', ' Business Pro')
       .should('contain', 'Enterprise');
-    cy.get('dib-company-management dib-subscription dib-subscription-pricing-plans .subscription-table small').should(
-      'contain',
-      `Subscription renewal date: ${subscriptionRenewalDate}`,
-      ' (days from now) '
-    );
+
+    if (
+      accounts.defaultAccount.firstName === 'CYQA' &&
+      accounts.defaultAccount.lastName === 'Bot' &&
+      accounts.defaultAccount.email === 'qa.tools@dibtravel.com'
+    ) {
+      cy.get('dib-company-management dib-subscription dib-subscription-pricing-plans .subscription-table small').should(
+        'contain',
+        `Subscription renewal date: ${subscriptionRenewalDate}`,
+        ' (days from now) '
+      );
+    }
     cy.get('dib-company-management dib-subscription dib-subscription-pricing-plans button').should(
       'contain',
       ' Contact us '
@@ -200,22 +214,37 @@ describe('Company Settings - Subscription', () => {
     cy.get('dib-company-management dib-subscription dib-subscription-licenses h3')
       .should('contain', ' Number of Licenses ')
       .should('contain', ' Additional Licenses ');
-    cy.get('dib-company-management dib-subscription dib-subscription-licenses p')
-      .should('contain', ` Subscription renewal date: ${subscriptionRenewalDate}`, ' (days from now) ')
-      .should('contain', ' 72 EUR per user ');
-    cy.get('dib-company-management dib-subscription dib-subscription-licenses .subscription-table__row__pricing')
-      .should('contain', ' 1 x 72 EUR = 72 EUR ')
-      .should('contain', ' Total cost: 72 EUR ');
+
+    if (
+      accounts.defaultAccount.firstName === 'CYQA' &&
+      accounts.defaultAccount.lastName === 'Bot' &&
+      accounts.defaultAccount.email === 'qa.tools@dibtravel.com'
+    ) {
+      cy.get('dib-company-management dib-subscription dib-subscription-licenses p')
+        .should('contain', ` Subscription renewal date: ${subscriptionRenewalDate}`, ' (days from now) ')
+        .should('contain', ' 72 EUR per user ');
+
+      cy.get('dib-company-management dib-subscription dib-subscription-licenses .subscription-table__row__pricing')
+        .should('contain', ' 1 x 72 EUR = 72 EUR ')
+        .should('contain', ' Total cost: 72 EUR ');
+    }
 
     cy.get('dib-company-management dib-subscription dib-subscription-licenses dib-tooltip:first')
       .invoke('show')
       .contains('info_outline')
       .trigger('mouseover', 'bottom')
       .click();
-    cy.get('.tooltip-content').should(
-      'contain',
-      `Additional licenses will be valid until the ${subscriptionValidDate}, after which they will be automatically renewed.`
-    );
+
+    if (
+      accounts.defaultAccount.firstName === 'CYQA' &&
+      accounts.defaultAccount.lastName === 'Bot' &&
+      accounts.defaultAccount.email === 'qa.tools@dibtravel.com'
+    ) {
+      cy.get('.tooltip-content').should(
+        'contain',
+        `Additional licenses will be valid until the ${subscriptionValidDate}, after which they will be automatically renewed.`
+      );
+    }
     cy.get('dib-company-management dib-subscription dib-subscription-licenses dib-tooltip')
       .eq(1)
       .invoke('show')
@@ -256,8 +285,7 @@ describe('Company Settings - Subscription', () => {
     cy.get('.cdk-overlay-container confirmation-dialog').should('not.exist');
   });
 
-  // TODO: Rethink a better way to organize this test below (we may not need `reload()` in the future)
-  it('should buy new license for subscription', () => {
+  it('should buy a new license for subscription', () => {
     cy.visitAngularUrl(`${subscriptionBaseLink}/licenses`);
 
     cy.intercept('GET', '/api/secure/v2/corporations/*/subscriptions/current').as('currentSubscriptionState');
@@ -336,7 +364,7 @@ describe('Company Settings - Subscription', () => {
       .should('contain', paymentMethod.invoiceRecipient.vatNumber);*/
 
     clickBillingProfileCtaAction(paymentMethod.primaryContact.email, 'Archive ');
-    archiveBillingProfile();
+    archiveBillingProfile(paymentMethod.primaryContact.email);
   });
 
   it('should check Purchase History tab', () => {
@@ -347,93 +375,110 @@ describe('Company Settings - Subscription', () => {
       .should('contain', ' Description ')
       .should('contain', ' Amount ')
       .should('contain', ' Status ')
-      .should('contain', subscriptionRenewalDate.substring(0, 3))
-      .should(
-        'contain',
-        ' Upgrade to subscription plan BUSINESS PRO ANNUAL .',
-        ' 1 license(s) have been added in [BUSINESS PRO] ANNUAL plan. '
-      )
-      .should(
-        'contain',
-        'License(s) added to subscription.',
-        '1 license(s) have been added in [BUSINESS PRO] ANNUAL plan.'
-      )
       .should('contain', 'EUR', 'RSD')
       .should('contain', ' Completed ');
+
+    if (
+      accounts.defaultAccount.firstName === 'CYQA' &&
+      accounts.defaultAccount.lastName === 'Bot' &&
+      accounts.defaultAccount.email === 'qa.tools@dibtravel.com'
+    ) {
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+        'contain',
+        subscriptionRenewalDate.substring(0, 3)
+      );
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p')
+        .should(
+          'contain',
+          ' Upgrade to subscription plan BUSINESS PRO ANNUAL .',
+          ' 1 license(s) have been added in [BUSINESS PRO] ANNUAL plan. '
+        )
+        .should(
+          'contain',
+          'License(s) added to subscription.',
+          '1 license(s) have been added in [BUSINESS PRO] ANNUAL plan.'
+        );
+    }
   });
 
   it('should check pagination on Purchase History tab', () => {
-    cy.visitAngularUrl(`${subscriptionBaseLink}/purchase-history`);
+    if (
+      accounts.defaultAccount.firstName === 'CYQA' &&
+      accounts.defaultAccount.lastName === 'Bot' &&
+      accounts.defaultAccount.email === 'qa.tools@dibtravel.com'
+    ) {
+      cy.visitAngularUrl(`${subscriptionBaseLink}/purchase-history`);
 
-    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination ul li')
-      .contains('2')
-      .click();
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination ul li')
+        .contains('2')
+        .click();
 
-    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
-      'contain',
-      subscriptionEndDate
-    );
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+        'contain',
+        subscriptionEndDate
+      );
 
-    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination ul li')
-      .contains('1')
-      .click();
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination ul li')
+        .contains('1')
+        .click();
 
-    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
-      'contain',
-      subscriptionStartDate
-    );
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+        'contain',
+        subscriptionStartDate
+      );
 
-    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
-      .contains('keyboard_arrow_right')
-      .click();
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
+        .contains('keyboard_arrow_right')
+        .click();
 
-    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
-      'contain',
-      subscriptionEndDate
-    );
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+        'contain',
+        subscriptionEndDate
+      );
 
-    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
-      .contains('keyboard_arrow_left')
-      .click();
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
+        .contains('keyboard_arrow_left')
+        .click();
 
-    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
-      'contain',
-      subscriptionStartDate
-    );
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+        'contain',
+        subscriptionStartDate
+      );
 
-    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
-      .contains('last_page')
-      .click();
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
+        .contains('last_page')
+        .click();
 
-    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
-      'not.contain',
-      subscriptionStartDate
-    );
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+        'not.contain',
+        subscriptionStartDate
+      );
 
-    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
-      .contains('first_page')
-      .click();
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination i')
+        .contains('first_page')
+        .click();
 
-    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
-      'contain',
-      subscriptionStartDate
-    );
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+        'contain',
+        subscriptionStartDate
+      );
 
-    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination span')
-      .contains('20')
-      .click();
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history page-pagination span')
+        .contains('20')
+        .click();
 
-    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
-      'contain',
-      subscriptionStartDate,
-      subscriptionEndDate
-    );
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+        'contain',
+        subscriptionStartDate,
+        subscriptionEndDate
+      );
 
-    cy.reload();
+      cy.reload();
 
-    cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
-      'not.contain',
-      subscriptionEndDate
-    );
+      cy.get('dib-company-management dib-subscription dib-subscription-purchase-history p').should(
+        'not.contain',
+        subscriptionEndDate
+      );
+    }
   });
 });

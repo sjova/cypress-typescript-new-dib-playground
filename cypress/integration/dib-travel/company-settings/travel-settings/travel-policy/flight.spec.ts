@@ -1,4 +1,5 @@
-import { DibTravelAccounts, TravelSettings } from '@cy/models';
+import { changeCurrency } from '@cy/helpers';
+import { DibTravelAccounts, ProfileDetails, TravelSettings } from '@cy/models';
 import {
   cancelDeleteDialogAndConfirm,
   closeEditDialogAndConfirm,
@@ -10,8 +11,8 @@ import {
 
 describe('Company Settings - Travel Settings - Travel Policy - Flight', () => {
   let accounts: DibTravelAccounts;
-
   let travelPolicyDetails: TravelSettings;
+  let profileDetails: ProfileDetails;
 
   before(() => {
     cy.fixture('dib-travel-accounts').then((accountsFixture) => {
@@ -21,11 +22,20 @@ describe('Company Settings - Travel Settings - Travel Policy - Flight', () => {
     cy.fixture('company-settings/travel-settings-details').then((travelPolicyDetailsFixture) => {
       travelPolicyDetails = travelPolicyDetailsFixture;
     });
+
+    cy.fixture('personal-settings/profile-details').then((profileDetailsFixture) => {
+      profileDetails = profileDetailsFixture;
+    });
   });
 
   beforeEach(() => {
     cy.login();
     cy.visitAngularUrl('/company-management/travel-settings');
+  });
+
+  // eslint-disable-next-line mocha/no-sibling-hooks
+  before(() => {
+    changeCurrency(profileDetails.localize.currency);
   });
 
   it('should add flight travel policy', () => {
