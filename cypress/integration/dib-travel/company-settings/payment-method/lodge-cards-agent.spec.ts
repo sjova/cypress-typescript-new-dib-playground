@@ -31,8 +31,14 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
     cy.waitForAngular();
   });
 
+  it('should display Lodge Card page', () => {
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards h1').should('have.text', ' Lodge Cards ');
+  });
+
   it('should close the form for adding lodge card', () => {
-    cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]').click();
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]')
+      .contains(' Add Lodge Card ')
+      .click();
 
     cy.get('.cdk-overlay-container dib-dialog-wrapper i').contains('close').click();
 
@@ -40,7 +46,9 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
   });
 
   it('should cancel the adding lodge card', () => {
-    cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]').click();
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]')
+      .contains(' Add Lodge Card ')
+      .click();
 
     cancelCardFormAndConfirm();
   });
@@ -48,7 +56,9 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
   it('should not be able to submit an empty lodge card form', () => {
     cy.waitForAngular();
 
-    cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]').click();
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]')
+      .contains(' Add Lodge Card ')
+      .click();
 
     cy.get('.cdk-overlay-container dib-lodge-card-dialog ui-button[type=success]').click();
 
@@ -68,7 +78,9 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
   });
 
   it('should add a lodge card', () => {
-    cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]').click();
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards ui-button[type=primary]')
+      .contains(' Add Lodge Card ')
+      .click();
 
     cy.get('.cdk-overlay-container dib-lodge-card-dialog input[name=companyLegalName]').type(
       paymentMethod.companyInformation.companyLegalName
@@ -266,9 +278,8 @@ describe('Company Settings - Payment Method - Lodge Cards (Agent)', () => {
     cy.get('.cdk-overlay-container confirmation-dialog ui-button[type=warning]').click();
 
     cy.get('.cdk-overlay-container simple-snack-bar > span').should('have.text', 'Successfully archived lodge card.');
-    cy.get('dib-company-management dib-payment-method dib-lodge-cards .items').should(
-      'contain',
-      ' You have not added any lodge cards yet. '
-    );
+    cy.get('dib-company-management dib-payment-method dib-lodge-cards')
+      .contains(paymentMethod.primaryContact.modifiedEmail)
+      .should('not.exist');
   });
 });

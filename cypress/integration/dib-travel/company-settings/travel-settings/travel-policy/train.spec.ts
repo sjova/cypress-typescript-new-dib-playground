@@ -1,4 +1,5 @@
-import { DibTravelAccounts, TravelSettings } from '@cy/models';
+import { changeAccountCurrency } from '@cy/helpers';
+import { DibTravelAccounts, ProfileDetails, TravelSettings } from '@cy/models';
 import {
   cancelDeleteDialogAndConfirm,
   closeEditDialogAndConfirm,
@@ -10,8 +11,8 @@ import {
 
 describe('Company Settings - Travel Settings - Travel Policy - Train', () => {
   let accounts: DibTravelAccounts;
-
   let travelPolicyDetails: TravelSettings;
+  let profileDetails: ProfileDetails;
 
   before(() => {
     cy.fixture('dib-travel-accounts').then((accountsFixture) => {
@@ -21,6 +22,15 @@ describe('Company Settings - Travel Settings - Travel Policy - Train', () => {
     cy.fixture('company-settings/travel-settings-details').then((travelPolicyDetailsFixture) => {
       travelPolicyDetails = travelPolicyDetailsFixture;
     });
+
+    cy.fixture('personal-settings/profile-details').then((profileDetailsFixture) => {
+      profileDetails = profileDetailsFixture;
+    });
+  });
+
+  // eslint-disable-next-line mocha/no-sibling-hooks
+  before(() => {
+    changeAccountCurrency(profileDetails.localize.currency);
   });
 
   beforeEach(() => {
@@ -96,7 +106,12 @@ describe('Company Settings - Travel Settings - Travel Policy - Train', () => {
   it('should expand train travel policy and display all details', () => {
     cy.waitForAngular();
 
-    cy.get('dib-company-management dib-travel-policy dib-expandable-item .button').click();
+    cy.get('dib-company-management dib-travel-policy dib-expandable-item')
+      .contains(travelPolicyDetails.sharedDetails.modifiedName)
+      .parents('dib-expandable-item')
+      .find('.collapsed i')
+      .last()
+      .click();
 
     cy.get('dib-company-management dib-travel-policy dib-expandable-item .section__item')
       .should(

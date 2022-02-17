@@ -53,7 +53,10 @@ export const addBillingProfile = (paymentMethod: PaymentMethod): void => {
   cy.get('.cdk-overlay-container dib-billing-profile-dialog  ui-control-wrapper .container').type(
     getFirstWord(paymentMethod.groupName)
   );
-  cy.get('.cdk-overlay-container ui-dropdown-panel .checkbox-label').contains(paymentMethod.groupName).click();
+  // Computed size is zero, and we need to use `{ force: true }`
+  cy.get('.cdk-overlay-container ui-dropdown-panel .checkbox-label')
+    .contains(paymentMethod.groupName)
+    .click({ force: true });
 
   cy.get('.cdk-overlay-container dib-billing-profile-dialog ui-button[type=success]').click();
 

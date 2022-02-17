@@ -1,17 +1,27 @@
-import { getTestingEnvironment } from '@cy/helpers';
-import { DibTravelAccounts } from '@cy/models';
+import { changeAccountCurrency, getTestingEnvironment } from '@cy/helpers';
+import { DibTravelAccounts, ProfileDetails } from '@cy/models';
 
 describe('Company Report - Analytics & Reporting', () => {
   let accounts: DibTravelAccounts;
+  let profileDetails: ProfileDetails;
 
   let testingEnvironment: string;
 
   before(() => {
     cy.fixture('dib-travel-accounts').then((accountsFixture) => {
       accounts = accountsFixture;
-
-      testingEnvironment = getTestingEnvironment();
     });
+
+    cy.fixture('personal-settings/profile-details').then((profileDetailsFixture) => {
+      profileDetails = profileDetailsFixture;
+    });
+
+    testingEnvironment = getTestingEnvironment();
+  });
+
+  // eslint-disable-next-line mocha/no-sibling-hooks
+  before(() => {
+    changeAccountCurrency(profileDetails.localize.currency);
   });
 
   beforeEach(() => {

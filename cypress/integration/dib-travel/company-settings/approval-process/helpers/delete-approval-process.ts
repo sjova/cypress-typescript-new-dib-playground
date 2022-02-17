@@ -12,5 +12,7 @@ export const deleteApprovalProcess = (travelerName: string): void => {
     'have.text',
     'Approval process successfully deleted.'
   );
-  cy.get('dib-company-management dib-approval-process dib-page dib-approval-process-item').should('not.exist');
+  cy.get('dib-company-management dib-approval-process dib-page dib-approval-process-item')
+    .contains(travelerName)
+    .should('not.exist');
 };
