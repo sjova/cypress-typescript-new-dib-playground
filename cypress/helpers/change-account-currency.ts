@@ -1,6 +1,6 @@
 import { clickCtaInsideSection } from 'integration/dib-travel/personal-settings/helpers';
 
-export const changeCurrency = (profileDetails: string) => {
+export const changeAccountCurrency = (profileDetails: string) => {
   cy.login();
   cy.visitAngularUrl('/profile/account');
 

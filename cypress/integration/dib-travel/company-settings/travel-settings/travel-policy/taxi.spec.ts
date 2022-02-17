@@ -1,4 +1,4 @@
-import { changeCurrency } from '@cy/helpers';
+import { changeAccountCurrency } from '@cy/helpers';
 import { DibTravelAccounts, ProfileDetails, TravelSettings } from '@cy/models';
 import {
   cancelDeleteDialogAndConfirm,
@@ -30,7 +30,7 @@ describe('Company Settings - Travel Settings - Travel Policy - Taxi', () => {
 
   // eslint-disable-next-line mocha/no-sibling-hooks
   before(() => {
-    changeCurrency(profileDetails.localize.currency);
+    changeAccountCurrency(profileDetails.localize.currency);
   });
 
   beforeEach(() => {

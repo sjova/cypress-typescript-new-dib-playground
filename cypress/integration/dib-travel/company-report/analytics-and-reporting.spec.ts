@@ -1,4 +1,4 @@
-import { changeCurrency, getTestingEnvironment } from '@cy/helpers';
+import { changeAccountCurrency, getTestingEnvironment } from '@cy/helpers';
 import { DibTravelAccounts, ProfileDetails } from '@cy/models';
 
 describe('Company Report - Analytics & Reporting', () => {
@@ -21,7 +21,7 @@ describe('Company Report - Analytics & Reporting', () => {
 
   // eslint-disable-next-line mocha/no-sibling-hooks
   before(() => {
-    changeCurrency(profileDetails.localize.currency);
+    changeAccountCurrency(profileDetails.localize.currency);
   });
 
   beforeEach(() => {
