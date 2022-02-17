@@ -1,33 +1,33 @@
-# cypress-typescript-new-dib-playground
+# dib-customer-web-e2e
 
-Cypress TypeScript DIB Playground
+DIB customer web end-to-end tests
 
 ## System Requirements
 
-Operating System: **macOS Big Sur 11.6.1 (20G224)**
+Operating System: **macOS Big Sur 11.6.3**
 
-IDE: **Visual Studio Code 1.62.3 (Universal)**
+IDE: **Visual Studio Code 1.64.2 (Universal)**
 
 ```
 git --version
-git version 2.34.1
+git version 2.35.1
 
 nvm --version
-0.39.0
+0.39.1
 
 node --version
-v16.5.0
+v16.14.0
 
 npm --version
-7.19.1
+8.5.0
 
 yarn --version
 1.22.17
 
 npx cypress --version
-Cypress package version: 9.1.0
-Cypress binary version: 9.1.0
-Electron version: 15.2.0
+Cypress package version: 9.5.0
+Cypress binary version: 9.5.0
+Electron version: 15.3.4
 Bundled Node version: 16.5.0
 ```
 
