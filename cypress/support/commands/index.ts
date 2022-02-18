@@ -1,4 +1,5 @@
 export * from './async-add';
+export * from './change-account-currency';
 export * from './check-token';
 export * from './click-link';
 export * from './data-cy';

@@ -8,10 +8,8 @@
  *
  *    cy.get('dib-parent').waitForAngular().within(() => { cy.get('dib-children') });
  */
-// TODO: Revisit `subject` type
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const waitForAngular = (subject?: any): Cypress.Chainable<unknown> => {
-  console.time('cy.waitForAngular() duration'); // start timer (will be removed later)
+export const waitForAngular = (subject?: unknown): Cypress.Chainable<unknown> => {
+  // console.time('cy.waitForAngular() duration'); // start timer (will be removed later)
   cy.log('waitForAngular...');
 
   return cy
@@ -27,7 +25,7 @@ export const waitForAngular = (subject?: any): Cypress.Chainable<unknown> => {
           (testability) =>
             new Cypress.Promise((resolve) => {
               testability.whenStable(() => {
-                console.timeEnd('cy.waitForAngular() duration'); // stops timer(will be removed later)
+                // console.timeEnd('cy.waitForAngular() duration'); // stops timer(will be removed later)
                 subject ? resolve(subject) : resolve();
               });
             })

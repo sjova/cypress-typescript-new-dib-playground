@@ -3,6 +3,7 @@
 
 import {
   asyncAdd,
+  changeAccountCurrency,
   checkToken,
   clickLink,
   dataCy,
@@ -20,6 +21,7 @@ import {
 } from './commands';
 
 Cypress.Commands.add('asyncAdd', asyncAdd);
+Cypress.Commands.add('changeAccountCurrency', changeAccountCurrency);
 Cypress.Commands.add('checkToken', checkToken);
 Cypress.Commands.add('clickLink', clickLink);
 Cypress.Commands.add('dataCy', dataCy);

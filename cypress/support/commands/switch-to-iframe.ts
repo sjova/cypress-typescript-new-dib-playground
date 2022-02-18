@@ -7,7 +7,6 @@
  *    cy.get('iframe[data-cy="dib-foo-iframe"]').switchToIframe().find('#run-button').should('have.text', 'Try it').click()
  *    cy.get('iframe[data-cy="dib-foo-iframe"]').switchToIframe().find('#result').should('include.text', '"some response"')
  */
-// TODO: Revisit `iframeSelector` type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const switchToIframe = (iframeSelector?: any): Cypress.Chainable<JQuery<HTMLElement>> => {
   // get the `iframe > document > body`, and retry until the body element is not empty

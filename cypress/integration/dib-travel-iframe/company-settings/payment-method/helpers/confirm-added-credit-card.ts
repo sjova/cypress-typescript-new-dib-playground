@@ -13,6 +13,7 @@ export const confirmAddedCreditCard = (paymentMethod: PaymentMethod, creditCard:
     .should('contain', paymentMethod.primaryContact.email)
     .should('contain', creditCard.expiryMonth.slice(-1))
     .should('contain', creditCard.expiryYear);
+
   // TODO: This should be discussed, because on the staging environment, we don't have section "COMPANY INFORMATION"
   if (testingEnvironment === 'ci') {
     cy.get('dib-company-management dib-payment-method dib-payment-method-credit-cards dib-credit-card')

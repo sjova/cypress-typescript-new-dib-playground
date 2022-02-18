@@ -1,4 +1,4 @@
-import { changeAccountCurrency, getTestingEnvironment } from '@cy/helpers';
+import { getTestingEnvironment } from '@cy/helpers';
 import { DibTravelAccounts, ProfileDetails } from '@cy/models';
 
 describe('Company Report - Analytics & Reporting', () => {
@@ -19,9 +19,11 @@ describe('Company Report - Analytics & Reporting', () => {
     testingEnvironment = getTestingEnvironment();
   });
 
+  // TODO: Rethink a better way to execute prepare data actions instead of duplicated `before()`
+  // Maybe load multiple fixtures and then execute prepare actions
   // eslint-disable-next-line mocha/no-sibling-hooks
   before(() => {
-    changeAccountCurrency(profileDetails.localize.currency);
+    cy.changeAccountCurrency(profileDetails.localize.currency);
   });
 
   beforeEach(() => {

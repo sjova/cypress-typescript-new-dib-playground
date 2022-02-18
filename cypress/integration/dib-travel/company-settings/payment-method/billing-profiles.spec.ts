@@ -105,6 +105,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       .should('contain', paymentMethod.companyInformation.address)
       .should('contain', 1)
       .should('contain', paymentMethod.currency.originalCurrency);
+
     // TODO: This should be discussed, because on the staging environment, we don't have section "INVOICE RECIPIENT E-MAIL AND VAT NUMBER"
     if (testingEnvironment === 'ci') {
       cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item .content')
@@ -183,6 +184,7 @@ describe('Company Settings - Payment Method - Billing Profiles', () => {
       .should('contain', paymentMethod.modifiedCompanyInformation.address)
       .should('contain', 2)
       .should('contain', paymentMethod.currency.originalCurrency);
+
     // TODO: This should be discussed, because on the staging environment, we don't have section "INVOICE RECIPIENT E-MAIL AND VAT NUMBER"
     if (testingEnvironment === 'ci') {
       cy.get('dib-company-management dib-payment-method dib-billing-profiles dib-item .content')

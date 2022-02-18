@@ -43,7 +43,7 @@ describe('Company Settings - Approval Process', () => {
     cy.login();
 
     cy.visitAngularUrl('/company-management/travel-settings');
-    addHotelTravelPolicy(travelPolicyDetails, accounts.defaultAccount); // TODO: Do we need to include other types (Flight, Train)?
+    addHotelTravelPolicy(travelPolicyDetails, accounts.defaultAccount);
 
     cy.visitAngularUrl('/people-management/groups');
     addGroup(

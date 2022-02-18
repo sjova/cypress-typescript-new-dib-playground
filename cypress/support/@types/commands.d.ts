@@ -1,5 +1,6 @@
 import {
   asyncAdd,
+  changeAccountCurrency,
   checkToken,
   clickLink,
   dataCy,
@@ -20,6 +21,7 @@ declare global {
   namespace Cypress {
     interface Chainable {
       asyncAdd: typeof asyncAdd;
+      changeAccountCurrency: typeof changeAccountCurrency;
       checkToken: typeof checkToken;
       clickLink: typeof clickLink;
       dataCy: typeof dataCy;

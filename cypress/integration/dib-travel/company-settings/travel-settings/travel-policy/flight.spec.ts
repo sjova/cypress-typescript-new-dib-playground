@@ -1,4 +1,3 @@
-import { changeAccountCurrency } from '@cy/helpers';
 import { DibTravelAccounts, ProfileDetails, TravelSettings } from '@cy/models';
 import {
   cancelDeleteDialogAndConfirm,
@@ -33,9 +32,11 @@ describe('Company Settings - Travel Settings - Travel Policy - Flight', () => {
     cy.visitAngularUrl('/company-management/travel-settings');
   });
 
+  // TODO: Rethink a better way to execute prepare data actions instead of duplicated `before()`
+  // Maybe load multiple fixtures and then execute prepare actions
   // eslint-disable-next-line mocha/no-sibling-hooks
   before(() => {
-    changeAccountCurrency(profileDetails.localize.currency);
+    cy.changeAccountCurrency(profileDetails.localize.currency);
   });
 
   it('should add flight travel policy', () => {
